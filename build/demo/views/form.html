@@ -1,0 +1,100 @@
+<div ng-controller="pageCtrl" ng-init="mainStatus.navigation='form'">
+    <div class="top-nav-wrap">
+        <div class="back backBtn"><i class="iconfont icon-back"></i></div>
+        <div class="title2">表单</div>
+        <div class="right">
+            <div class="nav">
+                <a class="li"><i class="iconfont icon-plus"></i></a>
+                <a class="li"><i class="iconfont icon-search"></i></a>
+                <a class="li"><i class="iconfont icon-bell"></i><i class="tip" ng-if="mainStatus.msgBubble">{{mainStatus.msgBubble}}</i></a>
+            </div>
+        </div>
+    </div>
+    <div class="page-main">
+        <div class="mg-l"><span class="text-l">表单元素</span></div>
+        <div class="form-tr">
+            <div class="form-th">输入框</div>
+            <div class="form-td">
+                <input type="text" class="ipt" placeholder="输入框"/>
+            </div>
+        </div>
+        <div class="form-tr">
+            <div class="form-th">多选</div>
+            <div class="form-td">
+                <div class="form-ctrl">
+                    <label class="label"><input type="checkbox"/> 选项1</label>
+                    <label class="label"><input type="checkbox"/> 选项2</label>
+                    <label class="label"><input type="checkbox"/> 选项3</label>
+                </div>
+            </div>
+        </div>
+        <div class="form-tr">
+            <div class="form-th">单选</div>
+            <div class="form-td">
+                <div class="form-ctrl">
+                    <label class="label"><input type="radio" name="radio"/> 选项1</label>
+                    <label class="label"><input type="radio" name="radio"/> 选项2</label>
+                    <label class="label"><input type="radio" name="radio"/> 选项3</label>
+                </div>
+            </div>
+        </div>
+        <div class="form-tr">
+            <div class="form-th">下拉</div>
+            <div class="form-td">
+                <select class="select">
+                    <option>下拉选择</option>
+                    <option>A1</option>
+                    <option>A2</option>
+                </select>
+                <select class="select">
+                    <option>下拉选择</option>
+                    <option>A1</option>
+                    <option>A2</option>
+                </select>
+                <select class="select">
+                    <option>下拉选择</option>
+                    <option>A1</option>
+                    <option>A2</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-tr">
+            <div class="form-th">下拉(固定宽度)</div>
+            <div class="form-td">
+                <select class="select select-w">
+                    <option>下拉选择</option>
+                    <option>A1</option>
+                    <option>A2</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-tr">
+            <div class="form-th">异步下拉</div>
+            <div class="form-td">
+                <select class="select" select-async="../data/selectlist.data" ng-model="formData.select1">
+                </select>
+            </div>
+        </div>
+        <div class="form-tr">
+            <div class="form-th">级联下拉</div>
+            <div class="form-td">
+                <select relative-select relative-initload="true" relative-to="#relativeSelect2" class="select" ng-model="formData.select2" name="select2">
+                    <option value="">请选择</option>
+                    <option value="0">Option 1</option>
+                    <option value="1">Option 2</option>
+                    <option value="2">Option 3</option>
+                    <option value="3">Option 4</option>
+                </select>
+                <select relative-select="../data/selectlist.data" relative-to="#relativeSelect3" class="select" ng-model="formData.select3" id="relativeSelect2" name="select3" select-first>
+                    <option value="">请选择</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-tr">
+            <div class="form-th">图片上传</div>
+            <div class="form-td">
+                <div uploader="../data/upload.data" ng-model="formData.pics"></div>
+            </div>
+        </div>
+    </div>
+</div>

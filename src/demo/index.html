@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <!--[if lt IE 9]>
+    <meta http-equiv="Refresh" content="0;url=ie6.html"/>
+    <![endif]-->
+    <link rel="stylesheet" href="../ui/css/com.css">
+    <script>
+        var Config = {
+            viewsDir: "views/",  //视图目录
+            indexPage: "base.html", //默认打开的地址
+            getMainInfo: "../data/main-info.data" //获取主要的状态信息
+        }
+    </script>
+    <script src="../ui/r.js" defer async data-main="../ui/app.js"></script>
+</head>
+<body ng-controller="mainCtrl">
+<div class="page-wrap">
+    <div ng-include="'views/navigation.html'"></div>
+    <div class="page-main-wrap" ng-class="{'fold':mainStatus.navFold}">
+        <div ng-view autoscroll="true"></div>
+    </div>
+</div>
+</body>
+</html>

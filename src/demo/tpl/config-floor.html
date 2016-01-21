@@ -1,0 +1,12 @@
+<table class="table-list">
+    <tbody>
+    <tr>
+        <td>单元名称</td>
+        <td ng-repeat="unit in config.unitList track by $index"><input type="text" class="ipt ipt-s ipt-xshort" ng-model="config.unitList[$index]"/></td>
+    </tr>
+    <tr>
+        <td>每层户数</td>
+        <td ng-repeat="col in config.unitColList track by $index"><input type="number" class="ipt ipt-s ipt-xshort" min="1" ng-model="config.unitColList[$index]"/></td>
+    </tr>
+    </tbody>
+</table>

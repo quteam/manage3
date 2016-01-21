@@ -1,0 +1,51 @@
+{
+  "code": 200,
+  "data": {
+    "process1": 70,
+    "process2": 50,
+    "authList": [
+      {
+        "name": "项目信息管理",
+        "num": 6,
+        "unit": "个项目标签",
+        "url": "#/project-info.html"
+      },
+      {
+        "name": "户型管理",
+        "num": 8,
+        "unit": "个当前户型种类",
+        "url": "#/project-house.html"
+      },
+      {
+        "name": "房源标签管理",
+        "num": 32,
+        "unit": "个房源标签",
+        "url": "#/project-tags.html"
+      },
+      {
+        "name": "价格管理",
+        "num": 13,
+        "unit": "套报价房源",
+        "url": "#/project-price.html"
+      },
+      {
+        "name": "生成房源",
+        "num": 56,
+        "unit": "套生成房源",
+        "url": "#/project-source.html"
+      },
+      {
+        "name": "房间管理",
+        "num": 37,
+        "unit": "套可管理房间",
+        "url": "#/project-room.html"
+      },
+      {
+        "name": "折扣管理",
+        "num": 5,
+        "unit": "套优惠房源",
+        "url": "#/project-discount.html"
+      }
+    ]
+  }
+}

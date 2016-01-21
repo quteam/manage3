@@ -1,0 +1,443 @@
+{
+  "code": 200,
+  "data": {
+    "id": 1,
+    "name": "滨河组团 > 一期 > 1栋",
+    "roomList": [
+      {
+        "status":"sign",
+        "houseUnit": "1单元",
+        "houseNo": "801",
+        "houseType": "A1",
+        "floor": 8
+      },
+      {
+        "status":"sale",
+        "houseUnit": "1单元",
+        "houseNo": "802",
+        "houseType": "A3",
+        "floor": 8
+      },
+      {
+        "houseUnit": "2单元",
+        "houseNo": "801",
+        "houseType": "A1",
+        "floor": 8
+      },
+      {
+        "houseUnit": "2单元",
+        "houseNo": "802",
+        "houseType": "A1",
+        "floor": 8
+      },
+      {
+        "houseUnit": "2单元",
+        "houseNo": "803",
+        "houseType": "A1",
+        "floor": 8
+      },
+      {
+        "houseUnit": "3单元",
+        "houseNo": "801",
+        "houseType": "A1",
+        "floor": 8
+      },
+      {
+        "houseUnit": "3单元",
+        "houseNo": "802",
+        "houseType": "A1",
+        "floor": 8
+      },
+      {
+        "houseUnit": "4单元",
+        "houseNo": "801",
+        "houseType": "A1",
+        "floor": 8
+      },
+      {
+        "houseUnit": "4单元",
+        "houseNo": "802",
+        "houseType": "A1",
+        "floor": 8
+      },
+      {
+        "houseUnit": "1单元",
+        "houseNo": "701",
+        "houseType": "A1",
+        "floor": 7
+      },
+      {
+        "houseUnit": "1单元",
+        "houseNo": "702",
+        "houseType": "A3",
+        "floor": 7
+      },
+      {
+        "houseUnit": "2单元",
+        "houseNo": "701",
+        "houseType": "A1",
+        "floor": 7
+      },
+      {
+        "houseUnit": "2单元",
+        "houseNo": "702",
+        "houseType": "A1",
+        "floor": 7
+      },
+      {
+        "houseUnit": "2单元",
+        "houseNo": "703",
+        "houseType": "A1",
+        "floor": 7
+      },
+      {
+        "houseUnit": "3单元",
+        "houseNo": "701",
+        "houseType": "A1",
+        "floor": 7
+      },
+      {
+        "houseUnit": "3单元",
+        "houseNo": "702",
+        "houseType": "A1",
+        "floor": 7
+      },
+      {
+        "houseUnit": "4单元",
+        "houseNo": "701",
+        "houseType": "A1",
+        "floor": 7
+      },
+      {
+        "houseUnit": "4单元",
+        "houseNo": "702",
+        "houseType": "A1",
+        "floor": 7
+      },
+      {
+        "houseUnit": "1单元",
+        "houseNo": "601",
+        "houseType": "A1",
+        "floor": 6
+      },
+      {
+        "houseUnit": "1单元",
+        "houseNo": "602",
+        "houseType": "A3",
+        "floor": 6
+      },
+      {
+        "houseUnit": "2单元",
+        "houseNo": "601",
+        "houseType": "A1",
+        "floor": 6
+      },
+      {
+        "houseUnit": "2单元",
+        "houseNo": "602",
+        "houseType": "A1",
+        "floor": 6
+      },
+      {
+        "houseUnit": "2单元",
+        "houseNo": "603",
+        "houseType": "A1",
+        "floor": 6
+      },
+      {
+        "houseUnit": "3单元",
+        "houseNo": "601",
+        "houseType": "A1",
+        "floor": 6
+      },
+      {
+        "houseUnit": "3单元",
+        "houseNo": "602",
+        "houseType": "A1",
+        "floor": 6
+      },
+      {
+        "houseUnit": "4单元",
+        "houseNo": "601",
+        "houseType": "A1",
+        "floor": 6
+      },
+      {
+        "houseUnit": "4单元",
+        "houseNo": "602",
+        "houseType": "A1",
+        "floor": 6
+      },
+      {
+        "houseUnit": "1单元",
+        "houseNo": "501",
+        "houseType": "A1",
+        "floor": 5
+      },
+      {
+        "houseUnit": "1单元",
+        "houseNo": "502",
+        "houseType": "A3",
+        "floor": 5
+      },
+      {
+        "houseUnit": "2单元",
+        "houseNo": "501",
+        "houseType": "A1",
+        "floor": 5
+      },
+      {
+        "houseUnit": "2单元",
+        "houseNo": "502",
+        "houseType": "A1",
+        "floor": 5
+      },
+      {
+        "houseUnit": "2单元",
+        "houseNo": "503",
+        "houseType": "A1",
+        "floor": 5
+      },
+      {
+        "houseUnit": "3单元",
+        "houseNo": "501",
+        "houseType": "A1",
+        "floor": 5
+      },
+      {
+        "houseUnit": "3单元",
+        "houseNo": "502",
+        "houseType": "A1",
+        "floor": 5
+      },
+      {
+        "houseUnit": "4单元",
+        "houseNo": "501",
+        "houseType": "A1",
+        "floor": 5
+      },
+      {
+        "houseUnit": "4单元",
+        "houseNo": "502",
+        "houseType": "A1",
+        "floor": 5
+      },
+      {
+        "houseUnit": "1单元",
+        "houseNo": "401",
+        "houseType": "A2",
+        "floor": "3.5"
+      },
+      {
+        "houseUnit": "1单元",
+        "houseNo": "402",
+        "houseType": "A3",
+        "floor": "3.5"
+      },
+      {
+        "houseUnit": "2单元",
+        "houseNo": "401",
+        "houseType": "A2",
+        "floor": "3.5"
+      },
+      {
+        "houseUnit": "2单元",
+        "houseNo": "402",
+        "houseType": "A2",
+        "floor": "3.5"
+      },
+      {
+        "houseUnit": "2单元",
+        "houseNo": "403",
+        "houseType": "A2",
+        "floor": "3.5"
+      },
+      {
+        "houseUnit": "3单元",
+        "houseNo": "401",
+        "houseType": "A2",
+        "floor": "3.5"
+      },
+      {
+        "houseUnit": "3单元",
+        "houseNo": "402",
+        "houseType": "A2",
+        "floor": "3.5"
+      },
+      {
+        "houseUnit": "4单元",
+        "houseNo": "401",
+        "houseType": "A2",
+        "floor": "3.5"
+      },
+      {
+        "houseUnit": "4单元",
+        "houseNo": "402",
+        "houseType": "A2",
+        "floor": "3.5"
+      },
+      {
+        "houseUnit": "1单元",
+        "houseNo": "301",
+        "houseType": "A1",
+        "floor": 3
+      },
+      {
+        "houseUnit": "1单元",
+        "houseNo": "302",
+        "houseType": "A3",
+        "floor": 3
+      },
+      {
+        "houseUnit": "2单元",
+        "houseNo": "301",
+        "houseType": "A1",
+        "floor": 3
+      },
+      {
+        "houseUnit": "2单元",
+        "houseNo": "302",
+        "houseType": "A1",
+        "floor": 3
+      },
+      {
+        "houseUnit": "2单元",
+        "houseNo": "303",
+        "houseType": "A1",
+        "floor": 3
+      },
+      {
+        "houseUnit": "3单元",
+        "houseNo": "301",
+        "houseType": "A1",
+        "floor": 3
+      },
+      {
+        "houseUnit": "3单元",
+        "houseNo": "302",
+        "houseType": "A1",
+        "floor": 3
+      },
+      {
+        "houseUnit": "4单元",
+        "houseNo": "301",
+        "houseType": "A1",
+        "floor": 3
+      },
+      {
+        "houseUnit": "4单元",
+        "houseNo": "302",
+        "houseType": "A1",
+        "floor": 3
+      },
+      {
+        "houseUnit": "1单元",
+        "houseNo": "201",
+        "houseType": "A1",
+        "floor": 2
+      },
+      {
+        "houseUnit": "1单元",
+        "houseNo": "202",
+        "houseType": "A3",
+        "floor": 2
+      },
+      {
+        "houseUnit": "2单元",
+        "houseNo": "201",
+        "houseType": "A1",
+        "floor": 2
+      },
+      {
+        "houseUnit": "2单元",
+        "houseNo": "202",
+        "houseType": "A1",
+        "floor": 2
+      },
+      {
+        "houseUnit": "2单元",
+        "houseNo": "203",
+        "houseType": "A1",
+        "floor": 2
+      },
+      {
+        "houseUnit": "3单元",
+        "houseNo": "201",
+        "houseType": "A1",
+        "floor": 2
+      },
+      {
+        "houseUnit": "3单元",
+        "houseNo": "202",
+        "houseType": "A1",
+        "floor": 2
+      },
+      {
+        "houseUnit": "4单元",
+        "houseNo": "201",
+        "houseType": "A1",
+        "floor": 2
+      },
+      {
+        "houseUnit": "4单元",
+        "houseNo": "202",
+        "houseType": "A1",
+        "floor": 2
+      },
+      {
+        "houseUnit": "1单元",
+        "houseNo": "101",
+        "houseType": "A1",
+        "floor": 1
+      },
+      {
+        "houseUnit": "1单元",
+        "houseNo": "102",
+        "houseType": "A3",
+        "floor": 1
+      },
+      {
+        "houseUnit": "2单元",
+        "houseNo": "101",
+        "houseType": "A1",
+        "floor": 1
+      },
+      {
+        "houseUnit": "2单元",
+        "houseNo": "102",
+        "houseType": "A1",
+        "floor": 1
+      },
+      {
+        "houseUnit": "2单元",
+        "houseNo": "103",
+        "houseType": "A1",
+        "floor": 1
+      },
+      {
+        "houseUnit": "3单元",
+        "houseNo": "101",
+        "houseType": "A1",
+        "floor": 1
+      },
+      {
+        "houseUnit": "3单元",
+        "houseNo": "102",
+        "houseType": "A1",
+        "floor": 1
+      },
+      {
+        "houseUnit": "4单元",
+        "houseNo": "101",
+        "houseType": "A1",
+        "floor": 1
+      },
+      {
+        "houseUnit": "4单元",
+        "houseNo": "102",
+        "houseType": "A1",
+        "floor": 1
+      }
+    ]
+  }
+}

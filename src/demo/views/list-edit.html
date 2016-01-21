@@ -1,0 +1,72 @@
+<div class="page-dialog-wrap">
+    <div class="page-dialog-title">折扣编辑</div>
+    <div class="page-dialog-content">
+        <div class="mg-m col-group">
+            <div class="col-6">
+                <div class="color-gray">项目名称</div>
+                <div class="text-m">/ 北岸组团</div>
+            </div>
+            <div class="col-6">
+                <div class="color-gray">折扣类型</div>
+                <div class="text-m">/ 银卡优惠</div>
+            </div>
+        </div>
+        <div class="form-box">
+            <form name="myForm" action="../data/form.data" form-validator>
+                <div class="form-tr">
+                    <div class="form-th">折扣名称</div>
+                    <div class="form-td"><input type="text" class="ipt ipt-short" ng-model="formData.name"/></div>
+                </div>
+                <div class="form-tr">
+                    <div class="form-th">特价房是否适用</div>
+                    <div class="form-td pd-s">
+                        <label class="label"><input type="radio" name="radio" ng-model="formData.radio"> 适用</label>
+                        <label class="label"><input type="radio" name="radio" ng-model="formData.radio"> 不适用</label>
+                    </div>
+                </div>
+                <div class="form-tr">
+                    <div class="form-th">计算方法</div>
+                    <div class="form-td pd-s">
+                        <label class="label"><input type="radio" name="radio2" ng-model="formData.radio2"> 减点</label>
+                        <label class="label"><input type="radio" name="radio2" ng-model="formData.radio2"> 打折</label>
+                        <label class="label"><input type="radio" name="radio2" ng-model="formData.radio2"> 总价优惠</label>
+                        <label class="label"><input type="radio" name="radio2" ng-model="formData.radio2"> 单价优惠</label>
+                    </div>
+                </div>
+                <div class="form-tr">
+                    <div class="form-th">折扣（%）</div>
+                    <div class="form-td"><input type="text" class="ipt ipt-short" ng-model="formData.sale"/></div>
+                </div>
+                <div class="form-tr">
+                    <div class="form-th">优惠金额</div>
+                    <div class="form-td"><input type="text" class="ipt ipt-short" ng-model="formData.amount"/></div>
+                </div>
+                <div class="form-tr">
+                    <div class="form-th">折扣范围</div>
+                    <div class="form-td pd-s">
+                        <label class="label"><input type="radio" name="radio3" ng-model="formData.radio3"> 整个项目</label>
+                        <label class="label"><input type="radio" name="radio3" ng-model="formData.radio3"> 特定房间(6)</label>
+                    </div>
+                </div>
+                <div class="form-tr">
+                    <div class="form-th">生效日期</div>
+                    <div class="form-td"><input type="date" class="ipt ipt-short" ng-model="formData.startDate" convert-to-date/></div>
+                </div>
+                <div class="form-tr">
+                    <div class="form-th">失效日期</div>
+                    <div class="form-td"><input type="date" class="ipt ipt-short" ng-model="formData.endDate" convert-to-date/></div>
+                </div>
+                <div class="form-tr">
+                    <div class="form-th">折扣说明</div>
+                    <div class="form-td">
+                        <textarea class="textarea textarea-block" ng-model="formData.saleIntro"></textarea>
+                    </div>
+                </div>
+                <div class="mg-m">
+                    <button type="button" class="btn btn-gray" ng-click="closeThisDialog()"><i class="iconfont icon-cancel"></i> 取消</button>
+                    <button type="submit" class="btn btn-primary"><i class="iconfont icon-ok"></i> 保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

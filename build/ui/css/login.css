@@ -1,0 +1,34 @@
+/**
+ * Manage System v3.0 | haovei@qq.com
+ */
+@charset "UTF-8";
+blockquote,body,button,dd,dl,dt,fieldset,form,h1,h2,h3,h4,h5,h6,hr,input,legend,li,ol,p,pre,td,textarea,th,ul{margin:0;padding:0}
+form{display:inline}
+body,button,input,select,textarea{font:14px/1.5 Helvetica,"lantinghei sc","Microsoft Yahei",tahoma,arial,\5b8b\4f53,sans-serif;-webkit-font-smoothing:antialiased;-webkit-text-stroke-width:.2px;-moz-osx-font-smoothing:grayscale}
+h1,h2,h3,h4,h5,h6{font-size:100%}
+address,cite,dfn,em,var{font-style:normal}
+code,kbd,pre,samp{font-family:courier new,courier,monospace}
+small{font-size:12px}
+ol,ul{list-style:none}
+a{text-decoration:none;color:#9BA5A7;cursor:pointer;white-space:nowrap}
+a:hover{text-decoration:underline}
+sup{vertical-align:text-top}
+sub{vertical-align:text-bottom}
+legend{color:#000}
+fieldset,img{border:0}
+button,input,select,textarea{font-size:14px}
+table{border-collapse:collapse;border-spacing:0}
+article,aside,audio,details,figcaption,figure,footer,header,mark,menu,nav,section,summary,time,video{display:block;margin:0;padding:0}
+.text-right{text-align:right}
+.fl{float:left}
+.fr{float:right}
+body{background:#4D637B}
+.login-wrap{position:fixed;top:50%;left:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);width:280px}
+.login-wrap .avatar{width:128px;margin:0 auto 38px auto}
+.login-wrap .avatar img{width:128px;height:128px;border-radius:64px;display:block}
+.login-wrap .row{margin-bottom:12px}
+.login-wrap .ipt{width:100%;height:36px;box-sizing:border-box;padding:5px 10px;border-radius:3px;background:#F5F5F5;border:1px solid #E6E6E6;outline:0}
+.login-wrap .ipt-s{width:175px}
+.login-wrap .btn{width:100%;height:36px;box-sizing:border-box;border-radius:3px;border:none;background:#15BBF9;color:#FFF;outline:0}
+.login-wrap .captcha{height:36px;width:90px;border-radius:3px}
+.logo{position:fixed;bottom:0;left:0;right:0;width:260px;margin:auto;text-align:center}

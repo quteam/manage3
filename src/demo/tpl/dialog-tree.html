@@ -1,0 +1,10 @@
+<div class="page-dialog-wrap">
+    <div class="page-dialog-title">选择</div>
+    <div class="page-dialog-content">
+        <div class="tree-list tree-list-border" tree-list="../data/tree.data" ng-model="selectItem"></div>
+        <div class="text-center pd-v-s">
+            <button type="button" class="btn btn-gray" ng-click="closeThisDialog()">取消</button>
+            <button type="button" class="btn btn-blue" ng-click="confirm(selectItem)">确定</button>
+        </div>
+    </div>
+</div>

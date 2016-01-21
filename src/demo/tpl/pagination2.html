@@ -1,0 +1,7 @@
+<ul class="pagination2" ng-if="status.totalPage!=1">
+    <li class="text-muted">{{status.currentPage+"/" + status.totalPage}} 页</li>
+    <li><a ng-class="{'on':status.currentPage==1}" ng-click="start()"><i class="iconfont icon-page-start"></i></a></li>
+    <li><a ng-class="{'on':status.currentPage==1}" ng-click="prev()"><i class="iconfont icon-page-prev"></i></a></a></li>
+    <li><a ng-class="{'on':status.currentPage==status.totalPage}" ng-click="next()"><i class="iconfont icon-page-next"></i></a></a></li>
+    <li><a ng-class="{'on':status.currentPage==status.totalPage}" ng-click="end()"><i class="iconfont icon-page-end"></i></a></li>
+</ul>

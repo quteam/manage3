@@ -1,0 +1,8 @@
+{
+  "code": 200,
+  "message": "上传成功",
+  "data": {
+    "id": 12,
+    "url": "../ui/img/avatar.png"
+  }
+}

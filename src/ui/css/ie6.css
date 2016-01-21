@@ -1,0 +1,37 @@
+@charset "utf-8";
+/*reset*/
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td { margin: 0; padding: 0 }
+form { display: inline }
+body, button, input, select, textarea { font: 12px/1.8 tahoma, arial, \5b8b\4f53, sans-serif }
+h1, h2, h3, h4, h5, h6 { font-size: 100% }
+address, cite, dfn, em, var { font-style: normal }
+code, kbd, pre, samp { font-family: courier new, courier, monospace }
+small { font-size: 12px }
+ul, ol { list-style: none }
+a { text-decoration: none }
+sup { vertical-align: text-top }
+sub { vertical-align: text-bottom }
+legend { color: #000 }
+fieldset, img { border: 0 }
+button, input, select, textarea { font-size: 100% }
+table { border-collapse: collapse; border-spacing: 0 }
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video { display: block; margin: 0; padding: 0 }
+mark { background: #FF0 }
+.clearfix { *zoom: 1
+}
+.clearfix:before, .clearfix:after { display: table; content: "" }
+.clearfix:after { clear: both }
+.undis { display: none }
+.text-muted { color: #AAA; }
+/**/
+.box { position: absolute; top: 40%; left: 50%; width: 800px; margin-left: -400px; margin-top: -150px }
+.box h1 { font: 36px "Microsoft Yahei", "SimHei"; color: #333 }
+.box p { margin: 10px 0; font-size: 14px; }
+.box ul { margin-top: 20px; }
+.box li { float: left;}
+.box li a { display: inline-block; width: 130px; padding:10px 0 10px 70px; color: #808080; background: 0 50% no-repeat; }
+.box li a:hover { color: #000; }
+.box .icon-ie { background-image: url(../img/browser/ie.jpg); }
+.box .icon-chrome { background-image: url(../img/browser/chrome.jpg); }
+.box .icon-ff { background-image: url(../img/browser/firefox.jpg); }
+.box .icon-opera { background-image: url(../img/browser/opera.jpg); }

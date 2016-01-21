@@ -1,0 +1,22 @@
+<div>
+    <div class="fr">
+        <pagination status="status"></pagination>
+    </div>
+    <div ng-transclude></div>
+</div>
+<table class="table-list">
+    <thead>
+    <tr>
+        <th ng-if="listSelected"><input type="checkbox" class="selectAll"></th>
+        <th ng-repeat="(hKey,hValue) in theadList">{{hValue}}</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="tr in tbodyList">
+        <td ng-if="listSelected" class="select-td"><input type="checkbox" class="selectOne" value="{{tr.id}}">{{$index}}</td>
+        <td ng-repeat="(hKey,hValue) in theadList">
+            <table-cell row="tr[hKey]"></table-cell>
+        </td>
+    </tr>
+    </tbody>
+</table>

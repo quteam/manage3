@@ -1,0 +1,146 @@
+<div ng-controller="pageCtrl" ng-init="mainStatus.navigation='base'">
+    <div class="top-nav-wrap">
+        <div class="back backBtn"><i class="iconfont icon-back"></i></div>
+        <div class="title2">Base</div>
+        <div class="right">
+            <div class="tab">
+                <a href="#base.html" class="on">列表视图</a>
+                <a href="#base.html">楼盘表视图</a>
+            </div>
+            <div class="nav">
+                <a class="li"><i class="iconfont icon-plus"></i></a>
+                <a class="li"><i class="iconfont icon-search"></i></a>
+                <a class="li"><i class="iconfont icon-bell"></i><i class="tip" ng-if="mainStatus.msgBubble">{{mainStatus.msgBubble}}</i></a>
+            </div>
+        </div>
+    </div>
+    <div class="page-main">
+        <div class="mg-l"><span class="text-l">表单</span></div>
+        <div class="mg-l">
+            <div class="form-tr">
+                <div class="form-th">文本样式</div>
+                <div class="form-td">
+                    <div class="text-xl">文本样式 text-xl</div>
+                    <div class="text-l">文本样式 text-l</div>
+                    <div class="text-m">文本样式 text-m</div>
+                    <div class="text-n">文本样式 text-n</div>
+                    <div class="text-s">文本样式 text-s</div>
+
+                    <div class="text-tips text-s mg">提示信息 text-tips</div>
+
+                    <div class="text-xl text-muted">文本样式 text style 123</div>
+                    <div class="text-l text-muted">文本样式 text style 123</div>
+                    <div class="text-m text-muted">文本样式 text style 123</div>
+                    <div class="text-muted">文本样式 text style 123</div>
+                    <div class="text-s text-muted">文本样式 text style 123</div>
+
+                    <div class="text-tips text-s text-italic mg">提示信息 text-tips</div>
+
+                    <div class="text-xl text-muted text-italic">文本样式 text style 123</div>
+                    <div class="text-l text-muted text-italic">文本样式 text style 123</div>
+                    <div class="text-m text-muted text-italic">文本样式 text style 123</div>
+                    <div class="text-muted text-italic">文本样式 text style 123</div>
+                    <div class="text-s text-muted text-italic">文本样式 text style 123</div>
+                </div>
+            </div>
+            <div class="form-tr">
+                <div class="form-th">段落</div>
+                <div class="form-td">
+                    <div class="text-left">文本样式 text style 123</div>
+                    <div class="text-center">文本样式 text style 123</div>
+                    <div class="text-right">文本样式 text style 123</div>
+                </div>
+            </div>
+            <div class="form-tr">
+                <div class="form-th">按钮</div>
+                <div class="form-td">
+                    <div class="mg-s">
+                        <button type="button" class="btn btn-l"><i class="iconfont icon-ok"></i> 确定</button>
+                        <button type="button" class="btn btn-l" disabled>按钮</button>
+                        <button type="button" class="btn btn-l btn-gray"><i class="iconfont icon-cancel"></i> 取消</button>
+                        <button type="button" class="btn btn-l btn-orange"><i class="iconfont icon-delete"></i> 删除户型</button>
+                        <button type="button" class="btn btn-l btn-blue">按钮</button>
+                        <button type="button" class="btn btn-l btn-white">按钮</button>
+                    </div>
+                    <div class="mg-s">
+                        <button type="button" class="btn"><i class="iconfont icon-ok"></i> 确定</button>
+                        <button type="button" class="btn" disabled>按钮</button>
+                        <button type="button" class="btn btn-gray"><i class="iconfont icon-cancel"></i> 取消</button>
+                        <button type="button" class="btn btn-orange"><i class="iconfont icon-delete"></i> 删除户型</button>
+                        <button type="button" class="btn btn-blue">按钮</button>
+                        <button type="button" class="btn btn-white">按钮</button>
+                    </div>
+                    <div class="mg-s">
+                        <button type="button" class="btn btn-s"><i class="iconfont icon-ok"></i> 确定</button>
+                        <button type="button" class="btn btn-s" disabled>按钮</button>
+                        <button type="button" class="btn btn-s btn-gray"><i class="iconfont icon-cancel"></i> 取消</button>
+                        <button type="button" class="btn btn-s btn-orange"><i class="iconfont icon-delete"></i> 删除户型</button>
+                        <button type="button" class="btn btn-s btn-blue">按钮</button>
+                        <button type="button" class="btn btn-s btn-white">按钮</button>
+                    </div>
+                    <div class="mg-s">
+                        <button type="button" class="btn btn-l">进入项目规划信息</button>
+                        <button type="button" class="btn btn-w"><i class="iconfont icon-import"></i> 导入房间列表</button>
+                        <button type="button" class="btn"><i class="iconfont icon-export"></i> 导出房间列表</button>
+                        <button type="button" class="btn btn-s"><i class="iconfont icon-import"></i> 导入房间列表</button>
+                    </div>
+                </div>
+            </div>
+            <div class="form-tr">
+                <div class="form-th">标签</div>
+                <div class="form-td"><span class="tag">常态</span><span class="tag tag-activated">已激活</span><span class="tag tag-selected">已选择</span><span class="tag tag-add"><i
+                        class="iconfont icon-plus"></i></span></div>
+            </div>
+            <div class="form-tr">
+                <div class="form-th">选项卡</div>
+                <div class="form-td">
+                    <div class="tab-wrap" ng-init="tab=1">
+                        <li class="li" ng-class="{on:tab==1}" ng-click="tab=1">选项卡1</li>
+                        <li class="li" ng-class="{on:tab==2}" ng-click="tab=2">选项卡2选项卡2</li>
+                        <li class="li" ng-class="{on:tab==3}" ng-click="tab=3">选项卡3</li>
+                    </div>
+                    <div class="tab2-wrap">
+                        <li class="li" ng-class="{on:tab==1}" ng-click="tab=1">选项卡1</li>
+                        <li class="li" ng-class="{on:tab==2}" ng-click="tab=2">选项卡2选项卡2</li>
+                        <li class="li" ng-class="{on:tab==3}" ng-click="tab=3">选项卡3</li>
+                    </div>
+                    <div class="tab2-wrap tab2-wrap-inline">
+                        <li class="li" ng-class="{on:tab==1}" ng-click="tab=1">选项卡1</li>
+                        <li class="li" ng-class="{on:tab==2}" ng-click="tab=2">选项卡2选项卡2</li>
+                        <li class="li" ng-class="{on:tab==3}" ng-click="tab=3">选项卡3</li>
+                    </div>
+                    <div class="mg">
+                        <div class="tab3-wrap">
+                            <li class="li" ng-class="{on:tab==1}" ng-click="tab=1">选项卡1</li>
+                            <li class="li" ng-class="{on:tab==2}" ng-click="tab=2">选项卡2选项卡2</li>
+                            <li class="li" ng-class="{on:tab==3}" ng-click="tab=3">选项卡3</li>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-tr">
+                <div class="form-th">动画</div>
+                <div class="form-td">
+                    <div class="loader">
+                        <div class="loader-inner pacman">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-tr">
+                <div class="form-th">空数据</div>
+                <div class="form-td">
+                    <div class="empty-wrap">
+                        <div class="icon"><i class="iconfont icon-empty"></i></div>
+                        <div>什么也没有</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

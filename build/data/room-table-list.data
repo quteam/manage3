@@ -1,0 +1,76 @@
+{
+  "code": 200,
+  "message": "没有权限",
+  "options": {
+    "totalCount": 20,
+    "pageSize": 20
+  },
+  "data": [
+    {
+      "floor": 1,
+      "col1": "101",
+      "col1Status": "sale",
+      "col2": "102",
+      "col2Status": "sign",
+      "col3": "103",
+      "col3Status": "",
+      "col4": "104",
+      "col4Status": "sale"
+    },
+    {
+      "floor": 2,
+      "col1": "201",
+      "col1Status": "sale",
+      "col2": "202",
+      "col2Status": "sign",
+      "col3": "203",
+      "col3Status": "",
+      "col4": "204",
+      "col4Status": "sale"
+    },
+    {
+      "floor": 3,
+      "col1": "301",
+      "col1Status": "sale",
+      "col2": "302",
+      "col2Status": "sign",
+      "col3": "303",
+      "col3Status": "",
+      "col4": "304",
+      "col4Status": "sale"
+    },
+    {
+      "floor": 4,
+      "col1": "401",
+      "col1Status": "sale",
+      "col2": "402",
+      "col2Status": "sign",
+      "col3": "403",
+      "col3Status": "",
+      "col4": "404",
+      "col4Status": "sale"
+    },
+    {
+      "floor": 5,
+      "col1": "501",
+      "col1Status": "sale",
+      "col2": "502",
+      "col2Status": "sign",
+      "col3": "503",
+      "col3Status": "",
+      "col4": "504",
+      "col4Status": "sale"
+    },
+    {
+      "floor": 6,
+      "col1": "601",
+      "col1Status": "sale",
+      "col2": "602",
+      "col2Status": "sign",
+      "col3": "603",
+      "col3Status": "",
+      "col4": "604",
+      "col4Status": "sale"
+    }
+  ]
+}

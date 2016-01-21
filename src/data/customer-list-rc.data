@@ -1,0 +1,32 @@
+{
+  "code": 200,
+  "message": "没有权限",
+  "options": {
+    "totalCount": 60,
+    "pageSize": 20
+  },
+  "data": [
+    {
+      "id": 11,
+      "status": "未到访",
+      "name": "张三",
+      "tel": "13800138000",
+      "gender": "男",
+      "advisor": "顾问A",
+      "saleGroup": "1组",
+      "saleAgent": "张经理",
+      "hasUpdateDoc": "down.html"
+    },
+    {
+      "id": 12,
+      "status": "未到访",
+      "name": "张三",
+      "tel": "13800138000",
+      "gender": "男",
+      "advisor": "顾问A",
+      "saleGroup": "2组",
+      "saleAgent": "张经理",
+      "hasUpdateDoc": "down.html"
+    }
+  ]
+}

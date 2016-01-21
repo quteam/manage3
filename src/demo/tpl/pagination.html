@@ -1,0 +1,5 @@
+<ul class="pagination" ng-if="status.totalPage>1">
+    <li ng-class="{disabled:status.currentPage==1}"><a ng-click="prev()"><span>«</span></a></li>
+    <li ng-repeat="page in pages" ng-class="{active:page.active}"><a ng-click="goto(page.number)">{{page.text}}</a></li>
+    <li ng-class="{disabled:status.currentPage==status.totalPage}"><a ng-click="next()"><span>»</span></a></li>
+</ul>

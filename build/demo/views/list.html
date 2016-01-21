@@ -1,0 +1,76 @@
+<div ng-controller="pageCtrl" ng-init="mainStatus.navigation='list'">
+    <div class="top-nav-wrap">
+        <div class="back backBtn"><i class="iconfont icon-back"></i></div>
+        <div class="title2">列表</div>
+        <div class="right">
+            <div class="nav">
+                <a class="li"><i class="iconfont icon-plus"></i></a>
+                <a class="li"><i class="iconfont icon-search"></i></a>
+                <a class="li"><i class="iconfont icon-bell"></i><i class="tip" ng-if="mainStatus.msgBubble">{{mainStatus.msgBubble}}</i></a>
+            </div>
+        </div>
+    </div>
+    <div class="page-main">
+        <div class="mg-l"><span class="text-l">列表</span></div>
+        <table-list list-data="../data/table-list.data" list-params="listParams">
+            <div class="loader" ng-if="status.isLoading">
+                <div class="loader-inner pacman">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+            <div ng-if="!status.isLoading">
+                <div class="empty-wrap" ng-if="tbodyList.length==0">
+                    <div class="icon"><i class="iconfont icon-empty"></i></div>
+                    <div>什么也没有</div>
+                </div>
+                <div ng-if="tbodyList.length">
+                    <div class="mg-m">
+                        <div class="fr">
+                            <pagination2 status="status"></pagination2>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-orange" ng-click="delSelected('../data/form.data')"><i class="iconfont icon-delete"></i> 删除</button>
+                            <button type="button" class="btn" modal-right="400" modal-scope="this" modal-url="views/list-edit.html"><i class="iconfont icon-plus"></i> 新建
+                            </button>
+                        </div>
+                    </div>
+                    <table class="table-list">
+                        <thead>
+                        <tr>
+                            <th><input type="checkbox" class="selectAll"></th>
+                            <th>户型名称</th>
+                            <th>房屋用途</th>
+                            <th>房 型</th>
+                            <th>预售面积</th>
+                            <th>附属/赠送类型和面积</th>
+                            <th>户型图</th>
+                            <th>其他信息</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="tr in tbodyList" modal-right="400" modal-scope="this" modal-url="views/list-view.html" modal-data="{{tr}}">
+                            <td class="select-td"><input type="checkbox" class="selectOne" value="{{tr.id}}"></td>
+                            <td>{{tr.name}}</td>
+                            <td>{{tr.col1}}</td>
+                            <td>{{tr.col2}}</td>
+                            <td>{{tr.col3}}</td>
+                            <td>{{tr.col4}}</td>
+                            <td>{{tr.col5}}</td>
+                            <td>{{tr.col6}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="mg-s">
+                        <div class="fr">
+                            <pagination status="status"></pagination>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </table-list>
+    </div>
+</div>
