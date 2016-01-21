@@ -11,7 +11,7 @@
         </div>
     </div>
     <div class="page-main">
-        <div class="mg-l"><span class="text-l">基本布局</span></div>
+        <div class="mgb-l"><span class="text-l">基本布局</span></div>
         <div class="mg-l">
             <div class="col-group col-group-exp mg">
                 <div class="col-1">.col-1</div>
@@ -111,6 +111,86 @@
                             </div>
                         </div>
                     </table-list>
+                </div>
+            </div>
+        </div>
+        <div class="mg-l"><span class="text-l">其他布局</span></div>
+        <div class="mg-l">
+            <div class="flex-column">
+                <div class="flex-item-8">
+                    <div class="tab-list-wrap" ng-controller="oneCtrl">
+                        <ul class="tab-wrap" ng-init="tab=1">
+                            <li class="li" ng-class="{on:tab==1}" ng-click="tab=1"><em>房间价格</em></li>
+                            <li class="li" ng-class="{on:tab==2}" ng-click="tab=2"><em>普通折扣</em></li>
+                            <li class="li" ng-class="{on:tab==3}" ng-click="tab=3"><em>活动折扣</em></li>
+                        </ul>
+                        <div class="pd-m">
+                            <ul class="list-group">
+                                <li class="li">
+                                    <a class="name">郊区项目标签模板A</a>
+                                </li>
+                                <li class="li">
+                                    <a class="name">郊区项目标签模板A</a>
+                                </li>
+                                <li class="li">
+                                    <a class="name">郊区项目标签模板A</a>
+                                </li>
+                                <li class="li">
+                                    <a class="name">郊区项目标签模板A</a>
+                                </li>
+                                <li class="li">
+                                    <a class="name">郊区项目标签模板A</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-item-4 flex-row pdl-m">
+                    <div class="flex-item tab-list-wrap pd-m" ng-controller="oneCtrl">
+                        <div class="mgb-m">常用业务</div>
+                        <div class="mg-m">
+                            <a href="#" class="btn btn-s btn-white">考试创建</a>
+                            <a href="#" class="btn btn-s btn-white">成绩录入</a>
+                            <a href="#" class="btn btn-s btn-white">成绩中心</a>
+                            <a href="#" class="btn btn-s btn-white">我的课件</a>
+                        </div>
+                        <div class="mgb-m">常用流程</div>
+                        <div class="mg-m">
+                            <a href="#" class="btn btn-s">请假加班申请</a>
+                            <a href="#" class="btn btn-s">设备维修申报</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mg-l">
+            <div class="flex-column">
+                <div class="flex-item-6">
+                    <div class="tab-list-wrap pd-m">
+                        <div class="mgb-m">代办事件</div>
+                        <ul class="list-group">
+                            <li class="li">
+                                <a class="name">郊区项目标签模板A</a>
+                            </li>
+                            <li class="li">
+                                <a class="name">郊区项目标签模板A</a>
+                            </li>
+                            <li class="li">
+                                <a class="name">郊区项目标签模板A</a>
+                            </li>
+                            <li class="li">
+                                <a class="name">郊区项目标签模板A</a>
+                            </li>
+                            <li class="li">
+                                <a class="name">郊区项目标签模板A</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="flex-item-6 flex-row pdl-m">
+                    <div class="flex-item tab-list-wrap pd-m">
+                        <div class="mgb-m">通知</div>
+                    </div>
                 </div>
             </div>
         </div>

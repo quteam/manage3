@@ -4,7 +4,7 @@
 @charset "utf-8";
 blockquote,body,button,dd,dl,dt,fieldset,form,h1,h2,h3,h4,h5,h6,hr,input,legend,li,ol,p,pre,td,textarea,th,ul{margin:0;padding:0}
 form{display:inline}
-body,button,input,select,textarea{font:12px/1.8 tahoma,arial,\5b8b\4f53,sans-serif}
+body,button,input,select,textarea{font:12px/1.8 tahoma,arial,"\5b8b\4f53",sans-serif}
 h1,h2,h3,h4,h5,h6{font-size:100%}
 address,cite,dfn,em,var{font-style:normal}
 code,kbd,pre,samp{font-family:courier new,courier,monospace}

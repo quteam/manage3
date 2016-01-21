@@ -10,7 +10,9 @@ var exec = require('child_process').exec,
     uglify = require('gulp-uglify'),
     template = require('gulp-ng-template'),
     minifyHtml = require('gulp-minify-html'),
-    preprocess = require('gulp-preprocess');
+    preprocess = require('gulp-preprocess'),
+    less = require('gulp-less'),
+    autoprefixer = require('gulp-autoprefixer');
 
 var Config = {
     name: "manageApp",
@@ -28,7 +30,7 @@ gulp.task('clean', function () {
 });
 
 //template 没有 define
-gulp.task('template', function () {
+gulp.task('template', ['clean'], function () {
     return gulp.src('./src/demo/tpl/**/*.html')
         .pipe(minifyHtml({
             quotes: true,
@@ -70,7 +72,7 @@ gulp.task('js', ['template'], function () {
     gulp.src(['./src/ui/r.js']).pipe(gulp.dest('./build/ui'));
 });
 
-gulp.task('image', function () {
+gulp.task('image', ['clean'], function () {
     gulp.src(['./src/ui/**/*.{png,jpg,gif,ico}'])
         .pipe(imagemin({
             progressive: true,
@@ -80,24 +82,43 @@ gulp.task('image', function () {
         .pipe(gulp.dest('./build/ui'));
 });
 
-gulp.task('css', function () {
-    gulp.src(['./src/ui/**/*.css'])
-        //.pipe(concat('css/style.css'))
+gulp.task('css', ['clean'], function () {
+    gulp.src(['./src/ui/less/*.less'])
+        .pipe(less())
+        .pipe(autoprefixer())
         .pipe(cssmin({
             advanced: false,
             compatibility: "*",
             keepBreaks: true
         }))
         .pipe(header('/**\n * ${itemName} v<%= version %> | <%= author %>\n */\n', Config))
-        .pipe(gulp.dest('./build/ui'));
+        .pipe(gulp.dest('./build/ui/css'));
 });
 
-gulp.task('copy', function () {
+gulp.task('copy', ['clean'], function () {
     gulp.src(['./src/ui/img/**/*.*', '!./src/ui/img/**/*.{png,jpg,gif,ico}'])
         .pipe(gulp.dest('./build/ui/img'));
     //复制其他文件
     gulp.src(['./src/data/**/*.*']).pipe(gulp.dest('./build/data'));
     gulp.src(['./src/demo/**/*.*', '!./src/demo/tpl/**/*.*']).pipe(gulp.dest('./build/demo'));
 });
+
+gulp.task('clean-css', function () {
+    return gulp.src("./src/ui/css")
+        .pipe(clean());
+});
+
+gulp.task('build-less', function () {
+    gulp.src(['./src/ui/less/*.less'])
+        .pipe(less())
+        .pipe(autoprefixer())
+        .pipe(gulp.dest('./src/ui/css'))
+});
+
+// 日常开发中使用
+gulp.task('develop', function () {
+    gulp.watch('./src/ui/less/*.less', ['build-less']);
+});
+
 
 gulp.task('default', ['clean', 'css', 'image', 'js', 'copy']);
