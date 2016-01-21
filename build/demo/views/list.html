@@ -49,10 +49,11 @@
                             <th>附属/赠送类型和面积</th>
                             <th>户型图</th>
                             <th>其他信息</th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="tr in tbodyList" modal-right="400" modal-scope="this" modal-url="views/list-view.html" modal-data="{{tr}}">
+                        <tr ng-repeat="tr in tbodyList">
                             <td class="select-td"><input type="checkbox" class="selectOne" value="{{tr.id}}"></td>
                             <td>{{tr.name}}</td>
                             <td>{{tr.col1}}</td>
@@ -61,6 +62,12 @@
                             <td>{{tr.col4}}</td>
                             <td>{{tr.col5}}</td>
                             <td>{{tr.col6}}</td>
+                            <td>
+                                <button type="button" class="btn btn-s btn-white" modal-right="400" modal-scope="this" modal-url="views/list-view.html" modal-data="{{tr}}"><i
+                                        class="iconfont icon-delete"></i> 查看
+                                </button>
+                                <button type="button" class="btn btn-s btn-orange" ng-click="deleteThis('../data/form.data?id={{tr.id}}')"><i class="iconfont icon-delete"></i> 删除</button>
+                            </td>
                         </tr>
                         </tbody>
                     </table>

@@ -224,6 +224,25 @@ define('main/directives', ['main/init'], function () {
                             });
                     });
                 };
+                //单个删除
+                $scope.deleteThis = function (_url) {
+                    var _tr = this.tr;
+                    dialogConfirm('确定删除?', function () {
+                        $.post(_url, {}, function (data) {
+                                if (data.code == 200) {
+                                    $scope.tbodyList.splice($scope.tbodyList.indexOf(_tr), 1);
+                                } else {
+                                    alert(data.message || '删除错误');
+                                }
+                            }, 'json')
+                            .error(function () {
+                                alert('请求错误');
+                            })
+                            .complete(function () {
+                                $scope.$digest();
+                            })
+                    });
+                };
 
                 //弹窗修改后的回调
                 $scope.submitCallBack = function (_data) {
