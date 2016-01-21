@@ -65,7 +65,7 @@ gulp.task('js', ['template'], function () {
         }());
 
     gulp.src(['./src/ui/libs/**/*.*'])
-        .pipe(uglify())
+        //.pipe(uglify())
         .pipe(gulp.dest('./build/ui/libs'));
     gulp.src(['./src/ui/r.js']).pipe(gulp.dest('./build/ui'));
 });

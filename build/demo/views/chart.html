@@ -1,0 +1,41 @@
+<div ng-controller="pageCtrl" ng-init="mainStatus.navigation='chart'">
+    <div class="top-nav-wrap">
+        <div class="back backBtn"><i class="iconfont icon-back"></i></div>
+        <div class="title2">图表</div>
+        <div class="right">
+            <div class="nav">
+                <a class="li"><i class="iconfont icon-plus"></i></a>
+                <a class="li"><i class="iconfont icon-search"></i></a>
+                <a class="li"><i class="iconfont icon-bell"></i><i class="tip" ng-if="mainStatus.msgBubble">{{mainStatus.msgBubble}}</i></a>
+            </div>
+        </div>
+    </div>
+    <div class="page-main">
+        <div class="mg-l"><span class="text-l">图表</span></div>
+        <div class="form-tr">
+            <div class="form-th">饼状图</div>
+            <div class="form-td">
+                <div class="col-group">
+                    <div class="col-6">
+                        <div chart="../data/pie-chart.data" style="height: 300px;"></div>
+                    </div>
+                    <div class="col-6">
+                        <div chart="../data/pie-chart.data" style="height: 300px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-tr">
+            <div class="form-th">柱状图</div>
+            <div class="form-td">
+                <div chart="../data/bar-chart.data" style="height: 400px;"></div>
+            </div>
+        </div>
+        <div class="form-tr">
+            <div class="form-th">线状图</div>
+            <div class="form-td">
+                <div chart="../data/line-chart.data" style="height: 400px;"></div>
+            </div>
+        </div>
+    </div>
+</div>

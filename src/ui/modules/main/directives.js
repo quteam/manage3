@@ -848,6 +848,44 @@ define('main/directives', ['main/init'], function () {
     };
     relativeSelect.$inject = ["$timeout"];
 
+    function eChart($http) {
+        return {
+            restrict: 'A',
+            scope: true,
+            link: function ($scope, $element, $attrs) {
+                require(['echarts'], function (echarts) {
+                    var myChart = echarts.init($element[0]);
+
+                    function reSize() {
+                        myChart.resize();
+                    };
+                    $(window).on("resize", reSize);
+                    $scope.$on('$destroy', function () {
+                        $(window).off("resize", reSize);
+                        myChart.dispose();
+                    });
+
+                    myChart.showLoading();
+
+                    $http
+                        .get($attrs.chart, {
+                            headers: {'X-Requested-With': 'XMLHttpRequest'}
+                        })
+                        .success(function (_data) {
+                            myChart.hideLoading();
+                            if (_data.code == 200) {
+                                myChart.setOption(_data.data);
+                            }
+                        })
+                        .error(function () {
+                            myChart.hideLoading();
+                        });
+                });
+            }
+        };
+    };
+    eChart.$inject = ["$http"];
+
     /**
      * 加入项目
      */
@@ -866,4 +904,5 @@ define('main/directives', ['main/init'], function () {
         .directive("navList", navList)
         .directive("selectAsync", selectAsync)
         .directive("relativeSelect", relativeSelect)
+        .directive("chart", eChart)
 });

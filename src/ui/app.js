@@ -14,6 +14,7 @@ require.config({
     baseUrl: require.dir + 'modules',
     paths: {
         //'map': 'http://api.map.baidu.com/api?v=2.0&ak=wodRhOi2uhUtKFGAFPsHxIei&callback=mapInit',
+        'echarts': '../libs/echarts.min',
         'jQuery': '../libs/jquery.min',
         'angular': '../libs/angular'
     },
@@ -24,6 +25,9 @@ require.config({
         //'map': {
         //    exports: 'BMap'
         //},
+        'echarts': {
+            exports: 'echarts'
+        },
         'angular': {
             deps: ['jQuery'],
             exports: 'angular'
