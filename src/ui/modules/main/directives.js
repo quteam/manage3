@@ -971,6 +971,7 @@ define('main/directives', ['main/init'], function () {
                             }
 
                             var resultRow = {
+                                id: responseData[i].id,
                                 title: text,
                                 description: description,
                                 //image: image,

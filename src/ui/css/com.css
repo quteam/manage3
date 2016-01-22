@@ -1169,7 +1169,7 @@ body {
   padding: 6px 12px;
   height: 36px;
   box-sizing: border-box;
-  background: #F5F5F5;
+  background: transparent;
   border: 1px solid #E6E6E6;
   outline: none;
 }
@@ -1190,7 +1190,7 @@ body {
   padding: 5px 10px;
   margin-bottom: 2px;
   border-radius: 3px;
-  background: #F5F5F5;
+  background: transparent;
   border: 1px solid #E6E6E6;
   outline: none;
 }
@@ -1218,7 +1218,7 @@ body {
   box-sizing: border-box;
   padding: 5px 10px;
   border-radius: 3px;
-  background: #F5F5F5;
+  background: transparent;
   border: 1px solid #E6E6E6;
   outline: none;
 }
@@ -2925,9 +2925,7 @@ body.ngdialog-open {
   position: relative;
 }
 .angucomplete-dropdown {
-  border-color: #ECECEC;
-  border-width: 1px;
-  border-style: solid;
+  border: 1px solid #ECECEC;
   border-radius: 2px;
   width: 250px;
   padding: 6px;
@@ -2937,8 +2935,9 @@ body.ngdialog-open {
   /*top: 32px;
 	left: 0px;
 	*/
-  margin-top: -6px;
+  margin-top: -2px;
   background-color: #FFF;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 .angucomplete-searching {
   color: #ACACAC;
@@ -2954,8 +2953,9 @@ body.ngdialog-open {
 }
 .angucomplete-selected-row,
 .angucomplete-row:hover {
-  background-color: lightblue;
+  background-color: #4C637B;
   color: #FFF;
+  border-radius: 3px;
 }
 .angucomplete-image-holder {
   padding-top: 2px;
