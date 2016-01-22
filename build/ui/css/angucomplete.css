@@ -1,0 +1,12 @@
+/**
+ * Manage System v3.0 | haovei@qq.com
+ */
+.angucomplete-holder{position:relative}
+.angucomplete-dropdown{border-color:#ECECEC;border-width:1px;border-style:solid;border-radius:2px;width:250px;padding:6px;cursor:pointer;z-index:9999;position:absolute;margin-top:-6px;background-color:#FFF}
+.angucomplete-searching{color:#ACACAC;font-size:14px}
+.angucomplete-description{font-size:14px}
+.angucomplete-row{padding:5px;color:#000;margin-bottom:4px}
+.angucomplete-row:hover,.angucomplete-selected-row{background-color:#add8e6;color:#FFF}
+.angucomplete-image-holder{padding-top:2px;float:left;margin-right:10px;margin-left:5px}
+.angucomplete-image{height:34px;width:34px;border-radius:50%;border-color:#ECECEC;border-style:solid;border-width:1px}
+.angucomplete-image-default{background-position:center;background-size:contain;height:34px;width:34px}

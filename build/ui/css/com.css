@@ -81,6 +81,7 @@ body{color:#1E1E1E}
 .pdb{padding-bottom:10px}
 .pdb-s{padding-bottom:5px}
 .block{display:block}
+.inline-block{display:inline-block}
 .underline{text-decoration:underline}
 .relative{position:relative}
 .pos-lt{position:absolute;top:0;left:0}
@@ -581,3 +582,12 @@ body.ngdialog-open,html.ngdialog-open{overflow:hidden}
 .pacman>div:first-of-type{width:0;height:0;border-right:25px solid transparent;border-top:25px solid #CCC;border-left:25px solid #CCC;border-bottom:25px solid #CCC;border-radius:25px;-webkit-animation:rotate_pacman_half_up .5s 0s infinite;animation:rotate_pacman_half_up .5s 0s infinite}
 .pacman>div:nth-child(2){width:0;height:0;border-right:25px solid transparent;border-top:25px solid #CCC;border-left:25px solid #CCC;border-bottom:25px solid #CCC;border-radius:25px;-webkit-animation:rotate_pacman_half_down .5s 0s infinite;animation:rotate_pacman_half_down .5s 0s infinite;margin-top:-50px}
 .pacman>div:nth-child(3),.pacman>div:nth-child(4),.pacman>div:nth-child(5),.pacman>div:nth-child(6){background-color:#CCC;width:15px;height:15px;border-radius:100%;margin:2px;width:10px;height:10px;position:absolute;-webkit-transform:translate(0,-6.25px);transform:translate(0,-6.25px);top:25px;left:100px}
+.angucomplete-holder{position:relative}
+.angucomplete-dropdown{border-color:#ECECEC;border-width:1px;border-style:solid;border-radius:2px;width:250px;padding:6px;cursor:pointer;z-index:9999;position:absolute;margin-top:-6px;background-color:#FFF}
+.angucomplete-searching{color:#ACACAC;font-size:14px}
+.angucomplete-description{font-size:14px}
+.angucomplete-row{padding:5px;color:#000;margin-bottom:4px}
+.angucomplete-row:hover,.angucomplete-selected-row{background-color:#add8e6;color:#FFF}
+.angucomplete-image-holder{padding-top:2px;float:left;margin-right:10px;margin-left:5px}
+.angucomplete-image{height:34px;width:34px;border-radius:50%;border-color:#ECECEC;border-style:solid;border-width:1px}
+.angucomplete-image-default{background-position:center;background-size:contain;height:34px;width:34px}
