@@ -805,7 +805,7 @@ define('main/directives', ['main/init'], function () {
             require: "?^ngModel",
             link: function ($scope, $element, $attrs, ngModel) {
                 $.post($attrs.selectAsync, {}, function (data) {
-                    if (data.status == 200) {
+                    if (data.code == 200) {
                         var _options = '<option value="">请选择</option>';
                         var _length = data.data.length;
                         for (var i = 0; i < _length; i++) {
@@ -845,7 +845,7 @@ define('main/directives', ['main/init'], function () {
 
                 function getData(_data) {
                     $.post(_relativeSelect, _data, function (data) {
-                        if (data.status == 200) {
+                        if (data.code == 200) {
                             var _options = isSelectFirst ? '' : '<option value="">请选择</option>';
                             var _length = data.data.length;
                             for (var i = 0; i < _length; i++) {
@@ -924,8 +924,9 @@ define('main/directives', ['main/init'], function () {
                 "searchFields": "@searchfields",
                 "matchClass": "@matchclass"
             },
+            require: "?^ngModel",
             templateUrl: 'tpl/autocomplete.html',
-            link: function ($scope, elem, attrs) {
+            link: function ($scope, elem, attrs, ngModel) {
                 $scope.lastSearchTerm = null;
                 $scope.currentIndex = null;
                 $scope.justChanged = false;
@@ -1072,7 +1073,7 @@ define('main/directives', ['main/init'], function () {
                     $scope.selectedItem = result;
                     $scope.showDropdown = false;
                     $scope.results = [];
-                    //$scope.$apply();
+                    ngModel && ngModel.$setViewValue(result.id);
                 };
 
                 var inputField = elem.find('input');
@@ -1126,6 +1127,47 @@ define('main/directives', ['main/init'], function () {
     angucomplete.$inject = ["$parse", "$http", "$sce", "$timeout"];
 
     /**
+     * checkbox
+     */
+    function checkboxGroup() {
+        return {
+            restrict: "A",
+            scope: {
+                checkboxGroup: "="
+            },
+            link: function ($scope, $elem, $attrs) {
+                if (!angular.isArray($scope.checkboxGroup)) $scope.checkboxGroup = [];
+
+                //if ($scope.checkboxGroup.indexOf($attrs.value) !== -1) {
+                //    $elem[0].checked = true;
+                //}
+
+                // Update array on click
+                $elem.on('click', function () {
+                    var index = $scope.checkboxGroup.indexOf($attrs.value);
+                    // Add if checked
+                    if ($elem[0].checked) {
+                        if (index === -1) $scope.checkboxGroup.push($attrs.value);
+                    }
+                    // Remove if unchecked
+                    else {
+                        if (index !== -1) $scope.checkboxGroup.splice(index, 1);
+                    }
+                    $scope.$apply();
+                });
+
+                $scope.$watchCollection("checkboxGroup", function (value) {
+                    if (value) {
+                        if ($scope.checkboxGroup.indexOf($attrs.value) !== -1) {
+                            $elem[0].checked = true;
+                        }
+                    }
+                })
+            }
+        }
+    }
+
+    /**
      * 加入项目
      */
     angular.module('manageApp.main')
@@ -1145,4 +1187,5 @@ define('main/directives', ['main/init'], function () {
         .directive("relativeSelect", relativeSelect)
         .directive("chart", eChart)
         .directive("angucomplete", angucomplete)
+        .directive("checkboxGroup", checkboxGroup)
 });
