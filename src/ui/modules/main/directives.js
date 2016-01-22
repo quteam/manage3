@@ -1169,6 +1169,25 @@ define('main/directives', ['main/init'], function () {
     }
 
     /**
+     *
+     */
+    function chosen() {
+        return {
+            restrict: 'A',
+            scope: {
+                chosen: '='
+            },
+            link: function ($scope, $element, $attrs, $ctrls) {
+                require(['chosen'], function () {
+                    $element.chosen($scope.chosen || {
+                            no_results_text: "没有找到"
+                        });
+                })
+            }
+        }
+    }
+
+    /**
      * 加入项目
      */
     angular.module('manageApp.main')
@@ -1189,4 +1208,5 @@ define('main/directives', ['main/init'], function () {
         .directive("chart", eChart)
         .directive("angucomplete", angucomplete)
         .directive("checkboxGroup", checkboxGroup)
+        .directive("chosen", chosen)
 });
