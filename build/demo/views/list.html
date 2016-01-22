@@ -69,7 +69,7 @@
                                 <button type="button" class="btn btn-s btn-white" modal-right="400" modal-scope="this" modal-url="views/list-view.html" modal-data="{{tr}}"><i
                                         class="iconfont icon-delete"></i> 查看
                                 </button>
-                                <button type="button" class="btn btn-s btn-orange" ng-click="deleteThis('../data/form.data?id={{tr.id}}')"><i class="iconfont icon-delete"></i> 删除</button>
+                                <button type="button" class="btn btn-s btn-orange" ng-click="deleteThis('../data/form.data?id='+tr.id)"><i class="iconfont icon-delete"></i> 删除</button>
                             </td>
                         </tr>
                         </tbody>
