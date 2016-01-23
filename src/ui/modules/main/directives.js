@@ -873,8 +873,11 @@ define('main/directives', ['main/init'], function () {
     function eChart($http) {
         return {
             restrict: 'A',
-            scope: true,
-            link: function ($scope, $element, $attrs) {
+            scope: {
+                clickToUrl: "="
+            },
+            require: "?^ngModel",
+            link: function ($scope, $element, $attrs, ngModel) {
                 require(['echarts'], function (echarts) {
                     var myChart = echarts.init($element[0]);
 
@@ -888,6 +891,13 @@ define('main/directives', ['main/init'], function () {
                     });
 
                     myChart.showLoading();
+
+                    myChart.on("click", function (_data) {
+                        ngModel && ngModel.$setViewValue(_data.data);
+                        if ($scope.clickToUrl) {
+                            window.location.assign($scope.clickToUrl);
+                        }
+                    });
 
                     $http
                         .get($attrs.chart, {
