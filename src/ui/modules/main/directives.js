@@ -1187,11 +1187,31 @@ define('main/directives', ['main/init'], function () {
             scope: {
                 chosen: '='
             },
-            link: function ($scope, $element, $attrs, $ctrls) {
+            require: "?^ngModel",
+            link: function ($scope, $element, $attrs, ngModel) {
                 require(['chosen'], function () {
-                    $element.chosen($scope.chosen || {
-                            no_results_text: "没有找到"
+                    if ($attrs.selectSource) {
+                        $.post($attrs.selectSource, {}, function (data) {
+                            if (data.code == 200) {
+                                var _options = '';
+                                var _length = data.data.length;
+                                for (var i = 0; i < _length; i++) {
+                                    _options += '<option value="' + data.data[i].value + '"' + (ngModel.$viewValue == data.data[i].value ? 'selected' : '') + '>' + data.data[i].text + '</option>';
+                                }
+                                $element.html(_options);
+
+                                $element.chosen($scope.chosen || {
+                                        no_results_text: "没有找到"
+                                    });
+                            }
+                        }, 'json').complete(function () {
+                            $scope.$digest();
                         });
+                    } else {
+                        $element.chosen($scope.chosen || {
+                                no_results_text: "没有找到"
+                            });
+                    }
                 })
             }
         }
