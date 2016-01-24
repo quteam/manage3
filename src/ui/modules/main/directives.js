@@ -32,7 +32,7 @@ define('main/directives', ['main/init'], function () {
                     return dateFilter(val, _format);
                 });
                 ngModel.$formatters.push(function () {
-                    return ngModel.$modelValue;
+                    return new Date(ngModel.$modelValue);
                 });
             }
         };
