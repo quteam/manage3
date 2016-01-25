@@ -2173,6 +2173,7 @@ body {
   overflow: hidden;
   padding: 10px 0;
   line-height: 36px;
+  min-height: 56px;
 }
 .filter-wrap .dd span {
   display: inline-block;

@@ -599,47 +599,23 @@ define('main/directives', ['main/init'], function () {
     function filterConditions() {
         return {
             restrict: 'AE',
-            scope: true,
+            scope: {},
             transclude: true,
             link: function ($scope, $element, $attrs, $ctrls, $transclude) {
                 //筛选
                 //var listParams = $scope.$eval($attrs.ngModel);
-                var filterConditions = $scope.filterConditions = {list: []};
+                $scope.filterParams = {};
+                $scope.filterConditions = {list: []};
+                var filterConditions = $scope.filterConditions;
                 $scope.conditionList = {};
-                $scope.selectArea = function (_area) {
-                    _area.type = "area";
-                    filterConditions.area = _area;
-                    filterConditions.list.push(_area);
+
+                $scope.selectCondition = function (_name, _item) {
+                    _item.type = _name;
+                    filterConditions[_name] = _item;
+                    filterConditions.list.push(_item);
                     updataListParams();
                 };
-                $scope.selectBuilding = function (_building) {
-                    _building.type = "building";
-                    filterConditions.building = _building;
-                    filterConditions.list.push(_building);
-                    updataListParams();
-                };
-                $scope.selectHouse = function (_house) {
-                    _house.type = "house";
-                    filterConditions.house = _house;
-                    filterConditions.list.push(_house);
-                    updataListParams();
-                };
-                $scope.selectSale = function (_sale) {
-                    _sale.type = "sale";
-                    filterConditions.sale = _sale;
-                    filterConditions.list.push(_sale);
-                    updataListParams();
-                };
-                $scope.selectRoom = function (_roomNum) {
-                    var _room = {
-                        id: _roomNum,
-                        name: "房间号:" + _roomNum,
-                        type: "room"
-                    };
-                    filterConditions.room = _room;
-                    filterConditions.list.push(_room);
-                    updataListParams();
-                };
+
                 $scope.deleteCondition = function (_this) {
                     var _index = filterConditions.list.indexOf(_this);
                     filterConditions.list.splice(_index, 1);
@@ -649,25 +625,25 @@ define('main/directives', ['main/init'], function () {
 
                 //
                 function updataListParams() {
-                    angular.extend($scope.listParams, {
-                        area: filterConditions.area ? filterConditions.area.id : undefined,
-                        building: filterConditions.building ? filterConditions.building.id : undefined,
-                        house: filterConditions.house ? filterConditions.house.id : undefined,
-                        sale: filterConditions.sale ? filterConditions.sale.id : undefined,
-                        room: filterConditions.room ? filterConditions.room.id : undefined
+                    var _data = {};
+                    angular.forEach($scope.filterConditions.list, function (condition) {
+                        _data[condition.type] = condition.id;
                     });
+                    $scope.filterParams = _data;
                 }
 
                 //获取筛选条件
-                (function () {
-                    $.getJSON($attrs.filterConditions, {}, function (_data) {
-                        if (_data.code == 200) {
-                            $scope.conditionList = _data.data;
-                        }
-                    }).complete(function () {
-                        $scope.$digest();
-                    });
-                })();
+                if ($attrs.filterConditions) {
+                    (function () {
+                        $.getJSON($attrs.filterConditions, {}, function (_data) {
+                            if (_data.code == 200) {
+                                $scope.conditionList = _data.data;
+                            }
+                        }).complete(function () {
+                            $scope.$digest();
+                        });
+                    })();
+                }
 
                 $transclude($scope, function (clone) {
                     $element.append(clone);

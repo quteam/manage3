@@ -1,0 +1,127 @@
+<div ng-controller="pageCtrl" ng-init="mainStatus.navigation='filter'">
+    <div class="top-nav-wrap">
+        <div class="back backBtn"><i class="iconfont icon-back"></i></div>
+        <div class="title2">筛选</div>
+        <div class="right">
+            <div class="nav">
+                <a class="li"><i class="iconfont icon-plus"></i></a>
+                <a class="li"><i class="iconfont icon-search"></i></a>
+                <a class="li"><i class="iconfont icon-bell"></i><i class="tip" ng-if="mainStatus.msgBubble">{{mainStatus.msgBubble}}</i></a>
+            </div>
+        </div>
+    </div>
+    <div class="page-main">
+        <div class="mgb-l"><span class="text-l">筛选列表</span></div>
+        <div filter-conditions="../data/room-filter.data">
+            <div class="filter-wrap">
+                <div class="dl" ng-if="filterConditions.list.length">
+                    <div class="dt">筛选条件</div>
+                    <div class="dd">
+                        <span class="tag2" ng-repeat="cdt in filterConditions.list">{{cdt.name}} <i class="del" ng-click="deleteCondition(cdt)"></i></span>
+                    </div>
+                </div>
+                <div class="dl" ng-if="!filterConditions.area">
+                    <div class="dt">分 区</div>
+                    <div class="dd">
+                        <span ng-repeat="area in conditionList.area" ng-click="selectCondition('area',area)">{{area.name}}</span>
+                    </div>
+                </div>
+                <div class="dl" ng-if="!filterConditions.building">
+                    <div class="dt">楼 栋</div>
+                    <div class="dd">
+                        <span ng-repeat="building in conditionList.building" ng-click="selectCondition('building',building)">{{building.name}}</span>
+                    </div>
+                </div>
+                <div class="dl" ng-if="!filterConditions.house">
+                    <div class="dt">户 型</div>
+                    <div class="dd">
+                        <span ng-repeat="house in conditionList.house" ng-click="selectCondition('house',house)">{{house.name}}</span>
+                    </div>
+                </div>
+                <div class="dl" ng-if="!filterConditions.sale">
+                    <div class="dt">销售状态</div>
+                    <div class="dd">
+                        <span ng-repeat="sale in conditionList.sale" ng-click="selectCondition('sale',sale)">{{sale.name}}</span>
+                    </div>
+                </div>
+                <div class="dl" ng-if="!filterConditions.room">
+                    <div class="dt">房间号</div>
+                    <div class="dd">
+                        <input type="number" class="ipt ipt-xshort" ng-model="filterRoom"/>
+                        <button type="button" class="btn btn-short btn-white" ng-click="selectCondition('room',{id:filterRoom,name:'房间号:'+filterRoom})">确定</button>
+                    </div>
+                </div>
+            </div>
+            <table-list list-data="../data/table-list.data" list-params="filterParams">
+                <div class="loader" ng-if="status.isLoading">
+                    <div class="loader-inner pacman">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+                <div ng-if="!status.isLoading">
+                    <div class="empty-wrap" ng-if="tbodyList.length==0">
+                        <div class="icon"><i class="iconfont icon-empty"></i></div>
+                        <div>什么也没有</div>
+                    </div>
+                    <div ng-if="tbodyList.length">
+                        <div class="mg-m">
+                            <div class="fr">
+                                <pagination2 status="status"></pagination2>
+                            </div>
+                            <div>
+                                <button type="button" class="btn btn-orange" ng-click="delSelected('../data/form.data')" ng-disabled="listSelected.length==0">
+                                    <i class="iconfont icon-delete"></i> 删除
+                                </button>
+                                <button type="button" class="btn" modal-right="400" modal-scope="this" modal-url="views/list-edit.html">
+                                    <i class="iconfont icon-plus"></i> 新建
+                                </button>
+                            </div>
+                        </div>
+                        <table class="table-list">
+                            <thead>
+                            <tr>
+                                <th><input type="checkbox" class="selectAll"></th>
+                                <th>户型名称</th>
+                                <th>房屋用途</th>
+                                <th>房 型</th>
+                                <th>预售面积</th>
+                                <th>附属/赠送类型和面积</th>
+                                <th>户型图</th>
+                                <th>其他信息</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="tr in tbodyList">
+                                <td class="select-td"><input type="checkbox" class="selectOne" value="{{tr.id}}"></td>
+                                <td>{{tr.name}}</td>
+                                <td>{{tr.col1}}</td>
+                                <td>{{tr.col2}}</td>
+                                <td>{{tr.col3}}</td>
+                                <td>{{tr.col4}}</td>
+                                <td>{{tr.col5}}</td>
+                                <td>{{tr.col6}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-s btn-white" modal-right="400" modal-scope="this" modal-url="views/list-view.html" modal-data="{{tr}}"><i
+                                            class="iconfont icon-delete"></i> 查看
+                                    </button>
+                                    <button type="button" class="btn btn-s btn-orange" ng-click="deleteThis('../data/form.data?id='+tr.id)"><i class="iconfont icon-delete"></i> 删除</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="clearfix">
+                            <div class="fr">
+                                <pagination status="status"></pagination>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </table-list>
+        </div>
+    </div>
+</div>
