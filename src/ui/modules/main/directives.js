@@ -131,6 +131,14 @@ define('main/directives', ['main/init'], function () {
                 var DOMForm = angular.element($element)[0];
                 var scopeForm = $scope.$eval($attrs.name);
 
+                $scope.formData = angular.extend({},$scope.formData);
+
+                $scope.$watch($attrs.source, function (value) {
+                    if (value && angular.isObject(value)) {
+                        angular.extend($scope.formData, value);
+                    }
+                });
+
                 $scope.reset = function () {
                     DOMForm.reset();
                 };

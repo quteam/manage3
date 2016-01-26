@@ -60,7 +60,7 @@
                             </div>
                         </div>
                         <div ng-if="!isLoading">
-                            <div class="mgb color-gray text-italic">{{details.companyName}} &gt; {{details.city}} &gt; {{details.projectName}}</div>
+                            <!--<div class="mgb color-gray text-italic">{{details.companyName}} &gt; {{details.city}} &gt; {{details.projectName}}</div>-->
                             <div class="mg-l">
                                 <div class="mg col-group">
                                     <div class="col-6">
@@ -74,10 +74,10 @@
                                         </div>
                                         <div class="line"></div>
                                         <div class="pd-m">
-                                            <form name="myForm" action="../data/form.data" form-validator>
+                                            <form name="myForm" action="../data/form.data" form-validator source="details">
                                                 <div class="form-tr">
                                                     <div class="form-th">项目名称</div>
-                                                    <div class="form-td"><input type="text" class="ipt" placeholder="输入框" ng-model="formData.name"></div>
+                                                    <div class="form-td"><input type="text" class="ipt" placeholder="输入框" ng-model="formData.companyName"></div>
                                                 </div>
                                                 <div class="form-tr">
                                                     <div class="form-th">融资类型</div>
