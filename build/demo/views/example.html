@@ -1,0 +1,21 @@
+<div ng-controller="pageCtrl" ng-init="mainStatus.navigation='example'">
+    <div class="top-nav-wrap">
+        <div class="back backBtn"><i class="iconfont icon-back"></i></div>
+        <div class="title2">实例</div>
+        <div class="right">
+            <div class="nav">
+                <a class="li"><i class="iconfont icon-plus"></i></a>
+                <a class="li"><i class="iconfont icon-search"></i></a>
+                <a class="li"><i class="iconfont icon-bell"></i><i class="tip" ng-if="mainStatus.msgBubble">{{mainStatus.msgBubble}}</i></a>
+            </div>
+        </div>
+    </div>
+    <div class="page-main">
+        <div class="form-tr">
+            <div class="form-th"></div>
+            <div class="form-td">
+                <a href="#/example-1.html" class="btn">实例1</a>
+            </div>
+        </div>
+    </div>
+</div>

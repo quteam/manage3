@@ -132,6 +132,8 @@ body { color: #1E1E1E; }
 .row { margin: 10px 0; }
 .hr { border-top: 1px solid #E1E1E1; height: 0; font-size: 0; margin: 10px 0; }
 .line { border-bottom: 1px solid #E1E1E1; }
+.line-l { border-left: 1px solid #E1E1E1; }
+.line-r { border-right: 1px solid #E1E1E1; }
 /**/
 @-webkit-keyframes fadeIn {
 	0% {
@@ -224,6 +226,7 @@ body { color: #1E1E1E; }
 .icon-search:before { content: "\e600"; }
 .icon-bell:before { content: "\e601"; }
 .icon-relative:before { content: "\e624"; }
+.icon-list:before { content: "\e628"; }
 .icon-down:before { content: "\e617"; }
 .icon-up:before { content: "\e618"; }
 .icon-up2:before { content: "\e626"; }
@@ -242,9 +245,12 @@ body { color: #1E1E1E; }
 .icon-export:before { content: "\e610"; }
 .icon-next:before { content: "\e604"; }
 .icon-pic:before { content: "\e621"; }
+.icon-star:before { content: "\e62a"; }
 .icon-import:before { content: "\e611"; }
 .icon-cancel:before { content: "\e60e"; }
+.icon-star-o:before { content: "\e62b"; }
 .icon-empty:before { content: "\e625"; }
+.icon-camera:before { content: "\e62c"; }
 .icon-ok:before { content: "\e60f"; }
 .icon-down2:before { content: "\e627"; }
 .icon-settings:before { content: "\e619"; }
@@ -255,6 +261,7 @@ body { color: #1E1E1E; }
 .icon-3:before { content: "\e60c"; }
 .icon-6:before { content: "\e60d"; }
 .icon-radio-check:before { content: "\e623"; }
+.icon-7:before { content: "\e629"; }
 .icon-insert-right:before { content: "\e620"; }
 .icon-radio:before { content: "\e622"; }
 .icon-o { display: inline-block; padding: .4em; border-radius: 100%; border: 1px solid #787878; }
@@ -564,7 +571,7 @@ body { color: #1E1E1E; }
 /**/
 .column-layout-wrap { border: 1px solid #E1E1E1; border-top: 2px solid #969696; margin-top: 20px; display: flex; }
 .column-layout-wrap:after { content: ""; display: table; clear: both; }
-.column-layout-wrap .side-wrap { width: 320px; margin-right: -2px; border-right: 1px solid #E1E1E1; overflow: auto; position: relative; }
+.column-layout-wrap .side-wrap { width: 320px; margin-right: -1px; border-right: 1px solid #E1E1E1; overflow: auto; position: relative; }
 .column-layout-wrap .main-wrap { flex: 1; padding: 20px; border-left: 1px solid #E1E1E1; position: relative; overflow: auto; }
 .column-layout-wrap2 { background: #F2F6FA; height: 100%; border: none; margin-top: 0; }
 .column-layout-wrap2 .side-wrap { }

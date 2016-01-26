@@ -12,15 +12,16 @@ var exec = require('child_process').exec,
     minifyHtml = require('gulp-minify-html'),
     preprocess = require('gulp-preprocess'),
     less = require('gulp-less'),
-    autoprefixer = require('gulp-autoprefixer');
+    autoprefixer = require('gulp-autoprefixer'),
+    cdn = require('gulp-cdn');
 
 var Config = {
     name: "manageApp",
     itemName: "Manage System",
     version: "3.0",
-    author: "haovei@qq.com"
+    author: "haovei@qq.com",
+    cdn: "http://ui.quteam.com/manage3"
 };
-
 
 gulp.task('clean', function () {
     exec('rm -rf build', function (err, out) {
@@ -100,7 +101,12 @@ gulp.task('copy', ['clean'], function () {
         .pipe(gulp.dest('./build/ui/img'));
     //复制其他文件
     gulp.src(['./src/data/**/*.*']).pipe(gulp.dest('./build/data'));
-    gulp.src(['./src/demo/**/*.*', '!./src/demo/tpl/**/*.*']).pipe(gulp.dest('./build/demo'));
+    gulp.src(['./src/demo/**/*.*', '!./src/demo/tpl/**/*.*'])
+        .pipe(cdn({
+            domain: "../ui",
+            cdn: Config.cdn
+        }))
+        .pipe(gulp.dest('./build/demo'));
 });
 
 gulp.task('clean-css', function () {

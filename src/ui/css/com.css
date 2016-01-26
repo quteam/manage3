@@ -950,6 +950,12 @@ body {
 .line {
   border-bottom: 1px solid #E1E1E1;
 }
+.line-l {
+  border-left: 1px solid #E1E1E1;
+}
+.line-r {
+  border-right: 1px solid #E1E1E1;
+}
 /**/
 @-webkit-keyframes fadeIn {
   0% {
@@ -1062,6 +1068,9 @@ body {
 .icon-relative:before {
   content: "\e624";
 }
+.icon-list:before {
+  content: "\e628";
+}
 .icon-down:before {
   content: "\e617";
 }
@@ -1116,14 +1125,23 @@ body {
 .icon-pic:before {
   content: "\e621";
 }
+.icon-star:before {
+  content: "\e62a";
+}
 .icon-import:before {
   content: "\e611";
 }
 .icon-cancel:before {
   content: "\e60e";
 }
+.icon-star-o:before {
+  content: "\e62b";
+}
 .icon-empty:before {
   content: "\e625";
+}
+.icon-camera:before {
+  content: "\e62c";
 }
 .icon-ok:before {
   content: "\e60f";
@@ -1154,6 +1172,9 @@ body {
 }
 .icon-radio-check:before {
   content: "\e623";
+}
+.icon-7:before {
+  content: "\e629";
 }
 .icon-insert-right:before {
   content: "\e620";
@@ -2351,7 +2372,7 @@ body {
 }
 .column-layout-wrap .side-wrap {
   width: 320px;
-  margin-right: -2px;
+  margin-right: -1px;
   border-right: 1px solid #E1E1E1;
   overflow: auto;
   position: relative;

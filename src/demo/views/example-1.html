@@ -1,0 +1,123 @@
+<div ng-controller="pageCtrl" ng-init="mainStatus.navigation='example'">
+    <div class="top-nav-wrap">
+        <div class="back"><a href="#/example.html"><i class="iconfont icon-back"></i></a></div>
+        <div class="title2">实例1</div>
+        <div class="right">
+            <div class="nav">
+                <a class="li"><i class="iconfont icon-plus"></i></a>
+                <a class="li"><i class="iconfont icon-search"></i></a>
+                <a class="li"><i class="iconfont icon-bell"></i><i class="tip" ng-if="mainStatus.msgBubble">{{mainStatus.msgBubble}}</i></a>
+            </div>
+        </div>
+    </div>
+    <div class="page-main">
+        <div class="tab2-wrap tab2-wrap-inline">
+            <li class="li on">代办事件(9)</li>
+            <li class="li">已办事件</li>
+        </div>
+        <div class="mg-m">
+            <table class="table-list">
+                <thead>
+                <tr>
+                    <th>企业名称</th>
+                    <th>企业法人代表</th>
+                    <th>资产规模</th>
+                    <th>资产销售</th>
+                    <th>备注</th>
+                    <th>创建时间</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>企业名称</td>
+                    <td>张三</td>
+                    <td>1000万</td>
+                    <td>200万</td>
+                    <td>补强资料</td>
+                    <td>{{1453794845667|date}}</td>
+                    <td>
+                        <button type="button" class="btn btn-s">返回</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="mg-m">
+            <div class="column-layout-wrap" ng-controller="oneCtrl">
+                <div class="side-wrap">
+                    <div class="tree-list" tree-list="../data/tree.data" ng-model="itemData.item"></div>
+                </div>
+                <div class="main-wrap">
+                    <div details-info="../data/project-details.data" details-params='{id:{{itemData.item.id||0}}}'>
+                        <div class="loader" ng-if="isLoading">
+                            <div class="loader-inner pacman">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+                        <div ng-if="!isLoading">
+                            <div class="mgb color-gray text-italic">{{details.companyName}} &gt; {{details.city}} &gt; {{details.projectName}}</div>
+                            <div class="mg-l">
+                                <div class="mg col-group">
+                                    <div class="col-6">
+                                        <img src="../ui/img/example-1.jpg" width="100%"/>
+                                    </div>
+                                    <div class="col-6 line-l">
+                                        <div class="mg-l text-center">
+                                            <button type="button" class="btn">通过</button>
+                                            <button type="button" class="btn btn-blue">通知资金方</button>
+                                            <button type="button" class="btn btn-orange">不通过</button>
+                                        </div>
+                                        <div class="line"></div>
+                                        <div class="pd-m">
+                                            <form name="myForm" action="../data/form.data" form-validator>
+                                                <div class="form-tr">
+                                                    <div class="form-th">项目名称</div>
+                                                    <div class="form-td"><input type="text" class="ipt" placeholder="输入框" ng-model="formData.name"></div>
+                                                </div>
+                                                <div class="form-tr">
+                                                    <div class="form-th">融资类型</div>
+                                                    <div class="form-td">
+                                                        <div class="form-ctrl" ng-init="formData.checkbox=['选项2','选项3']">
+                                                            <label class="label"><input type="checkbox" value="选项1" checkbox-group="formData.checkbox"/> 选项1</label>
+                                                            <label class="label"><input type="checkbox" value="选项2" checkbox-group="formData.checkbox"/> 选项2</label>
+                                                            <label class="label"><input type="checkbox" value="选项3" checkbox-group="formData.checkbox"/> 选项3</label>
+                                                            <label class="label"><input type="checkbox" value="选项4" checkbox-group="formData.checkbox"/> 选项4</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-tr">
+                                                    <div class="form-th">融资金额</div>
+                                                    <div class="form-td">
+                                                        <div class="form-ctrl">1000w</div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-tr">
+                                                    <div class="form-th">期限</div>
+                                                    <div class="form-td">
+                                                        <div class="form-ctrl">36个月</div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-tr">
+                                                    <div class="form-th"></div>
+                                                    <div class="form-td">
+                                                        <button type="submit" class="btn btn-primary">保存</button>
+                                                        <span ng-show="submitInfo">{{submitInfo}}</span>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
