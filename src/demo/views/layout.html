@@ -189,7 +189,22 @@
                 </div>
                 <div class="flex-item-6 flex-row pdl-m">
                     <div class="flex-item tab-list-wrap pd-m">
-                        <div class="mgb-m">通知</div>
+                        <div class="mgb-m">
+                            <div class="list-group" ng-controller="oneCtrl">
+                                <div class="li">
+                                    <div class="name" ng-click="show=(show==1?0:1)">北岸组团3栋</div>
+                                    <div class="info animation overhide" style="height:{{show==1?'18px':'0'}}">300套 2015.10.06</div>
+                                </div>
+                                <div class="li">
+                                    <div class="name" ng-click="show=(show==2?0:2)">北岸组团3栋</div>
+                                    <div class="info animation overhide" style="height:{{show==2?'18px':'0'}}">300套 2015.10.06</div>
+                                </div>
+                                <div class="li">
+                                    <div class="name" ng-click="show=(show==3?0:3)">北岸组团3栋</div>
+                                    <div class="info animation overhide" style="height:{{show==3?'18px':'0'}}">300套 2015.10.06</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

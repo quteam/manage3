@@ -280,6 +280,8 @@ body{color:#1E1E1E}
 .icon-insert-right:before{content:"\e620"}
 .icon-radio:before{content:"\e622"}
 .icon-o{display:inline-block;padding:.4em;border-radius:100%;border:1px solid #787878}
+.animation{-webkit-transition:all .2s ease;transition:all .2s ease}
+.overhide{overflow:hidden}
 .point{cursor:pointer}
 .select{padding:6px 12px;height:36px;box-sizing:border-box;background:0 0;border:1px solid #E6E6E6;outline:0}
 .select:focus{border:1px solid #5897FB}
