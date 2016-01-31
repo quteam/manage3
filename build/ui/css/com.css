@@ -186,28 +186,6 @@ body{color:#1E1E1E}
 [class*=flex-item].flex-center{margin-left:auto;margin-right:auto}
 [class*=flex-item].flex-middle{margin-top:auto;margin-bottom:auto}
 .flex-md-show,.flex-sm-show{display:none}
-@media (max-width:992px){.flex-md{-webkit-box-orient:vertical;-webkit-box-direction:normal;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column}
-.flex-md.flex-left{-webkit-box-align:start;-webkit-align-items:flex-start;-ms-flex-align:start;-ms-grid-row-align:flex-start;align-items:flex-start}
-.flex-md.flex-right{-webkit-box-align:end;-webkit-align-items:flex-end;-ms-flex-align:end;-ms-grid-row-align:flex-end;align-items:flex-end}
-.flex-md.flex-top{-webkit-box-pack:start;-webkit-justify-content:flex-start;-ms-flex-pack:start;justify-content:flex-start}
-.flex-md.flex-bottom{-webkit-box-pack:end;-webkit-justify-content:flex-end;-ms-flex-pack:end;justify-content:flex-end}
-.flex-md.flex-center{-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;-ms-grid-row-align:center;align-items:center}
-.flex-md.flex-middle{-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center}
-.flex-md [class*=flex-item]{width:100%}
-.flex-md-hide{display:none!important}
-.flex-md-show{display:-webkit-box!important;display:-webkit-flex!important;display:-ms-flexbox!important;display:flex!important}
-}
-@media (max-width:768px){.flex-sm{-webkit-box-orient:vertical;-webkit-box-direction:normal;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column}
-.flex-sm.flex-left{-webkit-box-align:start;-webkit-align-items:flex-start;-ms-flex-align:start;-ms-grid-row-align:flex-start;align-items:flex-start}
-.flex-sm.flex-right{-webkit-box-align:end;-webkit-align-items:flex-end;-ms-flex-align:end;-ms-grid-row-align:flex-end;align-items:flex-end}
-.flex-sm.flex-top{-webkit-box-pack:start;-webkit-justify-content:flex-start;-ms-flex-pack:start;justify-content:flex-start}
-.flex-sm.flex-bottom{-webkit-box-pack:end;-webkit-justify-content:flex-end;-ms-flex-pack:end;justify-content:flex-end}
-.flex-sm.flex-center{-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;-ms-grid-row-align:center;align-items:center}
-.flex-sm.flex-middle{-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center}
-.flex-sm [class*=flex-item]{width:100%}
-.flex-sm-hide{display:none!important}
-.flex-sm-show{display:-webkit-box!important;display:-webkit-flex!important;display:-ms-flexbox!important;display:flex!important}
-}
 .row{margin:10px 0}
 .hr{border-top:1px solid #E1E1E1;height:0;font-size:0;margin:10px 0}
 .line{border-bottom:1px solid #E1E1E1}
@@ -506,6 +484,13 @@ body{color:#1E1E1E}
 .tree-list .empty-wrap{min-height:400px}
 .empty-wrap{box-sizing:border-box;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-flex:0;-webkit-flex:0 1 auto;-ms-flex:0 1 auto;flex:0 1 auto;-webkit-box-orient:vertical;-webkit-box-direction:normal;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;-webkit-box-flex:1;-webkit-flex-grow:1;-ms-flex-positive:1;flex-grow:1;-webkit-flex-shrink:0;-ms-flex-negative:0;flex-shrink:0;-webkit-flex-basis:25%;-ms-flex-preferred-size:25%;flex-basis:25%;min-height:200px;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;color:#CCC}
 .empty-wrap .icon{font-size:128px;line-height:1;margin-bottom:30px}
+.step-warp{margin:10px 0;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;border-radius:3px;overflow:hidden}
+.step-warp .step{-webkit-box-flex:1;-webkit-flex:1;-ms-flex:1;flex:1;background:#EFEFF0;line-height:36px;padding:0 20px 0 40px;position:relative}
+.step-warp .step:first-child{padding-left:20px}
+.step-warp .step:before{position:absolute;z-index:1;top:-2px;right:-19px;content:"";border-left:20px solid #FFF;border-top:20px solid transparent;border-bottom:20px solid transparent}
+.step-warp .step:after{position:absolute;z-index:2;top:0;right:-16px;content:"";border-left:18px solid #EFEFF0;border-top:18px solid transparent;border-bottom:18px solid transparent}
+.step-warp .step.on{background:#05C0EE;color:#FFF}
+.step-warp .step.on:after{border-left-color:#05C0EE}
 @-webkit-keyframes ngdialog-fadeout{0%{opacity:1}
 100%{opacity:0}
 }

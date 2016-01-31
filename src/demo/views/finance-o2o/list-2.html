@@ -1,0 +1,126 @@
+<div ng-controller="pageCtrl" ng-init="mainStatus.navigation='example'">
+    <div class="top-nav-wrap">
+        <div class="back"><a href="#/example.html"><i class="iconfont icon-back"></i></a></div>
+        <div class="title2">实例1</div>
+        <div class="right">
+            <div class="nav">
+                <a class="li"><i class="iconfont icon-plus"></i></a>
+                <a class="li"><i class="iconfont icon-search"></i></a>
+                <a class="li"><i class="iconfont icon-bell"></i><i class="tip" ng-if="mainStatus.msgBubble">{{mainStatus.msgBubble}}</i></a>
+            </div>
+        </div>
+    </div>
+    <div class="page-main">
+        <div class="tab-list-wrap" ng-controller="oneCtrl">
+            <ul class="tab-wrap">
+                <li class="li on">代办事件(9)</li>
+                <li class="li">已办事件</li>
+            </ul>
+            <div class="pd-m">
+                <table class="table-list">
+                    <thead>
+                    <tr>
+                        <th>企业名称</th>
+                        <th>企业法人代表</th>
+                        <th>资产规模</th>
+                        <th>资产销售</th>
+                        <th>备注</th>
+                        <th>创建时间</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>企业名称</td>
+                        <td>张三</td>
+                        <td>1000万</td>
+                        <td>200万</td>
+                        <td>补强资料</td>
+                        <td>{{1453794845667|date:'yyyy-MM-dd'}}</td>
+                        <td>
+                            <button type="button" class="btn btn-s">返回</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>企业名称</td>
+                        <td>张三</td>
+                        <td>1000万</td>
+                        <td>200万</td>
+                        <td>补强资料</td>
+                        <td>{{1453794845667|date:'yyyy-MM-dd'}}</td>
+                        <td>
+                            <button type="button" class="btn btn-s">返回</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="mgt-xl">
+                    <div class="step-warp">
+                        <span class="step on">第一步</span>
+                        <span class="step">第二步</span>
+                        <span class="step">第三步</span>
+                    </div>
+                </div>
+                <div class="mg-m">
+                    <div class="flex-column tab-list-wrap">
+                        <div class="flex-item">
+                            <div class="column-layout-wrap column-layout-wrap2">
+                                <div class="side-wrap">
+                                    <div class="tree-list" tree-list="../data/tree.data" ng-model="itemData.item"></div>
+                                </div>
+                                <div class="main-wrap">
+                                    <div details-info="../data/project-details.data" details-params='{id:{{itemData.item.id||0}}}'>
+                                        <div class="loader" ng-if="isLoading">
+                                            <div class="loader-inner pacman">
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                            </div>
+                                        </div>
+                                        <div ng-if="!isLoading">
+                                            <div class="mg-l">
+                                                <img src="../ui/img/example-1.jpg" width="100%"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-item">
+                            <div class="column-layout-wrap column-layout-wrap2">
+                                <div class="side-wrap">
+                                    <div class="tree-list" tree-list="../data/tree.data" ng-model="itemData.item"></div>
+                                </div>
+                                <div class="main-wrap">
+                                    <div details-info="../data/project-details.data" details-params='{id:{{itemData.item.id||0}}}'>
+                                        <div class="loader" ng-if="isLoading">
+                                            <div class="loader-inner pacman">
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                            </div>
+                                        </div>
+                                        <div ng-if="!isLoading">
+                                            <div class="mg-l">
+                                                <img src="../ui/img/example-1.jpg" width="100%"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="line"></div>
+                <div class="text-right pd-m">
+                    <button type="button" class="btn btn-short">保存</button>
+                    <button type="button" class="btn btn-blue btn-short">提交</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
