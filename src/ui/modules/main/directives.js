@@ -131,7 +131,7 @@ define('main/directives', ['main/init'], function () {
                 var DOMForm = angular.element($element)[0];
                 var scopeForm = $scope.$eval($attrs.name);
 
-                $scope.formData = angular.extend({},$scope.formData);
+                $scope.formData = angular.extend({}, $scope.formData);
 
                 $scope.$watch($attrs.source, function (value) {
                     if (value && angular.isObject(value)) {
@@ -271,7 +271,7 @@ define('main/directives', ['main/init'], function () {
                         return;
                     }
                     statusInfo.isLoading = true;
-                    $.getJSON($scope.listData, angular.merge({}, formData, {page: statusInfo.currentPage}), function (data, status, headers, config) {
+                    $.post($scope.listData, angular.merge({}, formData, {page: statusInfo.currentPage}), function (data, status, headers, config) {
                             if (data.code == 200) {
                                 if (data.options) {
                                     statusInfo.totalCount = data.options.totalCount || statusInfo.totalCount;
@@ -290,7 +290,7 @@ define('main/directives', ['main/init'], function () {
                                 statusInfo.loadFailMsg = data.message;
                             }
                             statusInfo.isLoading = false;
-                        })
+                        }, 'json')
                         .error(function () {
                             statusInfo.isLoading = false;
                             statusInfo.loadFailMsg = '加载出错';
