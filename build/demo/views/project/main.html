@@ -1,0 +1,60 @@
+<div ng-controller="pageCtrl">
+    <div class="top-nav-wrap">
+        <div class="title">项目管理</div>
+        <div class="right">
+            <div class="nav">
+                <a class="li" href="#/project-add.html"><i class="iconfont icon-plus"></i></a>
+                <a class="li"><i class="iconfont icon-search"></i></a>
+                <a class="li"><i class="iconfont icon-bell"></i><i class="tip" ng-if="mainStatus.msgBubble">{{mainStatus.msgBubble}}</i></a>
+            </div>
+        </div>
+    </div>
+    <div class="page-main page-main-0">
+        <div class="project-page-wrap" ng-controller="projectPanelCtrl">
+            <div class="project-list" project-menu="../data/project-menu.data" ng-show="projectList.length>1">
+                <div class="hd">
+                    <div class="fl">{{projectList.length}} 个项目</div>
+                    <div class="fr">
+                        <select class="select select-noborder" ng-model="order" ng-init="order='date'">
+                            <option value="projectName">按名称排序</option>
+                            <option value="date">按时间排序</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="list">
+                    <ul>
+                        <li ng-repeat="project in projectList | orderBy:order" ng-click="show(project)" ng-class="{on:currentProject.id==project.id}">
+                            <div class="date">{{project.date}}</div>
+                            <div class="name">{{project.projectName}}</div>
+                            <div class="meta"><img class="avatar" ng-src="{{project.avatar}}"/> {{project.name}}</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="project-panel" project-panel="../data/project-panel.data">
+                <div class="project-info">
+                    <div class="tt">项目信息管理</div>
+                    <div class="dd">
+                        <div class="process-bar">
+                            <div class="text">基本资料</div>
+                            <div class="bar"><i style="width:{{currentProject.info.process1}}%"><span class="num">{{currentProject.info.process1}}%</span></i></div>
+                        </div>
+                        <div class="process-bar process-bar-2">
+                            <div class="text">规划信息</div>
+                            <div class="bar"><i style="width:{{currentProject.info.process2}}%"><span class="num">{{currentProject.info.process2}}%</span></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-auth">
+                    <ul class="list">
+                        <li ng-repeat="auth in currentProject.info.authList" ng-click="pageTo(auth.url)">
+                            <div class="col col-1">{{auth.name}}</div>
+                            <div class="col col-2">{{auth.num}}</div>
+                            <div class="col col-3">{{auth.unit}}</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
