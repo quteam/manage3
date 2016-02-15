@@ -854,11 +854,12 @@ define('main/directives', ['main/init'], function () {
     /**
      * 图表
      */
-    function eChart($http) {
+    function eChart($http, dialogChart) {
         return {
             restrict: 'A',
             scope: {
-                clickToUrl: "="
+                clickToUrl: "=",
+                clickToDialog: "="
             },
             require: "?^ngModel",
             link: function ($scope, $element, $attrs, ngModel) {
@@ -880,6 +881,8 @@ define('main/directives', ['main/init'], function () {
                         ngModel && ngModel.$setViewValue(_data.data);
                         if ($scope.clickToUrl) {
                             window.location.assign($scope.clickToUrl);
+                        } else if ($scope.clickToDialog) {
+                            dialogChart($scope.clickToDialog);
                         }
                     });
 
@@ -900,7 +903,7 @@ define('main/directives', ['main/init'], function () {
             }
         };
     };
-    eChart.$inject = ["$http"];
+    eChart.$inject = ["$http", "dialogChart"];
 
     /**
      * 自动补全

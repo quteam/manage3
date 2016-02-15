@@ -135,16 +135,6 @@ body { color: #1E1E1E; }
 .line-l { border-left: 1px solid #E1E1E1; }
 .line-r { border-right: 1px solid #E1E1E1; }
 /**/
-@-webkit-keyframes fadeIn {
-	0% {
-		opacity: 0;
-		-webkit-transform: scale(0.9);
-	}
-	100% {
-		opacity: 1;
-		-webkit-transform: scale(1);
-	}
-}
 @keyframes fadeIn {
 	0% {
 		opacity: 0;
@@ -153,16 +143,6 @@ body { color: #1E1E1E; }
 	100% {
 		opacity: 1;
 		transform: scale(1);
-	}
-}
-@-webkit-keyframes fadeOut {
-	0% {
-		opacity: 1;
-		-webkit-transform: scale(1);
-	}
-	100% {
-		opacity: 0;
-		-webkit-transform: scale(0.9);
 	}
 }
 @keyframes fadeOut {
@@ -175,31 +155,38 @@ body { color: #1E1E1E; }
 		transform: scale(0.9);
 	}
 }
-@-webkit-keyframes fadeInRight {
+@keyframes dialogFadeIn {
 	0% {
 		opacity: 0;
-		-webkit-transform: translateX(20px);
-		transform: translateX(20px);
+		top: 45%;
+		transform: translate(-50%, -50%);
 	}
-
 	100% {
 		opacity: 1;
-		-webkit-transform: translateX(0);
-		transform: translateX(0);
+		top: 50%;
+		transform: translate(-50%, -50%);
+	}
+}
+@keyframes dialogFadeOut {
+	0% {
+		opacity: 1;
+		top: 50%;
+		transform: translate(-50%, -50%);
+	}
+	100% {
+		opacity: 0;
+		top: 45%;
+		transform: translate(-50%, -50%);
 	}
 }
 @keyframes fadeInRight {
 	0% {
 		opacity: 0;
-		-webkit-transform: translateX(40px);
-		-ms-transform: translateX(40px);
 		transform: translateX(40px);
 	}
 
 	100% {
 		opacity: 1;
-		-webkit-transform: translateX(0);
-		-ms-transform: translateX(0);
 		transform: translateX(0);
 	}
 }
@@ -720,20 +707,19 @@ html.ngdialog-open, body.ngdialog-open { overflow: hidden; }
 		opacity: 0; -webkit-transform: translateY(-40px); transform: translateY(-40px);
 	}
 }
-.ngdialog.ngdialog-theme-default { }
-.ngdialog.ngdialog-theme-default.ngdialog-closing .ngdialog-content { -webkit-animation: fadeOut .2s; animation: fadeOut .2s; }
+.ngdialog.ngdialog-theme-default {
+}
+.ngdialog.ngdialog-theme-default.ngdialog-closing .ngdialog-content {
+	animation: dialogFadeOut .2s;
+}
 .ngdialog.ngdialog-theme-default .ngdialog-content {
-	-webkit-animation: fadeIn .2s;
-	animation: fadeIn .2s;
+	animation: dialogFadeIn .2s;
 	border-radius: 5px;
 	color: #444;
-	margin: auto;
-	max-width: 100%;
 	position: absolute;
-	top: 50px;
-	left: 0;
-	right: 0;
-	width: 450px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 .ngdialog.ngdialog-theme-default .ngdialog-close { border-radius: 5px; cursor: pointer; position: absolute; right: 0; top: 0; }
 .ngdialog.ngdialog-theme-default .ngdialog-close:before {

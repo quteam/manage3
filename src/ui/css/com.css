@@ -846,10 +846,12 @@ body {
   0% {
     opacity: 0;
     -webkit-transform: scale(0.9);
+            transform: scale(0.9);
   }
   100% {
     opacity: 1;
     -webkit-transform: scale(1);
+            transform: scale(1);
   }
 }
 @keyframes fadeIn {
@@ -868,10 +870,12 @@ body {
   0% {
     opacity: 1;
     -webkit-transform: scale(1);
+            transform: scale(1);
   }
   100% {
     opacity: 0;
     -webkit-transform: scale(0.9);
+            transform: scale(0.9);
   }
 }
 @keyframes fadeOut {
@@ -886,28 +890,84 @@ body {
             transform: scale(0.9);
   }
 }
+@-webkit-keyframes dialogFadeIn {
+  0% {
+    opacity: 0;
+    top: 45%;
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+  }
+  100% {
+    opacity: 1;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+  }
+}
+@keyframes dialogFadeIn {
+  0% {
+    opacity: 0;
+    top: 45%;
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+  }
+  100% {
+    opacity: 1;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+  }
+}
+@-webkit-keyframes dialogFadeOut {
+  0% {
+    opacity: 1;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+  }
+  100% {
+    opacity: 0;
+    top: 45%;
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+  }
+}
+@keyframes dialogFadeOut {
+  0% {
+    opacity: 1;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+  }
+  100% {
+    opacity: 0;
+    top: 45%;
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+  }
+}
 @-webkit-keyframes fadeInRight {
   0% {
     opacity: 0;
-    -webkit-transform: translateX(20px);
-    transform: translateX(20px);
+    -webkit-transform: translateX(40px);
+            transform: translateX(40px);
   }
   100% {
     opacity: 1;
     -webkit-transform: translateX(0);
-    transform: translateX(0);
+            transform: translateX(0);
   }
 }
 @keyframes fadeInRight {
   0% {
     opacity: 0;
     -webkit-transform: translateX(40px);
-    transform: translateX(40px);
+            transform: translateX(40px);
   }
   100% {
     opacity: 1;
     -webkit-transform: translateX(0);
-    transform: translateX(0);
+            transform: translateX(0);
   }
 }
 /**/
@@ -2590,21 +2650,19 @@ body.ngdialog-open {
   }
 }
 .ngdialog.ngdialog-theme-default.ngdialog-closing .ngdialog-content {
-  -webkit-animation: fadeOut .2s;
-  animation: fadeOut .2s;
+  -webkit-animation: dialogFadeOut .2s;
+          animation: dialogFadeOut .2s;
 }
 .ngdialog.ngdialog-theme-default .ngdialog-content {
-  -webkit-animation: fadeIn .2s;
-  animation: fadeIn .2s;
+  -webkit-animation: dialogFadeIn .2s;
+          animation: dialogFadeIn .2s;
   border-radius: 5px;
   color: #444;
-  margin: auto;
-  max-width: 100%;
   position: absolute;
-  top: 50px;
-  left: 0;
-  right: 0;
-  width: 450px;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
 }
 .ngdialog.ngdialog-theme-default .ngdialog-close {
   border-radius: 5px;

@@ -76,7 +76,7 @@ define('modal/directives', ['modal/init'], function () {
     };
     modalRight.$inject = ['modal'];
 
-    //右侧遮罩层
+    //中间遮罩层
     function modalCenter(ngDialog) {
         return {
             restrict: 'A',
