@@ -5,42 +5,49 @@
     "process2": 50,
     "authList": [
       {
+        "id": 1,
         "name": "项目信息管理",
         "num": 6,
         "unit": "个项目标签",
         "url": "#/project-info.html"
       },
       {
+        "id": 2,
         "name": "户型管理",
         "num": 8,
         "unit": "个当前户型种类",
         "url": "#/project-house.html"
       },
       {
+        "id": 3,
         "name": "房源标签管理",
         "num": 32,
         "unit": "个房源标签",
         "url": "#/project-tags.html"
       },
       {
+        "id": 4,
         "name": "价格管理",
         "num": 13,
         "unit": "套报价房源",
         "url": "#/project-price.html"
       },
       {
+        "id": 5,
         "name": "生成房源",
         "num": 56,
         "unit": "套生成房源",
         "url": "#/project-source.html"
       },
       {
+        "id": 6,
         "name": "房间管理",
         "num": 37,
         "unit": "套可管理房间",
         "url": "#/project-room.html"
       },
       {
+        "id": 7,
         "name": "折扣管理",
         "num": 5,
         "unit": "套优惠房源",

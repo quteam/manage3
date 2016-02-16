@@ -20,7 +20,7 @@
                         <div class="col col-3">{{auth.unit}}</div>
                     </div>
                     <div class="li-sub" ng-if="current.show==$index">
-                        <table-list list-data="../data/table-list.data">
+                        <table-list list-data="../data/table-list.data?id={{auth.id}}">
                             <div class="loader" ng-if="status.isLoading">
                                 <div class="loader-inner pacman">
                                     <div></div>
