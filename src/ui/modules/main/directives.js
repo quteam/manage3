@@ -74,11 +74,19 @@ define('main/directives', ['main/init'], function () {
 
                 $scope.detailsHandler = $scope.$eval($attrs.detailsHandler);
 
-                $attrs.$observe("detailsParams", function (value) {
-                    getData($scope.$eval(value));
-                });
-
-                if (!$attrs.detailsParams) {
+                if ($attrs.detailsParams) {
+                    if ($attrs.detailsParams.indexOf("{") > -1) {
+                        //监听具体值
+                        $attrs.$observe("detailsParams", function (value) {
+                            getData($scope.$eval(value));
+                        });
+                    } else {
+                        //监听对象
+                        $scope.$watch($attrs.detailsParams, function (value) {
+                            getData(value);
+                        }, true);
+                    }
+                } else {
                     getData({});
                 }
 

@@ -16,14 +16,33 @@
 .project-panel:hover::-webkit-scrollbar-thumb { background-color: #4C637B; }
 .project-info { padding: 10px 16px; background: #F2F6FA; border-radius: 3px; }
 .project-info .tt { font-size: 18px; margin-bottom: 20px; }
-.project-auth { background: #F2F6FA; border-radius: 3px; margin-top: 20px; }
-.project-auth li { height: 80px; box-sizing: border-box; padding: 20px 15px; line-height: 40px; font-size: 0; transition: all .2s ease; }
-.project-auth li:nth-child(even) { background: #EBF1F5; }
-.project-auth li:hover { background: #E3EAF3; }
-.project-auth .col { display: inline-block; vertical-align: top; padding: 0 5px; box-sizing: border-box; }
-.project-auth .col-1 { width: 50%; font-size: 18px; }
-.project-auth .col-2 { width: 10%; color: rgba(60, 60, 60, 0.80); font-size: 44px; font-style: italic; text-align: right; font-weight: 100; }
-.project-auth .col-3 { width: 40%; color: rgba(60, 60, 60, 0.70); font-size: 14px; font-style: italic; }
+.project-auth {
+	background: #F2F6FA;
+	border-radius: 3px;
+	margin-top: 20px;
+	.list > :nth-child(even) {
+		background: #EBF1F5;
+	}
+	li, .li {
+		height: 80px; box-sizing: border-box; padding: 20px 15px; line-height: 40px; font-size: 0; transition: all .2s ease;
+		&:hover {
+			background: #E3EAF3;
+		}
+		&.on + .li-sub {
+			display: block;
+		}
+	}
+	.li-sub {
+		display: none;
+		background: #FFF;
+		border: 1px solid #F2F6FA;
+		padding: 20px;
+	}
+	.col { display: inline-block; vertical-align: top; padding: 0 5px; box-sizing: border-box; }
+	.col-1 { width: 50%; font-size: 18px; }
+	.col-2 { width: 10%; color: rgba(60, 60, 60, 0.80); font-size: 44px; font-style: italic; text-align: right; font-weight: 100; }
+	.col-3 { width: 40%; color: rgba(60, 60, 60, 0.70); font-size: 14px; font-style: italic; }
+}
 /**/
 .process-bar { height: 50px; position: relative; padding: 1px 0; margin: 5px 0; }
 .process-bar .text { font-size: 14px; margin: 5px 0; color: rgba(60, 60, 60, 0.80); }

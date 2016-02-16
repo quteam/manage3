@@ -44,7 +44,7 @@ define('manageApp.template', ['angular'], function () {
 
 
 define('manageApp.main', ['main/init', 'main/services', 'main/controllers', 'main/directives', 'main/filters']);
-define('manageApp.project', ['project/init', 'project/controllers', 'project/directives', 'project/services']);
+//define('manageApp.project', ['project/init', 'project/controllers', 'project/directives', 'project/services']);
 define('manageApp.modal', ['modal/init', 'modal/services', 'modal/directives']);
 define('manageApp.upload', ['upload/init', 'upload/directives']);
 
@@ -53,7 +53,7 @@ define('manageApp', [
     'manageApp.template',
     'manageApp.modal',
     'manageApp.main',
-    'manageApp.project',
+    //'manageApp.project',
     'manageApp.upload'
 ], function () {
     return angular.module('manageApp', [
@@ -61,7 +61,7 @@ define('manageApp', [
         'manageApp.template',
         'manageApp.modal',
         'manageApp.main',
-        'manageApp.project',
+        //'manageApp.project',
         'manageApp.upload'
     ]);
 });
