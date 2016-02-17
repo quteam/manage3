@@ -901,6 +901,16 @@ define('main/directives', ['main/init'], function () {
                         .success(function (_data) {
                             myChart.hideLoading();
                             if (_data.code == 200) {
+                                //解决百度图表雷达图 Tip 显示不正确的问题
+                                if (_data.data.polar) {
+                                    _data.data.tooltip.formatter = function (_items) {
+                                        var _str = _items[0].name;
+                                        angular.forEach(_items, function (_item) {
+                                            _str += '<br>' + _item.seriesName + ": " + _item.data;
+                                        });
+                                        return _str;
+                                    }
+                                }
                                 myChart.setOption(_data.data);
                             }
                         })

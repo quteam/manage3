@@ -1,0 +1,118 @@
+{
+  "code": 200,
+  "message": "Success",
+  "data": {
+    "tooltip": {
+      "trigger": "axis",
+      "axisPointer": {
+        "type": "shadow"
+      }
+    },
+    "legend": {
+      "orient": "vertical",
+      "x": "left",
+      "data": [
+        "当前成绩",
+        "平均成绩"
+      ]
+    },
+    "polar": [
+      {
+        "indicator": [
+          {
+            "text": "语文",
+            "max": 150
+          },
+          {
+            "text": "数学",
+            "max": 150
+          },
+          {
+            "text": "英语",
+            "max": 150
+          },
+          {
+            "text": "政治",
+            "max": 100
+          },
+          {
+            "text": "历史",
+            "max": 100
+          },
+          {
+            "text": "地理",
+            "max": 100
+          },
+          {
+            "text": "物理",
+            "max": 100
+          },
+          {
+            "text": "化学",
+            "max": 100
+          },
+          {
+            "text": "生物",
+            "max": 100
+          }
+        ]
+      }
+    ],
+    "series": [
+      {
+        "type": "radar",
+        "itemStyle": {
+          "normal": {
+            "areaStyle": {}
+          }
+        },
+        "data": [
+          {
+            "value": [
+              100,
+              130,
+              110,
+              78,
+              89,
+              89,
+              95,
+              90
+            ],
+            "name": "当前成绩"
+          }
+        ]
+      },
+      {
+        "type": "radar",
+        "itemStyle": {
+          "normal": {
+            "borderColor": "rgba(0, 0, 0)",
+            "areaStyle": {
+              "opacity": 0.1
+            }
+          }
+        },
+        "lineStyle": {
+          "normal": {
+            "opacity": 0.2
+          }
+        },
+        "data": [
+          {
+            "value": [
+              145,
+              100,
+              130,
+              99,
+              78,
+              89,
+              89,
+              95
+            ],
+            "name": "平均成绩"
+          }
+        ]
+      }
+    ]
+  }
+}
