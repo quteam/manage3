@@ -10,7 +10,7 @@
             </div>
         </div>
     </div>
-    <div class="page-main">
+    <div class="page-main" ng-controller="oneCtrl">
         <div class="mgb-l"><span class="text-l">图表</span></div>
         <div class="form-tr">
             <div class="form-th">饼状图</div>
@@ -30,7 +30,7 @@
             <div class="form-td">
                 <div class="col-group">
                     <div class="col-6">
-                        <div chart="../data/radar-chart.data" style="height: 400px;"></div>
+                        <div chart="../data/radar-chart.data" chart-params='{id:{{formData.chart2.id}}}' style="height: 400px;"></div>
                     </div>
                 </div>
             </div>

@@ -75,7 +75,7 @@ define('main/directives', ['main/init'], function () {
                 $scope.detailsHandler = $scope.$eval($attrs.detailsHandler);
 
                 if ($attrs.detailsParams) {
-                    if ($attrs.detailsParams.indexOf("{") > -1) {
+                    if ($attrs.detailsParams.indexOf("{") == 0) {
                         //监听具体值
                         $attrs.$observe("detailsParams", function (value) {
                             getData($scope.$eval(value));
@@ -862,12 +862,13 @@ define('main/directives', ['main/init'], function () {
     /**
      * 图表
      */
-    function eChart($http, dialogChart) {
+    function eChart(requestData, dialogChart) {
         return {
             restrict: 'A',
             scope: {
                 clickToUrl: "=",
                 clickToDialog: "="
+                //chartParams: "="
             },
             require: "?^ngModel",
             link: function ($scope, $element, $attrs, ngModel) {
@@ -883,8 +884,6 @@ define('main/directives', ['main/init'], function () {
                         myChart.dispose();
                     });
 
-                    myChart.showLoading();
-
                     myChart.on("click", function (_data) {
                         ngModel && ngModel.$setViewValue(_data.data);
                         if ($scope.clickToUrl) {
@@ -894,16 +893,22 @@ define('main/directives', ['main/init'], function () {
                         }
                     });
 
-                    $http
-                        .get($attrs.chart, {
-                            headers: {'X-Requested-With': 'XMLHttpRequest'}
-                        })
-                        .success(function (_data) {
-                            myChart.hideLoading();
-                            if (_data.code == 200) {
+                    if ($attrs.chartParams) {
+                        //监听具体值
+                        $attrs.$observe("chartParams", function (value) {
+                            loadChart($attrs.chart, $scope.$eval(value));
+                        });
+                    }
+                    loadChart($attrs.chart);
+
+                    function loadChart(_url, _params) {
+                        myChart.showLoading();
+                        requestData(_url, _params)
+                            .then(function (_data) {
+                                myChart.hideLoading();
                                 //解决百度图表雷达图 Tip 显示不正确的问题
-                                if (_data.data.polar) {
-                                    _data.data.tooltip.formatter = function (_items) {
+                                if (_data.polar) {
+                                    _data.tooltip.formatter = function (_items) {
                                         var _str = _items[0].name;
                                         angular.forEach(_items, function (_item) {
                                             _str += '<br>' + _item.seriesName + ": " + _item.data;
@@ -911,17 +916,20 @@ define('main/directives', ['main/init'], function () {
                                         return _str;
                                     }
                                 }
-                                myChart.setOption(_data.data);
-                            }
-                        })
-                        .error(function () {
-                            myChart.hideLoading();
-                        });
+                                myChart.setOption(_data);
+                            })
+                            .catch(function (_msg) {
+                                console.error(_msg);
+                                myChart.hideLoading();
+                            });
+                    };
+
+                    //loadChart();
                 });
             }
         };
     };
-    eChart.$inject = ["$http", "dialogChart"];
+    eChart.$inject = ["requestData", "dialogChart"];
 
     /**
      * 自动补全
