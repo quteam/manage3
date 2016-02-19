@@ -1192,9 +1192,9 @@ define('main/directives', ['main/init'], function () {
     }
 
     /**
-     *
+     * 下拉
      */
-    function chosen() {
+    function chosen(requestData) {
         return {
             restrict: 'A',
             scope: {
@@ -1204,22 +1204,95 @@ define('main/directives', ['main/init'], function () {
             link: function ($scope, $element, $attrs, ngModel) {
                 require(['chosen'], function () {
                     if ($attrs.selectSource) {
-                        $.post($attrs.selectSource, {}, function (data) {
-                            if (data.code == 200) {
-                                var _options = '';
-                                var _length = data.data.length;
-                                for (var i = 0; i < _length; i++) {
-                                    _options += '<option value="' + data.data[i].value + '"' + (ngModel.$viewValue == data.data[i].value ? 'selected' : '') + '>' + data.data[i].text + '</option>';
-                                }
-                                $element.html(_options);
+                        if (angular.isDefined($attrs.chosenAjax)) {
+                            $element.chosen({
+                                no_results_text: "没有找到"
+                            });
 
-                                $element.chosen($scope.chosen || {
-                                        no_results_text: "没有找到"
+                            var $chosenContainer = $element.next();
+                            var $input = $('input', $chosenContainer);
+                            var searchStr = "";
+
+                            $('.chosen-search > input, .chosen-choices .search-field input', $chosenContainer).on('keyup', processValue).on('paste', function (e) {
+                                var that = this;
+                                setTimeout(function () {
+                                    processValue.call(that, e);
+                                }, 500);
+                            });
+
+                            function processValue(e) {
+                                var field = $(this),
+                                    q = $.trim(field.val());
+                                if (!q || searchStr == q) {
+                                    return false;
+                                }
+                                searchStr = q;
+
+                                //don't fire ajax if...
+                                if ((e.type === 'paste' && field.is(':not(:focus)')) ||
+                                    (e.which && (
+                                        (e.which === 9) ||//Tab
+                                        (e.which === 13) ||//Enter
+                                        (e.which === 16) ||//Shift
+                                        (e.which === 17) ||//Ctrl
+                                        (e.which === 18) ||//Alt
+                                        (e.which === 19) ||//Pause, Break
+                                        (e.which === 20) ||//CapsLock
+                                        (e.which === 27) ||//Esc
+                                        (e.which === 33) ||//Page Up
+                                        (e.which === 34) ||//Page Down
+                                        (e.which === 35) ||//End
+                                        (e.which === 36) ||//Home
+                                        (e.which === 37) ||//Left arrow
+                                        (e.which === 38) ||//Up arrow
+                                        (e.which === 39) ||//Right arrow
+                                        (e.which === 40) ||//Down arrow
+                                        (e.which === 44) ||//PrntScrn
+                                        (e.which === 45) ||//Insert
+                                        (e.which === 144) ||//NumLock
+                                        (e.which === 145) ||//ScrollLock
+                                        (e.which === 91) ||//WIN Key (Start)
+                                        (e.which === 93) ||//WIN Menu
+                                        (e.which === 224) ||//command key
+                                        (e.which >= 112 && e.which <= 123)//F1 to F12
+                                    ))) {
+                                    return false;
+                                }
+
+                                var selected = $('option:selected', $element).not(':empty').clone().attr('selected', true);
+                                requestData($attrs.selectSource, {q: q})
+                                    .then(function (data) {
+                                        var _options = '';
+                                        var _length = data.length;
+                                        var _selected = angular.isArray(ngModel.$viewValue) ? ngModel.$viewValue : [ngModel.$viewValue];
+                                        for (var i = 0; i < _length; i++) {
+                                            if (_selected.indexOf(data[i].value) == -1) {
+                                                _options += '<option value="' + data[i].value + '">' + data[i].text + '</option>';
+                                            }
+                                        }
+                                        $element.html(_options).prepend(selected);
+                                        $element.trigger("chosen:updated");
+                                        var keyRight = $.Event('keyup');
+                                        keyRight.which = 39;
+                                        $input.val(q).trigger(keyRight);
                                     });
-                            }
-                        }, 'json').complete(function () {
-                            $scope.$digest();
-                        });
+                            };
+
+                        } else {
+                            requestData($attrs.selectSource)
+                                .then(function (data) {
+                                    var _options = '';
+                                    var _length = data.length;
+                                    var _selected = angular.isArray(ngModel.$viewValue) ? ngModel.$viewValue : [ngModel.$viewValue];
+                                    for (var i = 0; i < _length; i++) {
+                                        _options += '<option value="' + data[i].value + '"' + (_selected.indexOf(data[i].value) > -1 ? 'selected' : '') + '>' + data[i].text + '</option>';
+                                    }
+                                    $element.html(_options);
+                                    $element.chosen($scope.chosen || {
+                                            no_results_text: "没有找到"
+                                        });
+                                });
+                        }
                     } else {
                         $element.chosen($scope.chosen || {
                                 no_results_text: "没有找到"
@@ -1228,7 +1301,8 @@ define('main/directives', ['main/init'], function () {
                 })
             }
         }
-    }
+    };
+    chosen.$inject = ["requestData"];
 
     /**
      * 加入项目
