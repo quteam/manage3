@@ -50,7 +50,7 @@
             <div class="form-tr">
                 <div class="form-th">自动补全</div>
                 <div class="form-td">
-                    <span angucomplete placeholder="输入" title-field="text" url="../data/autocomplete.data?s=" class="inline-block" ng-model="formData.text"></span>
+                    <span angucomplete placeholder="输入" title-field="text" url="../data/autocomplete.data" class="inline-block" ng-model="formData.text"></span>
                 </div>
             </div>
             <div class="form-tr">
@@ -138,14 +138,17 @@
             <div class="form-tr">
                 <div class="form-th">级联下拉</div>
                 <div class="form-td">
-                    <select relative-select relative-initload="true" relative-to="#relativeSelect2" class="select" ng-model="formData.select2" name="select2">
+                    <select relative-select relative-initload relative-to="#relativeSelect3" class="select" ng-model="formData.select2" name="select2">
                         <option value="">请选择</option>
                         <option value="0">Option 1</option>
                         <option value="1">Option 2</option>
                         <option value="2">Option 3</option>
                         <option value="3">Option 4</option>
                     </select>
-                    <select relative-select="../data/selectlist.data" relative-to="#relativeSelect3" class="select" ng-model="formData.select3" id="relativeSelect2" name="select3" select-first>
+                    <select relative-select="../data/selectlist.data" relative-to="#relativeSelect4" class="select" ng-model="formData.select3" id="relativeSelect3" name="select3" select-first>
+                        <option value="">请选择</option>
+                    </select>
+                    <select relative-select="../data/selectlist.data" class="select" ng-model="formData.select4" id="relativeSelect4" name="select4" select-first>
                         <option value="">请选择</option>
                     </select>
                 </div>

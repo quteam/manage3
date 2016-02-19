@@ -60,7 +60,7 @@ define('main/directives', ['main/init'], function () {
     /**
      * detailsInfo
      */
-    function detailsInfo($http, $httpParamSerializer) {
+    function detailsInfo(requestData) {
         return {
             restrict: 'AE',
             scope: true,
@@ -92,41 +92,28 @@ define('main/directives', ['main/init'], function () {
 
                 function getData(params) {
                     $scope.isLoading = true;
-                    $http({
-                        method: 'POST',
-                        url: $attrs.detailsInfo,
-                        data: params,
-                        transformRequest: function (data) {
-                            return $httpParamSerializer(data);
-                        },
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded',
-                            'X-Requested-With': 'XMLHttpRequest'
-                        }
-                    })
-                        .success(function (data, status, headers, config) {
+                    requestData($attrs.detailsInfo, params)
+                        .then(function (data) {
                             $scope.isLoading = false;
-                            if (data.code == 200) {
-                                if ($scope.detailsHandler) {
-                                    $scope.details = $scope.detailsHandler(data.data);
-                                } else {
-                                    $scope.details = data.data;
-                                }
+                            if ($scope.detailsHandler) {
+                                $scope.details = $scope.detailsHandler(data);
+                            } else {
+                                $scope.details = data;
                             }
                         })
-                        .error(function () {
+                        .catch(function () {
                             $scope.isLoading = false;
-                        })
+                        });
                 }
             }
         };
     };
-    detailsInfo.$inject = ["$http", "$httpParamSerializer"];
+    detailsInfo.$inject = ["requestData"];
 
     /**
      * 表单验证
      */
-    function formValidator($http, $httpParamSerializer) {
+    function formValidator(requestData) {
         return {
             restrict: 'A',
             scope: true,
@@ -154,46 +141,31 @@ define('main/directives', ['main/init'], function () {
                 $element.on("submit", function (e) {
                     e.preventDefault();
                     formStatus.submitting = true;
-                    $http({
-                        method: 'POST',
-                        url: $attrs.action,
-                        data: $scope.formData,
-                        transformRequest: function (data) {
-                            return $httpParamSerializer(data);
-                        },
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded',
-                            'X-Requested-With': 'XMLHttpRequest'
-                        }
-                    })
-                        .success(function (data, status, headers, config) {
+                    requestData($attrs.action, $scope.formData)
+                        .then(function (data) {
                             formStatus.submitting = false;
-                            if (data.code == 200) {
-                                formStatus.submitInfo = data.message || '提交成功';
-                                if (angular.isFunction($scope.submitCallBack)) {
-                                    $scope.submitCallBack(data);
-                                } else if (data.url) {
-                                    window.location.assign(data.options.url);
-                                }
-                            } else {
-                                formStatus.submitInfo = data.message || '提交错误';
-                                angular.isFunction($scope.submitCallBack) && $scope.submitCallBack(data);
+                            formStatus.submitInfo = "";
+                            if (angular.isFunction($scope.submitCallBack)) {
+                                $scope.submitCallBack(data);
+                            } else if (data.url) {
+                                window.location.assign(data.options.url);
                             }
                         })
-                        .error(function () {
+                        .catch(function (error) {
                             formStatus.submitting = false;
-                            formStatus.submitInfo = '提交失败。';
-                        })
+                            formStatus.submitInfo = error || '提交失败。';
+                            angular.isFunction($scope.submitCallBack) && $scope.submitCallBack(data);
+                        });
                 })
             }
         }
     };
-    formValidator.$inject = ["$http", "$httpParamSerializer"];
+    formValidator.$inject = ["requestData"];
 
     /**
      * 表格
      */
-    function tableList(modal, dialogConfirm, $timeout) {
+    function tableList(requestData, modal, dialogConfirm, $timeout) {
         return {
             restrict: 'AE',
             scope: {
@@ -228,15 +200,12 @@ define('main/directives', ['main/init'], function () {
                 //批量删除
                 $scope.delSelected = function (_url) {
                     dialogConfirm('确定删除这些?', function () {
-                        $.post(_url, {ids: $scope.listSelected.join(",")}, function (data) {
-                                if (data.code == 200) {
-                                    $scope.$broadcast("reloadList");
-                                } else {
-                                    alert(data.message || '删除错误');
-                                }
-                            }, 'json')
-                            .error(function () {
-                                alert('请求错误');
+                        requestData(_url, {ids: $scope.listSelected.join(",")})
+                            .then(function () {
+                                $scope.$broadcast("reloadList");
+                            })
+                            .catch(function (error) {
+                                alert(error || '删除错误');
                             });
                     });
                 };
@@ -244,19 +213,13 @@ define('main/directives', ['main/init'], function () {
                 $scope.deleteThis = function (_url) {
                     var _tr = this.tr;
                     dialogConfirm('确定删除?', function () {
-                        $.post(_url, {}, function (data) {
-                                if (data.code == 200) {
-                                    $scope.tbodyList.splice($scope.tbodyList.indexOf(_tr), 1);
-                                } else {
-                                    alert(data.message || '删除错误');
-                                }
-                            }, 'json')
-                            .error(function () {
-                                alert('请求错误');
+                        requestData(_url, {})
+                            .then(function () {
+                                $scope.tbodyList.splice($scope.tbodyList.indexOf(_tr), 1);
                             })
-                            .complete(function () {
-                                $scope.$digest();
-                            })
+                            .catch(function (error) {
+                                alert(error || '删除错误');
+                            });
                     });
                 };
 
@@ -413,7 +376,7 @@ define('main/directives', ['main/init'], function () {
                         }
 
                         setSelectedValue();
-                        $scope.$apply();
+                        //$scope.$apply();
                     });
                 }
 
@@ -423,7 +386,7 @@ define('main/directives', ['main/init'], function () {
             }
         };
     };
-    tableList.$inject = ['modal', 'dialogConfirm', '$timeout'];
+    tableList.$inject = ['requestData', 'modal', 'dialogConfirm', '$timeout'];
 
     /**
      * 表格 单元格
@@ -612,7 +575,7 @@ define('main/directives', ['main/init'], function () {
     /**
      * 筛选
      */
-    function filterConditions() {
+    function filterConditions(requestData) {
         return {
             restrict: 'AE',
             scope: {},
@@ -651,13 +614,10 @@ define('main/directives', ['main/init'], function () {
                 //获取筛选条件
                 if ($attrs.filterConditions) {
                     (function () {
-                        $.getJSON($attrs.filterConditions, {}, function (_data) {
-                            if (_data.code == 200) {
-                                $scope.conditionList = _data.data;
-                            }
-                        }).complete(function () {
-                            $scope.$digest();
-                        });
+                        requestData($attrs.filterConditions)
+                            .then(function (_data) {
+                                $scope.conditionList = _data;
+                            })
                     })();
                 }
 
@@ -666,12 +626,13 @@ define('main/directives', ['main/init'], function () {
                 });
             }
         }
-    }
+    };
+    filterConditions.$inject = ["requestData"];
 
     /**
      * 树状列表
      */
-    function treeList($http, $filter) {
+    function treeList(requestData, $filter) {
         return {
             restrict: 'AE',
             scope: {},
@@ -705,28 +666,23 @@ define('main/directives', ['main/init'], function () {
                     ngModel && ngModel.$setViewValue(_tree);
                 };
 
-                $http({
-                    method: 'POST',
-                    url: $attrs.treeList
-                })
-                    .success(function (data, status, headers, config) {
-                        if (data.code == 200) {
-                            $scope.treeList = data.data;
-                        }
+                requestData($attrs.treeList)
+                    .then(function (data) {
+                        $scope.treeList = data;
                         $scope.status.isLoading = false;
                     })
-                    .error(function () {
+                    .catch(function () {
                         $scope.status.isLoading = false;
                     });
             }
         }
     };
-    treeList.$inject = ["$http", "$filter"];
+    treeList.$inject = ["requestData", "$filter"];
 
     /**
      * 导航列表
      */
-    function navList($http, $httpParamSerializer) {
+    function navList(requestData) {
         return {
             restrict: 'AE',
             scope: true,
@@ -758,25 +714,13 @@ define('main/directives', ['main/init'], function () {
                     }
                     statusInfo.isLoading = true;
 
-                    $http({
-                        method: 'POST',
-                        url: $attrs.navList,
-                        transformRequest: function (data) {
-                            return $httpParamSerializer(data);
-                        },
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded',
-                            'X-Requested-With': 'XMLHttpRequest'
-                        }
-                    })
-                        .success(function (data, status, headers, config) {
+                    requestData($attrs.navList)
+                        .then(function (data) {
                             $scope.isLoading = false;
-                            if (data.code == 200) {
-                                $scope.listData = data.data;
-                                $scope.select($scope.listData[0]);
-                            }
+                            $scope.listData = data.data;
+                            $scope.select($scope.listData[0]);
                         })
-                        .error(function () {
+                        .catch(function () {
                             $scope.isLoading = false;
                         });
                 };
@@ -785,38 +729,36 @@ define('main/directives', ['main/init'], function () {
             }
         }
     };
-    navList.$inject = ["$http", "$httpParamSerializer"];
+    navList.$inject = ["requestData"];
 
     /**
      * 异步下拉
      */
-    function selectAsync() {
+    function selectAsync(requestData) {
         return {
             restrict: 'A',
             scope: {},
             require: "?^ngModel",
             link: function ($scope, $element, $attrs, ngModel) {
-                $.post($attrs.selectAsync, {}, function (data) {
-                    if (data.code == 200) {
+
+                requestData($attrs.selectAsync)
+                    .then(function (data) {
                         var _options = '<option value="">请选择</option>';
-                        var _length = data.data.length;
+                        var _length = data.length;
                         for (var i = 0; i < _length; i++) {
-                            _options += '<option value="' + data.data[i].value + '"' + (ngModel.$viewValue == data.data[i].value ? 'selected' : '') + '>' + data.data[i].text + '</option>';
+                            _options += '<option value="' + data[i].value + '"' + (ngModel.$viewValue == data[i].value ? 'selected' : '') + '>' + data[i].text + '</option>';
                         }
                         $element.html(_options);
-                    }
-                }, 'json').complete(function () {
-                    $scope.$digest();
-                });
+                    });
             }
         }
     };
-    selectAsync.$inject = [];
+    selectAsync.$inject = ["requestData"];
 
     /**
      * 级联下拉
      */
-    function relativeSelect($timeout) {
+    function relativeSelect(requestData, $timeout) {
         return {
             restrict: 'A',
             scope: {},
@@ -824,40 +766,42 @@ define('main/directives', ['main/init'], function () {
                 var _relativeTo = $attrs.relativeTo;
                 var _relativeSelect = $attrs.relativeSelect;
                 var isSelectFirst = angular.isDefined($attrs.selectFirst);
+                var relativeInitload = angular.isDefined($attrs.relativeInitload);
 
-                $element.on("change", function () {
-                    var _data = {};
-                    _data[this.name] = this.value;
-                    $(_relativeTo).trigger("update", _data);
-                });
+                $element.on("change", changeHandle);
 
                 $element.on("update", function (e, _data) {
                     getData(_data);
                 });
 
-                function getData(_data) {
-                    $.post(_relativeSelect, _data, function (data) {
-                        if (data.code == 200) {
-                            var _options = isSelectFirst ? '' : '<option value="">请选择</option>';
-                            var _length = data.data.length;
-                            for (var i = 0; i < _length; i++) {
-                                _options += '<option ' + (data.data[i].enabled === 0 ? ' class="text-muted"' : '') + ' value="' + data.data[i].value + '" ' + (data.data[i].selected || (isSelectFirst && i == 0) ? 'selected' : '') + '>' + data.data[i].text + '</option>';
-                            }
-                            $element.html(_options);
-                            $element.trigger("change");
-                        }
-                    }, 'json');
+                function changeHandle() {
+                    var _data = {};
+                    _data[$element[0].name] = $element.val();
+                    console.log(_data);
+                    $(_relativeTo).trigger("update", _data);
                 }
 
-                if ($attrs.relativeInitload) {
-                    $timeout(function () {
-                        $element.trigger("change");
-                    });
+                function getData(_data) {
+                    requestData(_relativeSelect, _data)
+                        .then(function (data) {
+                            var _options = isSelectFirst ? '' : '<option value="">请选择</option>';
+                            var _length = data.length;
+                            for (var i = 0; i < _length; i++) {
+                                _options += '<option ' + (data[i].enabled === 0 ? ' class="text-muted"' : '') + ' value="' + data[i].value + '" ' + (data[i].selected || (isSelectFirst && i == 0) ? 'selected' : '') + '>' + data[i].text + '</option>';
+                            }
+                            $element.html(_options);
+                            //$element.trigger("change");
+                            changeHandle();
+                        });
+                }
+
+                if (relativeInitload) {
+                    $timeout(changeHandle);
                 }
             }
         }
     };
-    relativeSelect.$inject = ["$timeout"];
+    relativeSelect.$inject = ["requestData", "$timeout"];
 
     /**
      * 图表
@@ -934,7 +878,7 @@ define('main/directives', ['main/init'], function () {
     /**
      * 自动补全
      */
-    function angucomplete($parse, $http, $sce, $timeout) {
+    function angucomplete($parse, requestData, $sce, $timeout) {
         return {
             restrict: 'EA',
             scope: {
@@ -1035,13 +979,12 @@ define('main/directives', ['main/init'], function () {
                             $scope.processResults(matches, str);
 
                         } else {
-                            $http.get($scope.url + str, {}).success(function (responseData, status, headers, config) {
+                            requestData($scope.url, {q: str}).then(function (data) {
                                 $scope.searching = false;
-                                if (responseData.code == 200) {
-                                    $scope.processResults(responseData.data, str);
-                                }
-                            }).error(function (data, status, headers, config) {
-                                console.log("error");
+                                $scope.processResults(data, str);
+                            }).catch(function (error) {
+                                $scope.searching = false;
+                                console.error(error);
                             });
                         }
                     }
@@ -1148,7 +1091,7 @@ define('main/directives', ['main/init'], function () {
             }
         };
     };
-    angucomplete.$inject = ["$parse", "$http", "$sce", "$timeout"];
+    angucomplete.$inject = ["$parse", "requestData", "$sce", "$timeout"];
 
     /**
      * checkbox

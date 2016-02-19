@@ -20,7 +20,7 @@ define('main/services', ['main/init'], function () {
             })
                 .success(function (_data, status, headers, config) {
                     if (status == 200 && _data.code == 200) {
-                        defer.resolve(_data.data);
+                        defer.resolve(_data.data || {});
                     } else {
                         defer.reject(_data.msg || '出错了');
                     }
