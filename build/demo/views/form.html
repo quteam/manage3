@@ -87,7 +87,18 @@
                 <div class="form-th">下拉</div>
                 <div class="form-td">
                     <div>
-                        <select class="select select-w" data-placeholder="选择一个..." chosen ng-model="formData.chosen" select-source="../data/selectlist.data"></select>
+                        <select class="select select-w" data-placeholder="选择一个..." chosen ng-model="formData.chosen1">
+                            <option value="1">United States</option>
+                            <option value="2">United Kingdom</option>
+                            <option value="3">Afghanistan</option>
+                            <option value="4">Aland Islands</option>
+                            <option value="5">Albania</option>
+                            <option value="6">Algeria</option>
+                            <option value="7">American Samoa</option>
+                            <option value="8">Andorra</option>
+                            <option value="9">Angola</option>
+                            <option value="10">Anguilla</option>
+                        </select>
                     </div>
                     <div class="mgt-m">
                         <select class="select select-w" data-placeholder="选择一个..." chosen multiple ng-model="formData.chosen2">
@@ -101,6 +112,18 @@
                             <option value="8">Andorra</option>
                             <option value="9">Angola</option>
                             <option value="10">Anguilla</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-tr">
+                <div class="form-th">Ajax下拉</div>
+                <div class="form-td">
+                    <div>
+                        <select class="select select-w" data-placeholder="选择一个..." chosen chosen-ajax ng-model="formData.chosen3" select-source="../data/selectlist.data"></select>
+                    </div>
+                    <div class="mgt-m">
+                        <select class="select select-w" data-placeholder="选择一个..." chosen multiple chosen-ajax ng-model="formData.chosen4" select-source="../data/selectlist.data">
                         </select>
                     </div>
                 </div>
