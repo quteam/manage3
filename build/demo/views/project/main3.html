@@ -1,0 +1,160 @@
+<div ng-controller="pageCtrl">
+    <div class="top-nav-wrap">
+        <div class="back backBtn"><i class="iconfont icon-back"></i></div>
+        <div class="title2">成绩录入</div>
+        <div class="right">
+            <div class="nav">
+                <a class="li" href="#/project-add.html"><i class="iconfont icon-plus"></i></a>
+                <a class="li"><i class="iconfont icon-search"></i></a>
+                <a class="li"><i class="iconfont icon-bell"></i><i class="tip" ng-if="mainStatus.msgBubble">{{mainStatus.msgBubble}}</i></a>
+            </div>
+        </div>
+    </div>
+    <div class="page-main">
+        <div class="flex-column" ng-controller="oneCtrl">
+            <div class="flex-item-6 flex-row">
+                <div class="tab-list-wrap flex-item pd-m">
+                    <table-list list-data="../data/table-list.data">
+                        <div class="loader" ng-if="status.isLoading">
+                            <div class="loader-inner pacman">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+                        <div ng-if="!status.isLoading">
+                            <div class="empty-wrap" ng-if="tbodyList.length==0">
+                                <div class="icon"><i class="iconfont icon-empty"></i></div>
+                                <div>什么也没有</div>
+                            </div>
+                            <div ng-if="tbodyList.length">
+                                <table class="table-list">
+                                    <thead>
+                                    <tr>
+                                        <th>户型名称</th>
+                                        <th>房屋用途</th>
+                                        <th>房 型</th>
+                                        <th>预售面积</th>
+                                        <th>户型图</th>
+                                        <th>其他信息</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="tr in tbodyList">
+                                        <td>{{tr.name}}</td>
+                                        <td>{{tr.col1}}</td>
+                                        <td>{{tr.col2}}</td>
+                                        <td>{{tr.col3}}</td>
+                                        <td>{{tr.col5}}</td>
+                                        <td>{{tr.col6}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <div class="mg-s clearfix">
+                                    <div class="fr">
+                                        <pagination status="status"></pagination>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </table-list>
+                </div>
+            </div>
+            <div class="flex-item-6 flex-row pdl-m">
+                <div class="tab-list-wrap flex-item pd-m">
+                    <div class="mg-m">
+                        考生: <input type="text" class="ipt ipt-short" placeholder="输入考号"/>
+                        成绩: <input type="text" class="ipt ipt-short" placeholder="输入成绩"/>
+                    </div>
+                    <div class="tab-wrap" ng-init="tab=1">
+                        <li class="li" ng-class="{on:tab==1}" ng-click="tab=1">摘要</li>
+                        <li class="li" ng-class="{on:tab==2}" ng-click="tab=2">录入预览</li>
+                    </div>
+                    <div class="mg-m" ng-if="tab==1">
+                        <div class="mg-m"><span class="text-l">考生信息</span></div>
+                        <table class="table-list">
+                            <thead>
+                            <tr>
+                                <th>姓名</th>
+                                <th>班级</th>
+                                <th>科目</th>
+                                <th>成绩</th>
+                                <th>考场</th>
+                                <th>座号</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>张三</td>
+                                <td>高三(01)班</td>
+                                <td>123</td>
+                                <td>语文</td>
+                                <td>第 1 考场</td>
+                                <td>3</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="mg-m"><span class="text-l">摘要</span></div>
+                        <table class="table-list">
+                            <thead>
+                            <tr>
+                                <th>姓名</th>
+                                <th>班级</th>
+                                <th>科目</th>
+                                <th>成绩</th>
+                                <th>考场</th>
+                                <th>座号</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>张三</td>
+                                <td>高三(01)班</td>
+                                <td>123</td>
+                                <td>语文</td>
+                                <td>第 1 考场</td>
+                                <td>3</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mg-m" ng-if="tab==2">
+                        <div class="mg-m"><span class="text-l">成绩录入列表</span></div>
+                        <table class="table-list">
+                            <thead>
+                            <tr>
+                                <th>姓名</th>
+                                <th>班级</th>
+                                <th>科目</th>
+                                <th>成绩</th>
+                                <th>考场</th>
+                                <th>座号</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>张三</td>
+                                <td>高三(01)班</td>
+                                <td>123</td>
+                                <td>语文</td>
+                                <td>第 1 考场</td>
+                                <td>3</td>
+                            </tr>
+                            <tr>
+                                <td>张三</td>
+                                <td>高三(01)班</td>
+                                <td>123</td>
+                                <td>语文</td>
+                                <td>第 1 考场</td>
+                                <td>3</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
