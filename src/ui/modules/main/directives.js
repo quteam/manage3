@@ -665,7 +665,7 @@ define('main/directives', ['main/init'], function () {
                 };
                 $scope.selectTree2 = function (tree) {
                     $scope.curTree2 = tree;
-                    var _subTree = $filter("filter")($scope.treeList, {pid: tree.id}, tree);
+                    var _subTree = $filter("filter")($scope.treeList, {pid: "" + tree.id}, tree);
                     if (_subTree.length < 1) {
                         var _tree = angular.copy(tree);
                         _tree.p = $scope.curTree1;
@@ -862,7 +862,7 @@ define('main/directives', ['main/init'], function () {
                         //监听具体值
                         $scope.$watch("chartParams", function (value) {
                             loadChart($attrs.chart, value);
-                        },true);
+                        }, true);
                     } else {
                         $attrs.$observe("chart", function (value) {
                             loadChart($attrs.chart);
