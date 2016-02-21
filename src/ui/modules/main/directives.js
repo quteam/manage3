@@ -228,7 +228,11 @@ define('main/directives', ['main/init'], function () {
                 };
                 //选择当个
                 $scope.selectThis = function () {
-                    ngModel && ngModel.$setViewValue(angular.copy(this.tr));
+                    var _tr = this.tr;
+                    var _index = $scope.tbodyList.indexOf(_tr);
+                    var $tr = $element.find("tbody tr");
+                    $tr.removeClass("on").eq(_index).addClass("on");
+                    ngModel && ngModel.$setViewValue(angular.copy(_tr));
                 };
 
                 //弹窗修改后的回调
