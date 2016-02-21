@@ -1,0 +1,37 @@
+{
+  "code": 200,
+  "message": "没有权限",
+  "options": {
+    "totalCount": 60,
+    "pageSize": 20
+  },
+  "thead": [
+    "科目",
+    "优秀线",
+    "及格线",
+    "差控线"
+  ],
+  "data": [
+    {
+      "id": 1,
+      "name": "语文",
+      "score1": "120",
+      "score2": "90",
+      "score3": "54"
+    },
+    {
+      "id": 2,
+      "name": "数学",
+      "score1": "120",
+      "score2": "90",
+      "score3": "54"
+    },
+    {
+      "id": 3,
+      "name": "英语",
+      "score1": "120",
+      "score2": "90",
+      "score3": "54"
+    }
+  ]
+}

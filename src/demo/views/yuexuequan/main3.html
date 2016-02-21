@@ -11,10 +11,11 @@
         </div>
     </div>
     <div class="page-main">
+        <div class="mg-m text-m">考试名称 20160215高二(1)班语文小测试</div>
         <div class="flex-column" ng-controller="oneCtrl">
-            <div class="flex-item-6 flex-row">
+            <div class="flex-item-5 flex-row">
                 <div class="tab-list-wrap flex-item pd-m">
-                    <table-list list-data="../data/table-list.data">
+                    <table-list list-data="../data/table-subject.data" ng-model="currentSubject">
                         <div class="loader" ng-if="status.isLoading">
                             <div class="loader-inner pacman">
                                 <div></div>
@@ -33,125 +34,66 @@
                                 <table class="table-list">
                                     <thead>
                                     <tr>
-                                        <th>户型名称</th>
-                                        <th>房屋用途</th>
-                                        <th>房 型</th>
-                                        <th>预售面积</th>
-                                        <th>户型图</th>
-                                        <th>其他信息</th>
+                                        <th ng-repeat="th in theadList">{{th}}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr ng-repeat="tr in tbodyList">
+                                    <tr ng-repeat="tr in tbodyList" ng-click="selectThis()">
                                         <td>{{tr.name}}</td>
-                                        <td>{{tr.col1}}</td>
-                                        <td>{{tr.col2}}</td>
-                                        <td>{{tr.col3}}</td>
-                                        <td>{{tr.col5}}</td>
-                                        <td>{{tr.col6}}</td>
+                                        <td>{{tr.score1}}</td>
+                                        <td>{{tr.score2}}</td>
+                                        <td>{{tr.score3}}</td>
                                     </tr>
                                     </tbody>
                                 </table>
-                                <div class="mg-s clearfix">
-                                    <div class="fr">
-                                        <pagination status="status"></pagination>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </table-list>
                 </div>
             </div>
-            <div class="flex-item-6 flex-row pdl-m">
-                <div class="tab-list-wrap flex-item pd-m">
-                    <div class="mg-m">
-                        考生: <input type="text" class="ipt ipt-short" placeholder="输入考号"/>
-                        成绩: <input type="text" class="ipt ipt-short" placeholder="输入成绩"/>
+            <div class="flex-item-7 flex-row pdl-m">
+                <div class="tab-list-wrap flex-item pd-m" ng-if="!currentSubject.name">
+                    <div class="empty-wrap">
+                        <div class="icon"><i class="iconfont icon-empty"></i></div>
+                        <div>请选择一个科目</div>
                     </div>
-                    <div class="tab-wrap" ng-init="tab=1">
-                        <li class="li" ng-class="{on:tab==1}" ng-click="tab=1">摘要</li>
-                        <li class="li" ng-class="{on:tab==2}" ng-click="tab=2">录入预览</li>
+                </div>
+                <div class="tab-list-wrap flex-item pd-m" ng-if="currentSubject.name" ng-init="formData={}">
+                    <div class="mg-m text-l">录入{{currentSubject.name}}成绩</div>
+                    <div class="mg-m pdb-m line">
+                        <div class="col-group">
+                            <div class="col-6">
+                                考生: <span angucomplete placeholder="输入考生姓名" title-field="text" url="../data/select-person.data" class="inline-block" ng-model="formData.name"></span>
+                            </div>
+                            <div class="col-6">
+                                成绩: <input type="number" min="0" class="ipt ipt-short" ng-model="formData.score" placeholder="输入成绩"/>
+                            </div>
+                        </div>
                     </div>
-                    <div class="mg-m" ng-if="tab==1">
-                        <div class="mg-m"><span class="text-l">考生信息</span></div>
-                        <table class="table-list">
-                            <thead>
-                            <tr>
-                                <th>姓名</th>
-                                <th>班级</th>
-                                <th>科目</th>
-                                <th>成绩</th>
-                                <th>考场</th>
-                                <th>座号</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>张三</td>
-                                <td>高三(01)班</td>
-                                <td>123</td>
-                                <td>语文</td>
-                                <td>第 1 考场</td>
-                                <td>3</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <div class="mg-m"><span class="text-l">摘要</span></div>
-                        <table class="table-list">
-                            <thead>
-                            <tr>
-                                <th>姓名</th>
-                                <th>班级</th>
-                                <th>科目</th>
-                                <th>成绩</th>
-                                <th>考场</th>
-                                <th>座号</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>张三</td>
-                                <td>高三(01)班</td>
-                                <td>123</td>
-                                <td>语文</td>
-                                <td>第 1 考场</td>
-                                <td>3</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="mg-m" ng-if="tab==2">
-                        <div class="mg-m"><span class="text-l">成绩录入列表</span></div>
-                        <table class="table-list">
-                            <thead>
-                            <tr>
-                                <th>姓名</th>
-                                <th>班级</th>
-                                <th>科目</th>
-                                <th>成绩</th>
-                                <th>考场</th>
-                                <th>座号</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>张三</td>
-                                <td>高三(01)班</td>
-                                <td>123</td>
-                                <td>语文</td>
-                                <td>第 1 考场</td>
-                                <td>3</td>
-                            </tr>
-                            <tr>
-                                <td>张三</td>
-                                <td>高三(01)班</td>
-                                <td>123</td>
-                                <td>语文</td>
-                                <td>第 1 考场</td>
-                                <td>3</td>
-                            </tr>
-                            </tbody>
-                        </table>
+                    <div class="mg-m" details-info="../data/student-details.data">
+                        <div class="mg-m"><span class="text-m text-em">考生信息</span></div>
+                        <div class="col-group">
+                            <div class="col-4">{{details.name}}</div>
+                            <div class="col-4">{{details.class}}</div>
+                            <div class="col-4">{{details.no}}</div>
+                        </div>
+                        <div class="col-group">
+                            <div class="col-4">{{details.subject}}</div>
+                            <div class="col-4">{{details.score}}分</div>
+                            <div class="col-4"></div>
+                        </div>
+                        <div class="mg-m"><span class="text-m text-em">录入提示</span></div>
+                        <div class="col-group mg-m">
+                            <div class="col-6">当前科目未录入</div>
+                            <div class="col-6"><span class="text-xl">{{details.num1}}</span> <span class="text-s color-gray">/{{details.num2}} 人</span></div>
+                        </div>
+                        <div class="col-group mg-m">
+                            <div class="col-6">成绩录入异常</div>
+                            <div class="col-6 color-red"><span class="text-xl">{{details.num3}}</span> <span class="text-s color-gray">人</span></div>
+                        </div>
+                        <div class="mg-m text-right">
+                            <a class="btn">查看录入情况</a>
+                        </div>
                     </div>
                 </div>
             </div>
