@@ -5,6 +5,20 @@
     "projectName": "万科 · 金色领域",
     "city": "成都",
     "companyName": "万科",
-    "date": "2015.09.12"
+    "date": "2015.09.12",
+    "pics": [
+      {
+        "url": "../ui/img/example-1.jpg",
+        "name": "图片一"
+      },
+      {
+        "url": "../ui/img/example-2.jpg",
+        "name": "图片二"
+      },
+      {
+        "url": "../ui/img/example-2.jpg",
+        "name": "图片三"
+      }
+    ]
   }
 }

@@ -1,0 +1,59 @@
+{
+  "code": 200,
+  "data": {
+    "action": "../data/form.data",
+    "items": [
+      {
+        "name": "输入框",
+        "type": "text",
+        "key": "input",
+        "placeholder": "请输入"
+      },
+      {
+        "name": "日期",
+        "type": "date",
+        "key": "date",
+        "placeholder": "请输入日期"
+      },
+      {
+        "name": "多选",
+        "type": "checkbox",
+        "key": "checkbox",
+        "options": [
+          "选项1",
+          "选项2",
+          "选项3",
+          "选项4"
+        ]
+      },
+      {
+        "name": "单选",
+        "type": "radio",
+        "key": "radio",
+        "options": [
+          "选项1",
+          "选项2",
+          "选项3",
+          "选项4"
+        ]
+      },
+      {
+        "name": "下拉",
+        "type": "select",
+        "key": "select",
+        "options": [
+          "选项1",
+          "选项2",
+          "选项3",
+          "选项4"
+        ]
+      },
+      {
+        "name": "备注",
+        "type": "textarea",
+        "key": "textarea",
+        "placeholder": "请输入备注"
+      }
+    ]
+  }
+}

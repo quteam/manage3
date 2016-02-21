@@ -68,20 +68,36 @@ define('manageApp', [
 
 require(['manageApp'], function (app) {
     app.config(['$routeProvider', function ($routeProvider) {
-        $routeProvider
-            .when("/:page*", {
-                templateUrl: function (param) {
-                    var _url = (Config.viewsDir || '') + param.page;
-                    delete param.page;
-                    var _param = $.param(param);
-                    return _param ? _url + "?" + _param : _url;
-                },
-                resolve: {
-                    load: function () {
+        if (window.Config) {
+            $routeProvider
+                .when("/:page*", {
+                    templateUrl: function (param) {
+                        var _url = (Config.viewsDir || '') + param.page;
+                        delete param.page;
+                        var _param = $.param(param);
+                        return _param ? _url + "?" + _param : _url;
+                    },
+                    resolve: {
+                        load: function () {
+                        }
                     }
-                }
-            })
-            .otherwise({redirectTo: Config.indexPage});
+                })
+                .otherwise({redirectTo: Config.indexPage});
+        } else {
+            $routeProvider
+                .when("/:page*", {
+                    templateUrl: function (param) {
+                        var _url = param.page;
+                        delete param.page;
+                        var _param = $.param(param);
+                        return _param ? _url + "?" + _param : _url;
+                    },
+                    resolve: {
+                        load: function () {
+                        }
+                    }
+                })
+        }
     }]);
 
     angular.bootstrap(document, ['manageApp']);

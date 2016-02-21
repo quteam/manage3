@@ -19,14 +19,16 @@ define('main/controllers', ['main/init'], function () {
         };
 
         //获取主要信息
-        $.getJSON(Config.getMainInfo, function (_data) {
-                if (_data.code == 200) {
-                    angular.extend($scope.mainStatus, _data.data);
-                }
-            })
-            .complete(function () {
-                $scope.$digest();
-            });
+        if (window.Config) {
+            $.getJSON(Config.getMainInfo, function (_data) {
+                    if (_data.code == 200) {
+                        angular.extend($scope.mainStatus, _data.data);
+                    }
+                })
+                .complete(function () {
+                    $scope.$digest();
+                });
+        }
 
         //后退
         $(document).on("click", ".top-nav-wrap .backBtn", function () {

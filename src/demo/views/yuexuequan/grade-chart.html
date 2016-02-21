@@ -1,0 +1,149 @@
+<div ng-controller="pageCtrl" ng-init="mainStatus.navigation='chart'">
+    <div class="top-nav-wrap">
+        <div class="back backBtn"><i class="iconfont icon-back"></i></div>
+        <div class="title2">年级图表</div>
+    </div>
+    <div class="page-main" details-info="/gradeResults/getGradeList?id={{mainStatus.pageParams.id}}">
+        {{filterParams}}
+        {{filterParams2}}
+        <!--年级选择框和科目选择框-->
+        <div class="filter-wrap">
+            <!--if中条件满足则显示-->
+            <div class="dl">
+                <div class="dt">年级选择</div>
+                <div class="dd" ng-init="filterParams2.gradeName=filterParams.gradeName=mainStatus.pageParams.id">
+                    <select relative-select relative-initload relative-to="#relativeSelect2" class="select"
+                            ng-change="filterParams2.gradeName=filterParams.gradeName" ng-model="filterParams.gradeName" name="gradeId1">
+                        <option value="{{opt.value}}" ng-repeat="opt in details">{{opt.text}}</option>
+                    </select>
+                    <!--最近一次考试年级的考试科目-->
+                    &nbsp;&nbsp;&nbsp;科目选择
+                    <select relative-select="/gradeResults/getExamSubject" id="relativeSelect2" class="select" ng-change="filterParams2.courseId=filterParams.courseId" ng-model="filterParams.courseId"
+                            select-first>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <!--<div class="mg-l"><span class="text-l">图表</span></div>-->
+        <div class="form-tr">
+            <!--年级下某科三率环图-->
+            <div class="form-td" style="margin-bottom: 10px">
+                <div class="col-group">
+                    <div class="mg text-xl" style="line-height: 50px;padding-left: 20px;background-color: #F5F5F5">
+                        年级三率
+                    </div>
+                    <div class="col-4" style="margin-top:50px;">
+                        <div chart="/gradeResults/gradeExcellentCircle" chart-params='filterParams'
+                             click-to-dialog="'/gradeResults/gradePreviousAnalysis?id='+filterParams.gradeName+'filterParams.courseId'"
+                             ng-model="formData.chart" style="height: 150px;"></div>
+                    </div>
+                    <div class="col-4" style="margin-top:50px;">
+                        <div chart="/gradeResults/gradePassCircle" chart-params='filterParams'
+                             click-to-dialog="'/gradeResults/gradePreviousAnalysis?id='+filterParams.gradeName+'filterParams.courseId'"
+                             ng-model="formData.chart" style="height: 150px;"></div>
+                    </div>
+                    <div class="col-4" style="margin-top:50px;">
+                        <div chart="/gradeResults/gradePoorCircle" chart-params='filterParams'
+                             click-to-dialog="'/gradeResults/gradePreviousAnalysis?id='+filterParams.gradeName+'filterParams.courseId'"
+                             ng-model="formData.chart" style="height: 150px;"></div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="form-td">
+                <!--年级下某科成绩波动最大的学生柱状图-->
+                <div class="col-group">
+                    <div class="col-12">
+                        <div chart="/gradeResults/gradeLargeFluctuations" chart-params='filterParams'
+                             ng-model="formData.chart" style="height: 400px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-tr">
+            <!--年级下各班某科柱状图-->
+            <div class="form-td">
+                <div class="mg-m">
+                    <label class="label"><input type="radio" name="radio" ng-model="filterParams2.selectType" value="平均分"> 平均分</label>
+                    <label class="label"><input type="radio" name="radio" ng-model="filterParams2.selectType" value="三率"> 三率</label>
+                    <label class="label"><input type="radio" name="radio" ng-model="filterParams2.selectType" value="学科有效人头生"> 学科有效人头生</label>
+                    <label class="label"><input type="radio" name="radio" ng-model="filterParams2.selectType" value="分段人头生"> 分段人头生</label>
+                </div>
+                <div ng-if="filterParams2.selectType=='学科有效人头生'">
+                    <span>分数段选择：</span>
+                    <select class="select select-w" name="scoreType" ng-init="filterParams2.scoreType='大于等于'" ng-model="filterParams2.scoreType" style="width: 110px">
+                        <option value="大于等于">大于等于</option>
+                        <option value="小于等于">小于等于</option>
+                    </select>
+                    <span>输入分数：</span>
+                    <input type="text" class="ipt" ng-model="compScore"/>
+                    <button type="button" class="btn btn-short" ng-click="filterParams2.compScore=compScore">确定</button>
+                </div>
+                <div ng-if="filterParams2.selectType=='分段人头生'">
+                    <span>前</span><input type="text" class="ipt" ng-model="rank"/><span>名</span>
+                    <button type="button" class="btn btn-short" ng-click="filterParams2.rank=rank">确定</button>
+                </div>
+                <div chart="/gradeResults/classBarData" chart-params='filterParams2' click-to-url="'#/class_chart.html?id='+formData.chart"
+                     ng-model="formData.chart" style="height: 400px;"></div>
+            </div>
+        </div>
+        <div class="form-tr">
+            <!--年级下各班某科表格展示-->
+            <div class="form-td">
+                <table-list list-data="/gradeResults/classTableData" list-params='filterParams'>
+                    <div class="loader" ng-if="status.isLoading">
+                        <div class="loader-inner pacman">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div ng-if="!status.isLoading">
+                        <div ng-if="tbodyList.length">
+                            <table class="table-list">
+                                <thead>
+                                <tr>
+                                    <th>班级名称</th>
+                                    <th>任课教师</th>
+                                    <th>平均分</th>
+                                    <th>优秀率</th>
+                                    <th>及格率</th>
+                                    <th>差控率</th>
+                                    <th>三率一分排名</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="tr in tbodyList">
+                                    <td>{{tr.banJiName}}</td>
+                                    <td>{{tr.teacherName}}</td>
+                                    <td>{{tr.averageScore}}</td>
+                                    <td>{{tr.excellentRate}}</td>
+                                    <td>{{tr.passRate}}</td>
+                                    <td>{{tr.differenceRate}}</td>
+                                    <!--以下三率一分排名-->
+                                    <td>{{tr.threeRateRanked}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="mg-s">
+                                <div class="fr">
+                                    <pagination status="status"></pagination>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </table-list>
+            </div>
+        </div>
+        <div class="form-tr">
+            <!--年级平均分折线图-->
+            <div class="form-td">
+                <div chart="/gradeResults/gradeLineData" chart-params='filterParams' click-to-dialog="'/gradeResults/classTestBar?id='+formData.chart.id"
+                     ng-model="formData.chart"
+                     style="height: 400px;"></div>
+            </div>
+        </div>
+    </div>
+</div>
