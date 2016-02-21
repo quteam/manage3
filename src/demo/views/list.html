@@ -12,7 +12,7 @@
     </div>
     <div class="page-main">
         <div class="mgb-l"><span class="text-l">列表</span></div>
-        <table-list list-data="../data/table-list.data" list-params="listParams">
+        <table-list list-data="../data/table-list.data" list-params="listParams" ng-model="tableSelected">
             <div class="loader" ng-if="status.isLoading">
                 <div class="loader-inner pacman">
                     <div></div>
@@ -50,7 +50,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="tr in tbodyList">
+                        <tr ng-repeat="tr in tbodyList" ng-click="selectThis()">
                             <td class="select-td"><input type="checkbox" class="selectOne" value="{{tr.id}}"></td>
                             <td>{{tr.name}}</td>
                             <td>{{tr.col1}}</td>

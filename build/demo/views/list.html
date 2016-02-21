@@ -12,7 +12,7 @@
     </div>
     <div class="page-main">
         <div class="mgb-l"><span class="text-l">列表</span></div>
-        <table-list list-data="../data/table-list.data" list-params="listParams">
+        <table-list list-data="../data/table-list.data" list-params="listParams" ng-model="tableSelected">
             <div class="loader" ng-if="status.isLoading">
                 <div class="loader-inner pacman">
                     <div></div>
@@ -45,18 +45,12 @@
                         <thead>
                         <tr>
                             <th><input type="checkbox" class="selectAll"></th>
-                            <th>户型名称</th>
-                            <th>房屋用途</th>
-                            <th>房 型</th>
-                            <th>预售面积</th>
-                            <th>附属/赠送类型和面积</th>
-                            <th>户型图</th>
-                            <th>其他信息</th>
+                            <th ng-repeat="th in theadList">{{th}}</th>
                             <th></th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="tr in tbodyList">
+                        <tr ng-repeat="tr in tbodyList" ng-click="selectThis()">
                             <td class="select-td"><input type="checkbox" class="selectOne" value="{{tr.id}}"></td>
                             <td>{{tr.name}}</td>
                             <td>{{tr.col1}}</td>

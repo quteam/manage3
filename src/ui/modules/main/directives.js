@@ -226,6 +226,10 @@ define('main/directives', ['main/init'], function () {
                             });
                     });
                 };
+                //选择当个
+                $scope.selectThis = function () {
+                    ngModel && ngModel.$setViewValue(angular.copy(this.tr));
+                };
 
                 //弹窗修改后的回调
                 $scope.submitCallBack = function (_data) {
