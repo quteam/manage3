@@ -1,0 +1,9 @@
+{
+  "code": 200,
+  "data": {
+    "name": "高二(1)班",
+    "personCount": 60,
+    "num1": 25,
+    "num2": 2
+  }
+}

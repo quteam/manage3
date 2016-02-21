@@ -760,9 +760,10 @@ define('main/directives', ['main/init'], function () {
                         var _options = '<option value="">请选择</option>';
                         var _length = data.length;
                         for (var i = 0; i < _length; i++) {
-                            _options += '<option value="' + data[i].value + '"' + (ngModel.$viewValue == data[i].value ? 'selected' : '') + '>' + data[i].text + '</option>';
+                            _options += '<option value="' + data[i].value + '">' + data[i].text + '</option>';
                         }
                         $element.html(_options);
+                        ngModel && $element.val(ngModel.$viewValue);
                     });
             }
         }
@@ -776,7 +777,8 @@ define('main/directives', ['main/init'], function () {
         return {
             restrict: 'A',
             scope: {},
-            link: function ($scope, $element, $attrs) {
+            require: "?^ngModel",
+            link: function ($scope, $element, $attrs, ngModel) {
                 var _relativeTo = $attrs.relativeTo;
                 var _relativeSelect = $attrs.relativeSelect;
                 var isSelectFirst = angular.isDefined($attrs.selectFirst);
@@ -799,11 +801,17 @@ define('main/directives', ['main/init'], function () {
                         .then(function (data) {
                             var _options = isSelectFirst ? '' : '<option value="">请选择</option>';
                             var _length = data.length;
+                            var _value = "";
                             for (var i = 0; i < _length; i++) {
-                                _options += '<option ' + (data[i].enabled === 0 ? ' class="text-muted"' : '') + ' value="' + data[i].value + '" ' + (data[i].selected || (isSelectFirst && i == 0) ? 'selected' : '') + '>' + data[i].text + '</option>';
+                                if (data[i].selected || (isSelectFirst && i == 0)) {
+                                    _value = data[i].value;
+                                }
+                                _options += '<option ' + (data[i].enabled === 0 ? ' class="text-muted"' : '') + ' value="' + data[i].value + '">' + data[i].text + '</option>';
                             }
                             $element.html(_options);
                             //$element.trigger("change");
+                            $element.val(_value);
+                            ngModel && ngModel.$setViewValue(_value);
                             changeHandle();
                         });
                 }
