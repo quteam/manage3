@@ -45,13 +45,7 @@
                         <thead>
                         <tr>
                             <th><input type="checkbox" class="selectAll"></th>
-                            <th>户型名称</th>
-                            <th>房屋用途</th>
-                            <th>房 型</th>
-                            <th>预售面积</th>
-                            <th>附属/赠送类型和面积</th>
-                            <th>户型图</th>
-                            <th>其他信息</th>
+                            <th ng-repeat="th in theadList">{{th}}</th>
                             <th></th>
                         </tr>
                         </thead>
