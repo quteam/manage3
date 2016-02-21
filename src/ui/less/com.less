@@ -18,7 +18,7 @@ fieldset, img { border: 0 }
 button, input, select, textarea { font-size: 14px; }
 table { border-collapse: collapse; border-spacing: 0 }
 th { background: #F5F5F5; text-align: left; font-weight: normal; color: #787878; }
-article, aside, details, figcaption, figure, footer, header, menu, nav, section, summary, time, mark, audio, video { display: block; margin: 0; padding: 0 }
+article, aside, details, figcaption, figure, footer, header, menu, nav, section, summary, time, mark, audio, video, table-list { display: block; margin: 0; padding: 0 }
 body { color: #1E1E1E; }
 ::-webkit-scrollbar-track { }
 ::-webkit-scrollbar { width: 6px; height: 6px; }
@@ -262,7 +262,7 @@ body { color: #1E1E1E; }
 .select-noborder { background: transparent; border: none; }
 .select-w { width: 280px; }
 .select-block { width: 100%; }
-.ipt { height: 36px; width: 280px; box-sizing: border-box; padding: 5px 10px; margin-bottom: 2px; border-radius: 3px; background: transparent; border: 1px solid #E6E6E6; outline: none; }
+.ipt { height: 36px; width: 280px; box-sizing: border-box; padding: 5px 10px; margin-bottom: 2px; border-radius: 3px; background-color: #FFF; border: 1px solid #E6E6E6; outline: none; }
 .ipt:focus { border: 1px solid #5897FB; }
 .ipt-block { display: block; width: 100%; }
 .ipt-short { width: 180px; }
@@ -408,7 +408,7 @@ body { color: #1E1E1E; }
 .uploader-list .text i { font-style: normal; font-size: 18px; }
 .uploader-list .del { position: absolute; bottom: 0; right: 0; z-index: 2; width: 32px; height: 32px; font-size: 18px; line-height: 32px; color: #969696; text-align: center; background: #E6E6E6; cursor: pointer; display: none; }
 .uploader-list .del:hover { color: #FF6000; }
-.uploader-list .file .img { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-size: cover; }
+.uploader-list .file .img { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url(../img/file.png) 50% 50% no-repeat; background-size: cover; }
 .uploader-list .file:hover .del { display: block; }
 .uploader-list .file.error .progress-mask { background: #FF2A00; }
 .uploader-list .file.finished .progress-mask { opacity: 0; }

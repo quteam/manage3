@@ -61,18 +61,17 @@ define('main/services', ['main/init'], function () {
     dialog.$inject = ['$rootScope', 'modal'];
 
     //图表弹窗
-    function dialogChart($rootScope, modal) {
+    function dialogChart($rootScope, modal, $http) {
         return function (_url) {
             var _$scope = $rootScope.$new(false);
             _$scope.url = _url;
             modal.open({
-                template: 'tpl/dialog-chart.html',
+                template: 'tpl/dialog-center.html',
                 scope: _$scope
             });
         };
     };
-    dialogChart.$inject = ['$rootScope', 'modal'];
-
+    dialogChart.$inject = ['$rootScope', 'modal', '$http'];
 
     angular.module('manageApp.main')
         .service('requestData', requestData)

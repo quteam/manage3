@@ -1,7 +1,8 @@
 <div class="uploader-wrap">
     <div class="uploader-list">
         <div class="file" ng-class="{finished:file.status=='finished',error:file.status=='error'}" ng-repeat="file in fileList">' +
-            <div class="img" style="background-image: url({{file.imgSrc}})"></div>
+            <div class="img" ng-if="file.imgSrc" style="background-image: url({{file.imgSrc}})"></div>
+            <div class="img" ng-if="!file.imgSrc" style="background-size:50%;"></div>
             <div class="progress-mask" style="height:{{file.progress}}%"></div>
             <div class="del" ng-click="delFile(file)"><i class="iconfont icon-delete"></i></div>
             <div class="text"><span class="status">{{file.text}}</span><i>{{file.progress}}%</i></div>

@@ -120,7 +120,8 @@ summary,
 time,
 mark,
 audio,
-video {
+video,
+table-list {
   display: block;
   margin: 0;
   padding: 0;
@@ -1173,7 +1174,7 @@ body {
   padding: 5px 10px;
   margin-bottom: 2px;
   border-radius: 3px;
-  background: transparent;
+  background-color: #FFF;
   border: 1px solid #E6E6E6;
   outline: none;
 }
@@ -1947,6 +1948,7 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
+  background: url(../img/file.png) 50% 50% no-repeat;
   background-size: cover;
 }
 .uploader-list .file:hover .del {
@@ -2963,7 +2965,9 @@ body.ngdialog-open {
 .angucomplete-dropdown {
   border: 1px solid #ECECEC;
   border-radius: 2px;
-  width: 250px;
+  width: 280px;
+  max-height: 200px;
+  overflow: auto;
   padding: 6px;
   cursor: pointer;
   z-index: 9999;

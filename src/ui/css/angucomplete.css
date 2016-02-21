@@ -4,7 +4,9 @@
 .angucomplete-dropdown {
   border: 1px solid #ECECEC;
   border-radius: 2px;
-  width: 250px;
+  width: 280px;
+  max-height: 200px;
+  overflow: auto;
   padding: 6px;
   cursor: pointer;
   z-index: 9999;

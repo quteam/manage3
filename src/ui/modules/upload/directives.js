@@ -14,6 +14,7 @@ define('upload/directives', ['upload/init'], function () {
             templateUrl: 'tpl/uploader.html',
             link: function ($scope, $element, $attrs) {
                 var $fileIpt = $('<input type="file" multiple/>');
+                var fileType = $attrs.uploadType || "image";
                 $scope.fileList = [];
                 $scope.delFile = delFile;
                 $scope.ngModel = $scope.ngModel || [];
@@ -34,20 +35,55 @@ define('upload/directives', ['upload/init'], function () {
                     //HTML5文件API操作
                     var files = $fileIpt[0].files;
                     for (var i = 0, l = files.length; i < l; i++) {
-                        if (/image/g.test(files[i].type)) {
-                            var _fileObj = {
-                                status: 'uploading',
-                                file: files[i],
-                                progress: 0,
-                                text: '上传中...',
-                                data: {},
-                                imgSrc: window.URL.createObjectURL(new Blob([files[i]], {type: files[i].type}))
-                            };
-                            $scope.fileList.push(_fileObj);
-                            $scope.$digest();
-                            uploadFile(_fileObj);
-                        } else {
-                            alert('只能上传图片');
+                        if ($scope.fileList.length >= $attrs.uploadMax) {
+                            alert("超过文件上传数");
+                            return;
+                        }
+                        switch (fileType) {
+                            case "*":
+                                var _fileObj = {
+                                    status: 'uploading',
+                                    file: files[i],
+                                    progress: 0,
+                                    text: '上传中...',
+                                    data: {}
+                                };
+                                $scope.fileList.push(_fileObj);
+                                $scope.$digest();
+                                uploadFile(_fileObj);
+                                break;
+                            case "image":
+                                if (/image/g.test(files[i].type)) {
+                                    var _fileObj = {
+                                        status: 'uploading',
+                                        file: files[i],
+                                        progress: 0,
+                                        text: '上传中...',
+                                        data: {},
+                                        imgSrc: window.URL.createObjectURL(new Blob([files[i]], {type: files[i].type}))
+                                    };
+                                    $scope.fileList.push(_fileObj);
+                                    $scope.$digest();
+                                    uploadFile(_fileObj);
+                                } else {
+                                    alert('只能上传图片');
+                                }
+                                break;
+                            default:
+                                if (new RegExp(fileType).test(files[i].type)) {
+                                    var _fileObj = {
+                                        status: 'uploading',
+                                        file: files[i],
+                                        progress: 0,
+                                        text: '上传中...',
+                                        data: {}
+                                    };
+                                    $scope.fileList.push(_fileObj);
+                                    $scope.$digest();
+                                    uploadFile(_fileObj);
+                                } else {
+                                    alert('上传格式错误');
+                                }
                         }
                     }
                 }

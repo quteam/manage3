@@ -19,7 +19,7 @@ fieldset,img{border:0}
 button,input,select,textarea{font-size:14px}
 table{border-collapse:collapse;border-spacing:0}
 th{background:#F5F5F5;text-align:left;font-weight:400;color:#787878}
-article,aside,audio,details,figcaption,figure,footer,header,mark,menu,nav,section,summary,time,video{display:block;margin:0;padding:0}
+article,aside,audio,details,figcaption,figure,footer,header,mark,menu,nav,section,summary,table-list,time,video{display:block;margin:0;padding:0}
 body{color:#1E1E1E}
 ::-webkit-scrollbar{width:6px;height:6px}
 ::-webkit-scrollbar-thumb{background-color:#4C637B;border-radius:3px}
@@ -279,7 +279,7 @@ body{color:#1E1E1E}
 .select-noborder{background:0 0;border:none}
 .select-w{width:280px}
 .select-block{width:100%}
-.ipt{height:36px;width:280px;box-sizing:border-box;padding:5px 10px;margin-bottom:2px;border-radius:3px;background:0 0;border:1px solid #E6E6E6;outline:0}
+.ipt{height:36px;width:280px;box-sizing:border-box;padding:5px 10px;margin-bottom:2px;border-radius:3px;background-color:#FFF;border:1px solid #E6E6E6;outline:0}
 .ipt:focus{border:1px solid #5897FB}
 .ipt-block{display:block;width:100%}
 .ipt-short{width:180px}
@@ -406,7 +406,7 @@ body{color:#1E1E1E}
 .uploader-list .text i{font-style:normal;font-size:18px}
 .uploader-list .del{position:absolute;bottom:0;right:0;z-index:2;width:32px;height:32px;font-size:18px;line-height:32px;color:#969696;text-align:center;background:#E6E6E6;cursor:pointer;display:none}
 .uploader-list .del:hover{color:#FF6000}
-.uploader-list .file .img{position:absolute;top:0;left:0;right:0;bottom:0;background-size:cover}
+.uploader-list .file .img{position:absolute;top:0;left:0;right:0;bottom:0;background:url(../img/file.png) 50% 50% no-repeat;background-size:cover}
 .uploader-list .file:hover .del{display:block}
 .uploader-list .file.error .progress-mask{background:#FF2A00}
 .uploader-list .file.finished .progress-mask{opacity:0}
@@ -594,7 +594,7 @@ body.ngdialog-open,html.ngdialog-open{overflow:hidden}
 .pacman>div:nth-child(2){width:0;height:0;border-right:25px solid transparent;border-top:25px solid #CCC;border-left:25px solid #CCC;border-bottom:25px solid #CCC;border-radius:25px;-webkit-animation:rotate_pacman_half_down .5s 0s infinite;animation:rotate_pacman_half_down .5s 0s infinite;margin-top:-50px}
 .pacman>div:nth-child(3),.pacman>div:nth-child(4),.pacman>div:nth-child(5),.pacman>div:nth-child(6){background-color:#CCC;width:15px;height:15px;border-radius:100%;margin:2px;width:10px;height:10px;position:absolute;-webkit-transform:translate(0,-6.25px);transform:translate(0,-6.25px);top:25px;left:100px}
 .angucomplete-holder{position:relative}
-.angucomplete-dropdown{border:1px solid #ECECEC;border-radius:2px;width:250px;padding:6px;cursor:pointer;z-index:9999;position:absolute;margin-top:-2px;background-color:#FFF;box-shadow:0 2px 5px rgba(0,0,0,.1)}
+.angucomplete-dropdown{border:1px solid #ECECEC;border-radius:2px;width:280px;max-height:200px;overflow:auto;padding:6px;cursor:pointer;z-index:9999;position:absolute;margin-top:-2px;background-color:#FFF;box-shadow:0 2px 5px rgba(0,0,0,.1)}
 .angucomplete-searching{color:#ACACAC;font-size:14px}
 .angucomplete-description{font-size:14px}
 .angucomplete-row{padding:5px;color:#000;margin-bottom:4px}

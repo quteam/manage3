@@ -213,9 +213,12 @@ define('main/directives', ['main/init'], function () {
                 $scope.deleteThis = function (_url) {
                     var _tr = this.tr;
                     dialogConfirm('确定删除?', function () {
-                        requestData(_url, {})
+                        requestData(_url, {id: _tr.id})
                             .then(function () {
                                 $scope.tbodyList.splice($scope.tbodyList.indexOf(_tr), 1);
+                                if ($scope.tbodyList.length == 0) {
+                                    $scope.$broadcast("reloadList");
+                                }
                             })
                             .catch(function (error) {
                                 alert(error || '删除错误');
@@ -225,12 +228,10 @@ define('main/directives', ['main/init'], function () {
 
                 //弹窗修改后的回调
                 $scope.submitCallBack = function (_data) {
-                    if (_data.code == 200) {
-                        modal.closeAll();
-                        $timeout(function () {
-                            $scope.$broadcast("reloadList");
-                        });
-                    }
+                    modal.closeAll();
+                    $timeout(function () {
+                        $scope.$broadcast("reloadList");
+                    });
                 };
 
                 var formData = {};
@@ -248,6 +249,10 @@ define('main/directives', ['main/init'], function () {
                                     statusInfo.totalCount = data.options.totalCount || statusInfo.totalCount;
                                     statusInfo.pageSize = data.options.pageSize || statusInfo.pageSize;
                                     statusInfo.totalPage = Math.ceil(statusInfo.totalCount / statusInfo.pageSize);
+                                }
+
+                                if (data.thead) {
+                                    $scope.theadList = data.thead;
                                 }
 
                                 if (data.data && data.data.length > 0) {
@@ -777,7 +782,6 @@ define('main/directives', ['main/init'], function () {
                 function changeHandle() {
                     var _data = {};
                     _data[$element[0].name] = $element.val();
-                    console.log(_data);
                     $(_relativeTo).trigger("update", _data);
                 }
 
