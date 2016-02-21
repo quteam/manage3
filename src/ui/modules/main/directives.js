@@ -862,12 +862,12 @@ define('main/directives', ['main/init'], function () {
                         //监听具体值
                         $scope.$watch("chartParams", function (value) {
                             loadChart($attrs.chart, value);
+                        },true);
+                    } else {
+                        $attrs.$observe("chart", function (value) {
+                            loadChart($attrs.chart);
                         });
                     }
-                    $attrs.$observe("chart", function () {
-                        loadChart($attrs.chart);
-                    });
-
 
                     //loadChart($attrs.chart);
 
