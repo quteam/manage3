@@ -7,16 +7,17 @@ define('main/directives', ['main/init'], function () {
     /**
      * Clear ng-view template cache
      */
-    function ngView($route, $templateCache) {
+    function ngView($route, $templateCache, $routeParams) {
         return {
             restrict: 'A',
             priority: -500,
             link: function ($scope, $element) {
                 $templateCache.remove($route.current.loadedTemplateUrl);
+                $scope.mainStatus.pageParams = $routeParams;
             }
         };
     };
-    ngView.$inject = ["$route", "$templateCache"];
+    ngView.$inject = ["$route", "$templateCache", "$routeParams"];
 
     /**
      * 转换日期
