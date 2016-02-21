@@ -832,8 +832,8 @@ define('main/directives', ['main/init'], function () {
             restrict: 'A',
             scope: {
                 clickToUrl: "=",
-                clickToDialog: "="
-                //chartParams: "="
+                clickToDialog: "=",
+                chartParams: "="
             },
             require: "?^ngModel",
             link: function ($scope, $element, $attrs, ngModel) {
@@ -858,13 +858,18 @@ define('main/directives', ['main/init'], function () {
                         }
                     });
 
-                    if ($attrs.chartParams) {
+                    if (angular.isDefined($attrs.chartParams)) {
                         //监听具体值
-                        $attrs.$observe("chartParams", function (value) {
-                            loadChart($attrs.chart, $scope.$eval(value));
+                        $scope.$watch("chartParams", function (value) {
+                            loadChart($attrs.chart, value);
                         });
                     }
-                    loadChart($attrs.chart);
+                    $attrs.$observe("chart", function () {
+                        loadChart($attrs.chart);
+                    });
+
+
+                    //loadChart($attrs.chart);
 
                     function loadChart(_url, _params) {
                         myChart.showLoading();
