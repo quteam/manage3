@@ -399,7 +399,7 @@ body{color:#1E1E1E}
 .form-page-wrap .dt{margin-bottom:20px}
 .uploader-list{font-size:0;margin-left:-2px}
 .uploader-list .file{display:inline-block;position:relative;height:100px;width:120px;margin:2px;background:#F0F0F0;vertical-align:top}
-.uploader-list .file-upload{line-height:100px;text-align:center;font-size:48px;color:#0AD27A;cursor:pointer}
+.uploader-list .file-upload{text-align:center;font-size:48px;color:#CCC;cursor:pointer}
 .uploader-list .progress-mask{position:absolute;bottom:0;left:0;right:0;height:0;background:#3A95D6;-webkit-transition:all .2s ease;transition:all .2s ease;opacity:.8}
 .uploader-list .text{position:absolute;top:40%;left:0;right:0;color:#FFF;text-align:center}
 .uploader-list .text .status{display:block}

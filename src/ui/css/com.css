@@ -356,7 +356,7 @@ body {
   top: 50%;
   right: 10px;
   -webkit-transform: translate(0, -50%);
-  transform: translate(0, -50%);
+          transform: translate(0, -50%);
 }
 /**/
 .color-red {
@@ -1892,10 +1892,9 @@ body {
   vertical-align: top;
 }
 .uploader-list .file-upload {
-  line-height: 100px;
   text-align: center;
   font-size: 48px;
-  color: #0AD27A;
+  color: #CCC;
   cursor: pointer;
 }
 .uploader-list .progress-mask {

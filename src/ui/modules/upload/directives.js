@@ -8,7 +8,10 @@ define('upload/directives', ['upload/init'], function () {
         return {
             restrict: 'EA',
             scope: {
-                ngModel: "="
+                ngModel: "=",
+                uploadMax: "=",
+                width: "@",
+                height: "@"
             },
             replace: true,
             templateUrl: 'tpl/uploader.html',
@@ -18,6 +21,9 @@ define('upload/directives', ['upload/init'], function () {
                 $scope.fileList = [];
                 $scope.delFile = delFile;
                 $scope.ngModel = $scope.ngModel || [];
+                $scope.uploadMax = $scope.uploadMax || 99;
+                $scope.width = $scope.width ? $scope.width + 'px' : "auto";
+                $scope.height = $scope.height ? $scope.height + 'px' : "auto";
 
                 //对外提供方法
                 $scope.$parent.resetPic = function () {
@@ -25,7 +31,8 @@ define('upload/directives', ['upload/init'], function () {
                     $scope.fileList = [];
                 };
 
-                $(".uploadBtn", $element).on("click", function () {
+                var $uploadBtn = $(".uploadBtn", $element)
+                $uploadBtn.on("click", function () {
                     $fileIpt.trigger("click");
                 });
                 $fileIpt.on("change", fileSelected);
@@ -35,7 +42,7 @@ define('upload/directives', ['upload/init'], function () {
                     //HTML5文件API操作
                     var files = $fileIpt[0].files;
                     for (var i = 0, l = files.length; i < l; i++) {
-                        if ($scope.fileList.length >= $attrs.uploadMax) {
+                        if ($scope.fileList.length >= $scope.uploadMax) {
                             alert("超过文件上传数");
                             return;
                         }

@@ -1,0 +1,81 @@
+<div ng-controller="pageCtrl" ng-init="mainStatus.navigation='example'">
+    <div class="top-nav-wrap">
+        <div class="back backBtn"><i class="iconfont icon-back"></i></div>
+        <div class="title2">实例4</div>
+        <div class="right">
+            <div class="nav">
+                <a class="li"><i class="iconfont icon-plus"></i></a>
+                <a class="li"><i class="iconfont icon-search"></i></a>
+                <a class="li"><i class="iconfont icon-bell"></i><i class="tip" ng-if="mainStatus.msgBubble">{{mainStatus.msgBubble}}</i></a>
+            </div>
+        </div>
+    </div>
+    <div class="page-main">
+        <div class="tab2-wrap tab2-wrap-inline">
+            <li class="li on">代办事件(9)</li>
+            <li class="li">已办事件</li>
+        </div>
+        <div class="mg-m">
+            <table class="table-list">
+                <thead>
+                <tr>
+                    <th>企业名称</th>
+                    <th>企业法人代表</th>
+                    <th>资产规模</th>
+                    <th>资产销售</th>
+                    <th>备注</th>
+                    <th>创建时间</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>企业名称</td>
+                    <td>张三</td>
+                    <td>1000万</td>
+                    <td>200万</td>
+                    <td>补强资料</td>
+                    <td>{{1453794845667|date:'yyyy-MM-dd'}}</td>
+                    <td>
+                        <button type="button" class="btn btn-s">返回</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="tab-wrap">
+            <li class="li on">信息录入</li>
+            <li class="li">待后监控</li>
+        </div>
+        <div class="mg-l pdb-m line">
+            每期还款金额
+            <input type="number" class="ipt ipt-xshort"/>
+            利率
+            <input type="number" class="ipt ipt-xshort"/>
+            期数
+            <select class="select">
+                <option value="">选择</option>
+            </select>
+            还款时间
+            <input type="date" class="ipt ipt-short"/>
+            <button type="submit" class="btn">提交</button>
+        </div>
+        <div class="mg-m">
+            <form name="myForm" form-validator action="../data/form.data">
+                <div class="flex-column flex-center">
+                    <div class="flex-item-4 text-center pd-m">
+                        <div>借款合同</div>
+                        <div uploader="../data/upload.data" ng-model="formData.pics" width="240" height="300" upload-max="1"></div>
+                    </div>
+                    <div class="flex-item-4 text-center pd-m">
+                        <div>贷款凭证</div>
+                        <div uploader="../data/upload.data" ng-model="formData.pics2" width="240" height="300" upload-max="1"></div>
+                    </div>
+                </div>
+                <div class="mg-m text-center">
+                    <button type="submit" class="btn" ng-disabled="!(formData.pics.length>0 && formData.pics2.length>0)">提交</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

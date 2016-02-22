@@ -1286,13 +1286,13 @@ define('main/directives', ['main/init'], function () {
                 var _item = "";
                 switch (_src.type) {
                     case "text":
-                        _item = '<input type="' + _src.type + '" name="' + _src.key + '" ng-model="formData[\'' + _src.key + '\']" class="ipt" placeholder="' + _src.placeholder + '" />';
+                        _item = '<input type="' + _src.type + '" name="' + _src.key + '" ng-init="formData[\'' + _src.key + '\']=\'' + (_src.value||"") + '\'" ng-model="formData[\'' + _src.key + '\']" class="ipt" placeholder="' + _src.placeholder + '" />';
                         break;
                     case "date":
-                        _item = '<input type="' + _src.type + '" name="' + _src.key + '" ng-model="formData[\'' + _src.key + '\']" class="ipt" placeholder="' + _src.placeholder + '" convert-to-date/>';
+                        _item = '<input type="' + _src.type + '" name="' + _src.key + '" ng-init="formData[\'' + _src.key + '\']=\'' + (_src.value||"") + '\'" ng-model="formData[\'' + _src.key + '\']" class="ipt" placeholder="' + _src.placeholder + '" convert-to-date/>';
                         break;
                     case "checkbox":
-                        _item = '<div class="form-ctrl">';
+                        _item = '<div class="form-ctrl" ng-init="formData[\'' + _src.key + '\']=[\'' + (_src.value||"") + '\']">';
                         angular.forEach(_src.options, function (item) {
                             _item += '<label class="label">' +
                                 '<input type="' + _src.type + '" name="' + _src.key + '" checkbox-group="formData[\'' + _src.key + '\']"  value="' + item + '" /> ' + item +
@@ -1301,7 +1301,7 @@ define('main/directives', ['main/init'], function () {
                         _item += '</div>';
                         break;
                     case "radio":
-                        _item = '<div class="form-ctrl">';
+                        _item = '<div class="form-ctrl" ng-init="formData[\'' + _src.key + '\']=\'' + (_src.value||"") + '\'">';
                         angular.forEach(_src.options, function (item) {
                             _item += '<label class="label">' +
                                 '<input type="' + _src.type + '" name="' + _src.key + '" ng-model="formData[\'' + _src.key + '\']"  value="' + item + '" /> ' + item +
@@ -1310,7 +1310,7 @@ define('main/directives', ['main/init'], function () {
                         _item += '</div>';
                         break;
                     case "select":
-                        _item = '<select class="select select-w" name="' + _src.key + '" ng-model="formData[\'' + _src.key + '\']"  >';
+                        _item = '<select class="select select-w" name="' + _src.key + '" ng-init="formData[\'' + _src.key + '\']=\'' + (_src.value||"") + '\'" ng-model="formData[\'' + _src.key + '\']"  >';
                         _item += '<option value="" >请选择</option>';
                         angular.forEach(_src.options, function (item) {
                             _item += '<option value="' + item + '" >' + item + '</option>';
@@ -1318,7 +1318,7 @@ define('main/directives', ['main/init'], function () {
                         _item += '</select>';
                         break;
                     case "textarea":
-                        _item = '<textarea name="' + _src.key + '" ng-model="formData[\'' + _src.key + '\']"  class="textarea" placeholder="' + _src.placeholder + '"></textarea>';
+                        _item = '<textarea name="' + _src.key + '" ng-init="formData[\'' + _src.key + '\']=\'' + (_src.value||"") + '\'" ng-model="formData[\'' + _src.key + '\']"  class="textarea" placeholder="' + _src.placeholder + '"></textarea>';
                         break;
                 }
                 $element.append($compile(_item)($scope));

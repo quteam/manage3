@@ -5,6 +5,7 @@
     "items": [
       {
         "name": "输入框",
+        "value": "abc",
         "type": "text",
         "key": "input",
         "placeholder": "请输入"
@@ -17,6 +18,7 @@
       },
       {
         "name": "多选",
+        "value": "选项2",
         "type": "checkbox",
         "key": "checkbox",
         "options": [
@@ -28,6 +30,7 @@
       },
       {
         "name": "单选",
+        "value": "选项2",
         "type": "radio",
         "key": "radio",
         "options": [
@@ -39,6 +42,7 @@
       },
       {
         "name": "下拉",
+        "value": "选项2",
         "type": "select",
         "key": "select",
         "options": [
