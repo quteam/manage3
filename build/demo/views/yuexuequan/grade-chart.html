@@ -3,7 +3,7 @@
         <div class="back backBtn"><i class="iconfont icon-back"></i></div>
         <div class="title2">年级图表</div>
     </div>
-    <div class="page-main" details-info="/gradeResults/getGradeList?id={{mainStatus.pageParams.id}}">
+    <div class="page-main" details-info="../data/yuexuequan/details.data?id={{mainStatus.pageParams.id}}">
         {{filterParams}}
         {{filterParams2}}
         <!--年级选择框和科目选择框-->
@@ -18,51 +18,51 @@
                     </select>
                     <!--最近一次考试年级的考试科目-->
                     &nbsp;&nbsp;&nbsp;科目选择
-                    <select relative-select="/gradeResults/getExamSubject" id="relativeSelect2" class="select" ng-change="filterParams2.courseId=filterParams.courseId" ng-model="filterParams.courseId"
+                    <select relative-select="../data/selectlist2.data" id="relativeSelect2" class="select" ng-change="filterParams2.courseId=filterParams.courseId" ng-model="filterParams.courseId"
                             select-first>
                     </select>
                 </div>
             </div>
         </div>
         <!--<div class="mg-l"><span class="text-l">图表</span></div>-->
-        <div class="form-tr">
-            <!--年级下某科三率环图-->
-            <div class="form-td" style="margin-bottom: 10px">
-                <div class="col-group">
-                    <div class="mg text-xl" style="line-height: 50px;padding-left: 20px;background-color: #F5F5F5">
-                        年级三率
-                    </div>
-                    <div class="col-4" style="margin-top:50px;">
-                        <div chart="/gradeResults/gradeExcellentCircle" chart-params='filterParams'
-                             click-to-dialog="'/gradeResults/gradePreviousAnalysis?id='+filterParams.gradeName+'filterParams.courseId'"
-                             ng-model="formData.chart" style="height: 150px;"></div>
-                    </div>
-                    <div class="col-4" style="margin-top:50px;">
-                        <div chart="/gradeResults/gradePassCircle" chart-params='filterParams'
-                             click-to-dialog="'/gradeResults/gradePreviousAnalysis?id='+filterParams.gradeName+'filterParams.courseId'"
-                             ng-model="formData.chart" style="height: 150px;"></div>
-                    </div>
-                    <div class="col-4" style="margin-top:50px;">
-                        <div chart="/gradeResults/gradePoorCircle" chart-params='filterParams'
-                             click-to-dialog="'/gradeResults/gradePreviousAnalysis?id='+filterParams.gradeName+'filterParams.courseId'"
-                             ng-model="formData.chart" style="height: 150px;"></div>
-                    </div>
+        <div ng-if="filterParams.gradeName&&filterParams.courseId">
+            <div class="mg-m col-group">
+                <!--年级下某科三率环图-->
+                <div class="col-6">
+                    <div class="col-group">
+                        <div class="mg text-xl" style="line-height: 50px;padding-left: 20px;background-color: #F5F5F5">
+                            年级三率
+                        </div>
+                        <div class="col-4" style="margin-top:50px;">
+                            <div chart="../data/pie-chart.data" chart-params='filterParams'
+                                 click-to-dialog="'/gradeResults/gradePreviousAnalysis?id='+filterParams.gradeName+'filterParams.courseId'"
+                                 ng-model="formData.chart" style="height: 150px;"></div>
+                        </div>
+                        <div class="col-4" style="margin-top:50px;">
+                            <div chart="../data/pie-chart.data" chart-params='filterParams'
+                                 click-to-dialog="'/gradeResults/gradePreviousAnalysis?id='+filterParams.gradeName+'filterParams.courseId'"
+                                 ng-model="formData.chart" style="height: 150px;"></div>
+                        </div>
+                        <div class="col-4" style="margin-top:50px;">
+                            <div chart="../data/pie-chart.data" chart-params='filterParams'
+                                 click-to-dialog="'/gradeResults/gradePreviousAnalysis?id='+filterParams.gradeName+'filterParams.courseId'"
+                                 ng-model="formData.chart" style="height: 150px;"></div>
+                        </div>
 
+                    </div>
                 </div>
-            </div>
-            <div class="form-td">
-                <!--年级下某科成绩波动最大的学生柱状图-->
-                <div class="col-group">
-                    <div class="col-12">
-                        <div chart="/gradeResults/gradeLargeFluctuations" chart-params='filterParams'
-                             ng-model="formData.chart" style="height: 400px;"></div>
+                <div class="col-6">
+                    <!--年级下某科成绩波动最大的学生柱状图-->
+                    <div class="col-group">
+                        <div class="col-12">
+                            <div chart="../data/bar-chart.data" chart-params='filterParams'
+                                 ng-model="formData.chart" style="height: 400px;"></div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="form-tr">
-            <!--年级下各班某科柱状图-->
-            <div class="form-td">
+            <div class="mg-m">
+                <!--年级下各班某科柱状图-->
                 <div class="mg-m">
                     <label class="label"><input type="radio" name="radio" ng-model="filterParams2.selectType" value="平均分"> 平均分</label>
                     <label class="label"><input type="radio" name="radio" ng-model="filterParams2.selectType" value="三率"> 三率</label>
@@ -76,21 +76,19 @@
                         <option value="小于等于">小于等于</option>
                     </select>
                     <span>输入分数：</span>
-                    <input type="text" class="ipt" ng-model="compScore"/>
+                    <input type="text" class="ipt ipt-xshort" ng-model="compScore"/>
                     <button type="button" class="btn btn-short" ng-click="filterParams2.compScore=compScore">确定</button>
                 </div>
                 <div ng-if="filterParams2.selectType=='分段人头生'">
-                    <span>前</span><input type="text" class="ipt" ng-model="rank"/><span>名</span>
+                    <span>前</span> <input type="number" class="ipt ipt-xshort" ng-model="rank"/> <span>名</span>
                     <button type="button" class="btn btn-short" ng-click="filterParams2.rank=rank">确定</button>
                 </div>
-                <div chart="/gradeResults/classBarData" chart-params='filterParams2' click-to-url="'#/class_chart.html?id='+formData.chart"
+                <div chart="../data/bar-chart.data" chart-params='filterParams2' click-to-url="'#/class_chart.html?id='+formData.chart"
                      ng-model="formData.chart" style="height: 400px;"></div>
             </div>
-        </div>
-        <div class="form-tr">
-            <!--年级下各班某科表格展示-->
-            <div class="form-td">
-                <table-list list-data="/gradeResults/classTableData" list-params='filterParams'>
+            <div class="mg-m">
+                <!--年级下各班某科表格展示-->
+                <table-list list-data="../data/table-list.data" list-params='filterParams'>
                     <div class="loader" ng-if="status.isLoading">
                         <div class="loader-inner pacman">
                             <div></div>
@@ -136,11 +134,9 @@
                     </div>
                 </table-list>
             </div>
-        </div>
-        <div class="form-tr">
-            <!--年级平均分折线图-->
-            <div class="form-td">
-                <div chart="/gradeResults/gradeLineData" chart-params='filterParams' click-to-dialog="'/gradeResults/classTestBar?id='+formData.chart.id"
+            <div class="mg-m">
+                <!--年级平均分折线图-->
+                <div chart="../data/line-chart.data" chart-params='filterParams' click-to-dialog="'/gradeResults/classTestBar?id='+formData.chart.id"
                      ng-model="formData.chart"
                      style="height: 400px;"></div>
             </div>

@@ -15,7 +15,7 @@
         <div class="flex-column" ng-controller="importScoreCtrl">
             <div class="flex-item-5 flex-row">
                 <div class="tab-list-wrap flex-item pd-m">
-                    <table-list list-data="../data/yuexueyuan/table-subject.data" ng-model="currentSubject">
+                    <table-list list-data="../data/yuexuequan/table-subject.data" ng-model="currentSubject">
                         <div class="loader" ng-if="status.isLoading">
                             <div class="loader-inner pacman">
                                 <div></div>
@@ -65,7 +65,7 @@
                     <div class="mg-m pdb-m line">
                         <div class="col-group">
                             <div class="col-6">
-                                考生: <span angucomplete placeholder="输入考生姓名" title-field="text" url="../data/yuexueyuan/select-person.data" class="inline-block" ng-model="formData.studentID"
+                                考生: <span angucomplete placeholder="输入考生姓名" title-field="text" url="../data/yuexuequan/select-person.data" class="inline-block" ng-model="formData.studentID"
                                           ng-change="typeStudent()"></span>
                             </div>
                             <div class="col-6">
@@ -82,7 +82,7 @@
                         </div>
                     </div>
                     <!-- 有学生ID -->
-                    <div class="mg-m" ng-if="formData.studentID" details-info="../data/yuexueyuan/student-details.data"
+                    <div class="mg-m" ng-if="formData.studentID" details-info="../data/yuexuequan/student-details.data"
                          details-params="{id:'{{formData.studentID}}',sid:'{{currentSubject.id}}',t:'{{formData.time}}'}">
                         <div class="mg-m"><span class="text-m text-em">考生信息</span></div>
                         <div class="col-group">
@@ -97,7 +97,7 @@
                         </div>
                     </div>
                     <!-- 录入提示 -->
-                    <div class="mg-m" details-info="../data/yuexueyuan/subject-details.data" details-params="{id:'{{currentSubject.id}}',sid:'{{currentSubject.id}}',t:'{{formData.time}}'}">
+                    <div class="mg-m" details-info="../data/yuexuequan/subject-details.data" details-params="{id:'{{currentSubject.id}}',sid:'{{currentSubject.id}}',t:'{{formData.time}}'}">
                         <div class="mg-m"><span class="text-m text-em">录入提示</span></div>
                         <div class="col-group mg-m">
                             <div class="col-6">当前科目未录入</div>

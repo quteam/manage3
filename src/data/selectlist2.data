@@ -1,0 +1,29 @@
+{
+  "code": 200,
+  "data": [
+    {
+      "value": "1",
+      "text": "B1"
+    },
+    {
+      "value": "2",
+      "text": "B2"
+    },
+    {
+      "value": "3",
+      "text": "B3"
+    },
+    {
+      "value": "4",
+      "text": "B4"
+    },
+    {
+      "value": "5",
+      "text": "B5"
+    },
+    {
+      "value": "6",
+      "text": "B6"
+    }
+  ]
+}
