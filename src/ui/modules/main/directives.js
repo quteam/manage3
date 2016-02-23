@@ -831,8 +831,8 @@ define('main/directives', ['main/init'], function () {
         return {
             restrict: 'A',
             scope: {
-                clickToUrl: "=",
-                clickToDialog: "=",
+                clickToUrl: "@",
+                clickToDialog: "@",
                 chartParams: "="
             },
             require: "?^ngModel",
