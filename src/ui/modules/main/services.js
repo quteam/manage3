@@ -64,7 +64,16 @@ define('main/services', ['main/init'], function () {
     function dialogChart($rootScope, modal, $http) {
         return function (_url) {
             var _$scope = $rootScope.$new(false);
+            var _params = {};
+            var _urlObj = _url.split("?");
+            if (_urlObj[1]) {
+                angular.forEach(_urlObj[1].split("&"), function (_row) {
+                    var _arr = _row.split("=");
+                    _params[_arr[0]] = _arr[1];
+                })
+            }
             _$scope.url = _url;
+            _$scope.urlParams = _params;
             modal.open({
                 template: 'tpl/dialog-center.html',
                 scope: _$scope

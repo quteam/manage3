@@ -837,6 +837,8 @@ define('main/directives', ['main/init'], function () {
             },
             require: "?^ngModel",
             link: function ($scope, $element, $attrs, ngModel) {
+                $scope.isLoading = false;
+
                 require(['echarts'], function (echarts) {
                     var myChart = echarts.init($element[0]);
 
@@ -867,11 +869,14 @@ define('main/directives', ['main/init'], function () {
                         $attrs.$observe("chart", function (value) {
                             loadChart($attrs.chart);
                         });
+                        loadChart($attrs.chart);
                     }
 
-                    //loadChart($attrs.chart);
-
                     function loadChart(_url, _params) {
+                        if ($scope.isLoading) {
+                            return;
+                        }
+                        $scope.isLoading = true;
                         myChart.showLoading();
                         requestData(_url, _params)
                             .then(function (_data) {
@@ -891,13 +896,13 @@ define('main/directives', ['main/init'], function () {
                                     }
                                 }
                                 myChart.setOption(_data);
+                                $scope.isLoading = false;
                             })
                             .catch(function (_msg) {
+                                $scope.isLoading = false;
                                 myChart.hideLoading();
                             });
                     };
-
-                    //loadChart();
                 });
             }
         };
