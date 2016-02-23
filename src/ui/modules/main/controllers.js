@@ -12,6 +12,8 @@ define('main/controllers', ['main/init'], function () {
             navigation: "",
             msgBubble: 0 //消息气泡
         };
+        $scope.mainConfig = window.Config || {};
+
 
         //页面跳转
         $scope.pageTo = function (_url) {
@@ -19,8 +21,8 @@ define('main/controllers', ['main/init'], function () {
         };
 
         //获取主要信息
-        if (window.Config) {
-            $.getJSON(Config.getMainInfo, function (_data) {
+        if ($scope.mainConfig.getMainInfo) {
+            $.getJSON($scope.mainConfig.getMainInfo, function (_data) {
                     if (_data.code == 200) {
                         angular.extend($scope.mainStatus, _data.data);
                     }
