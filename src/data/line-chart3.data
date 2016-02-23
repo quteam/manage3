@@ -1,0 +1,50 @@
+{
+  "code": 200,
+  "message": "Success",
+  "data": {
+    "tooltip": {
+      "formatter": "function (params) {return params.seriesName +'<br/>' + params.name +'<br/>' + params.data.name}",
+      "trigger": "item"
+    },
+    "xAxis": {
+      "splitLine": {
+        "show": false
+      },
+      "name": "操作教师",
+      "data": [
+        "王强(2016/02/15)",
+        "王强(2016/02/15)",
+        "唐应树(2016/02/22)",
+        "李彦康(2016/02/22)"
+      ],
+      "type": "category"
+    },
+    "yAxis": {
+      "name": "操行"
+    },
+    "series": [
+      {
+        "name": "操行",
+        "data": [
+          {
+            "name": "上课不认真听讲",
+            "value": "5"
+          },
+          {
+            "name": "上课不尊重老师",
+            "value": "5"
+          },
+          {
+            "name": "宿舍熄灯后还在大声喧哗",
+            "value": "10"
+          },
+          {
+            "name": "宿舍熄灯后还在大声喧哗",
+            "value": "10"
+          }
+        ],
+        "type": "line"
+      }
+    ]
+  }
+}

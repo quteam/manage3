@@ -885,6 +885,10 @@ define('main/directives', ['main/init'], function () {
                                         });
                                         return _str;
                                     }
+                                } else {
+                                    if (_data.tooltip.formatter && _data.tooltip.formatter.indexOf("function") == 0) {
+                                        _data.tooltip.formatter = eval("(" + _data.tooltip.formatter + ")");
+                                    }
                                 }
                                 myChart.setOption(_data);
                             })
