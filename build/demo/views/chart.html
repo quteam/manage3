@@ -17,7 +17,7 @@
             <div class="form-td">
                 <div class="col-group">
                     <div class="col-6">
-                        <div chart="../data/pie-chart.data?id=1" click-to-url="'#/chart.html?id='+formData.chart.id" ng-model="formData.chart" style="height: 300px;"></div>
+                        <div chart="../data/pie-chart.data?id=1" click-to-url="#/chart.html?id={{formData.chart.id}}" ng-model="formData.chart" style="height: 300px;"></div>
                     </div>
                     <div class="col-6">
                         <div chart="../data/pie-chart.data?id=2" click-to-dialog="dialog-chart.html?id={{formData.chart2.id}}" ng-model="formData.chart2" style="height: 300px;"></div>
@@ -41,13 +41,13 @@
         <div class="form-tr">
             <div class="form-th">柱状图</div>
             <div class="form-td">
-                <div chart="../data/bar-chart.data" click-to-dialog="'dialog-table.html?id='+formData.chart4.id" ng-model="formData.chart4" style="height: 400px;"></div>
+                <div chart="../data/bar-chart.data" click-to-dialog="dialog-table.html?id={{formData.chart4.id}}" ng-model="formData.chart4" style="height: 400px;"></div>
             </div>
         </div>
         <div class="form-tr">
             <div class="form-th">线状图</div>
             <div class="form-td">
-                <div chart="../data/line-chart.data" click-to-url="'dialog-table.html?id='+formData.chart5.id" ng-model="formData.chart5" style="height: 400px;"></div>
+                <div chart="../data/line-chart.data" click-to-url="dialog-table.html?id={{formData.chart5.id}}" ng-model="formData.chart5" style="height: 400px;"></div>
             </div>
         </div>
     </div>

@@ -22,8 +22,8 @@ define('upload/directives', ['upload/init'], function () {
                 $scope.delFile = delFile;
                 $scope.ngModel = $scope.ngModel || [];
                 $scope.uploadMax = $scope.uploadMax || 99;
-                $scope.width = $scope.width ? $scope.width + 'px' : "auto";
-                $scope.height = $scope.height ? $scope.height + 'px' : "auto";
+                $scope.width = $scope.width ? $scope.width : 120 + "px";
+                $scope.height = $scope.height ? $scope.height : 100 + "px";
 
                 //对外提供方法
                 $scope.$parent.resetPic = function () {
