@@ -1171,7 +1171,7 @@ define('main/directives', ['main/init'], function () {
     /**
      * 下拉
      */
-    function chosen(requestData) {
+    function chosen(requestData, $timeout) {
         return {
             restrict: 'A',
             scope: {
@@ -1189,53 +1189,9 @@ define('main/directives', ['main/init'], function () {
                             var $chosenContainer = $element.next();
                             var $input = $('input', $chosenContainer);
                             var searchStr = "";
+                            var isChinessInput = false;
 
-                            $('.chosen-search > input, .chosen-choices .search-field input', $chosenContainer).on('keyup', processValue).on('paste', function (e) {
-                                var that = this;
-                                setTimeout(function () {
-                                    processValue.call(that, e);
-                                }, 500);
-                            });
-
-                            function processValue(e) {
-                                var field = $(this),
-                                    q = $.trim(field.val());
-                                if (!q || searchStr == q) {
-                                    return false;
-                                }
-                                searchStr = q;
-
-                                //don't fire ajax if...
-                                if ((e.type === 'paste' && field.is(':not(:focus)')) ||
-                                    (e.which && (
-                                        (e.which === 9) ||//Tab
-                                        (e.which === 13) ||//Enter
-                                        (e.which === 16) ||//Shift
-                                        (e.which === 17) ||//Ctrl
-                                        (e.which === 18) ||//Alt
-                                        (e.which === 19) ||//Pause, Break
-                                        (e.which === 20) ||//CapsLock
-                                        (e.which === 27) ||//Esc
-                                        (e.which === 33) ||//Page Up
-                                        (e.which === 34) ||//Page Down
-                                        (e.which === 35) ||//End
-                                        (e.which === 36) ||//Home
-                                        (e.which === 37) ||//Left arrow
-                                        (e.which === 38) ||//Up arrow
-                                        (e.which === 39) ||//Right arrow
-                                        (e.which === 40) ||//Down arrow
-                                        (e.which === 44) ||//PrntScrn
-                                        (e.which === 45) ||//Insert
-                                        (e.which === 144) ||//NumLock
-                                        (e.which === 145) ||//ScrollLock
-                                        (e.which === 91) ||//WIN Key (Start)
-                                        (e.which === 93) ||//WIN Menu
-                                        (e.which === 224) ||//command key
-                                        (e.which >= 112 && e.which <= 123)//F1 to F12
-                                    ))) {
-                                    return false;
-                                }
-
+                            function handleSearch(q) {
                                 var selected = $('option:selected', $element).not(':empty').clone().attr('selected', true);
                                 requestData($attrs.selectSource, {q: q})
                                     .then(function (data) {
@@ -1249,12 +1205,77 @@ define('main/directives', ['main/init'], function () {
                                         }
                                         $element.html(_options).prepend(selected);
                                         $element.trigger("chosen:updated");
-                                        var keyRight = $.Event('keyup');
+                                        var keyRight = $.Event('keydown');
                                         keyRight.which = 39;
                                         $input.val(q).trigger(keyRight);
                                     });
                             };
 
+                            function processValue(e) {
+                                var field = $(this);
+
+                                //don't fire ajax if...
+                                if ((e.type === 'paste' && field.is(':not(:focus)')) ||
+                                    (e.keyCode && (
+                                        (e.keyCode === 9) ||//Tab
+                                        (e.keyCode === 13) ||//Enter
+                                        (e.keyCode === 16) ||//Shift
+                                        (e.keyCode === 17) ||//Ctrl
+                                        (e.keyCode === 18) ||//Alt
+                                        (e.keyCode === 19) ||//Pause, Break
+                                        (e.keyCode === 20) ||//CapsLock
+                                        (e.keyCode === 27) ||//Esc
+                                        (e.keyCode === 33) ||//Page Up
+                                        (e.keyCode === 34) ||//Page Down
+                                        (e.keyCode === 35) ||//End
+                                        (e.keyCode === 36) ||//Home
+                                        (e.keyCode === 37) ||//Left arrow
+                                        (e.keyCode === 38) ||//Up arrow
+                                        (e.keyCode === 39) ||//Right arrow
+                                        (e.keyCode === 40) ||//Down arrow
+                                        (e.keyCode === 44) ||//PrntScrn
+                                        (e.keyCode === 45) ||//Insert
+                                        (e.keyCode === 144) ||//NumLock
+                                        (e.keyCode === 145) ||//ScrollLock
+                                        (e.keyCode === 91) ||//WIN Key (Start)
+                                        (e.keyCode === 93) ||//WIN Menu
+                                        (e.keyCode === 224) ||//command key
+                                        (e.keyCode >= 112 && e.keyCode <= 123)//F1 to F12
+                                    ))) {
+                                    return false;
+                                }
+
+                                if (isChinessInput && e.keyCode != 32) {
+                                    return false;
+                                }
+
+                                var q = $.trim(field.val());
+                                if (searchStr == q) {
+                                    return false;
+                                }
+                                searchStr = q;
+
+                                if ($scope.searchTimer) {
+                                    $timeout.cancel($scope.searchTimer);
+                                }
+
+                                $scope.searchTimer = $timeout(function () {
+                                    handleSearch(q);
+                                }, 500);
+                            };
+
+                            $('.chosen-search > input, .chosen-choices .search-field input', $chosenContainer).on('keyup', processValue).on('paste', function (e) {
+                                var that = this;
+                                setTimeout(function () {
+                                    processValue.call(that, e);
+                                }, 500);
+                            }).on('keydown', function (e) {
+                                if (e.keyCode == 229) {
+                                    isChinessInput = true;
+                                } else {
+                                    isChinessInput = false;
+                                }
+                            });
                         } else {
                             requestData($attrs.selectSource)
                                 .then(function (data) {
@@ -1279,7 +1300,7 @@ define('main/directives', ['main/init'], function () {
             }
         }
     };
-    chosen.$inject = ["requestData"];
+    chosen.$inject = ["requestData", "$timeout"];
 
     /**
      * form-item
