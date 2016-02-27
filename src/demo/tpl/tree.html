@@ -13,14 +13,14 @@
         <div>什么也没有</div>
     </div>
     <ul ng-if="treeList.length">
-        <li ng-class="{fold:curTree1.id==tree.id}" ng-repeat="tree in treeList | filter:{pid:'0'}:true">
-            <em ng-click="selectTree1(tree)"><i class="iconfont fold-p"></i> {{tree.name}}</em>
-            <ul>
-                <li ng-class="{fold:curTree2.id==tree2.id}" ng-repeat="tree2 in treeList | filter:{pid:tree.id}:true">
-                    <em ng-click="selectTree2(tree2)"><i class="iconfont fold-p"></i> {{tree2.name}}</em>
-                    <ul>
-                        <li ng-class="{on:curTree3.id==tree3.id}" ng-repeat="tree3 in treeList | filter:{pid:tree2.id}:true">
-                            <em ng-click="selectTree3(tree3)"><i class="iconfont icon-house"></i> {{tree3.name}}</em>
+        <li ng-repeat="tree in treeList">
+            <em ng-click="selectTree(tree,$event)"><i class="iconfont fold-p" ng-if="tree.nodes.length"></i> {{tree.name}}</em>
+            <ul ng-if="tree.nodes.length">
+                <li ng-repeat="tree2 in tree.nodes">
+                    <em ng-click="selectTree(tree2,$event)"><i class="iconfont fold-p" ng-if="tree2.nodes.length"></i> {{tree2.name}}</em>
+                    <ul ng-if="tree2.nodes.length">
+                        <li ng-repeat="tree3 in tree2.nodes">
+                            <em ng-click="selectTree(tree3,$event)"><i class="iconfont icon-house"></i> {{tree3.name}}</em>
                         </li>
                     </ul>
                 </li>

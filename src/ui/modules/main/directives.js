@@ -126,6 +126,7 @@ define('main/directives', ['main/init'], function () {
                 };
                 var DOMForm = angular.element($element)[0];
                 var scopeForm = $scope.$eval($attrs.name);
+                var dialogData = $scope.ngDialogData;
 
                 $scope.formData = angular.extend({}, $scope.formData);
 
@@ -147,7 +148,7 @@ define('main/directives', ['main/init'], function () {
                             formStatus.submitting = false;
                             formStatus.submitInfo = "";
                             if (angular.isFunction($scope.submitCallBack)) {
-                                $scope.submitCallBack(data);
+                                $scope.submitCallBack.call($scope, dialogData, data);
                             } else if (data.url) {
                                 window.location.assign(data.options.url);
                             }
@@ -155,7 +156,7 @@ define('main/directives', ['main/init'], function () {
                         .catch(function (error) {
                             formStatus.submitting = false;
                             formStatus.submitInfo = error || '提交失败。';
-                            angular.isFunction($scope.submitCallBack) && $scope.submitCallBack(data);
+                            angular.isFunction($scope.submitCallBack) && $scope.submitCallBack.call($scope, dialogData, "");
                         });
                 })
             }
@@ -236,11 +237,19 @@ define('main/directives', ['main/init'], function () {
                 };
 
                 //弹窗修改后的回调
-                $scope.submitCallBack = function (_data) {
+                $scope.submitCallBack = function (_curRow, _data) {
                     modal.closeAll();
-                    $timeout(function () {
-                        $scope.$broadcast("reloadList");
-                    });
+                    if (_data && _curRow) { //修改
+                        angular.forEach($scope.tbodyList, function (_row, _index) {
+                            if (_row.id == _curRow.id) {
+                                $scope.tbodyList[_index] = _data;
+                            }
+                        });
+                    } else {
+                        $timeout(function () {
+                            $scope.$broadcast("reloadList");
+                        });
+                    }
                 };
 
                 var formData = {};
@@ -655,34 +664,68 @@ define('main/directives', ['main/init'], function () {
             link: function ($scope, $element, $attrs, ngModel) {
                 $scope.status = {};
                 $scope.treeList = [];
-                $scope.curTree1 = {};
-                $scope.curTree2 = {};
-                $scope.curTree3 = {};
+                $scope.curTree = {};
                 $scope.status.isLoading = true;
 
-                $scope.selectTree1 = function (tree) {
-                    $scope.curTree1 = tree;
-                };
-                $scope.selectTree2 = function (tree) {
-                    $scope.curTree2 = tree;
-                    var _subTree = $filter("filter")($scope.treeList, {pid: "" + tree.id}, tree);
-                    if (_subTree.length < 1) {
-                        var _tree = angular.copy(tree);
-                        _tree.p = $scope.curTree1;
+                $scope.selectTree = function (tree, e) {
+                    var $li = $element.find("li");
+                    var $em = $(e.currentTarget);
+                    var _tree = angular.copy(tree);
+                    if (_tree.nodes.length == 0) {
+                        $li.removeClass("on");
+                        $em.parent("li").addClass("on");
                         ngModel && ngModel.$setViewValue(_tree);
+                    } else {
+                        $li.removeClass("fold");
+                        $em.parents("li").addClass("fold");
                     }
                 };
-                $scope.selectTree3 = function (tree) {
-                    $scope.curTree3 = tree;
-                    var _tree = angular.copy(tree);
-                    _tree.p = $scope.curTree2;
-                    _tree.p2 = $scope.curTree1;
-                    ngModel && ngModel.$setViewValue(_tree);
-                };
+
+                function buildTree(data) {
+                    var pos = {};
+                    var tree = [];
+                    var i = 0;
+                    while (data.length != 0) {
+                        if (data[i].pid == "0") {
+                            tree.push({
+                                id: data[i].id,
+                                name: data[i].name,
+                                nodes: []
+                            });
+                            pos[data[i].id] = [tree.length - 1];
+                            data.splice(i, 1);
+                            i--;
+                        } else {
+                            var posArr = pos[data[i].pid];
+                            if (posArr != undefined) {
+
+                                var obj = tree[posArr[0]];
+                                for (var j = 1; j < posArr.length; j++) {
+                                    obj = obj.nodes[posArr[j]];
+                                }
+
+                                obj.nodes.push({
+                                    id: data[i].id,
+                                    name: data[i].name,
+                                    nodes: []
+                                });
+                                pos[data[i].id] = posArr.concat([obj.nodes.length - 1]);
+                                data.splice(i, 1);
+                                i--;
+                            }
+                        }
+                        i++;
+                        if (i > data.length - 1) {
+                            i = 0;
+                        }
+                    }
+
+                    return tree;
+                }
 
                 requestData($attrs.treeList)
                     .then(function (data) {
-                        $scope.treeList = data;
+                        $scope.treeList = buildTree(data);
                         $scope.status.isLoading = false;
                     })
                     .catch(function () {
