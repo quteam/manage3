@@ -9,7 +9,7 @@ define('upload/directives', ['upload/init'], function () {
             restrict: 'EA',
             scope: {
                 ngModel: "=",
-                uploadMax: "=",
+                uploadMax: "=?",
                 width: "@",
                 height: "@"
             },

@@ -149,8 +149,8 @@ define('main/directives', ['main/init'], function () {
                             formStatus.submitInfo = "";
                             if (angular.isFunction($scope.submitCallBack)) {
                                 $scope.submitCallBack.call($scope, dialogData, data);
-                            } else if (data.url) {
-                                window.location.assign(data.options.url);
+                            } else if (data && data.url) {
+                                window.location.assign(data.url);
                             }
                         })
                         .catch(function (error) {
@@ -171,9 +171,9 @@ define('main/directives', ['main/init'], function () {
         return {
             restrict: 'AE',
             scope: {
-                listParams: "=",
-                listSelected: "=",
-                listSource: "="
+                listParams: "=?",
+                listSelected: "=?",
+                listSource: "=?"
             },
             transclude: true,
             require: "?^ngModel",
@@ -655,7 +655,7 @@ define('main/directives', ['main/init'], function () {
     /**
      * 树状列表
      */
-    function treeList(requestData, $filter) {
+    function treeList(requestData) {
         return {
             restrict: 'AE',
             scope: {},
@@ -704,11 +704,10 @@ define('main/directives', ['main/init'], function () {
                                     obj = obj.nodes[posArr[j]];
                                 }
 
-                                obj.nodes.push({
-                                    id: data[i].id,
-                                    name: data[i].name,
-                                    nodes: []
-                                });
+                                var _obj = angular.copy(data[i]);
+                                _obj.nodes = [];
+                                obj.nodes.push(_obj);
+
                                 pos[data[i].id] = posArr.concat([obj.nodes.length - 1]);
                                 data.splice(i, 1);
                                 i--;
@@ -723,18 +722,109 @@ define('main/directives', ['main/init'], function () {
                     return tree;
                 }
 
-                requestData($attrs.treeList)
-                    .then(function (data) {
-                        $scope.treeList = buildTree(data);
-                        $scope.status.isLoading = false;
-                    })
-                    .catch(function () {
-                        $scope.status.isLoading = false;
-                    });
+                function getTreeData() {
+                    $scope.status.isLoading = true;
+                    requestData($attrs.treeList)
+                        .then(function (data) {
+                            $scope.treeList = buildTree(data);
+                            $scope.status.isLoading = false;
+                        })
+                        .catch(function () {
+                            $scope.status.isLoading = false;
+                        });
+                }
+
+                $attrs.$observe("treeList", getTreeData)
             }
         }
     };
-    treeList.$inject = ["requestData", "$filter"];
+    treeList.$inject = ["requestData"];
+
+    /**
+     * 树状列表2
+     */
+    function treeList2(requestData) {
+        return {
+            restrict: 'AE',
+            require: "?^ngModel",
+            link: function ($scope, $element, $attrs, ngModel) {
+                $scope.status = {};
+                $scope.treeList = [];
+                $scope.curTree = {};
+                $scope.status.isLoading = true;
+
+                $scope.selectTree = function (tree, e) {
+                    var $li = $element.find("li");
+                    var $em = $(e.currentTarget);
+                    var _tree = angular.copy(tree);
+                    if (_tree.nodes.length == 0) {
+                        $li.removeClass("on");
+                        $em.parent("li").addClass("on");
+                        ngModel && ngModel.$setViewValue(_tree);
+                    } else {
+                        $li.removeClass("fold");
+                        $em.parents("li").addClass("fold");
+                    }
+                };
+
+                function buildTree(data) {
+                    var pos = {};
+                    var tree = [];
+                    var i = 0;
+                    while (data.length != 0) {
+                        if (data[i].pid == "0") {
+                            tree.push({
+                                id: data[i].id,
+                                name: data[i].name,
+                                nodes: []
+                            });
+                            pos[data[i].id] = [tree.length - 1];
+                            data.splice(i, 1);
+                            i--;
+                        } else {
+                            var posArr = pos[data[i].pid];
+                            if (posArr != undefined) {
+
+                                var obj = tree[posArr[0]];
+                                for (var j = 1; j < posArr.length; j++) {
+                                    obj = obj.nodes[posArr[j]];
+                                }
+
+                                var _obj = angular.copy(data[i]);
+                                _obj.nodes = [];
+                                obj.nodes.push(_obj);
+
+                                pos[data[i].id] = posArr.concat([obj.nodes.length - 1]);
+                                data.splice(i, 1);
+                                i--;
+                            }
+                        }
+                        i++;
+                        if (i > data.length - 1) {
+                            i = 0;
+                        }
+                    }
+
+                    return tree;
+                }
+
+                function getTreeData() {
+                    $scope.status.isLoading = true;
+                    requestData($attrs.treeList2)
+                        .then(function (data) {
+                            $scope.treeList = buildTree(data);
+                            $scope.status.isLoading = false;
+                        })
+                        .catch(function () {
+                            $scope.status.isLoading = false;
+                        });
+                }
+
+                $attrs.$observe("treeList2", getTreeData)
+            }
+        }
+    };
+    treeList2.$inject = ["requestData"];
 
     /**
      * 导航列表
@@ -959,14 +1049,14 @@ define('main/directives', ['main/init'], function () {
         return {
             restrict: 'EA',
             scope: {
-                "placeholder": "@placeholder",
-                "selectedItem": "=selectedItem",
-                "url": "@url",
-                "titleField": "@titleField",
-                "descriptionField": "@descriptionField",
-                //"localData": "=localdata",
-                "searchFields": "@searchfields",
-                "matchClass": "@matchclass"
+                "placeholder": "@",
+                "selectedItem": "=?",
+                "url": "@",
+                "titleField": "@",
+                "descriptionField": "@",
+                //"localData": "=?",
+                "searchFields": "@",
+                "matchClass": "@"
             },
             require: "?^ngModel",
             templateUrl: 'tpl/autocomplete.html',
@@ -1222,12 +1312,16 @@ define('main/directives', ['main/init'], function () {
             },
             require: "?^ngModel",
             link: function ($scope, $element, $attrs, ngModel) {
+                var chosenConfig = {
+                    no_results_text: "没有找到",
+                    display_selected_options: false
+                };
+                $attrs.width && (chosenConfig.width = $attrs.width);
+
                 require(['chosen'], function () {
                     if ($attrs.selectSource) {
                         if (angular.isDefined($attrs.chosenAjax)) {
-                            $element.chosen({
-                                no_results_text: "没有找到"
-                            });
+                            $element.chosen(chosenConfig);
 
                             var $chosenContainer = $element.next();
                             var $input = $('input', $chosenContainer);
@@ -1329,15 +1423,11 @@ define('main/directives', ['main/init'], function () {
                                         _options += '<option value="' + data[i].value + '"' + (_selected.indexOf(data[i].value) > -1 ? 'selected' : '') + '>' + data[i].text + '</option>';
                                     }
                                     $element.html(_options);
-                                    $element.chosen($scope.chosen || {
-                                            no_results_text: "没有找到"
-                                        });
+                                    $element.chosen($scope.chosen || chosenConfig);
                                 });
                         }
                     } else {
-                        $element.chosen($scope.chosen || {
-                                no_results_text: "没有找到"
-                            });
+                        $element.chosen($scope.chosen || chosenConfig);
                     }
                 })
             }
@@ -1414,6 +1504,7 @@ define('main/directives', ['main/init'], function () {
         .directive("pagination2", pagination2)
         .directive("filterConditions", filterConditions)
         .directive("treeList", treeList)
+        .directive("treeList2", treeList2)
         .directive("navList", navList)
         .directive("selectAsync", selectAsync)
         .directive("relativeSelect", relativeSelect)

@@ -38,7 +38,7 @@ define('main/services', ['main/init'], function () {
     function dialogConfirm($rootScope, modal) {
         return function (_text, _callBack) {
             var _$scope = $rootScope.$new(false);
-            _$scope.confirmText = '确定删除?';
+            _$scope.confirmText = _text||'确定删除?';
             modal.openConfirm({
                 template: 'tpl/dialog-confirm.html',
                 scope: _$scope

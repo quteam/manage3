@@ -16,7 +16,7 @@ require.config({
         'echarts': '../libs/echarts.min',
         'chosen': '../libs/chosen.jquery.min',
         'jQuery': '../libs/jquery.min',
-        'angular': '../libs/angular'
+        'angular': '../libs/angular.min'
     },
     shim: {
         'jQuery': {
@@ -67,7 +67,7 @@ define('manageApp', [
 });
 
 require(['manageApp'], function (app) {
-    app.config(['$routeProvider', function ($routeProvider) {
+    app.config(['$routeProvider', '$templateRequestProvider', function ($routeProvider, $templateRequestProvider) {
         if (window.Config) {
             $routeProvider
                 .when("/:page*", {
@@ -98,6 +98,12 @@ require(['manageApp'], function (app) {
                     }
                 })
         }
+
+        $templateRequestProvider.httpOptions({
+            headers: {
+                'template': '1'
+            }
+        });
     }]);
 
     angular.bootstrap(document, ['manageApp']);

@@ -2342,9 +2342,12 @@ body {
       -ms-flex: 1;
           flex: 1;
   padding: 20px;
-  border-left: 1px solid #E1E1E1;
   position: relative;
   overflow: auto;
+}
+.column-layout-wrap .main-wrap + .side-wrap,
+.column-layout-wrap .side-wrap + .main-wrap {
+  border-left: 1px solid #E1E1E1;
 }
 .column-layout-wrap2 {
   background: #F2F6FA;

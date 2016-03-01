@@ -1,0 +1,61 @@
+<div ng-controller="pageCtrl">
+    <div class="top-nav-wrap">
+        <div class="back backBtn"><i class="iconfont icon-back"></i></div>
+        <div class="title2">成绩录入</div>
+        <div class="right">
+            <div class="nav">
+                <a class="li" href="#/project-add.html"><i class="iconfont icon-plus"></i></a>
+                <a class="li"><i class="iconfont icon-search"></i></a>
+                <a class="li"><i class="iconfont icon-bell"></i><i class="tip" ng-if="mainStatus.msgBubble">{{mainStatus.msgBubble}}</i></a>
+            </div>
+        </div>
+    </div>
+    <div class="page-main">
+        <div class="column-layout-wrap" ng-controller="noticePageCtrl">
+            <div class="main-wrap">
+                <form name="myForm" form-validator action="../data/form.data">
+                    <div class="form-tr">
+                        <div class="form-th">收件人:</div>
+                        <div class="form-td">
+                            <select class="select select-block selectRecipient" data-placeholder="选择一个..." chosen multiple width="100%"
+                                    ng-model="recipient">
+                                <option value="{{r.id}}" ng-repeat="r in recipientList">{{r.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-tr">
+                        <div class="form-th">主题:</div>
+                        <div class="form-td"><input type="text" class="ipt ipt-block" placeholder="输入框"/></div>
+                    </div>
+                    <div class="form-tr">
+                        <div class="form-th"></div>
+                        <div class="form-td">
+                            <div uploader="../data/upload.data" ng-model="formData.files" upload-type="*"></div>
+                        </div>
+                    </div>
+                    <div class="form-tr">
+                        <div class="form-th">内容:</div>
+                        <div class="form-td">
+                            <textarea class="textarea textarea-block" style="height:400px;"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="side-wrap">
+                <div class="tree-list" tree-list2="../data/tree-contact.data">
+                    <div class="pd-m text-m line">通讯录</div>
+                    <ul ng-if="treeList.length">
+                        <li ng-repeat="tree in treeList">
+                            <em ng-click="selectTree(tree,$event)"><i class="iconfont fold-p" ng-if="tree.nodes.length"></i> {{tree.name}}</em>
+                            <ul ng-if="tree.nodes.length">
+                                <li ng-repeat="tree2 in tree.nodes">
+                                    <em ng-click="selectOne(tree2)"><i class="iconfont fold-p" ng-if="tree2.nodes.length"></i> {{tree2.name}}</em>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

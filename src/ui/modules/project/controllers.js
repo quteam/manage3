@@ -29,6 +29,28 @@ define('project/controllers', ['project/init'], function () {
     };
     importScoreCtrl.$inject = ['$scope', 'requestData', '$element'];
 
+    //发送通知
+    function noticePageCtrl($scope, $element, $timeout) {
+        var $select = $element.find(".selectRecipient");
+        $scope.recipient = [];
+        $scope.recipientList = [];
+        $scope.selectOne = function (_data) {
+            var _index = $scope.recipientList.indexOf(_data);
+            if (_index > -1) {
+                $scope.recipientList.splice(_index, 1);
+                $scope.recipient.splice(_index, 1);
+            } else {
+                $scope.recipientList.push(_data);
+                $scope.recipient.push(_data.id);
+            }
+            $timeout(function () {
+                $select.trigger("chosen:updated");
+            });
+        }
+    };
+    noticePageCtrl.$inject = ['$scope', '$element', '$timeout'];
+
     angular.module('manageApp.project')
         .controller('importScoreCtrl', importScoreCtrl)
+        .controller('noticePageCtrl', noticePageCtrl)
 });
