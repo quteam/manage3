@@ -1,7 +1,7 @@
 <div ng-controller="pageCtrl">
     <div class="top-nav-wrap">
         <div class="back backBtn"><i class="iconfont icon-back"></i></div>
-        <div class="title2">成绩录入</div>
+        <div class="title2">发送通知</div>
         <div class="right">
             <div class="nav">
                 <a class="li" href="#/project-add.html"><i class="iconfont icon-plus"></i></a>
@@ -11,15 +11,22 @@
         </div>
     </div>
     <div class="page-main">
-        <div class="column-layout-wrap" ng-controller="noticePageCtrl">
-            <div class="main-wrap">
-                <form name="myForm" form-validator action="../data/form.data">
+        <form name="myForm" form-validator action="../data/form.data">
+            <div class="column-layout-wrap" ng-controller="noticePageCtrl">
+                <div class="main-wrap">
                     <div class="form-tr">
                         <div class="form-th">收件人:</div>
                         <div class="form-td">
                             <select class="select select-block selectRecipient" data-placeholder="选择一个..." chosen multiple width="100%"
-                                    ng-model="recipient">
-                                <option value="{{r.id}}" ng-repeat="r in recipientList">{{r.name}}</option>
+                                    ng-model="formData.recipient">
+                                <option value="11">张三</option>
+                                <option value="12">李四</option>
+                                <option value="21">王五</option>
+                                <option value="22">赵六</option>
+                                <option value="31">张三</option>
+                                <option value="32">李四</option>
+                                <option value="41">王五</option>
+                                <option value="42">赵六</option>
                             </select>
                         </div>
                     </div>
@@ -39,24 +46,24 @@
                             <textarea class="textarea textarea-block" style="height:400px;"></textarea>
                         </div>
                     </div>
-                </form>
-            </div>
-            <div class="side-wrap">
-                <div class="tree-list" tree-list2="../data/tree-contact.data">
-                    <div class="pd-m text-m line">通讯录</div>
-                    <ul ng-if="treeList.length">
-                        <li ng-repeat="tree in treeList">
-                            <span ng-click="selectMultiple(tree.nodes,$event)" class="fr point mgt-m mgr-m text-s">全选</span>
-                            <em ng-click="selectTree(tree,$event)"><i class="iconfont fold-p" ng-if="tree.nodes.length"></i> {{tree.name}}</em>
-                            <ul ng-if="tree.nodes.length">
-                                <li ng-repeat="tree2 in tree.nodes">
-                                    <em ng-click="selectOne(tree2)"><i class="iconfont fold-p" ng-if="tree2.nodes.length"></i> {{tree2.name}}</em>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
+                </div>
+                <div class="side-wrap">
+                    <div class="tree-list" tree-list2="../data/tree-contact.data">
+                        <div class="pd-m text-m line">通讯录</div>
+                        <ul ng-if="treeList.length">
+                            <li ng-repeat="tree in treeList">
+                                <span ng-click="selectMultiple(tree.nodes,$event)" class="fr point mgt-m mgr-m text-s">全选</span>
+                                <em ng-click="selectTree(tree,$event)"><i class="iconfont fold-p" ng-if="tree.nodes.length"></i> {{tree.name}}</em>
+                                <ul ng-if="tree.nodes.length">
+                                    <li ng-repeat="tree2 in tree.nodes">
+                                        <em ng-click="selectOne(tree2)"><i class="iconfont fold-p" ng-if="tree2.nodes.length"></i> {{tree2.name}}</em>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 </div>

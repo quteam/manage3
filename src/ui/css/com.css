@@ -1547,6 +1547,15 @@ body {
   z-index: 9;
   -webkit-transition: width .2s ease;
   transition: width .2s ease;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 .left-nav-wrap .user-info {
   position: relative;
@@ -1583,6 +1592,16 @@ body {
   font-size: 12px;
   color: rgba(255, 255, 255, 0.6);
 }
+.left-nav-wrap .menu-list {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  overflow: auto;
+}
+.left-nav-wrap .menu-list::-webkit-scrollbar-thumb {
+  background-color: #344C67;
+}
 .left-nav-wrap .menu-list a {
   display: block;
   height: 60px;
@@ -1603,10 +1622,7 @@ body {
   margin-right: 10px;
 }
 .left-nav-wrap .logo {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 260px;
+  padding: 10px 0;
   text-align: center;
 }
 .left-nav-wrap .nav-fold {
@@ -1636,6 +1652,9 @@ body {
 .left-nav-wrap.fold em {
   visibility: hidden;
   opacity: 0;
+}
+.left-nav-wrap.fold .logo {
+  display: none;
 }
 /**/
 .top-nav-wrap {

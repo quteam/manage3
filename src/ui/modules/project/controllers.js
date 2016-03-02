@@ -32,16 +32,14 @@ define('project/controllers', ['project/init'], function () {
     //发送通知
     function noticePageCtrl($scope, $element, $timeout) {
         var $select = $element.find(".selectRecipient");
-        $scope.recipient = [];
-        $scope.recipientList = [];
+        $scope.formData = {};
+        $scope.formData.recipient = [];
         $scope.selectOne = function (_data) {
-            var _index = $scope.recipientList.indexOf(_data);
+            var _index = $scope.formData.recipient.indexOf(_data.id);
             if (_index > -1) {
-                $scope.recipientList.splice(_index, 1);
-                $scope.recipient.splice(_index, 1);
+                $scope.formData.recipient.splice(_index, 1);
             } else {
-                $scope.recipientList.push(_data);
-                $scope.recipient.push(_data.id);
+                $scope.formData.recipient.push(_data.id);
             }
             $timeout(function () {
                 $select.trigger("chosen:updated");
@@ -53,26 +51,24 @@ define('project/controllers', ['project/init'], function () {
             var $e = $(e.currentTarget);
             var isSelected = $e.data("selected");
             angular.forEach(trees, function (_node) {
-                var _index = $scope.recipientList.indexOf(_node);
-                if (isSelected) {
-                    if (_index > -1) {
-                        $scope.recipientList.splice(_index, 1);
-                        $scope.recipient.splice(_index, 1);
-                    }
-                } else {
+                var _index = $scope.formData.recipient.indexOf(_node.id);
+                //if (isSelected) {
+                //    if (_index > -1) {
+                //        $scope.formData.recipient.splice(_index, 1);
+                //    }
+                //} else {
                     if (_index == -1) {
-                        $scope.recipientList.push(_node);
-                        $scope.recipient.push(_node.id);
+                        $scope.formData.recipient.push(_node.id);
                     }
-                }
+                //}
             });
-            if (!isSelected) {
-                $e.data("selected", true);
-                $e.text('取消全选');
-            } else {
-                $e.data("selected", false);
-                $e.text('全选');
-            }
+            //if (!isSelected) {
+            //    $e.data("selected", true);
+            //    $e.text('取消全选');
+            //} else {
+            //    $e.data("selected", false);
+            //    $e.text('全选');
+            //}
 
             $timeout(function () {
                 $select.trigger("chosen:updated");

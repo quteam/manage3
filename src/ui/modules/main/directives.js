@@ -1387,7 +1387,7 @@ define('main/directives', ['main/init'], function () {
                                 }
 
                                 var q = $.trim(field.val());
-                                if (searchStr == q) {
+                                if (!q && searchStr == q) {
                                     return false;
                                 }
                                 searchStr = q;

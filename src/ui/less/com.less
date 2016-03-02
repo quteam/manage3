@@ -338,22 +338,44 @@ body { color: #1E1E1E; }
 .dialog-tips { padding: 20px 30px; width: 300px; }
 .dialog-tips .info { margin: 10px 0; }
 /**/
-.left-nav-wrap { width: 260px; background: #4C637B; position: fixed; top: 0; left: 0; bottom: 0; z-index: 9; -webkit-transition: width .2s ease; transition: width .2s ease; }
+.left-nav-wrap {
+	width: 260px;
+	background: #4C637B;
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	z-index: 9;
+	transition: width .2s ease;
+	display: flex;
+	flex-direction: column;
+}
 .left-nav-wrap .user-info { position: relative; background: #344C67; height: 70px; width: 100%; box-sizing: border-box; padding: 11px 20px; }
 .left-nav-wrap .avatar { width: 48px; height: 48px; float: left; vertical-align: top; }
 .left-nav-wrap .avatar img { display: block; width: 48px; height: 48px; border-radius: 24px; }
 .left-nav-wrap .info { position: absolute; left: 80px; height: 48px; width: 180px; overflow: hidden; }
 .left-nav-wrap .info .name { font-size: 16px; color: #FFF; }
 .left-nav-wrap .info .meta { font-size: 12px; color: rgba(255, 255, 255, 0.6); }
+.left-nav-wrap .menu-list {
+	flex: 1;
+	overflow: auto;
+	&::-webkit-scrollbar-thumb {
+		background-color: #344C67;
+	}
+}
 .left-nav-wrap .menu-list a { display: block; height: 60px; line-height: 30px; padding: 15px 20px 15px 30px; box-sizing: border-box; font-size: 16px; text-decoration: none; color: #C4CAD1; overflow: hidden; }
 .left-nav-wrap .menu-list .on a { background: #36AEEA; color: #FFF; }
 .left-nav-wrap .menu-list .iconfont { font-size: 24px; margin-right: 10px; }
-.left-nav-wrap .logo { position: absolute; left: 0; bottom: 0; width: 260px; text-align: center; }
+.left-nav-wrap .logo {
+	padding: 10px 0;
+	text-align: center;
+}
 .left-nav-wrap .nav-fold { position: absolute; bottom: 40px; right: 0; background: url(../img/nav-fold.png) -52px 0 no-repeat; width: 11px; height: 54px; cursor: pointer; }
 .left-nav-wrap.fold { width: 88px; }
 .left-nav-wrap.fold .nav-fold { right: -11px; background-position: 0 0; }
 .left-nav-wrap .info, .left-nav-wrap .logo, .left-nav-wrap em { -webkit-transition: all .4s ease; transition: all .4s ease; }
 .left-nav-wrap.fold .info, .left-nav-wrap.fold .logo, .left-nav-wrap.fold em { visibility: hidden; opacity: 0; }
+.left-nav-wrap.fold .logo { display: none; }
 /**/
 .top-nav-wrap { position: absolute; top: 0; left: 0; right: 0; bottom: 0; height: 70px; line-height: 30px; background: #E3EAF3; box-sizing: border-box; padding: 20px 28px; }
 .top-nav-wrap .title { font-size: 22px; color: rgba(30, 30, 30, 0.7); }
