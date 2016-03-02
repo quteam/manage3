@@ -46,6 +46,7 @@
                     <div class="pd-m text-m line">通讯录</div>
                     <ul ng-if="treeList.length">
                         <li ng-repeat="tree in treeList">
+                            <span ng-click="selectMultiple(tree.nodes,$event)" class="fr point mgt-m mgr-m text-s">全选</span>
                             <em ng-click="selectTree(tree,$event)"><i class="iconfont fold-p" ng-if="tree.nodes.length"></i> {{tree.name}}</em>
                             <ul ng-if="tree.nodes.length">
                                 <li ng-repeat="tree2 in tree.nodes">
