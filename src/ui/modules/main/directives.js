@@ -1327,25 +1327,68 @@ define('main/directives', ['main/init'], function () {
                             var $input = $('input', $chosenContainer);
                             var searchStr = "";
                             var isChinessInput = false;
+                            var typing = false;
+                            var requestQueue;
 
                             function handleSearch(q) {
                                 var selected = $('option:selected', $element).not(':empty').clone().attr('selected', true);
-                                requestData($attrs.selectSource, {q: q})
-                                    .then(function (data) {
-                                        var _options = '';
-                                        var _length = data.length;
-                                        var _selected = angular.isArray(ngModel.$viewValue) ? ngModel.$viewValue : [ngModel.$viewValue];
-                                        for (var i = 0; i < _length; i++) {
-                                            if (_selected.indexOf(data[i].value) == -1) {
-                                                _options += '<option value="' + data[i].value + '">' + data[i].text + '</option>';
+                                requestQueue && requestQueue.abort();
+                                requestQueue = $.ajax({
+                                    url: $attrs.selectSource,
+                                    type: 'post',
+                                    data: {q: q},
+                                    dataType: 'json',
+                                    success: function (_data) {
+                                        if (_data.code == 200) {
+                                            var _options = '';
+                                            var _length = _data.data.length;
+                                            var _selected = angular.isArray(ngModel.$viewValue) ? ngModel.$viewValue : [ngModel.$viewValue];
+                                            for (var i = 0; i < _length; i++) {
+                                                if (_selected.indexOf(_data.data[i].value) == -1) {
+                                                    _options += '<option value="' + _data.data[i].value + '">' + _data.data[i].text + '</option>';
+                                                }
+                                            }
+                                            $element.html(_options).prepend(selected);
+                                            $element.trigger("chosen:updated");
+                                            var keyRight = $.Event('keydown');
+                                            keyRight.which = 39;
+                                            $input.val(q).trigger(keyRight);
+
+                                            if (_data.data.length > 0) {
+                                                $chosenContainer.find('.no-results').hide();
+                                            } else {
+                                                $chosenContainer.find('.no-results').show();
                                             }
                                         }
-                                        $element.html(_options).prepend(selected);
-                                        $element.trigger("chosen:updated");
-                                        var keyRight = $.Event('keydown');
-                                        keyRight.which = 39;
-                                        $input.val(q).trigger(keyRight);
-                                    });
+                                    },
+                                    complete: function () {
+                                        $scope.$digest();
+                                    }
+                                });
+
+
+                                //requestData($attrs.selectSource, {q: q})
+                                //    .then(function (data) {
+                                //        var _options = '';
+                                //        var _length = data.length;
+                                //        var _selected = angular.isArray(ngModel.$viewValue) ? ngModel.$viewValue : [ngModel.$viewValue];
+                                //        for (var i = 0; i < _length; i++) {
+                                //            if (_selected.indexOf(data[i].value) == -1) {
+                                //                _options += '<option value="' + data[i].value + '">' + data[i].text + '</option>';
+                                //            }
+                                //        }
+                                //        $element.html(_options).prepend(selected);
+                                //        $element.trigger("chosen:updated");
+                                //        var keyRight = $.Event('keydown');
+                                //        keyRight.which = 39;
+                                //        $input.val(q).trigger(keyRight);
+                                //
+                                //        if (data.length > 0) {
+                                //            $chosenContainer.find('.no-results').hide();
+                                //        } else {
+                                //            $chosenContainer.find('.no-results').show();
+                                //        }
+                                //    });
                             };
 
                             function processValue(e) {
@@ -1382,9 +1425,11 @@ define('main/directives', ['main/init'], function () {
                                     return false;
                                 }
 
-                                if (isChinessInput && e.keyCode != 32) {
+                                if (isChinessInput && (e.keyCode != 32 && (e.keyCode < 48 || e.keyCode > 57))) {
                                     return false;
                                 }
+
+                                $chosenContainer.find('.no-results').hide();
 
                                 var q = $.trim(field.val());
                                 if (!q && searchStr == q) {
@@ -1392,13 +1437,16 @@ define('main/directives', ['main/init'], function () {
                                 }
                                 searchStr = q;
 
+                                typing = true;
+
                                 if ($scope.searchTimer) {
                                     $timeout.cancel($scope.searchTimer);
                                 }
 
                                 $scope.searchTimer = $timeout(function () {
+                                    typing = false;
                                     handleSearch(q);
-                                }, 500);
+                                }, 600);
                             };
 
                             $('.chosen-search > input, .chosen-choices .search-field input', $chosenContainer).on('keyup', processValue).on('paste', function (e) {
