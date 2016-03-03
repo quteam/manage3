@@ -235,6 +235,20 @@ define('main/directives', ['main/init'], function () {
                     $tr.removeClass("on").eq(_index).addClass("on");
                     ngModel && ngModel.$setViewValue(angular.copy(_tr));
                 };
+                //改变状态
+                $scope.changeStatus = function (_url, _text) {
+                    var _tr = this.tr;
+                    dialogConfirm(_text || '确定?', function () {
+                        requestData(_url, {id: _tr.id})
+                            .then(function (_data) {
+                                var _index = $scope.tbodyList.indexOf(_tr);
+                                $scope.tbodyList[_index] = _data;
+                            })
+                            .catch(function (error) {
+                                alert(error || '请求失败!');
+                            });
+                    });
+                };
 
                 //弹窗修改后的回调
                 $scope.submitCallBack = function (_curRow, _data) {
