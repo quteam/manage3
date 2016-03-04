@@ -114,7 +114,7 @@ define('main/directives', ['main/init'], function () {
     /**
      * 表单验证
      */
-    function formValidator(requestData) {
+    function formValidator(requestData, modal) {
         return {
             restrict: 'A',
             scope: true,
@@ -152,6 +152,8 @@ define('main/directives', ['main/init'], function () {
                             } else if (data && data.url) {
                                 window.location.assign(data.url);
                             }
+                            //自动关闭弹窗
+                            angular.isDefined($attrs.autoCloseDialog) && modal.close();
                         })
                         .catch(function (error) {
                             formStatus.submitting = false;
@@ -162,7 +164,7 @@ define('main/directives', ['main/init'], function () {
             }
         }
     };
-    formValidator.$inject = ["requestData"];
+    formValidator.$inject = ["requestData", "modal"];
 
     /**
      * 表格
