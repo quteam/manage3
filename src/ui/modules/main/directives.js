@@ -415,7 +415,7 @@ define('main/directives', ['main/init'], function () {
                         }
 
                         setSelectedValue();
-                        //$scope.$apply();
+                        $scope.$apply();
                     });
                 }
 
