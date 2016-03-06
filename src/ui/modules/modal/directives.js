@@ -62,8 +62,8 @@ define('modal/directives', ['modal/init'], function () {
                         template: $attrs.modalUrl,
                         className: 'ngdialog-theme-right',
                         cache: false,
-                        trapFocus: false,
-                        overlay: false,
+                        trapFocus: true,
+                        overlay: ($attrs.modalOverlay == "true"),
                         data: $attrs.modalData,
                         scope: $scope.modalScope,
                         controller: ["$scope", "$element", function ($scope, $element) {
