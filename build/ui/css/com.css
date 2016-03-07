@@ -407,9 +407,10 @@ body{color:#1E1E1E}
 .uploader-list .text{position:absolute;top:40%;left:0;right:0;color:#FFF;text-align:center}
 .uploader-list .text .status{display:block}
 .uploader-list .text i{font-style:normal;font-size:18px}
+.uploader-list .name{white-space:nowrap;position:absolute;left:0;right:0;bottom:0;padding:5px;color:#FFF;text-align:center;text-shadow:0 0 5px #000;font-size:12px;overflow:hidden;text-overflow:ellipsis}
 .uploader-list .del{position:absolute;bottom:0;right:0;z-index:2;width:32px;height:32px;font-size:18px;line-height:32px;color:#969696;text-align:center;background:#E6E6E6;cursor:pointer;display:none}
 .uploader-list .del:hover{color:#FF6000}
-.uploader-list .file .img{position:absolute;top:0;left:0;right:0;bottom:0;background:url(../img/file.png) 50% 50% no-repeat;background-size:cover}
+.uploader-list .file .img{position:absolute;top:0;left:0;right:0;bottom:0;background:url(../img/file.png) 50% 40% no-repeat;background-size:cover}
 .uploader-list .file:hover .del{display:block}
 .uploader-list .file.error .progress-mask{background:#FF2A00}
 .uploader-list .file.finished .progress-mask{opacity:0}

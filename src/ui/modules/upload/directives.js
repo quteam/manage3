@@ -53,6 +53,7 @@ define('upload/directives', ['upload/init'], function () {
                                     file: files[i],
                                     progress: 0,
                                     text: '上传中...',
+                                    name: files[i].name,
                                     data: {}
                                 };
                                 $scope.fileList.push(_fileObj);
@@ -66,6 +67,7 @@ define('upload/directives', ['upload/init'], function () {
                                         file: files[i],
                                         progress: 0,
                                         text: '上传中...',
+                                        name: files[i].name,
                                         data: {},
                                         imgSrc: window.URL.createObjectURL(new Blob([files[i]], {type: files[i].type}))
                                     };

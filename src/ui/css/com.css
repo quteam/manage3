@@ -1942,6 +1942,20 @@ body {
   font-style: normal;
   font-size: 18px;
 }
+.uploader-list .name {
+  white-space: nowrap;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 5px;
+  color: #FFF;
+  text-align: center;
+  text-shadow: 0 0 5px #000;
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .uploader-list .del {
   position: absolute;
   bottom: 0;
@@ -1966,7 +1980,7 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: url(../img/file.png) 50% 50% no-repeat;
+  background: url(../img/file.png) 50% 40% no-repeat;
   background-size: cover;
 }
 .uploader-list .file:hover .del {
@@ -1981,7 +1995,6 @@ body {
 .uploader-list .file.finished .text {
   display: none;
 }
-/*.uploader-list .file.on:after { content: "封面"; position: absolute; top: 0; left: 0; padding: 2px 5px; background: #3A95D6; color: #FFF; }*/
 /**/
 .table-list-wrap {
   overflow: auto;
