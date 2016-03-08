@@ -1071,6 +1071,9 @@ body {
 .icon-pic:before {
   content: "\e621";
 }
+.icon-quit:before {
+  content: "\e62d";
+}
 .icon-star:before {
   content: "\e62a";
 }
@@ -1079,6 +1082,9 @@ body {
 }
 .icon-cancel:before {
   content: "\e60e";
+}
+.icon-shutdown:before {
+  content: "\e62e";
 }
 .icon-star-o:before {
   content: "\e62b";
