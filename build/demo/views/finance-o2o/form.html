@@ -1,0 +1,80 @@
+<div ng-controller="pageCtrl" ng-init="mainStatus.navigation='form'">
+    <div class="top-nav-wrap">
+        <div class="back backBtn"><i class="iconfont icon-back"></i></div>
+        <div class="title2">表单</div>
+        <div class="right">
+            <div class="nav">
+                <a class="li"><i class="iconfont icon-plus"></i></a>
+                <a class="li"><i class="iconfont icon-search"></i></a>
+                <a class="li"><i class="iconfont icon-bell"></i><i class="tip" ng-if="mainStatus.msgBubble">{{mainStatus.msgBubble}}</i></a>
+            </div>
+        </div>
+    </div>
+    <div class="page-main">
+        <div class="mgb-l"><span class="text-l">表单元素</span></div>
+        <form name="myForm" form-validator action="../data/form.data">
+            <div class="form-tr">
+                <div class="form-th">输入框</div>
+                <div class="form-td">
+                    <input type="text" class="ipt" placeholder="输入框" ng-model="formData.input"/>
+                </div>
+            </div>
+            <div class="form-tr">
+                <div class="form-th">自定义</div>
+                <div class="form-td">
+                    <custom-config ng-model="formData.config">
+                        <table class="table-list table-list-top">
+                            <thead>
+                            <tr>
+                                <th width="30"></th>
+                                <th width="20%">Name</th>
+                                <th width="30%">Type</th>
+                                <th width="20%">Key</th>
+                                <th width="20%">Palceholder</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="tr in dataList">
+                                <td>{{$index+1}}</td>
+                                <td><input type="text" name="name" class="ipt ipt-block" placeholder="name" ng-model="tr.name[$index]"/></td>
+                                <td>
+                                    <select class="select select-block" name="type" ng-model="tr.type[$index]" ng-init="tr.type[$index]='text'">
+                                        <option value="text">文本</option>
+                                        <option value="checkbox">多选</option>
+                                        <option value="radio">单选</option>
+                                        <option value="select">下拉</option>
+                                        <option value="textarea">文本域</option>
+                                    </select>
+                                    <div class="mgt-s" ng-if="tr.type[$index]=='select'||tr.type[$index]=='checkbox'||tr.type[$index]=='radio'">
+                                        <input type="text" class="ipt ipt-block" name="options" ng-model="tr.options[$index]" placeholder="options"/>
+                                    </div>
+                                </td>
+                                <td><input type="text" name="key" class="ipt ipt-block" placeholder="key" ng-model="tr.key[$index]"/></td>
+                                <td><input type="text" name="palceholder" class="ipt ipt-block" placeholder="placeholder" ng-model="tr.palceholder[$index]"/></td>
+                                <td>
+                                    <button type="button" class="btn btn-s btn-orange" ng-click="delRow($index)"><i class="iconfont icon-delete"></i> 删除</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td></td>
+                                <td colspan="5">
+                                    <button type="button" class="btn btn-s btn-primary" ng-click="addRow()"><i class="iconfont icon-plus"></i> 新增</button>
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </custom-config>
+                </div>
+            </div>
+            <div class="form-tr">
+                <div class="form-th"></div>
+                <div class="form-td">
+                    <button type="submit" class="btn btn-l">提交</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

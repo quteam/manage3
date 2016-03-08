@@ -99,7 +99,7 @@
                                     <div class="tree-list" tree-list="../data/tree.data" ng-model="itemData.item2"></div>
                                 </div>
                                 <div class="main-wrap">
-                                    <div details-info="../data/form-structure.data" details-params='itemData.item2.id'>
+                                    <div details-info="../data/form-structure.data" details-params='{id:"{{itemData.item2.id||0}}"}'>
                                         <div class="loader" ng-if="isLoading">
                                             <div class="loader-inner pacman">
                                                 <div></div>

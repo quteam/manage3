@@ -251,9 +251,11 @@ body{color:#1E1E1E}
 .icon-export:before{content:"\e610"}
 .icon-next:before{content:"\e604"}
 .icon-pic:before{content:"\e621"}
+.icon-quit:before{content:"\e62d"}
 .icon-star:before{content:"\e62a"}
 .icon-import:before{content:"\e611"}
 .icon-cancel:before{content:"\e60e"}
+.icon-shutdown:before{content:"\e62e"}
 .icon-star-o:before{content:"\e62b"}
 .icon-empty:before{content:"\e625"}
 .icon-camera:before{content:"\e62c"}
@@ -274,7 +276,7 @@ body{color:#1E1E1E}
 .animation{-webkit-transition:all .2s ease;transition:all .2s ease}
 .overhide{overflow:hidden}
 .point{cursor:pointer}
-.select{padding:6px 12px;height:36px;box-sizing:border-box;background:0 0;border:1px solid #E6E6E6;outline:0}
+.select{padding:6px 12px;height:36px;box-sizing:border-box;background:#FFF;border:1px solid #E6E6E6;outline:0}
 .select:focus{border:1px solid #5897FB}
 .select-noborder{background:0 0;border:none}
 .select-w{width:280px}
@@ -420,11 +422,12 @@ body{color:#1E1E1E}
 .table-list td,.table-list th{padding:10px 10px;line-height:1.2}
 .table-list tbody tr{border-top:1px solid #FFF}
 .table-list tbody tr.on td{background-color:#D1D6DA}
-.table-list tr td{background:#F2F6FA}
-.table-list tr:nth-child(even) td{background:#EBF1F5}
+.table-list tr td{background:#EBF1F5}
+.table-list tr:nth-child(even) td{background:#F2F6FA}
 .table-list input[type=checkbox]{width:16px;height:16px;vertical-align:middle}
 .table-list .select-td{width:16px;white-space:nowrap}
 .table-list .td-s,.table-list .th-s{padding-left:0;padding-right:0}
+.table-list-top td{vertical-align:top}
 .table-list-2{border-spacing:1px;border-collapse:separate;text-align:center}
 .table-list-2 tbody tr{border:none}
 .table-list-2 td,.table-list-2 th{text-align:center;padding:12px}

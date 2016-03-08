@@ -1,0 +1,29 @@
+<table class="table-list">
+    <thead>
+    <tr>
+        <th width="30"></th>
+        <th ng-repeat="th in theadList">{{th}}</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="r" ng-repeat="tr in dataList">
+        <td>{{$trIndex = $index + 1}}
+        </td>
+        <td ng-repeat="td in tr track by $index">
+            <input type="text" name="{{inputName[$index]}}" class="ipt ipt-block" ng-model="tr[$index]"/>
+        </td>
+        <td>
+            <button type="button" class="btn btn-s btn-orange" ng-click="delRow($index)"><i class="iconfont icon-delete"></i> 删除</button>
+        </td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+        <td></td>
+        <td colspan="{{theadList.length+1}}">
+            <button type="button" class="btn btn-s btn-primary" ng-click="addRow()"><i class="iconfont icon-plus"></i> 新增</button>
+        </td>
+    </tr>
+    </tfoot>
+</table>

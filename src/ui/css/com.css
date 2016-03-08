@@ -1156,7 +1156,7 @@ body {
   padding: 6px 12px;
   height: 36px;
   box-sizing: border-box;
-  background: transparent;
+  background: #FFF;
   border: 1px solid #E6E6E6;
   outline: none;
 }
@@ -2021,10 +2021,10 @@ body {
   background-color: #D1D6DA;
 }
 .table-list tr td {
-  background: #F2F6FA;
+  background: #EBF1F5;
 }
 .table-list tr:nth-child(even) td {
-  background: #EBF1F5;
+  background: #F2F6FA;
 }
 .table-list input[type=checkbox] {
   width: 16px;
@@ -2039,6 +2039,9 @@ body {
 .table-list .td-s {
   padding-left: 0;
   padding-right: 0;
+}
+.table-list-top td {
+  vertical-align: top;
 }
 .table-list-2 {
   border-spacing: 1px;
