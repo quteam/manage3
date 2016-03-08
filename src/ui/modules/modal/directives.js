@@ -64,7 +64,7 @@ define('modal/directives', ['modal/init'], function () {
                         cache: false,
                         trapFocus: true,
                         overlay: ($attrs.modalOverlay == "true"),
-                        data: $attrs.modalData,
+                        data: $attrs.modalData || $scope.modalScope.tr,
                         scope: $scope.modalScope,
                         controller: ["$scope", "$element", function ($scope, $element) {
                             $(".ngdialog-content", $element).width(dialogWidth);
@@ -96,7 +96,7 @@ define('modal/directives', ['modal/init'], function () {
                         cache: false,
                         trapFocus: false,
                         //overlay: false,
-                        data: $attrs.modalData,
+                        data: $attrs.modalData || $scope.modalScope.tr,
                         scope: $scope.modalScope,
                         controller: ["$scope", "$element", function ($scope, $element) {
                             $(".ngdialog-content", $element).width(dialogWidth);
