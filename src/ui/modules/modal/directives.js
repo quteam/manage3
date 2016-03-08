@@ -52,7 +52,7 @@ define('modal/directives', ['modal/init'], function () {
                 $elem.on('click', function (e) {
                     e.preventDefault();
 
-                    ngDialog.close();
+                    ngDialog.closeAll();
                     //var _dialogs = ngDialog.getOpenDialogs();
                     //if (_dialogs.length) {
                     //    return;

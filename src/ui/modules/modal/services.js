@@ -1,5 +1,8 @@
-/**
- * Created by hao on 15/11/21.
+/*
+ * ngDialog - easy modals and popup windows
+ * http://github.com/likeastore/ngDialog
+ * (c) 2013-2015 MIT License, https://likeastore.com
+ * 0.5.8
  */
 
 define('modal/services', ['modal/init'], function () {
@@ -17,6 +20,7 @@ define('modal/services', ['modal/init'], function () {
     var scopes = {};
     var openIdStack = [];
     var keydownIsBound = false;
+    var openOnePerName = false;
 
     m.provider('modal', function () {
         var defaults = this.defaults = {
@@ -51,6 +55,10 @@ define('modal/services', ['modal/init'], function () {
 
         this.setDefaults = function (newDefaults) {
             angular.extend(defaults, newDefaults);
+        };
+
+        this.setOpenOnePerName = function (isOpenOne) {
+            openOnePerName = isOpenOne || false;
         };
 
         var globalID = 0, dialogsCount = 0, closeByDocumentHandler, defers = {};
@@ -434,16 +442,22 @@ define('modal/services', ['modal/init'], function () {
                      * - closeByEscape {Boolean} - default true
                      * - closeByDocument {Boolean} - default true
                      * - preCloseCallback {String|Function} - user supplied function name/function called before closing dialog (if set)
-                     *
                      * @return {Object} dialog
                      */
                     open: function (opts) {
+                        var dialogID = null;
+                        opts = opts || {};
+                        if (openOnePerName && opts.name) {
+                            dialogID = opts.name + ' dialog';
+                            if (this.isOpen(dialogID)) {
+                                return;
+                            }
+                        }
                         var options = angular.copy(defaults);
                         var localID = ++globalID;
-                        var dialogID = 'ngdialog' + localID;
+                        dialogID = dialogID || 'ngdialog' + localID;
                         openIdStack.push(dialogID);
 
-                        opts = opts || {};
                         angular.extend(options, opts);
 
                         var defer;
@@ -472,7 +486,7 @@ define('modal/services', ['modal/init'], function () {
                             }
 
                             var hasOverlayClass = options.overlay ? '' : ' ngdialog-no-overlay';
-                            $dialog = $el('<div id="ngdialog' + localID + '" class="ngdialog' + hasOverlayClass + '"></div>');
+                            $dialog = $el('<div id="' + dialogID + '" class="ngdialog' + hasOverlayClass + '"></div>');
                             $dialog.html((options.overlay ?
                             '<div class="ngdialog-overlay"></div><div class="ngdialog-content" role="document">' + template + '</div>' :
                             '<div class="ngdialog-content" role="document">' + template + '</div>'));
@@ -483,11 +497,11 @@ define('modal/services', ['modal/init'], function () {
 
                             if (options.data && angular.isString(options.data)) {
                                 var firstLetter = options.data.replace(/^\s*/, '')[0];
-                                scope.ngDialogData = (firstLetter === '{' || firstLetter === '[') ? angular.fromJson(options.data) : options.data;
-                                //scope.ngDialogData.ngDialogId = dialogID;
+                                scope.ngDialogData = (firstLetter === '{' || firstLetter === '[') ? angular.fromJson(options.data) : new String(options.data);
+                                scope.ngDialogData.ngDialogId = dialogID;
                             } else if (options.data && angular.isObject(options.data)) {
                                 scope.ngDialogData = options.data;
-                                //scope.ngDialogData.ngDialogId = dialogID;
+                                scope.ngDialogData.ngDialogId = dialogID;
                             }
 
                             if (options.className) {
@@ -685,14 +699,15 @@ define('modal/services', ['modal/init'], function () {
                         };
 
                         var openResult = publicMethods.open(options);
-                        openResult.closePromise.then(function (data) {
-                            if (data) {
-                                return defer.reject(data.value);
-                            }
-                            return defer.reject();
-                        });
-
-                        return defer.promise;
+                        if (openResult) {
+                            openResult.closePromise.then(function (data) {
+                                if (data) {
+                                    return defer.reject(data.value);
+                                }
+                                return defer.reject();
+                            });
+                            return defer.promise;
+                        }
                     },
 
                     isOpen: function (id) {

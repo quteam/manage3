@@ -57,7 +57,7 @@ define('main/controllers', ['main/init'], function () {
      *
      */
     function pageCtrl($scope, modal) {
-        modal.close();
+        modal.closeAll();
     };
     pageCtrl.$inject = ["$scope", "modal"];
 
