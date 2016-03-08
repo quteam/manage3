@@ -20,7 +20,7 @@ var Config = {
     itemName: "Manage System",
     version: "3.0",
     author: "haovei@qq.com",
-    cdn: "http://ui.quteam.com/manage3"
+    cdn: "//ui.quteam.com/manage3"
 };
 
 gulp.task('clean', function () {
