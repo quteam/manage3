@@ -2014,7 +2014,8 @@ body {
   padding: 10px 10px;
   line-height: 1.2;
 }
-.table-list tbody tr {
+.table-list tbody tr,
+.table-list tfoot tr {
   border-top: 1px solid #FFF;
 }
 .table-list tbody tr.on td {

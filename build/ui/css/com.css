@@ -420,7 +420,7 @@ body{color:#1E1E1E}
 .table-list-wrap{overflow:auto}
 .table-list{width:100%;cursor:default}
 .table-list td,.table-list th{padding:10px 10px;line-height:1.2}
-.table-list tbody tr{border-top:1px solid #FFF}
+.table-list tbody tr,.table-list tfoot tr{border-top:1px solid #FFF}
 .table-list tbody tr.on td{background-color:#D1D6DA}
 .table-list tr td{background:#EBF1F5}
 .table-list tr:nth-child(even) td{background:#F2F6FA}

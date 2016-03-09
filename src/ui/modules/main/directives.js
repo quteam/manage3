@@ -1554,6 +1554,42 @@ define('main/directives', ['main/init'], function () {
     formItem.$inject = ["$compile"];
 
     /**
+     * 自定义配置 (资源相关)
+     */
+    function customConfig($timeout) {
+        return {
+            restrict: 'AE',
+            scope: true,
+            transclude: true,
+            require: "?^ngModel",
+            link: function ($scope, $element, $attrs, ngModel, $transclude) {
+                $timeout(function () {
+                    ngModel && ($scope.dataList = ngModel.$viewValue || []);
+                });
+
+                $scope.$watchCollection("dataList", function (value) {
+                    if (value && ngModel) {
+                        ngModel.$setViewValue(value);
+                    }
+                });
+
+                $scope.addRow = function () {
+                    $scope.dataList.push({});
+                };
+
+                $scope.delRow = function (n) {
+                    $scope.dataList.splice(n, 1);
+                };
+
+                $transclude($scope, function (clone) {
+                    $element.append(clone);
+                });
+            }
+        };
+    };
+    customConfig.$inject = ["$timeout"];
+
+    /**
      * 加入项目
      */
     angular.module('manageApp.main')
@@ -1577,4 +1613,5 @@ define('main/directives', ['main/init'], function () {
         .directive("checkboxGroup", checkboxGroup)
         .directive("chosen", chosen)
         .directive("formItem", formItem)
+        .directive("customConfig", customConfig)
 });
