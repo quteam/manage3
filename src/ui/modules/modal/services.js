@@ -498,9 +498,11 @@ define('modal/services', ['modal/init'], function () {
                             if (options.data && angular.isString(options.data)) {
                                 var firstLetter = options.data.replace(/^\s*/, '')[0];
                                 scope.ngDialogData = (firstLetter === '{' || firstLetter === '[') ? angular.fromJson(options.data) : new String(options.data);
+                                scope.dialogData = angular.copy(scope.ngDialogData);
                                 scope.ngDialogData.ngDialogId = dialogID;
                             } else if (options.data && angular.isObject(options.data)) {
                                 scope.ngDialogData = options.data;
+                                scope.dialogData = angular.copy(scope.ngDialogData);
                                 scope.ngDialogData.ngDialogId = dialogID;
                             }
 
