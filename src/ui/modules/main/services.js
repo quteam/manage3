@@ -2,6 +2,21 @@
  * Created by hao on 15/11/18.
  */
 define('main/services', ['main/init'], function () {
+    //请求拦截 用于登录超时
+    function redirectInterceptor($q, $location) {
+        return {
+            response: function (response) {
+                if (typeof response.data === 'string' && /^<!DOCTYPE html>/.test(response.data)) {
+                    window.location.assign(response.config.url);
+                    return response;
+                } else {
+                    return response;
+                }
+            }
+        }
+    };
+    redirectInterceptor.$inject = ['$q', '$location'];
+
     //数据请求
     function requestData($q, $http, $httpParamSerializer) {
         return function (_url, _params) {
@@ -20,7 +35,7 @@ define('main/services', ['main/init'], function () {
             })
                 .success(function (_data, status, headers, config) {
                     if (status == 200 && _data.code == 200) {
-                        defer.resolve(_data.data);
+                        defer.resolve([_data.data, _data]);
                     } else {
                         defer.reject(_data.msg || '出错了');
                     }
@@ -38,7 +53,7 @@ define('main/services', ['main/init'], function () {
     function dialogConfirm($rootScope, modal) {
         return function (_text, _callBack) {
             var _$scope = $rootScope.$new(false);
-            _$scope.confirmText = _text||'确定删除?';
+            _$scope.confirmText = _text || '确定删除?';
             modal.openConfirm({
                 template: 'tpl/dialog-confirm.html',
                 scope: _$scope
@@ -83,8 +98,12 @@ define('main/services', ['main/init'], function () {
     dialogChart.$inject = ['$rootScope', 'modal', '$http'];
 
     angular.module('manageApp.main')
+        .factory('redirectInterceptor', redirectInterceptor)
         .service('requestData', requestData)
         .service('dialogConfirm', dialogConfirm)
         .service('dialog', dialog)
         .service('dialogChart', dialogChart)
+        .config(['$httpProvider', function ($httpProvider) {
+            $httpProvider.interceptors.push('redirectInterceptor');
+        }])
 });

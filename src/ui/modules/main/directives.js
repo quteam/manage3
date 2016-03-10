@@ -94,7 +94,8 @@ define('main/directives', ['main/init'], function () {
                 function getData(params) {
                     $scope.isLoading = true;
                     requestData($attrs.detailsInfo, params)
-                        .then(function (data) {
+                        .then(function (results) {
+                            var data = results[0];
                             $scope.isLoading = false;
                             if ($scope.detailsHandler) {
                                 $scope.details = $scope.detailsHandler(data);
@@ -144,7 +145,8 @@ define('main/directives', ['main/init'], function () {
                     e.preventDefault();
                     formStatus.submitting = true;
                     requestData($attrs.action, $scope.formData)
-                        .then(function (data) {
+                        .then(function (results) {
+                            var data = results[0];
                             formStatus.submitting = false;
                             formStatus.submitInfo = "";
                             if (angular.isFunction($scope.submitCallBack)) {
@@ -242,7 +244,8 @@ define('main/directives', ['main/init'], function () {
                     var _tr = this.tr;
                     dialogConfirm(_text || '确定?', function () {
                         requestData(_url, {id: _tr.id})
-                            .then(function (_data) {
+                            .then(function (results) {
+                                var _data = results[0];
                                 var _index = $scope.tbodyList.indexOf(_tr);
                                 $scope.tbodyList[_index] = _data;
                             })
@@ -277,7 +280,9 @@ define('main/directives', ['main/init'], function () {
                         return;
                     }
                     statusInfo.isLoading = true;
-                    $.post($scope.listData, angular.merge({}, formData, {page: statusInfo.currentPage}), function (data, status, headers, config) {
+                    requestData($scope.listData, angular.merge({}, formData, {page: statusInfo.currentPage}))
+                        .then(function (results) {
+                            var data = results[1];
                             if (data.code == 200) {
                                 if (data.options) {
                                     statusInfo.totalCount = data.options.totalCount || statusInfo.totalCount;
@@ -300,15 +305,13 @@ define('main/directives', ['main/init'], function () {
                                 statusInfo.loadFailMsg = data.message;
                             }
                             statusInfo.isLoading = false;
-                        }, 'json')
-                        .error(function () {
+                            $timeout(bindSelectOneEvent);
+                            _callback && _callback();
+                        })
+                        .catch(function () {
                             statusInfo.isLoading = false;
                             statusInfo.loadFailMsg = '加载出错';
-                        })
-                        .complete(function () {
                             _callback && _callback();
-                            $scope.$digest();
-                            bindSelectOneEvent();
                         })
                 };
 
@@ -654,7 +657,8 @@ define('main/directives', ['main/init'], function () {
                 if ($attrs.filterConditions) {
                     (function () {
                         requestData($attrs.filterConditions)
-                            .then(function (_data) {
+                            .then(function (results) {
+                                var _data = results[0];
                                 $scope.conditionList = _data;
                             })
                     })();
@@ -741,7 +745,8 @@ define('main/directives', ['main/init'], function () {
                 function getTreeData() {
                     $scope.status.isLoading = true;
                     requestData($attrs.treeList)
-                        .then(function (data) {
+                        .then(function (results) {
+                            var data = results[0];
                             $scope.treeList = buildTree(data);
                             $scope.status.isLoading = false;
                         })
@@ -827,7 +832,8 @@ define('main/directives', ['main/init'], function () {
                 function getTreeData() {
                     $scope.status.isLoading = true;
                     requestData($attrs.treeList2)
-                        .then(function (data) {
+                        .then(function (results) {
+                            var data = results[0];
                             $scope.treeList = buildTree(data);
                             $scope.status.isLoading = false;
                         })
@@ -878,7 +884,8 @@ define('main/directives', ['main/init'], function () {
                     statusInfo.isLoading = true;
 
                     requestData($attrs.navList)
-                        .then(function (data) {
+                        .then(function (results) {
+                            var data = results[0];
                             $scope.isLoading = false;
                             $scope.listData = data.data;
                             $scope.select($scope.listData[0]);
@@ -905,7 +912,8 @@ define('main/directives', ['main/init'], function () {
             link: function ($scope, $element, $attrs, ngModel) {
 
                 requestData($attrs.selectAsync)
-                    .then(function (data) {
+                    .then(function (results) {
+                        var data = results[0];
                         var _options = '<option value="">请选择</option>';
                         var _length = data.length;
                         for (var i = 0; i < _length; i++) {
@@ -947,7 +955,8 @@ define('main/directives', ['main/init'], function () {
 
                 function getData(_data) {
                     requestData(_relativeSelect, _data)
-                        .then(function (data) {
+                        .then(function (results) {
+                            var data = results[0];
                             var _options = isSelectFirst ? '' : '<option value="">请选择</option>';
                             var _length = data.length;
                             var _value = "";
@@ -1028,7 +1037,8 @@ define('main/directives', ['main/init'], function () {
                         $scope.isLoading = true;
                         myChart.showLoading();
                         requestData(_url, _params)
-                            .then(function (_data) {
+                            .then(function (results) {
+                                var _data = results[0];
                                 myChart.hideLoading();
                                 //解决百度图表雷达图 Tip 显示不正确的问题
                                 if (_data.polar) {
@@ -1162,13 +1172,16 @@ define('main/directives', ['main/init'], function () {
                             $scope.processResults(matches, str);
 
                         } else {
-                            requestData($scope.url, {q: str}).then(function (data) {
-                                $scope.searching = false;
-                                $scope.processResults(data, str);
-                            }).catch(function (error) {
-                                $scope.searching = false;
-                                console.error(error);
-                            });
+                            requestData($scope.url, {q: str})
+                                .then(function (results) {
+                                    var data = results[0];
+                                    $scope.searching = false;
+                                    $scope.processResults(data, str);
+                                })
+                                .catch(function (error) {
+                                    $scope.searching = false;
+                                    console.error(error);
+                                });
                         }
                     }
                 };
@@ -1384,7 +1397,8 @@ define('main/directives', ['main/init'], function () {
 
 
                                 //requestData($attrs.selectSource, {q: q})
-                                //    .then(function (data) {
+                                //    .then(function (results) {
+                                //        var data = results[0];
                                 //        var _options = '';
                                 //        var _length = data.length;
                                 //        var _selected = angular.isArray(ngModel.$viewValue) ? ngModel.$viewValue : [ngModel.$viewValue];
@@ -1479,7 +1493,8 @@ define('main/directives', ['main/init'], function () {
                             });
                         } else {
                             requestData($attrs.selectSource)
-                                .then(function (data) {
+                                .then(function (results) {
+                                    var data = results[0];
                                     var _options = '';
                                     var _length = data.length;
                                     var _selected = angular.isArray(ngModel.$viewValue) ? ngModel.$viewValue : [ngModel.$viewValue];
