@@ -358,6 +358,14 @@ body {
   -webkit-transform: translate(0, -50%);
           transform: translate(0, -50%);
 }
+.fieldset {
+  border-radius: 3px;
+  border: 1px solid #E6E6E6;
+  padding: 10px;
+}
+.fieldset legend {
+  padding: 0 10px;
+}
 /**/
 .color-red {
   color: #FF6000;

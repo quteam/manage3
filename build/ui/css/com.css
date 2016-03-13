@@ -87,6 +87,8 @@ body{color:#1E1E1E}
 .pos-lt{position:absolute;top:0;left:0}
 .pos-tr{position:absolute;top:0;right:0}
 .pos-r{position:absolute;top:50%;right:10px;-webkit-transform:translate(0,-50%);transform:translate(0,-50%)}
+.fieldset{border-radius:3px;border:1px solid #E6E6E6;padding:10px}
+.fieldset legend{padding:0 10px}
 .color-red{color:#FF6000}
 .color-blue{color:#15BBF8}
 .color-green{color:#0AD27A}
