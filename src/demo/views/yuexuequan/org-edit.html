@@ -1,0 +1,53 @@
+<div class="page-dialog-wrap">
+    <div class="page-dialog-title">人员配置</div>
+    <div class="page-dialog-content">
+        <div class="form-box">
+            <form name="myForm" action="../data/form-edit.data" form-validator>
+                <div class="form-tr">
+                    <div class="form-th">机构名称</div>
+                    <div class="form-td"><input type="text" class="ipt ipt-short" ng-model="formData.name"/></div>
+                </div>
+                <div class="form-tr">
+                    <div class="form-th">负责人</div>
+                    <div class="form-td">
+                        <select class="select select-w">
+                            <option value="张三">张三</option>gulp
+                            <option value="李四">李四</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-tr">
+                    <div class="form-th">助理</div>
+                    <div class="form-td">
+                        <select class="select select-w">
+                            <option value="张三">张三</option>
+                            <option value="李四">李四</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-tr">
+                    <div class="form-th">语文科目组负责人</div>
+                    <div class="form-td">
+                        <select class="select select-w">
+                            <option value="张三">张三</option>
+                            <option value="李四">李四</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-tr">
+                    <div class="form-th">数学科目组负责人</div>
+                    <div class="form-td">
+                        <select class="select select-w">
+                            <option value="张三">张三</option>
+                            <option value="李四">李四</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mg-m">
+                    <button type="button" class="btn btn-gray" ng-click="closeThisDialog()"><i class="iconfont icon-cancel"></i> 取消</button>
+                    <button type="submit" class="btn btn-primary"><i class="iconfont icon-ok"></i> 保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

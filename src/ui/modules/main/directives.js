@@ -764,7 +764,7 @@ define('main/directives', ['main/init'], function () {
     /**
      * 树状列表2
      */
-    function treeList2(requestData) {
+    function treeList2(requestData, modal, $timeout) {
         return {
             restrict: 'AE',
             require: "?^ngModel",
@@ -785,6 +785,19 @@ define('main/directives', ['main/init'], function () {
                     } else {
                         $li.removeClass("fold");
                         $em.parents("li").addClass("fold");
+                    }
+                };
+
+                $scope.extendTree = function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    var $this = $(e.currentTarget);
+                    if ($this.hasClass("on")) {
+                        $this.removeClass("on");
+                        $this.parent().next().hide();
+                    } else {
+                        $this.addClass("on");
+                        $this.parent().next().show();
                     }
                 };
 
@@ -842,11 +855,17 @@ define('main/directives', ['main/init'], function () {
                         });
                 }
 
-                $attrs.$observe("treeList2", getTreeData)
+                $attrs.$observe("treeList2", getTreeData);
+
+                //弹窗修改后的回调
+                $scope.submitCallBack = function (_curRow, _data) {
+                    modal.closeAll();
+                    getTreeData();
+                };
             }
         }
     };
-    treeList2.$inject = ["requestData"];
+    treeList2.$inject = ["requestData", "modal", "$timeout"];
 
     /**
      * 导航列表

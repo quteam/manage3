@@ -947,3 +947,83 @@ html.ngdialog-open, body.ngdialog-open { overflow: hidden; }
 
 /* 项目 */
 @import "project";
+/**/
+.tree-org {
+}
+.tree-org ul {
+	padding-left: 40px;
+}
+.tree-org li {
+	margin: 0px 0;
+	list-style-type: none;
+	position: relative;
+	padding: 10px 5px 0px 5px;
+	&:before {
+		content: '';
+		position: absolute;
+		top: 0;
+		width: 1px;
+		height: 100%;
+		right: auto;
+		left: -20px;
+		border-left: 1px solid #CCC;
+		bottom: 50px;
+	}
+	&:after {
+		content: '';
+		position: absolute;
+		top: 25px;
+		width: 25px;
+		height: 20px;
+		right: auto;
+		left: -20px;
+		border-top: 1px solid #CCC;
+	}
+	.name {
+		display: inline-block;
+		border: 1px solid #CCC;
+		padding: 5px 10px;
+		min-width: 80px;
+		text-align: center;
+		text-decoration: none;
+		color: #666;
+		font-size: 12px;
+		border-radius: 5px;
+		cursor: pointer;
+		position: relative;
+	}
+	.extend {
+		position: absolute;
+		top: 50%;
+		right: -20px;
+		transform: translate(0, -50%);
+		color: #AAA;
+		cursor: pointer;
+		&:before {
+			content: "\e602"
+		}
+		&.on:before {
+			content: "\e61a"
+		}
+	}
+}
+/*Remove connectors before root*/
+.tree-org > ul > li::before, .tree-org > ul > li::after {
+	border: 0;
+}
+/*Remove connectors after last child*/
+.tree-org li:last-child::before {
+	height: 25px;
+}
+/*Time for some hover effects*/
+/*We will apply the hover effect the the lineage of the element also*/
+.tree-org li .name:hover, .tree-org li .name:hover + ul li .name {
+	background: #C8E4F8; color: #000; border: 1px solid #94A0B4;
+}
+/*Connector styles on hover*/
+.tree-org li .name:hover + ul li:after,
+.tree-org li .name:hover + ul li:before,
+.tree-org li .name:hover + ul:before,
+.tree-org li .name:hover + ul ul:before {
+	border-color: #94A0B4;
+}

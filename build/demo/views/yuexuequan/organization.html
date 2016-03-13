@@ -1,0 +1,56 @@
+<div ng-controller="pageCtrl">
+    <div class="top-nav-wrap">
+        <div class="back backBtn"><i class="iconfont icon-back"></i></div>
+        <div class="title2">组织架构</div>
+        <div class="right">
+            <div class="nav">
+                <a class="li" href="#/project-add.html"><i class="iconfont icon-plus"></i></a>
+                <a class="li"><i class="iconfont icon-search"></i></a>
+                <a class="li"><i class="iconfont icon-bell"></i><i class="tip" ng-if="mainStatus.msgBubble">{{mainStatus.msgBubble}}</i></a>
+            </div>
+        </div>
+    </div>
+    <div class="page-main">
+        <div class="tree-org" tree-list2="../data/tree-org.data">
+            <ul ng-if="treeList.length">
+                <li ng-repeat="tree in treeList">
+                    <span class="name">{{tree.name}}</span>
+                    <ul ng-if="tree.nodes.length">
+                        <li ng-repeat="tree2 in tree.nodes">
+                            <span class="name" modal-right="400" modal-scope="this" modal-url="views/yuexuequan/org-edit.html?id={{tree2.id}}">{{tree2.name}}</span>
+                            <ul ng-if="tree2.nodes.length">
+                                <li ng-repeat="tree3 in tree2.nodes">
+                                    <span class="name" modal-right="400" modal-scope="this" modal-url="views/yuexuequan/org-edit.html?id={{tree3.id}}">
+                                        {{tree3.name}}
+                                        <span class="extend iconfont" ng-if="tree3.nodes.length" ng-click="extendTree($event)"></span>
+                                    </span>
+                                    <ul ng-if="tree3.nodes.length" class="undis">
+                                        <li ng-repeat="tree4 in tree3.nodes">
+                                            <span class="name" modal-right="400" modal-scope="this" modal-url="views/yuexuequan/org-edit.html?id={{tree4.id}}">
+                                                {{tree4.name}}
+                                                <span class="extend iconfont" ng-if="tree4.nodes.length" ng-click="extendTree($event)"></span>
+                                            </span>
+                                            <ul ng-if="tree4.nodes.length" class="undis">
+                                                <li ng-repeat="tree5 in tree4.nodes">
+                                                    <span class="name" modal-right="400" modal-scope="this" modal-url="views/yuexuequan/org-edit.html?id={{tree5.id}}">
+                                                        {{tree5.name}}
+                                                        <span class="extend iconfont" ng-if="tree5.nodes.length" ng-click="extendTree($event)"></span>
+                                                    </span>
+                                                    <ul ng-if="tree5.nodes.length" class="undis">
+                                                        <li ng-repeat="tree6 in tree5.nodes">
+                                                            <span class="name" modal-right="400" modal-scope="this" modal-url="views/yuexuequan/org-edit.html?id={{tree6.id}}">{{tree6.name}}</span>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
