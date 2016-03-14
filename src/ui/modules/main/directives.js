@@ -104,6 +104,7 @@ define('main/directives', ['main/init'], function () {
                             }
                         })
                         .catch(function () {
+                            $scope.details = {};
                             $scope.isLoading = false;
                         });
                 }
@@ -675,13 +676,14 @@ define('main/directives', ['main/init'], function () {
     /**
      * 树状列表
      */
-    function treeList(requestData) {
+    function treeList(requestData, $timeout) {
         return {
             restrict: 'AE',
             scope: {},
             require: "?^ngModel",
             templateUrl: 'tpl/tree.html',
             link: function ($scope, $element, $attrs, ngModel) {
+                var isFirstLoad = true;
                 $scope.status = {};
                 $scope.treeList = [];
                 $scope.curTree = {};
@@ -707,11 +709,9 @@ define('main/directives', ['main/init'], function () {
                     var i = 0;
                     while (data.length != 0) {
                         if (data[i].pid == "0") {
-                            tree.push({
-                                id: data[i].id,
-                                name: data[i].name,
-                                nodes: []
-                            });
+                            var _obj = angular.copy(data[i]);
+                            _obj.nodes = [];
+                            tree.push(_obj);
                             pos[data[i].id] = [tree.length - 1];
                             data.splice(i, 1);
                             i--;
@@ -749,6 +749,18 @@ define('main/directives', ['main/init'], function () {
                             var data = results[0];
                             $scope.treeList = buildTree(data);
                             $scope.status.isLoading = false;
+                            if (isFirstLoad) {
+                                isFirstLoad = false;
+                                $timeout(function () {
+                                    var $em = $element.find("em");
+                                    for (var i = 0, l = $em.length; i < l; i++) {
+                                        $em.eq(i).trigger("click");
+                                        if ($em.eq(i).next("ul").length == 0) {
+                                            break;
+                                        }
+                                    }
+                                })
+                            }
                         })
                         .catch(function () {
                             $scope.status.isLoading = false;
@@ -759,7 +771,7 @@ define('main/directives', ['main/init'], function () {
             }
         }
     };
-    treeList.$inject = ["requestData"];
+    treeList.$inject = ["requestData", "$timeout"];
 
     /**
      * 树状列表2
@@ -807,11 +819,9 @@ define('main/directives', ['main/init'], function () {
                     var i = 0;
                     while (data.length != 0) {
                         if (data[i].pid == "0") {
-                            tree.push({
-                                id: data[i].id,
-                                name: data[i].name,
-                                nodes: []
-                            });
+                            var _obj = angular.copy(data[i]);
+                            _obj.nodes = [];
+                            tree.push(_obj);
                             pos[data[i].id] = [tree.length - 1];
                             data.splice(i, 1);
                             i--;
