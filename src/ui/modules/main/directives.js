@@ -749,7 +749,7 @@ define('main/directives', ['main/init'], function () {
                             var data = results[0];
                             $scope.treeList = buildTree(data);
                             $scope.status.isLoading = false;
-                            if (isFirstLoad) {
+                            if (isFirstLoad && angular.isDefined($attrs.selectFirst)) {
                                 isFirstLoad = false;
                                 $timeout(function () {
                                     var $em = $element.find("em");

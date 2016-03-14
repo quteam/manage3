@@ -66,7 +66,7 @@
                         <div class="flex-item flex-row flex-item-6">
                             <div class="flex-item column-layout-wrap column-layout-wrap2">
                                 <div class="side-wrap">
-                                    <div class="tree-list" tree-list="../data/tree.data" ng-model="itemData.item"></div>
+                                    <div class="tree-list" tree-list="../data/tree.data" ng-model="itemData.item" select-first></div>
                                 </div>
                                 <div class="main-wrap">
                                     <div details-info="../data/project-details.data" details-params='{id:{{itemData.item.id||0}}}'>
@@ -96,7 +96,7 @@
                         <div class="flex-item flex-row flex-item-6">
                             <div class="flex-item column-layout-wrap column-layout-wrap2">
                                 <div class="side-wrap">
-                                    <div class="tree-list" tree-list="../data/tree.data" ng-model="itemData.item2" select-first></div>
+                                    <div class="tree-list" tree-list="../data/tree.data" ng-model="itemData.item2"></div>
                                 </div>
                                 <div class="main-wrap">
                                     <div details-info="../data/form-structure.data" details-params='{id:"{{itemData.item2.id||0}}"}'>
