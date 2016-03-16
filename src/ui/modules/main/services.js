@@ -37,7 +37,7 @@ define('main/services', ['main/init'], function () {
                     if (status == 200 && _data.code == 200) {
                         defer.resolve([_data.data, _data]);
                     } else {
-                        defer.reject(_data.msg || '出错了');
+                        defer.reject(_data.message || '出错了');
                     }
                 })
                 .error(function () {
