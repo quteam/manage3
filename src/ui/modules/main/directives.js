@@ -692,14 +692,18 @@ define('main/directives', ['main/init'], function () {
                 $scope.selectTree = function (tree, e) {
                     var $li = $element.find("li");
                     var $em = $(e.currentTarget);
+                    var $parentLi = $em.parent("li");
                     var _tree = angular.copy(tree);
                     if (_tree.nodes.length == 0) {
                         $li.removeClass("on");
-                        $em.parent("li").addClass("on");
+                        $parentLi.addClass("on");
                         ngModel && ngModel.$setViewValue(_tree);
                     } else {
-                        $li.removeClass("fold");
-                        $em.parents("li").addClass("fold");
+                        if ($parentLi.hasClass("fold")) {
+                            $parentLi.removeClass("fold");
+                        } else {
+                            $parentLi.addClass("fold");
+                        }
                     }
                 };
 
@@ -789,14 +793,18 @@ define('main/directives', ['main/init'], function () {
                 $scope.selectTree = function (tree, e) {
                     var $li = $element.find("li");
                     var $em = $(e.currentTarget);
+                    var $parentLi = $em.parent("li");
                     var _tree = angular.copy(tree);
                     if (_tree.nodes.length == 0) {
                         $li.removeClass("on");
-                        $em.parent("li").addClass("on");
+                        $parentLi.addClass("on");
                         ngModel && ngModel.$setViewValue(_tree);
                     } else {
-                        $li.removeClass("fold");
-                        $em.parents("li").addClass("fold");
+                        if ($parentLi.hasClass("fold")) {
+                            $parentLi.removeClass("fold");
+                        } else {
+                            $parentLi.addClass("fold");
+                        }
                     }
                 };
 

@@ -367,17 +367,20 @@ body {
   padding: 0 10px;
 }
 /**/
-.color-red {
+.color-gray {
+  color: #787878;
+}
+.color-orange {
   color: #FF6000;
+}
+.color-red {
+  color: #F00;
 }
 .color-blue {
   color: #15BBF8;
 }
 .color-green {
   color: #0AD27A;
-}
-.color-gray {
-  color: #787878;
 }
 /**/
 .text-muted {
@@ -1082,6 +1085,9 @@ body {
 .icon-quit:before {
   content: "\e62d";
 }
+.icon-clock:before {
+  content: "\e630";
+}
 .icon-star:before {
   content: "\e62a";
 }
@@ -1141,6 +1147,9 @@ body {
 }
 .icon-radio:before {
   content: "\e622";
+}
+.icon-view:before {
+  content: "\e62f";
 }
 .icon-o {
   display: inline-block;
@@ -1219,7 +1228,7 @@ body {
   box-sizing: border-box;
   padding: 5px 10px;
   border-radius: 3px;
-  background: transparent;
+  background-color: #FFF;
   border: 1px solid #E6E6E6;
   outline: none;
 }
@@ -2116,7 +2125,7 @@ body {
   padding: 6px 12px;
   margin-left: -1px;
   line-height: 1.42857143;
-  color: #337AB7;
+  color: #777;
   text-decoration: none;
   background-color: #FFF;
   border: 1px solid #DDD;
@@ -2136,7 +2145,7 @@ body {
 .pagination > li > span:hover,
 .pagination > li > a:focus,
 .pagination > li > span:focus {
-  color: #23527C;
+  color: #777;
   background-color: #EEE;
   border-color: #DDD;
 }
@@ -2158,7 +2167,7 @@ body {
 .pagination > .disabled > a,
 .pagination > .disabled > a:hover,
 .pagination > .disabled > a:focus {
-  color: #777;
+  color: #CCC;
   cursor: not-allowed;
   background-color: #FFF;
   border-color: #DDD;

@@ -98,10 +98,11 @@ body { color: #1E1E1E; }
 	}
 }
 /**/
-.color-red { color: #FF6000; }
+.color-gray { color: #787878; }
+.color-orange { color: #FF6000; }
+.color-red { color: #F00; }
 .color-blue { color: #15BBF8; }
 .color-green { color: #0AD27A; }
-.color-gray { color: #787878; }
 /**/
 .text-muted { opacity: .7; }
 .text-tips { color: #9EA0A2 }
@@ -241,6 +242,7 @@ body { color: #1E1E1E; }
 .icon-next:before { content: "\e604"; }
 .icon-pic:before { content: "\e621"; }
 .icon-quit:before { content: "\e62d"; }
+.icon-clock:before { content: "\e630"; }
 .icon-star:before { content: "\e62a"; }
 .icon-import:before { content: "\e611"; }
 .icon-cancel:before { content: "\e60e"; }
@@ -261,6 +263,7 @@ body { color: #1E1E1E; }
 .icon-7:before { content: "\e629"; }
 .icon-insert-right:before { content: "\e620"; }
 .icon-radio:before { content: "\e622"; }
+.icon-view:before { content: "\e62f"; }
 .icon-o { display: inline-block; padding: .4em; border-radius: 100%; border: 1px solid #787878; }
 /**/
 .animation { -webkit-transition: all .2s ease; transition: all .2s ease; }
@@ -279,7 +282,7 @@ body { color: #1E1E1E; }
 .ipt-xshort { width: 80px; }
 .ipt-s { height: 28px; line-height: 1.4; }
 .ipt-noborder { border: none; background: transparent; }
-.textarea { width: 280px; height: 100px; box-sizing: border-box; padding: 5px 10px; border-radius: 3px; background: transparent; border: 1px solid #E6E6E6; outline: none; }
+.textarea { width: 280px; height: 100px; box-sizing: border-box; padding: 5px 10px; border-radius: 3px; background-color: #FFF; border: 1px solid #E6E6E6; outline: none; }
 .textarea-block { width: 100%; }
 .label { position: relative; display: inline-block; min-width: 70px; padding-left: 20px; margin-bottom: 0; margin-right: 10px; font-weight: normal; vertical-align: middle; cursor: pointer; }
 /*.label + .label { margin-left: 10px; }*/
@@ -479,7 +482,7 @@ body { color: #1E1E1E; }
 	padding: 6px 12px;
 	margin-left: -1px;
 	line-height: 1.42857143;
-	color: #337AB7;
+	color: #777;
 	text-decoration: none;
 	background-color: #FFF;
 	border: 1px solid #DDD;
@@ -499,7 +502,7 @@ body { color: #1E1E1E; }
 .pagination > li > span:hover,
 .pagination > li > a:focus,
 .pagination > li > span:focus {
-	color: #23527C;
+	color: #777;
 	background-color: #EEE;
 	border-color: #DDD;
 }
@@ -521,7 +524,7 @@ body { color: #1E1E1E; }
 .pagination > .disabled > a,
 .pagination > .disabled > a:hover,
 .pagination > .disabled > a:focus {
-	color: #777;
+	color: #CCC;
 	cursor: not-allowed;
 	background-color: #FFF;
 	border-color: #DDD;

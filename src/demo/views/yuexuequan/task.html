@@ -1,0 +1,78 @@
+<div ng-controller="pageCtrl" ng-init="mainStatus.navigation='example'">
+    <div class="top-nav-wrap">
+        <div class="back backBtn"><i class="iconfont icon-back"></i></div>
+        <div class="title2">任务</div>
+        <div class="right">
+            <div class="nav">
+                <a class="li"><i class="iconfont icon-plus"></i></a>
+                <a class="li"><i class="iconfont icon-search"></i></a>
+                <a class="li"><i class="iconfont icon-bell"></i><i class="tip" ng-if="mainStatus.msgBubble">{{mainStatus.msgBubble}}</i></a>
+            </div>
+        </div>
+    </div>
+    <div class="page-main">
+        <table-list list-data="../data/yuexuequan/table-task.data" list-params="listParams" ng-model="tableSelected">
+            <div class="loader" ng-if="status.isLoading">
+                <div class="loader-inner pacman">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+            <div ng-if="!status.isLoading">
+                <div class="empty-wrap" ng-if="tbodyList.length==0">
+                    <div class="icon"><i class="iconfont icon-empty"></i></div>
+                    <div>什么也没有</div>
+                </div>
+                <div ng-if="tbodyList.length">
+                    <div class="mg-m">
+                        <div>
+                            <button type="button" class="btn btn-short" modal-right="80%" modal-scope="this" modal-url="views/yuexuequan/task-view.html">
+                                <i class="iconfont icon-plus"></i> 新建
+                            </button>
+                        </div>
+                    </div>
+                    <table class="table-list">
+                        <thead>
+                        <tr>
+                            <th ng-repeat="th in theadList">{{th}}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="tr in tbodyList">
+                            <td>{{tr.col1}}</td>
+                            <td>{{tr.col2}}</td>
+                            <td>{{tr.col3}}</td>
+                            <td>{{tr.col4}}</td>
+                            <td>
+                                <span class="color-green" ng-if="tr.status==1">进行中</span>
+                                <span class="color-gray" ng-if="tr.status==2">过期</span>
+                                <span class="color-red" ng-if="tr.overdue">（工作报告逾期{{tr.overdue}}天）</span>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-s btn-white" modal-right="80%" modal-scope="this" modal-url="views/yuexuequan/task-view.html">
+                                    <i class="iconfont icon-view"></i> 查看
+                                </button>
+                                <button type="button"
+                                        class="btn btn-s btn-orange"
+                                        ng-if="tr.status==1"
+                                        ng-click="changeStatus('../data/yuexuequan/task-remind.data','确定提醒?')"
+                                >
+                                    <i class="iconfont icon-clock"></i> 提醒
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="clearfix">
+                        <div class="fr">
+                            <pagination status="status"></pagination>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </table-list>
+    </div>
+</div>

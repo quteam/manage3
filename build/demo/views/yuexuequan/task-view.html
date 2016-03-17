@@ -1,0 +1,98 @@
+<div class="page-dialog-wrap">
+    <div class="page-dialog-title">任务详情</div>
+    <div class="page-dialog-content">
+        <div class="form-box">
+            <form name="myForm" action="../data/form.data" form-validator>
+                <div class="form-tr">
+                    <div class="form-th">任务名称</div>
+                    <div class="form-td"><input type="text" class="ipt" ng-model="formData.name"/></div>
+                </div>
+                <div class="form-tr">
+                    <div class="form-th">截止时间</div>
+                    <div class="form-td">
+                        <input type="date" class="ipt"/>
+                    </div>
+                </div>
+                <div class="form-tr">
+                    <div class="form-th">任务内容</div>
+                    <div class="form-td">
+                        <textarea class="textarea textarea-block"></textarea>
+                    </div>
+                </div>
+                <div class="form-tr">
+                    <div class="form-th">汇报周期</div>
+                    <div class="form-td">
+                        <span class="form-ctrl">每周</span>
+                    </div>
+                </div>
+                <div class="form-tr">
+                    <div class="form-th">执行人</div>
+                    <div class="form-td">
+                        <span class="form-ctrl">张三</span>
+                    </div>
+                </div>
+                <div class="form-tr">
+                    <div class="form-th">工作报告</div>
+                    <div class="form-td" ng-init='
+                    oldReports=[
+                        {"date":"2016-03-17","zj":"asdfsadf","jh":"dfdfwesadf"},
+                        {"date":"2016-03-16","zj":"asdfadfa","jh":"ewrw3r3"}
+                    ]
+                    '>
+                        <custom-config ng-model="formData.reports">
+                            <table class="table-list table-list-top">
+                                <thead>
+                                <tr>
+                                    <th width="10%">日期</th>
+                                    <th width="40%">总结</th>
+                                    <th width="40%">计划</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="tr in oldReports">
+                                    <td>{{tr.date}}</td>
+                                    <td>
+                                        {{tr.zj}}
+                                    </td>
+                                    <td>
+                                        {{tr.jh}}
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr ng-repeat="tr in dataList">
+                                    <td></td>
+                                    <td>
+                                        <textarea class="textarea textarea-block" ng-model="tr.zj"></textarea>
+                                    </td>
+                                    <td>
+                                        <textarea class="textarea textarea-block" ng-model="tr.jh"></textarea>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-s btn-orange" ng-click="delRow($index)"><i class="iconfont icon-delete"></i> 删除</button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <td></td>
+                                    <td colspan="4">
+                                        <button type="button" class="btn btn-s btn-primary" ng-click="addRow()"><i class="iconfont icon-plus"></i> 新增</button>
+                                    </td>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </custom-config>
+                    </div>
+                </div>
+                <div class="form-tr">
+                    <div class="form-th"></div>
+                    <div class="form-td">
+                        <button type="button" class="btn btn-gray" ng-click="closeThisDialog()"><i class="iconfont icon-cancel"></i> 取消</button>
+                        <button type="submit" class="btn btn-primary"><i class="iconfont icon-ok"></i> 保存</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
