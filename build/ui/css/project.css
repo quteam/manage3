@@ -36,3 +36,5 @@
 .process-bar .bar .num{position:absolute;bottom:5px;right:5px;font-size:20px;font-style:normal;color:#15BBF8}
 .process-bar-2 .bar i{background:-webkit-gradient(linear,0 0,100% 0,from(#FFE0CE),to(#FF6000))}
 .process-bar-2 .bar .num{color:#FF6000}
+.import-score-wrap .studentNameIpt .ipt{height:50px;padding:5px 15px}
+.import-score-wrap .studentScoreIpt{height:50px;padding:5px 15px}

@@ -8,7 +8,7 @@ define('project/controllers', ['project/init'], function () {
         $scope.formData = {};
 
         $scope.typeStudent = function () {
-            $element.find("input").eq(1).focus();
+            $element.find(".studentScoreIpt").focus();
         };
 
         $scope.typeScore = function ($e, _url, _data) {
@@ -18,8 +18,9 @@ define('project/controllers', ['project/init'], function () {
                         //刷新数据
                         $scope.formData.time = Date.now();
                         //
-                        var $ipt = $element.find("input");
-                        $ipt.val("").eq(0).focus();
+                        var $ipt = $element.find(".studentNameIpt input");
+                        $ipt.val("").focus();
+                        $element.find(".studentScoreIpt").val("");
                     })
                     .catch(function (error) {
                         alert(error || '录入成绩错误');
@@ -57,9 +58,9 @@ define('project/controllers', ['project/init'], function () {
                 //        $scope.formData.recipient.splice(_index, 1);
                 //    }
                 //} else {
-                    if (_index == -1) {
-                        $scope.formData.recipient.push(_node.id);
-                    }
+                if (_index == -1) {
+                    $scope.formData.recipient.push(_node.id);
+                }
                 //}
             });
             //if (!isSelected) {

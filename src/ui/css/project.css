@@ -183,3 +183,12 @@
 .process-bar-2 .bar .num {
   color: #FF6000;
 }
+/**/
+.import-score-wrap .studentNameIpt .ipt {
+  height: 50px;
+  padding: 5px 15px;
+}
+.import-score-wrap .studentScoreIpt {
+  height: 50px;
+  padding: 5px 15px;
+}
