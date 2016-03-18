@@ -1,0 +1,108 @@
+<div ng-controller="pageCtrl" ng-init="mainStatus.navigation='example'">
+    <div class="top-nav-wrap">
+        <div class="back backBtn"><i class="iconfont icon-back"></i></div>
+        <div class="title2">成绩</div>
+        <div class="right">
+            <div class="nav">
+                <a class="li"><i class="iconfont icon-plus"></i></a>
+                <a class="li"><i class="iconfont icon-search"></i></a>
+                <a class="li"><i class="iconfont icon-bell"></i><i class="tip" ng-if="mainStatus.msgBubble">{{mainStatus.msgBubble}}</i></a>
+            </div>
+        </div>
+    </div>
+    <div class="page-main">
+        <div class="mgb-l"><span class="text-l">录入成绩</span></div>
+        <div class="form-box import-score-wrap" ng-controller="importScoreCtrl">
+            <div class="form-tr">
+                <div class="form-th">第一步</div>
+                <div class="form-td">
+                    <select class="select">
+                        <option value="高一1班">高一1班</option>
+                        <option value="高一2班">高一2班</option>
+                        <option value="高一3班">高一3班</option>
+                    </select>
+                    <select class="select">
+                        <option value="语文">语文</option>
+                        <option value="数学">数学</option>
+                        <option value="英语">英语</option>
+                    </select>
+                    <input type="date" class="ipt ipt-short"/>
+                </div>
+            </div>
+            <div class="form-tr">
+                <div class="form-th">第二步</div>
+                <div class="form-td">
+                    <div class="mg-s">录入成绩:
+                        <select class="select" ng-model="formData.importType" ng-init="formData.importType='按姓名录入'">
+                            <option value="按姓名录入">按姓名录入</option>
+                            <option value="按学号录入">按学号录入</option>
+                        </select>
+                    </div>
+                    <div class="mg-l">
+                        <span angucomplete
+                              placeholder="输入考生姓名"
+                              title-field="text"
+                              url="../data/yuexuequan/select-person.data"
+                              class="inline-block studentNameIpt"
+                              ng-model="formData.studentName"
+                              ng-change="typeStudent()"
+                              ng-if="formData.importType=='按姓名录入'"
+                        ></span>
+                        <span angucomplete
+                              placeholder="输入考生学号"
+                              title-field="text"
+                              url="../data/yuexuequan/select-person.data"
+                              class="inline-block studentNameIpt"
+                              ng-model="formData.studentID"
+                              ng-change="typeStudent()"
+                              ng-if="formData.importType=='按学号录入'"
+                        ></span>
+
+                        <input type="number" min="0" max="150"
+                               class="ipt ipt-short studentScoreIpt"
+                               ng-model="formData.studentScore"
+                               ng-keyup="typeScore($event,'../data/form.data',formData)"
+                               placeholder="输入成绩"/>
+                    </div>
+                </div>
+            </div>
+            <div class="form-tr">
+                <div class="form-th">第三步</div>
+                <div class="form-td"
+                     details-info="../data/yuexuequan/table-score.data"
+                     details-params="{t:'{{formData.time}}'}">
+                    <div class="mg-s">
+                        录入详情（<span class="color-red">{{details.num1}}人未录入</span>，<span class="color-green">{{details.num2}}人已录入</span>）
+                    </div>
+                    <div class="mg-s">
+                        <table class="table-list">
+                            <thead>
+                            <tr>
+                                <th>成绩录入情况</th>
+                                <th>班级</th>
+                                <th>学号</th>
+                                <th>姓名</th>
+                                <th>科目</th>
+                                <th>成绩</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="tr in details.list">
+                                <td>
+                                    <span ng-if="!tr.score" class="color-red">未录入</span>
+                                    <span ng-if="tr.score" class="color-green">已录入</span>
+                                </td>
+                                <td>{{tr.col1}}</td>
+                                <td>{{tr.col2}}</td>
+                                <td>{{tr.col3}}</td>
+                                <td>{{tr.col4}}</td>
+                                <td>{{tr.score}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
