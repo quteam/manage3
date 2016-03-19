@@ -88,7 +88,9 @@ define('main/directives', ['main/init'], function () {
                         }, true);
                     }
                 } else {
-                    getData({});
+                    $attrs.$observe("detailsInfo", function (value) {
+                        getData({});
+                    });
                 }
 
                 function getData(params) {

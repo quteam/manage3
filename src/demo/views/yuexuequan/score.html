@@ -21,7 +21,7 @@
                         <option value="高一2班">高一2班</option>
                         <option value="高一3班">高一3班</option>
                     </select>
-                    <select class="select">
+                    <select class="select" ng-model="formData.km">
                         <option value="语文">语文</option>
                         <option value="数学">数学</option>
                         <option value="英语">英语</option>
@@ -68,9 +68,7 @@
             </div>
             <div class="form-tr">
                 <div class="form-th">第三步</div>
-                <div class="form-td"
-                     details-info="../data/yuexuequan/table-score.data"
-                     details-params="{t:'{{formData.time}}'}">
+                <div class="form-td" details-info="../data/yuexuequan/table-score.data?km={{formData.km}}&t={{formData.time}}">
                     <div class="mg-s">
                         录入详情（<span class="color-red">{{details.num1}}人未录入</span>，<span class="color-green">{{details.num2}}人已录入</span>）
                     </div>
