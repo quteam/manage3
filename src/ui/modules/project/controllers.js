@@ -4,7 +4,7 @@
 
 define('project/controllers', ['project/init'], function () {
     //录入成绩
-    function importScoreCtrl($scope, requestData, $element) {
+    function importScoreCtrl($scope, requestData, $element, dialogConfirm, modal) {
         $scope.formData = {};
 
         $scope.typeStudent = function () {
@@ -26,9 +26,22 @@ define('project/controllers', ['project/init'], function () {
                         alert(error || '录入成绩错误');
                     });
             }
+        };
+
+        $scope.saveScore = function (_text, _url, _data) {
+            dialogConfirm(_text, function () {
+                requestData(_url, _data)
+                    .then(function () {
+                        modal.closeAll();
+                    })
+                    .catch(function (error) {
+                        alert(error || '保存错误');
+                    })
+            });
         }
+
     };
-    importScoreCtrl.$inject = ['$scope', 'requestData', '$element'];
+    importScoreCtrl.$inject = ['$scope', 'requestData', '$element', 'dialogConfirm', 'modal'];
 
     //发送通知
     function noticePageCtrl($scope, $element, $timeout) {
