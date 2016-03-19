@@ -1067,7 +1067,7 @@ define('main/directives', ['main/init'], function () {
                             loadChart($attrs.chart);
                         });
                     }
-                    loadChart($attrs.chart);
+                    loadChart($attrs.chart, $scope.chartParams);
 
                     function loadChart(_url, _params) {
                         if ($scope.isLoading) {
