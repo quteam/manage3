@@ -1164,6 +1164,7 @@ body {
 }
 .overhide {
   overflow: hidden;
+  text-overflow: ellipsis;
 }
 /**/
 .point {
