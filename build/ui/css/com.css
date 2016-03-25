@@ -520,6 +520,17 @@ body{color:#1E1E1E}
 .step-warp .step:after{position:absolute;z-index:2;top:0;right:-16px;content:"";border-left:18px solid #EFEFF0;border-top:18px solid transparent;border-bottom:18px solid transparent}
 .step-warp .step.on{background:#05C0EE;color:#FFF}
 .step-warp .step.on:after{border-left-color:#05C0EE}
+.step2-warp{margin:10px 0;font-size:0}
+.step2-warp .step{display:inline-block;background:#EFEFF0;line-height:70px;width:70px;height:70px;text-align:center;border-radius:40px;position:relative;margin-left:50px;font-size:14px}
+.step2-warp .step:first-child{margin-left:0}
+.step2-warp .step:first-child:before{display:none}
+.step2-warp .step:before{position:absolute;z-index:1;top:35px;left:-50px;content:"";border-top:1px solid #EFEFF0;width:50px}
+.step2-warp .step.on{background:#05C0EE;color:#FFF}
+.step2-warp .step.on:before{border-color:#05C0EE}
+.step2-warp .step.cur{background:#0AD27A;color:#FFF}
+.step2-warp .step.cur:before{border-color:#0AD27A}
+.step2-warp .step.fail{background:red;color:#FFF}
+.step2-warp .step.fail:before{border-color:red}
 @-webkit-keyframes ngdialog-fadeout{0%{opacity:1}
 100%{opacity:0}
 }

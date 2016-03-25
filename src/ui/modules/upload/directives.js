@@ -9,7 +9,8 @@ define('upload/directives', ['upload/init'], function () {
             restrict: 'EA',
             scope: {
                 ngModel: "=",
-                uploadMax: "=?",
+                uploadMax: "@",
+                uploadSize: "@",
                 width: "@",
                 height: "@"
             },
@@ -22,6 +23,7 @@ define('upload/directives', ['upload/init'], function () {
                 $scope.delFile = delFile;
                 $scope.ngModel = $scope.ngModel || [];
                 $scope.uploadMax = $scope.uploadMax || 99;
+                $scope.uploadSize = $scope.uploadSize || 1000;
                 $scope.width = $scope.width ? $scope.width : 120 + "px";
                 $scope.height = $scope.height ? $scope.height : 100 + "px";
 
@@ -44,6 +46,10 @@ define('upload/directives', ['upload/init'], function () {
                     for (var i = 0, l = files.length; i < l; i++) {
                         if ($scope.fileList.length >= $scope.uploadMax) {
                             alert("超过文件上传数");
+                            return;
+                        }
+                        if (files[i].size / 1024 > $scope.uploadSize) {
+                            alert("文件大小不能超过 " + $scope.uploadSize + " K");
                             return;
                         }
                         switch (fileType) {
