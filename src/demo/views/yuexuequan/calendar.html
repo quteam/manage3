@@ -1,0 +1,83 @@
+<div ng-controller="pageCtrl">
+    <div class="top-nav-wrap">
+        <div class="back backBtn"><i class="iconfont icon-back"></i></div>
+        <div class="title2">日历系统</div>
+        <div class="right">
+            <div class="nav">
+                <a class="li" href="#/project-add.html"><i class="iconfont icon-plus"></i></a>
+                <a class="li"><i class="iconfont icon-search"></i></a>
+                <a class="li"><i class="iconfont icon-bell"></i><i class="tip" ng-if="mainStatus.msgBubble">{{mainStatus.msgBubble}}</i></a>
+            </div>
+        </div>
+    </div>
+    <div class="page-main">
+        <div class="col-group">
+            <div class="col-8">
+                <div class="project-auth" details-info="../data/project-panel.data">
+                    <div class="list" ng-init="current={}">
+                        <div ng-repeat="auth in details.authList">
+                            <div class="li" ng-class="{on:current.show==$index}" ng-click="current.show=(current.show==$index?-1:$index);">
+                                <div class="col col-1">{{auth.name}}</div>
+                                <div class="col col-2">{{auth.num}}</div>
+                                <div class="col col-3">{{auth.unit}}</div>
+                            </div>
+                            <div class="li-sub" ng-if="current.show==$index">
+                                <table-list list-data="../data/table-list.data?id={{auth.id}}">
+                                    <div class="loader" ng-if="status.isLoading">
+                                        <div class="loader-inner pacman">
+                                            <div></div>
+                                            <div></div>
+                                            <div></div>
+                                            <div></div>
+                                            <div></div>
+                                        </div>
+                                    </div>
+                                    <div ng-if="!status.isLoading">
+                                        <div class="empty-wrap" ng-if="tbodyList.length==0">
+                                            <div class="icon"><i class="iconfont icon-empty"></i></div>
+                                            <div>什么也没有</div>
+                                        </div>
+                                        <div ng-if="tbodyList.length">
+                                            <table class="table-list">
+                                                <thead>
+                                                <tr>
+                                                    <th>户型名称</th>
+                                                    <th>房屋用途</th>
+                                                    <th>房 型</th>
+                                                    <th>预售面积</th>
+                                                    <th>附属/赠送类型和面积</th>
+                                                    <th>户型图</th>
+                                                    <th>其他信息</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr ng-repeat="tr in tbodyList">
+                                                    <td>{{tr.name}}</td>
+                                                    <td>{{tr.col1}}</td>
+                                                    <td>{{tr.col2}}</td>
+                                                    <td>{{tr.col3}}</td>
+                                                    <td>{{tr.col4}}</td>
+                                                    <td>{{tr.col5}}</td>
+                                                    <td>{{tr.col6}}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </table-list>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="mg-m">
+                    <input type="text" class="ipt ipt-block" placeholder="请输入关键字"/>
+                </div>
+                <div class="mg-m">
+                    <div date-picker class="date-picker-block" view="date" min-view="date"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

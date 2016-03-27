@@ -1,0 +1,34 @@
+/**
+ * Manage System v3.0 | haovei@qq.com
+ */
+.hide-text{font:0/0 a;color:transparent;text-shadow:none;background-color:transparent;border:0}
+.input-block-level{display:block;width:100%;min-height:30px;box-sizing:border-box}
+.date-picker-date-time{position:absolute}
+.date-range .date-picker-date-time{position:inherit}
+[date-picker-wrapper]{position:absolute;min-width:220px;z-index:10;display:block;font-size:14px}
+[date-time-append] [date-picker-wrapper] [date-picker]{margin-top:-30px;box-shadow:rgba(0,0,0,.5)}
+[date-time-append] [date-picker]{position:relative;margin-right:-1000px;margin-bottom:-1000px}
+[date-range] [date-picker] .after.before{color:#FFF;text-shadow:0 -1px 0 rgba(0,0,0,.25);background-color:#499DCD;background-image:-webkit-gradient(linear,0 0,0 100%,from(#5BC0DE),to(#2F6AB4));background-image:-webkit-linear-gradient(top,#5BC0DE,#2F6AB4);background-image:linear-gradient(to bottom,#5BC0DE,#2F6AB4);background-repeat:repeat-x;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff5bc0de', endColorstr='#ff2f6ab4', GradientType=0);border-color:#2F6AB4 #2F6AB4 #1F4677;border-color:rgba(0,0,0,.1) rgba(0,0,0,.1) rgba(0,0,0,.25);filter:progid:DXImageTransform.Microsoft.gradient(enabled=false)}
+[date-range] [date-picker] .after.before.active,[date-range] [date-picker] .after.before.disabled,[date-range] [date-picker] .after.before:active,[date-range] [date-picker] .after.before:hover,[date-range] [date-picker] .after.before[disabled]{color:#FFF;background-color:#2F6AB4}
+[date-range] [date-picker] .after.before.active,[date-range] [date-picker] .after.before:active{background-color:#24528C\9}
+[date-picker].hidden{display:none}
+[date-picker]{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;-o-user-select:none;user-select:none;border-radius:4px;background-color:#FFF;padding:4px;box-shadow:0 0 5px rgba(0,0,0,.5);min-width:300px}
+[date-picker] table{margin:0;width:100%}
+[date-picker] td,[date-picker] th{padding:4px 5px;text-align:center;width:20px;height:20px;border-radius:4px;border:none;background:#FFF}
+[date-picker] .switch{width:145px}
+[date-picker] span{display:block;width:23%;height:26px;line-height:25px;float:left;margin:1%;cursor:pointer;border-radius:4px}
+[date-picker] span:hover{background:#EEE}
+[date-picker] span.disabled,[date-picker] span.disabled:hover{background:0 0;color:#999;cursor:default}
+[date-picker] .active,[date-picker] .now{color:#EE905B}
+[date-picker] .active.active,[date-picker] .active.disabled,[date-picker] .active:active,[date-picker] .active:hover,[date-picker] .active[disabled],[date-picker] .now.active,[date-picker] .now.disabled,[date-picker] .now:active,[date-picker] .now:hover,[date-picker] .now[disabled]{color:#FFF;background-color:#36AEEA}
+[date-picker] .active.active,[date-picker] .active:active,[date-picker] .now.active,[date-picker] .now:active{background-color:#039\9}
+[date-picker] .now{color:#EE905B;background-color:transparent}
+[date-picker] .now.active,[date-picker] .now.disabled,[date-picker] .now:active,[date-picker] .now:hover,[date-picker] .now[disabled]{color:#FFF;background-color:#36AEEA}
+[date-picker] .disabled{background:0 0;color:#999!important;cursor:default}
+[date-picker] [ng-switch-when=year] span,[date-picker] [ng-switch-when=month] span,[date-picker] [ng-switch-when=minutes] span{height:54px;line-height:54px}
+[date-picker] [ng-switch-when=date] td{padding:0;vertical-align:middle}
+[date-picker] [ng-switch-when=date] span{width:100%;height:100%}
+[date-picker] [ng-switch-when=date] td span:hover,[date-picker] th:hover{background:#EEE;cursor:pointer}
+.date-picker-block{box-shadow:none;padding:0}
+.date-picker-block td,.date-picker-block th{border:1px solid #EEE}
+.date-picker-block td{height:50px}
