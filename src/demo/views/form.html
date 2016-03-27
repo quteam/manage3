@@ -26,6 +26,12 @@
                 </div>
             </div>
             <div class="form-tr">
+                <div class="form-th">日期2</div>
+                <div class="form-td" ng-init="formData.date2='2016-01-16'">
+                    <input type="text" class="ipt" ng-model="formData.date2" date-time view="date" min-view="date" format="YYYY-MM-DD"/>
+                </div>
+            </div>
+            <div class="form-tr">
                 <div class="form-th">多选</div>
                 <div class="form-td">
                     <div class="form-ctrl" ng-init="formData.checkbox=['选项2','选项3']">

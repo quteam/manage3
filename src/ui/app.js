@@ -13,6 +13,7 @@
 require.config({
     baseUrl: require.dir + 'modules',
     paths: {
+        'moment': '../libs/moment.min',
         'echarts': '../libs/echarts.min',
         'chosen': '../libs/chosen.jquery.min',
         'jQuery': '../libs/jquery.min',
@@ -47,6 +48,7 @@ define('manageApp.main', ['main/init', 'main/services', 'main/controllers', 'mai
 define('manageApp.project', ['project/init', 'project/services', 'project/controllers', 'project/directives', 'project/filters']);
 define('manageApp.modal', ['modal/init', 'modal/services', 'modal/directives']);
 define('manageApp.upload', ['upload/init', 'upload/directives']);
+define('datePicker', ['datepicker/datepicker']);
 
 define('manageApp', [
     'angular',
@@ -54,7 +56,8 @@ define('manageApp', [
     'manageApp.modal',
     'manageApp.main',
     'manageApp.project',
-    'manageApp.upload'
+    'manageApp.upload',
+    'datePicker'
 ], function () {
     return angular.module('manageApp', [
         'ngRoute',
@@ -62,7 +65,8 @@ define('manageApp', [
         'manageApp.modal',
         'manageApp.main',
         'manageApp.project',
-        'manageApp.upload'
+        'manageApp.upload',
+        'datePicker'
     ]);
 });
 
