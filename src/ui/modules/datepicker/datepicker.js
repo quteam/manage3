@@ -154,7 +154,10 @@ define('datepicker/datepicker', ['moment', 'angular'], function (moment) {
             scope: {
                 model: '=datePicker',
                 after: '=?',
-                before: '=?'
+                before: '=?',
+                dateSelect: '=?',
+                dateMonth: '=?',
+                statusList: '=?'
             },
             link: function (scope, element, attrs, ngModel) {
                 function prepareViews() {
@@ -208,12 +211,18 @@ define('datepicker/datepicker', ['moment', 'angular'], function (moment) {
                 };
 
                 scope.selectDate = function (date) {
+
                     if (attrs.disabled) {
                         return false;
                     }
                     if (isSame(scope.date, date)) {
                         date = scope.date;
                     }
+
+                    if (scope.view == 'date') {
+                        scope.dateSelect && scope.dateSelect(date);
+                    }
+
                     date = clipDate(date);
                     if (!date) {
                         return false;
@@ -360,6 +369,7 @@ define('datepicker/datepicker', ['moment', 'angular'], function (moment) {
                             break;
                         case 'date':
                             date.month(date.month() + delta);
+                            scope.dateMonth && scope.dateMonth(date);
                             break;
                         case 'hours':
                         /*falls through*/

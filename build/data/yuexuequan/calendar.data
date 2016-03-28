@@ -1,11 +1,8 @@
 {
   "code": 200,
   "data": {
-    "20160309": {
-      "status": "expire"
-    },
-    "201603022": {
-      "status": "remind"
-    }
+    "20160309": "expire",
+    "20160322": "remind",
+    "20160422": "remind"
   }
 }

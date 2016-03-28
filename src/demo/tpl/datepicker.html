@@ -14,9 +14,9 @@
             <tbody>
             <tr ng-repeat="week in weeks" ng-init="$index2 = $index">
                 <td ng-repeat="day in week">
-          <span
-                  ng-class="classes[$index2][$index]"
-                  ng-click="selectDate(day)" ng-bind="day|mFormat:'DD':tz"></span>
+                    <span
+                            ng-class="classes[$index2][$index] + ' ' + statusList[day.format('YYYYMMDD')]"
+                            ng-click="selectDate(day)" ng-bind="day|mFormat:'DD':tz"></span>
                 </td>
             </tr>
             </tbody>
@@ -34,9 +34,9 @@
             <tbody>
             <tr>
                 <td colspan="7">
-          <span ng-class="classes[$index]"
-                ng-repeat="year in years"
-                ng-click="selectDate(year)" ng-bind="year.year()"></span>
+                    <span ng-class="classes[$index]"
+                          ng-repeat="year in years"
+                          ng-click="selectDate(year)" ng-bind="year.year()"></span>
                 </td>
             </tr>
             </tbody>

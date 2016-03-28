@@ -1543,12 +1543,13 @@ define('main/directives', ['main/init'], function () {
                                     var data = results[0];
                                     var _options = '';
                                     var _length = data.length;
-                                    var _selected = angular.isArray(ngModel.$viewValue) ? ngModel.$viewValue : [ngModel.$viewValue];
+                                    var _selected = angular.isArray(ngModel.$viewValue) ? ngModel.$viewValue : [data[0].value];
                                     for (var i = 0; i < _length; i++) {
                                         _options += '<option value="' + data[i].value + '"' + (_selected.indexOf(data[i].value) > -1 ? 'selected' : '') + '>' + data[i].text + '</option>';
                                     }
                                     $element.html(_options);
                                     $element.chosen($scope.chosen || chosenConfig);
+                                    ngModel.$setViewValue($element.val());
                                 });
                         }
                     } else {

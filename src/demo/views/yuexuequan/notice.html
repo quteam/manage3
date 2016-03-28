@@ -39,6 +39,19 @@
                     <div class="form-tr">
                         <div class="form-th"></div>
                         <div class="form-td">
+                            <select class="select" ng-model="formData.select">
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                            </select>
+                            <select class="select" select-async="../data/selectlist.data" ng-model="formData.select2">
+                            </select>
+                            <select class="select select-w" data-placeholder="选择一个..." chosen ng-model="formData.chosen3" select-source="../data/selectlist.data"></select>
+                        </div>
+                    </div>
+                    <div class="form-tr">
+                        <div class="form-th"></div>
+                        <div class="form-td">
                             <div uploader="../data/upload.data" ng-model="formData.files" upload-type="*"></div>
                         </div>
                     </div>

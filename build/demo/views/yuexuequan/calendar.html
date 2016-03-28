@@ -75,7 +75,9 @@
                     <input type="text" class="ipt ipt-block" placeholder="请输入关键字"/>
                 </div>
                 <div class="mg-m">
-                    <div date-picker class="date-picker-block" view="date" min-view="date"></div>
+                    <div table-calendar="../data/yuexuequan/calendar.data" select-to="#/yuexuequan/calendar.html?date=">
+                        <div date-picker class="date-picker-block" view="date" min-view="date" date-month="changeMonth" date-select="dateSelect" status-list="statusList"></div>
+                    </div>
                 </div>
             </div>
         </div>
