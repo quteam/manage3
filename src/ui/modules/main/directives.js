@@ -278,8 +278,15 @@ define('main/directives', ['main/init'], function () {
 
                 function getListData(_callback) {
                     if ($attrs.listSource) {
-                        $scope.tbodyList = $scope.listSource;
-                        _callback && _callback();
+                        if ($scope.listSource) {
+                            $scope.tbodyList = angular.isArray($scope.listSource) ? $scope.listSource : $scope.listSource.list;
+                            if ($scope.listSource.options) {
+                                statusInfo.totalCount = $scope.listSource.options.totalCount || statusInfo.totalCount;
+                                statusInfo.pageSize = $scope.listSource.options.pageSize || statusInfo.pageSize;
+                                statusInfo.totalPage = Math.ceil(statusInfo.totalCount / statusInfo.pageSize);
+                            }
+                            _callback && _callback();
+                        }
                         return;
                     }
                     statusInfo.isLoading = true;
