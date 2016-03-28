@@ -47,7 +47,7 @@ define('project/controllers', ['project/init'], function () {
     function noticePageCtrl($scope, $element, $timeout) {
         var $select = $element.find(".selectRecipient");
         $timeout(function () {
-            $scope.formData = $scope.formData || {};
+            $scope.formData = angular.extend($scope.$parent.formData, $scope.formData);
             $scope.formData.recipient = [];
             $scope.selectOne = function (_data) {
                 var _index = $scope.formData.recipient.indexOf(_data.id);
