@@ -1,0 +1,7 @@
+{
+  "code": 200,
+  "message": "没有权限",
+  "data": {
+    "salaryAll": 123
+  }
+}

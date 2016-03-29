@@ -248,7 +248,7 @@ define('datepicker/datepicker', ['moment', 'angular'], function (moment) {
                     if (date) {
                         scope.model = date;
                         if (ngModel) {
-                            ngModel.$setViewValue(date);
+                            ngModel.$setViewValue(date.format(attrs.format));
                         }
                     }
                     scope.$emit('setDate', scope.model, scope.view);
@@ -790,6 +790,7 @@ define('datepicker/datepicker', ['moment', 'angular'], function (moment) {
                 (id ? 'id="' + id + '" ' : '') +
                 'date-picker="' + attrs.ngModel + '" ' +
                 (attrs.view ? 'view="' + attrs.view + '" ' : '') +
+                (attrs.format ? 'format="' + attrs.format + '" ' : '') +
                 (attrs.maxView ? 'max-view="' + attrs.maxView + '" ' : '') +
                 (attrs.maxDate ? 'max-date="' + attrs.maxDate + '" ' : '') +
                 (attrs.autoClose ? 'auto-close="' + attrs.autoClose + '" ' : '') +
@@ -819,7 +820,7 @@ define('datepicker/datepicker', ['moment', 'angular'], function (moment) {
         };
     });
 
-    Module.directive('dateTime', ['$compile', '$document', '$filter', 'dateTimeConfig', '$parse', 'datePickerUtils', function ($compile, $document, $filter, dateTimeConfig, $parse, datePickerUtils) {
+    Module.directive('dateTime', ['$compile', '$document', '$filter', 'dateTimeConfig', '$parse', 'datePickerUtils', '$timeout', function ($compile, $document, $filter, dateTimeConfig, $parse, datePickerUtils, $timeout) {
         var body = $document.find('body');
         var dateFilter = $filter('mFormat');
 
@@ -854,7 +855,13 @@ define('datepicker/datepicker', ['moment', 'angular'], function (moment) {
                 views.unshift(view);
 
                 function formatter(value) {
-                    return dateFilter(value, format, timezone);
+                    var _date = dateFilter(value, format, timezone);
+                    //默认值
+                    if (!value) {
+                        ngModel.$setViewValue(_date);
+                        element.val(_date);
+                    }
+                    return _date;
                 }
 
                 function parser(viewValue) {

@@ -10,115 +10,112 @@
                 <a href="#yuexuequan/wages2.html" class="li"><em>法定工作时间外课时工资</em></a>
             </div>
         </div>
-        <div class="mg-m" ng-init="formData.date='2016-01-16'">
-            <input type="text" class="ipt" ng-model="formData.date" date-time view="month" min-view="month" format="YYYY-MM"/>
-            <input type="text" class="ipt" ng-model="formData.search" placeholder="输入姓名查找">
-            <button type="button" class="btn  btn-short" ng-click="listParams.date = formData.date;listParams.search = formData.search;"><i class="iconfont icon-search"></i> 搜索</button>
+        <div class="mg-m">
+            <input type="text" class="ipt" ng-model="listParams.date" date-time view="month" min-view="month" format="YYYY-MM" auto-close="true"/>
+            <input type="text" class="ipt" ng-model="listParams.search" ng-model-options="{debounce:500}" placeholder="输入姓名查找">
         </div>
         <!--此处添加教师正常工资与额外工资选项模块-->
-        <div details-info="../data/yuexuequan/table-wages.data" details-params="listParams">
-            <table-list list-source="details">
-                <div class="mgb-m">
-                    <button type="button" class="btn" modal-right="800" modal-scope="this" modal-url="/salary/toUpload"><i class="iconfont icon-plus"></i> 导入
-                    </button>
+        <table-list list-data="../data/yuexuequan/table-wages.data" list-params="listParams">
+            <div class="mgb-m">
+                <button type="button" class="btn" modal-right="800" modal-scope="this" modal-url="/salary/toUpload"><i class="iconfont icon-plus"></i> 导入
+                </button>
+            </div>
+            <div class="loader" ng-if="status.isLoading">
+                <div class="loader-inner pacman">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
                 </div>
-                <div class="loader" ng-if="status.isLoading">
-                    <div class="loader-inner pacman">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>
+            </div>
+            <div ng-if="!status.isLoading">
+                <div class="empty-wrap" ng-if="tbodyList.length==0">
+                    <div class="icon"><i class="iconfont icon-empty"></i></div>
+                    <div>什么也没有</div>
                 </div>
-                <div ng-if="!status.isLoading">
-                    <div class="empty-wrap" ng-if="tbodyList.length==0">
-                        <div class="icon"><i class="iconfont icon-empty"></i></div>
-                        <div>什么也没有</div>
-                    </div>
-                    <div ng-if="tbodyList.length">
-                        <table class="table-list">
-                            <thead>
-                            <tr>
-                                <th>月份</th>
-                                <th>姓名</th>
-                                <th>薪级工资</th>
-                                <th>岗位工资</th>
-                                <th>绩效工资</th>
-                                <th>10%</th>
-                                <th>教龄</th>
-                                <th>粮贴</th>
-                                <th>津补贴</th>
-                                <th>班主任</th>
-                                <th>驾驶补贴</th>
-                                <th>生活补贴</th>
-                                <th>岗位津贴</th>
-                                <th>适当补贴</th>
-                                <th>独子费</th>
-                                <th>其他补贴</th>
-                                <th>个人所得税</th>
-                                <th>住房公积金</th>
-                                <th>医疗保险</th>
-                                <th>养老保险</th>
-                                <th>失业保险</th>
-                                <th>其他保险</th>
-                                <th>其他扣发工资</th>
-                                <th>补发</th>
-                                <th>应发工资</th>
-                                <th>扣发工资</th>
-                                <th>实发工资</th>
-                                <th>操作</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr ng-repeat="tr in tbodyList">
-                                <td>{{tr.year}}{{tr.month}}</td>
-                                <td>{{tr.teacherName}}</td>
-                                <td>{{tr.salaryScale}}</td>
-                                <td>{{tr.postSalary}}</td>
-                                <td>{{tr.meritPay}}</td>
-                                <td>{{tr.tenPercent}}</td>
-                                <td>{{tr.seniority}}</td>
-                                <td>{{tr.grainPaste}}</td>
-                                <td>{{tr.allowances}}</td>
-                                <td>{{tr.headmaster}}</td>
-                                <td>{{tr.drivingSubsidy}}</td>
-                                <td>{{tr.livingFee}}</td>
-                                <td>{{tr.postAllowance}}</td>
-                                <td>{{tr.appropriateFee}}</td>
-                                <td>{{tr.onlyChildFee}}</td>
-                                <td>{{tr.otherFee}}</td>
-                                <td>{{tr.individualTax}}</td>
-                                <td>{{tr.housingFound}}</td>
-                                <td>{{tr.medicalInsurance}}</td>
-                                <td>{{tr.endowmentInsurance}}</td>
-                                <td>{{tr.unemploymentInsurance}}</td>
-                                <td>{{tr.otherInsurance}}</td>
-                                <td>{{tr.otherWithholdingWages}}</td>
-                                <td>{{tr.reissue}}</td>
-                                <td>{{tr.paidWages}}</td>
-                                <td>{{tr.withholdingWages}}</td>
-                                <td>{{tr.realWages}}</td>
-                                <td>
-                                    <button type="button" class="btn btn-s btn-orange" ng-click="deleteThis('/salary/delete')"><i class="iconfont icon-delete"></i> 删除</button>
-                                    <!--<button type="button" class="btn btn-s" modal-right="920" modal-scope="this" modal-url="/salary/toSeeDetails?id={{::tr.id}}">查看详情</button>-->
-                                </td>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <div class="mg-s">
-                            <div class="fr">
-                                <pagination status="status"></pagination>
-                            </div>
+                <div ng-if="tbodyList.length">
+                    <table class="table-list">
+                        <thead>
+                        <tr>
+                            <th>月份</th>
+                            <th>姓名</th>
+                            <th>薪级工资</th>
+                            <th>岗位工资</th>
+                            <th>绩效工资</th>
+                            <th>10%</th>
+                            <th>教龄</th>
+                            <th>粮贴</th>
+                            <th>津补贴</th>
+                            <th>班主任</th>
+                            <th>驾驶补贴</th>
+                            <th>生活补贴</th>
+                            <th>岗位津贴</th>
+                            <th>适当补贴</th>
+                            <th>独子费</th>
+                            <th>其他补贴</th>
+                            <th>个人所得税</th>
+                            <th>住房公积金</th>
+                            <th>医疗保险</th>
+                            <th>养老保险</th>
+                            <th>失业保险</th>
+                            <th>其他保险</th>
+                            <th>其他扣发工资</th>
+                            <th>补发</th>
+                            <th>应发工资</th>
+                            <th>扣发工资</th>
+                            <th>实发工资</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="tr in tbodyList">
+                            <td>{{tr.year}}{{tr.month}}</td>
+                            <td>{{tr.teacherName}}</td>
+                            <td>{{tr.salaryScale}}</td>
+                            <td>{{tr.postSalary}}</td>
+                            <td>{{tr.meritPay}}</td>
+                            <td>{{tr.tenPercent}}</td>
+                            <td>{{tr.seniority}}</td>
+                            <td>{{tr.grainPaste}}</td>
+                            <td>{{tr.allowances}}</td>
+                            <td>{{tr.headmaster}}</td>
+                            <td>{{tr.drivingSubsidy}}</td>
+                            <td>{{tr.livingFee}}</td>
+                            <td>{{tr.postAllowance}}</td>
+                            <td>{{tr.appropriateFee}}</td>
+                            <td>{{tr.onlyChildFee}}</td>
+                            <td>{{tr.otherFee}}</td>
+                            <td>{{tr.individualTax}}</td>
+                            <td>{{tr.housingFound}}</td>
+                            <td>{{tr.medicalInsurance}}</td>
+                            <td>{{tr.endowmentInsurance}}</td>
+                            <td>{{tr.unemploymentInsurance}}</td>
+                            <td>{{tr.otherInsurance}}</td>
+                            <td>{{tr.otherWithholdingWages}}</td>
+                            <td>{{tr.reissue}}</td>
+                            <td>{{tr.paidWages}}</td>
+                            <td>{{tr.withholdingWages}}</td>
+                            <td>{{tr.realWages}}</td>
+                            <td>
+                                <button type="button" class="btn btn-s btn-orange" ng-click="deleteThis('/salary/delete')"><i class="iconfont icon-delete"></i> 删除</button>
+                                <!--<button type="button" class="btn btn-s" modal-right="920" modal-scope="this" modal-url="/salary/toSeeDetails?id={{::tr.id}}">查看详情</button>-->
+                            </td>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="mg-s">
+                        <div class="fr">
+                            <pagination status="status"></pagination>
                         </div>
                     </div>
                 </div>
-            </table-list>
-            <!--工资合计模块-->
-            <div class="form-tr">
-                <span>合计：</span><span>{{details.salaryAll}}</span>
             </div>
+        </table-list>
+        <!--工资合计模块-->
+        <div class="form-tr" details-info="../data/yuexuequan/table-wages-count.data" details-params="listParams">
+            <span>合计：</span><span>{{details.salaryAll}}</span>
         </div>
     </div>
 </div>

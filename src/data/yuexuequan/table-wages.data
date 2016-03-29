@@ -1,47 +1,44 @@
 {
   "code": 200,
   "message": "没有权限",
-  "data": {
-    "options": {
-      "totalCount": 60,
-      "pageSize": 20
+  "options": {
+    "totalCount": 60,
+    "pageSize": 20
+  },
+  "data": [
+    {
+      "id": 11,
+      "teacherName": "张三",
+      "col2": "教务处",
+      "col3": "教务处",
+      "col4": "2016-2-29",
+      "status": 1,
+      "overdue": 2
     },
-    "salaryAll": 123,
-    "list": [
-      {
-        "id": 11,
-        "teacherName": "张三",
-        "col2": "教务处",
-        "col3": "教务处",
-        "col4": "2016-2-29",
-        "status": 1,
-        "overdue": 2
-      },
-      {
-        "id": 12,
-        "teacherName": "李四",
-        "col2": "教务处",
-        "col3": "教务处",
-        "col4": "2016-2-29",
-        "status": 2,
-        "overdue": 2
-      },
-      {
-        "id": 13,
-        "teacherName": "王五",
-        "col2": "教务处",
-        "col3": "教务处",
-        "col4": "2016-2-29",
-        "status": 2
-      },
-      {
-        "id": 14,
-        "teacherName": "赵六",
-        "col2": "教务处",
-        "col3": "教务处",
-        "col4": "2016-2-29",
-        "status": 2
-      }
-    ]
-  }
+    {
+      "id": 12,
+      "teacherName": "李四",
+      "col2": "教务处",
+      "col3": "教务处",
+      "col4": "2016-2-29",
+      "status": 2,
+      "overdue": 2
+    },
+    {
+      "id": 13,
+      "teacherName": "王五",
+      "col2": "教务处",
+      "col3": "教务处",
+      "col4": "2016-2-29",
+      "status": 2
+    },
+    {
+      "id": 14,
+      "teacherName": "赵六",
+      "col2": "教务处",
+      "col3": "教务处",
+      "col4": "2016-2-29",
+      "status": 2
+    }
+  ]
 }
