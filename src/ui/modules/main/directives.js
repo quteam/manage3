@@ -193,6 +193,7 @@ define('main/directives', ['main/init'], function () {
                     isFinished: false,
                     isLoading: false
                 };
+                $scope.mainStatus = $scope.$parent.mainStatus;
                 $scope.parent = $scope.$parent;
                 $scope.status = statusInfo;
                 $scope.listData = $attrs.listData;
