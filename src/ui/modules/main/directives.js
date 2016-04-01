@@ -1550,7 +1550,7 @@ define('main/directives', ['main/init'], function () {
                                     }
                                     $element.html(_options);
                                     $element.chosen($scope.chosen || chosenConfig);
-                                    ngModel.$setViewValue($element.val());
+                                    ngModel.$setViewValue(_selected);
                                 });
                         }
                     } else {
