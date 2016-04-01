@@ -143,15 +143,12 @@
 }
 [date-picker] .now {
   background: transparent;
-  color: #EE5F5B;
+  color: #EE5F5B !important;
 }
 [date-picker] .disabled {
   background: none;
   color: #CCC;
   cursor: default;
-}
-[date-picker] .disabled.now {
-  color: #EE5F5B;
 }
 [date-picker] [ng-switch-when="year"] span,
 [date-picker] [ng-switch-when="month"] span,
@@ -174,7 +171,7 @@
 }
 .date-picker-block th,
 .date-picker-block td {
-  border: 1px solid #EEE;
+  border: 1px solid #CCC;
 }
 .date-picker-block td {
   height: 50px;

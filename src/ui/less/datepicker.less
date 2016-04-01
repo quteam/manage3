@@ -846,16 +846,13 @@
 	.now {
 		//.buttonBackground(@btnDangerBackground, spin(@btnDangerBackground, 20));
 		background: transparent;
-		color: @btnDangerBackground;
+		color: @btnDangerBackground !important;
 	}
 
 	.disabled {
 		background: none;
 		color: #CCC;
 		cursor: default;
-		&.now {
-			color: @btnDangerBackground;
-		}
 	}
 
 	/* SPECIFIC */
@@ -884,7 +881,7 @@
 }
 .date-picker-block {
 	th, td {
-		border: 1px solid #EEE;
+		border: 1px solid #CCC;
 	}
 	td {
 		height: 50px;
