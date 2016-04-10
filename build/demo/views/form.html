@@ -240,6 +240,19 @@
                 </div>
             </div>
             <div class="form-tr">
+                <div class="form-th">自定义</div>
+                <div class="form-td" ng-init='formData.nameList=[{aa:"a1",bb:"b1"},{aa:"a2",bb:"b2"}]'>
+                    <div class="form-tr" ng-repeat="tr in formData.nameList">
+                        <div class="form-td">
+                            <input type="text" class="ipt" ng-model="tr.aa"/>
+                        </div>
+                        <div class="form-td">
+                            <input type="text" class="ipt" ng-model="tr.bb"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-tr">
                 <div class="form-th"></div>
                 <div class="form-td">
                     <button type="submit" class="btn btn-l">提交</button>
