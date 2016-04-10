@@ -376,6 +376,9 @@ body {
 .color-green {
   color: #0AD27A;
 }
+.color-green2 {
+  color: green;
+}
 /**/
 .text-muted {
   opacity: .7;
@@ -1150,6 +1153,16 @@ body {
   padding: .4em;
   border-radius: 100%;
   border: 1px solid #787878;
+}
+.icon-a {
+  display: inline-block;
+  padding: .4em;
+  border-radius: 100%;
+  color: #FFF;
+  background: #5897FB;
+}
+.icon-a-green {
+  background: green;
 }
 /**/
 .animation {
