@@ -154,7 +154,9 @@
                             <option value="9">Angola</option>
                             <option value="10">Anguilla</option>
                         </select>
-                        <span details-info="../data/form.data?id={{formData.chosen2_2.join(',')}}" ng-if="formData.chosen2_2"><i class="iconfont icon-a icon-ok"></i></span>
+                        <span details-info="../data/form.data?id={{formData.chosen2_2.join(',')}}" ng-if="formData.chosen2_2">
+                            <i class="iconfont icon-a icon-ok" ng-show="formData.chosen2_2.length"></i>
+                        </span>
                     </div>
                 </div>
             </div>
