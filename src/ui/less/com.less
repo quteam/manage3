@@ -700,7 +700,7 @@ body { color: #1E1E1E; }
 		width: 70px;
 		height: 70px;
 		text-align: center;
-		border-radius: 40px;
+		border-radius: 50px;
 		position: relative;
 		margin-left: 50px;
 		font-size: 14px;
@@ -739,6 +739,23 @@ body { color: #1E1E1E; }
 			&:before {
 				border-color: #F00;
 			}
+		}
+	}
+	&.big .step {
+		line-height: 90px;
+		width: 90px;
+		height: 90px;
+		&:before {
+			top: 45px;
+		}
+	}
+	&.small .step {
+		line-height: 50px;
+		width: 50px;
+		height: 50px;
+		font-size: 12px;
+		&:before {
+			top: 25px;
 		}
 	}
 }

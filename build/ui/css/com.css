@@ -524,7 +524,7 @@ body{color:#1E1E1E}
 .step-warp .step.on{background:#05C0EE;color:#FFF}
 .step-warp .step.on:after{border-left-color:#05C0EE}
 .step2-warp{margin:10px 0;font-size:0}
-.step2-warp .step{display:inline-block;background:#EFEFF0;line-height:70px;width:70px;height:70px;text-align:center;border-radius:40px;position:relative;margin-left:50px;font-size:14px}
+.step2-warp .step{display:inline-block;background:#EFEFF0;line-height:70px;width:70px;height:70px;text-align:center;border-radius:50px;position:relative;margin-left:50px;font-size:14px}
 .step2-warp .step:first-child{margin-left:0}
 .step2-warp .step:first-child:before{display:none}
 .step2-warp .step:before{position:absolute;z-index:1;top:35px;left:-50px;content:"";border-top:1px solid #EFEFF0;width:50px}
@@ -534,6 +534,10 @@ body{color:#1E1E1E}
 .step2-warp .step.cur:before{border-color:#0AD27A}
 .step2-warp .step.fail{background:red;color:#FFF}
 .step2-warp .step.fail:before{border-color:red}
+.step2-warp.big .step{line-height:90px;width:90px;height:90px}
+.step2-warp.big .step:before{top:45px}
+.step2-warp.small .step{line-height:50px;width:50px;height:50px;font-size:12px}
+.step2-warp.small .step:before{top:25px}
 @-webkit-keyframes ngdialog-fadeout{0%{opacity:1}
 100%{opacity:0}
 }

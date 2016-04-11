@@ -2614,7 +2614,7 @@ body {
   width: 70px;
   height: 70px;
   text-align: center;
-  border-radius: 40px;
+  border-radius: 50px;
   position: relative;
   margin-left: 50px;
   font-size: 14px;
@@ -2654,6 +2654,23 @@ body {
 }
 .step2-warp .step.fail:before {
   border-color: #F00;
+}
+.step2-warp.big .step {
+  line-height: 90px;
+  width: 90px;
+  height: 90px;
+}
+.step2-warp.big .step:before {
+  top: 45px;
+}
+.step2-warp.small .step {
+  line-height: 50px;
+  width: 50px;
+  height: 50px;
+  font-size: 12px;
+}
+.step2-warp.small .step:before {
+  top: 25px;
 }
 /**/
 @-webkit-keyframes ngdialog-fadeout {
