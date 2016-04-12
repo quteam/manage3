@@ -705,7 +705,7 @@ body { color: #1E1E1E; }
 		margin-left: 50px;
 		font-size: 14px;
 		&:first-child {
-			margin-left: 0;
+			margin-left: 0 !important;
 			&:before {
 				display: none;
 			}
@@ -715,9 +715,9 @@ body { color: #1E1E1E; }
 			z-index: 1;
 			top: 35px;
 			left: -50px;
+			right: 100%;
 			content: "";
 			border-top: 1px solid #EFEFF0;
-			width: 50px;
 		}
 		&.on {
 			background: #05C0EE;
@@ -756,6 +756,24 @@ body { color: #1E1E1E; }
 		font-size: 12px;
 		&:before {
 			top: 25px;
+		}
+	}
+	&.long .step {
+		margin-left: 110px;
+		&:before {
+			left: -110px;
+		}
+	}
+	&.xlong .step {
+		margin-left: 150px;
+		&:before {
+			left: -150px;
+		}
+	}
+	&.xxlong .step {
+		margin-left: 200px;
+		&:before {
+			left: -200px;
 		}
 	}
 }

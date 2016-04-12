@@ -2620,7 +2620,7 @@ body {
   font-size: 14px;
 }
 .step2-warp .step:first-child {
-  margin-left: 0;
+  margin-left: 0 !important;
 }
 .step2-warp .step:first-child:before {
   display: none;
@@ -2630,9 +2630,9 @@ body {
   z-index: 1;
   top: 35px;
   left: -50px;
+  right: 100%;
   content: "";
   border-top: 1px solid #EFEFF0;
-  width: 50px;
 }
 .step2-warp .step.on {
   background: #05C0EE;
@@ -2671,6 +2671,24 @@ body {
 }
 .step2-warp.small .step:before {
   top: 25px;
+}
+.step2-warp.long .step {
+  margin-left: 110px;
+}
+.step2-warp.long .step:before {
+  left: -110px;
+}
+.step2-warp.xlong .step {
+  margin-left: 150px;
+}
+.step2-warp.xlong .step:before {
+  left: -150px;
+}
+.step2-warp.xxlong .step {
+  margin-left: 200px;
+}
+.step2-warp.xxlong .step:before {
+  left: -200px;
 }
 /**/
 @-webkit-keyframes ngdialog-fadeout {
