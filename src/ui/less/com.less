@@ -704,6 +704,20 @@ body { color: #1E1E1E; }
 		position: relative;
 		margin-left: 50px;
 		font-size: 14px;
+		.sub {
+			position: absolute;
+			top: -5px;
+			right: -5px;
+			background: #F00;
+			width: 25px;
+			height: 25px;
+			line-height: 25px;
+			font-size: 12px;
+			color: #FFF;
+			text-align: center;
+			border-radius: 30px;
+			font-style: normal;
+		}
 		&:first-child {
 			margin-left: 0 !important;
 			&:before {
@@ -748,6 +762,12 @@ body { color: #1E1E1E; }
 		&:before {
 			top: 45px;
 		}
+		.sub {
+			width: 30px;
+			height: 30px;
+			line-height: 30px;
+			font-size: 14px;
+		}
 	}
 	&.small .step {
 		line-height: 50px;
@@ -756,6 +776,11 @@ body { color: #1E1E1E; }
 		font-size: 12px;
 		&:before {
 			top: 25px;
+		}
+		.sub {
+			width: 20px;
+			height: 20px;
+			line-height: 20px;
 		}
 	}
 	&.long .step {

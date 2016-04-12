@@ -2619,6 +2619,20 @@ body {
   margin-left: 50px;
   font-size: 14px;
 }
+.step2-warp .step .sub {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: #F00;
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
+  font-size: 12px;
+  color: #FFF;
+  text-align: center;
+  border-radius: 30px;
+  font-style: normal;
+}
 .step2-warp .step:first-child {
   margin-left: 0 !important;
 }
@@ -2663,6 +2677,12 @@ body {
 .step2-warp.big .step:before {
   top: 45px;
 }
+.step2-warp.big .step .sub {
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  font-size: 14px;
+}
 .step2-warp.small .step {
   line-height: 50px;
   width: 50px;
@@ -2671,6 +2691,11 @@ body {
 }
 .step2-warp.small .step:before {
   top: 25px;
+}
+.step2-warp.small .step .sub {
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
 }
 .step2-warp.long .step {
   margin-left: 110px;
