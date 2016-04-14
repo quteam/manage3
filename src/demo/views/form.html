@@ -141,22 +141,34 @@
                             <option value="10">Anguilla</option>
                         </select>
                     </div>
+                </div>
+            </div>
+            <div class="form-tr">
+                <div class="form-th">
+                    打分
+                </div>
+                <div class="form-td" ng-init='formData.teacherList=[{aa:"a1",ruleIdList:["1","2"]},{aa:"a2",ruleIdList:"3"}]'>
+                    <score-config teacher-list="formData.teacherList" ng-model="scoreSelectCount">
+                        <div class="mgt-m" ng-repeat="teacher in teacherList">
+                            <select class="select select-w" data-placeholder="选择一个..." chosen multiple ng-model="teacher.ruleIdList">
+                                <option value="1">United States</option>
+                                <option value="2">United Kingdom</option>
+                                <option value="3">Afghanistan</option>
+                                <option value="4">Aland Islands</option>
+                                <option value="5">Albania</option>
+                                <option value="6">Algeria</option>
+                                <option value="7">American Samoa</option>
+                                <option value="8">Andorra</option>
+                                <option value="9">Angola</option>
+                                <option value="10">Anguilla</option>
+                            </select>
+                            <span details-info="../data/form.data?id={{teacher.bb.join(',')}}" ng-if="teacher.bb">
+                                <i class="iconfont icon-a icon-ok" ng-show="teacher.bb.length"></i>
+                            </span>
+                        </div>
+                    </score-config>
                     <div class="mgt-m">
-                        <select class="select select-w" data-placeholder="选择一个..." chosen multiple ng-model="formData.chosen2_2">
-                            <option value="1">United States</option>
-                            <option value="2">United Kingdom</option>
-                            <option value="3">Afghanistan</option>
-                            <option value="4">Aland Islands</option>
-                            <option value="5">Albania</option>
-                            <option value="6">Algeria</option>
-                            <option value="7">American Samoa</option>
-                            <option value="8">Andorra</option>
-                            <option value="9">Angola</option>
-                            <option value="10">Anguilla</option>
-                        </select>
-                        <span details-info="../data/form.data?id={{formData.chosen2_2.join(',')}}" ng-if="formData.chosen2_2">
-                            <i class="iconfont icon-a icon-ok" ng-show="formData.chosen2_2.length"></i>
-                        </span>
+                        <button type="button" class="btn" ng-disabled="formData.teacherList.length>scoreSelectCount">模拟提交</button>
                     </div>
                 </div>
             </div>
