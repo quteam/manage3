@@ -15,8 +15,11 @@
             <tr ng-repeat="week in weeks" ng-init="$index2 = $index">
                 <td ng-repeat="day in week">
                     <span
-                            ng-class="classes[$index2][$index] + ' ' + statusList[day.format('YYYYMMDD')]"
-                            ng-click="selectDate(day)" ng-bind="day|mFormat:'DD':tz"></span>
+                            ng-class="classes[$index2][$index]"
+                            ng-click="selectDate(day)"
+                            ng-bind="day|mFormat:'DD':tz"
+                            date-popover="statusList[day.format('YYYYMMDD')]"
+                    ></span>
                 </td>
             </tr>
             </tbody>
