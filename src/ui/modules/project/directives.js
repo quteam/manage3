@@ -25,44 +25,46 @@ define('project/directives', ['moment', 'project/init'], function (moment) {
     tableCalendar.$inject = ["requestData"];
 
     //日历提示
-    function datePopover() {
+    function datePopover($timeout) {
         return {
             restrict: 'AE',
             scope: {
                 datePopover: "=?"
             },
             link: function ($scope, $element) {
-                if ($scope.datePopover) {
-                    $element.addClass($scope.datePopover.css);
-                    $element.on("mouseenter", function () {
-                        $(".popover").remove();
-                        var $popover = $('<div class="popover"><div class="arrow"></div><div class="popover-content"></div></div>');
-                        $popover.css({
-                            top: $element.offset().top + 5,
-                            left: $element.offset().left
-                        });
+                $timeout(function () {
+                    if ($scope.datePopover) {
+                        $element.addClass($scope.datePopover.css);
+                        $element.on("mouseenter", function () {
+                            $(".popover").remove();
+                            var $popover = $('<div class="popover"><div class="arrow"></div><div class="popover-content"></div></div>');
+                            $popover.css({
+                                top: $element.offset().top + 5,
+                                left: $element.offset().left
+                            });
 
-                        var _list = "<ul>";
-                        $.each($scope.datePopover.eventList, function (i, _event) {
-                            if (i < 3) {
-                                _list += '<li>' + _event + '</li>';
-                            } else if (i == 3) {
-                                _list += '<li>……</li>';
-                            }
-                        });
-                        _list += '</ul>';
+                            var _list = "<ul>";
+                            $.each($scope.datePopover.eventList, function (i, _event) {
+                                if (i < 3) {
+                                    _list += '<li>' + _event + '</li>';
+                                } else if (i == 3) {
+                                    _list += '<li>……</li>';
+                                }
+                            });
+                            _list += '</ul>';
 
-                        $(".popover-content", $popover).html(_list);
-                        $popover.appendTo("body");
-                    });
-                    $element.on("mouseleave", function () {
-                        $(".popover").remove();
-                    })
-                }
+                            $(".popover-content", $popover).html(_list);
+                            $popover.appendTo("body");
+                        });
+                        $element.on("mouseleave", function () {
+                            $(".popover").remove();
+                        })
+                    }
+                })
             }
         }
     };
-    datePopover.$inject = [];
+    datePopover.$inject = ["$timeout"];
 
     /**
      * 打分
