@@ -67,23 +67,23 @@ define('project/controllers', ['project/init'], function () {
                 var isSelected = $e.data("selected");
                 angular.forEach(trees, function (_node) {
                     var _index = $scope.formData.recipient.indexOf(_node.id);
-                    //if (isSelected) {
-                    //    if (_index > -1) {
-                    //        $scope.formData.recipient.splice(_index, 1);
-                    //    }
-                    //} else {
-                    if (_index == -1) {
-                        $scope.formData.recipient.push(_node.id);
+                    if (isSelected) {
+                        if (_index > -1) {
+                            $scope.formData.recipient.splice(_index, 1);
+                        }
+                    } else {
+                        if (_index == -1) {
+                            $scope.formData.recipient.push(_node.id);
+                        }
                     }
-                    //}
                 });
-                //if (!isSelected) {
-                //    $e.data("selected", true);
-                //    $e.text('取消全选');
-                //} else {
-                //    $e.data("selected", false);
-                //    $e.text('全选');
-                //}
+                if (!isSelected) {
+                    $e.data("selected", true);
+                    $e.text('取消全选');
+                } else {
+                    $e.data("selected", false);
+                    $e.text('全选');
+                }
 
                 $timeout(function () {
                     $select.trigger("chosen:updated");
