@@ -98,9 +98,13 @@ define('project/controllers', ['project/init'], function () {
         $scope.submitCallBack = function (_data1, _data2) {
             if (_data2) {
                 alert("提交成功");
-                window.location.reload();
+                if (_data2.url) {
+                    window.location.assign(_data2.url);
+                } else {
+                    window.location.reload();
+                }
             } else {
-                alert("提交失败")
+                alert("提交失败");
             }
         }
     };

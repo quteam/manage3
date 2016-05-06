@@ -1,5 +1,7 @@
 {
   "code": 200,
   "message": "提交成功",
-  "data": {}
+  "data": {
+    "url": "redirect:../announcement2.html"
+  }
 }
