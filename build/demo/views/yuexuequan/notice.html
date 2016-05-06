@@ -10,7 +10,7 @@
             </div>
         </div>
     </div>
-    <div class="page-main">
+    <div class="page-main" ng-controller="noticeSubmitCtrl">
         <form name="myForm" form-validator action="../data/form.data">
             <div class="column-layout-wrap" ng-controller="noticePageCtrl">
                 <div class="main-wrap">
@@ -65,7 +65,7 @@
                     <div class="form-tr">
                         <div class="form-th"></div>
                         <div class="form-td text-right">
-                            <button type="submit" class="btn">提交</button>
+                            <button type="submit" class="btn" ng-disabled="formStatus.submitting">提交</button>
                         </div>
                     </div>
                 </div>

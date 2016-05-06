@@ -93,7 +93,21 @@ define('project/controllers', ['project/init'], function () {
     };
     noticePageCtrl.$inject = ['$scope', '$element', '$timeout'];
 
+    //
+    function noticeSubmitCtrl($scope) {
+        $scope.submitCallBack = function (_data1, _data2) {
+            if (_data2) {
+                alert("提交成功");
+                window.location.reload();
+            } else {
+                alert("提交失败")
+            }
+        }
+    };
+    noticeSubmitCtrl.$inject = ['$scope'];
+
     angular.module('manageApp.project')
         .controller('importScoreCtrl', importScoreCtrl)
         .controller('noticePageCtrl', noticePageCtrl)
+        .controller('noticeSubmitCtrl', noticeSubmitCtrl)
 });
