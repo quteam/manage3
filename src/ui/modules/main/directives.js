@@ -118,7 +118,7 @@ define('main/directives', ['main/init'], function () {
     /**
      * 表单验证
      */
-    function formValidator(requestData, modal) {
+    function formValidator(requestData, modal, dialogAlert) {
         return {
             restrict: 'A',
             scope: true,
@@ -155,7 +155,9 @@ define('main/directives', ['main/init'], function () {
                             if (angular.isFunction($scope.submitCallBack)) {
                                 $scope.submitCallBack.call($scope, dialogData, data);
                             } else if (data && data.url) {
-                                window.location.assign(data.url);
+                                dialogAlert(data.message || '提交成功', function () {
+                                    window.location.assign(data.url);
+                                })
                             }
                             //自动关闭弹窗
                             angular.isDefined($attrs.autoCloseDialog) && modal.close();
@@ -169,7 +171,7 @@ define('main/directives', ['main/init'], function () {
             }
         }
     };
-    formValidator.$inject = ["requestData", "modal"];
+    formValidator.$inject = ["requestData", "modal", "dialogAlert"];
 
     /**
      * 表格

@@ -62,6 +62,19 @@ define('main/services', ['main/init'], function () {
     };
     dialogConfirm.$inject = ['$rootScope', 'modal'];
 
+    //弹窗提示
+    function dialogAlert($rootScope, modal) {
+        return function (_text, _callBack) {
+            var _$scope = $rootScope.$new(false);
+            _$scope.confirmText = _text || '确定';
+            modal.openConfirm({
+                template: 'tpl/dialog-alert.html',
+                scope: _$scope
+            }).then(_callBack);
+        };
+    };
+    dialogConfirm.$inject = ['$rootScope', 'modal'];
+
     //普通弹窗
     function dialog($rootScope, modal) {
         return function (_content, _callBack) {
@@ -101,6 +114,7 @@ define('main/services', ['main/init'], function () {
         .factory('redirectInterceptor', redirectInterceptor)
         .service('requestData', requestData)
         .service('dialogConfirm', dialogConfirm)
+        .service('dialogAlert', dialogAlert)
         .service('dialog', dialog)
         .service('dialogChart', dialogChart)
         .config(['$httpProvider', function ($httpProvider) {

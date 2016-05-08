@@ -1,7 +1,7 @@
 {
   "code": 200,
-  "message": "提交成功",
   "data": {
-    "url": "redirect:../announcement2.html"
+    "url": "#/form.html",
+    "message": "保存成功"
   }
 }
