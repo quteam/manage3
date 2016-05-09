@@ -58,6 +58,9 @@ define('project/directives', ['moment', 'project/init'], function (moment) {
                         });
                         $element.on("mouseleave", function () {
                             $(".popover").remove();
+                        });
+                        $element.on("click",function(){
+                            $(".popover").remove();
                         })
                     }
                 })

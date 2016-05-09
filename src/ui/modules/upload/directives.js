@@ -19,6 +19,7 @@ define('upload/directives', ['upload/init'], function () {
             link: function ($scope, $element, $attrs) {
                 var $fileIpt = $('<input type="file" multiple/>');
                 var fileType = $attrs.uploadType || "image";
+                var initFiles = angular.fromJson($attrs.files || []);
                 $scope.fileList = [];
                 $scope.delFile = delFile;
                 $scope.ngModel = $scope.ngModel || [];
@@ -26,6 +27,16 @@ define('upload/directives', ['upload/init'], function () {
                 $scope.uploadSize = $scope.uploadSize || 1000;
                 $scope.width = $scope.width ? $scope.width : 120 + "px";
                 $scope.height = $scope.height ? $scope.height : 100 + "px";
+
+                //获取初始值
+                angular.forEach(initFiles, function (_file) {
+                    _file.status = "finished";
+                    if (/\.(jpe?g|png|gif)$/.test(_file.url)) {
+                        _file.imgSrc = _file.url;
+                    }
+                    $scope.fileList.push(_file);
+                    $scope.ngModel.push(_file.id);
+                });
 
                 //对外提供方法
                 $scope.$parent.resetPic = function () {
@@ -106,12 +117,12 @@ define('upload/directives', ['upload/init'], function () {
                 //删除图片
                 function delFile(file) {
                     var _files = [];
+                    var _index = $scope.fileList.indexOf(file);
+                    if (_index > -1) {
+                        $scope.fileList.splice(_index, 1);
+                    }
                     angular.forEach($scope.fileList, function (_file, _key) {
-                        if (file == _file) {
-                            $scope.fileList.splice(_key, 1);
-                        } else {
-                            _files.push(_file.data.id);
-                        }
+                        _files.push(_file.data.id);
                     });
                     $scope.ngModel = _files;
                 }
