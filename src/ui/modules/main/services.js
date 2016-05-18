@@ -73,7 +73,7 @@ define('main/services', ['main/init'], function () {
             }).then(_callBack);
         };
     };
-    dialogConfirm.$inject = ['$rootScope', 'modal'];
+    dialogAlert.$inject = ['$rootScope', 'modal'];
 
     //普通弹窗
     function dialog($rootScope, modal) {
