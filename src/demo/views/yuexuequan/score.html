@@ -81,7 +81,7 @@
                                 <th>学号</th>
                                 <th>姓名</th>
                                 <th>科目</th>
-                                <th>成绩</th>
+                                <th width="100">成绩</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -94,7 +94,9 @@
                                 <td>{{tr.col2}}</td>
                                 <td>{{tr.col3}}</td>
                                 <td>{{tr.col4}}</td>
-                                <td>{{tr.score}}</td>
+                                <td>
+                                    <span click-edit="tr.score" request-url="../data/form.data"></span>
+                                </td>
                             </tr>
                             </tbody>
                         </table>

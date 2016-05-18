@@ -59,7 +59,7 @@ define('project/directives', ['moment', 'project/init'], function (moment) {
                         $element.on("mouseleave", function () {
                             $(".popover").remove();
                         });
-                        $element.on("click",function(){
+                        $element.on("click", function () {
                             $(".popover").remove();
                         })
                     }
@@ -101,8 +101,40 @@ define('project/directives', ['moment', 'project/init'], function (moment) {
         };
     };
 
+    /**
+     * 点击修改
+     */
+    function clickEdit(requestData, $timeout) {
+        return {
+            restrict: 'AE',
+            scope: {
+                requestUrl: "@",
+                clickEdit: "="
+            },
+            transclude: true,
+            template: '<span><span ng-show="!isEdit" ng-click="edit()">{{text}}</span><span ng-show="isEdit"><input type="text" class="ipt ipt-s ipt-xshort" ng-model="text" ng-blur="cancelEdit()" /></span></span>',
+            link: function ($scope, $element, $attrs) {
+                $scope.text = $scope.clickEdit;
+                $scope.edit = function () {
+                    $scope.isEdit = true;
+                    $timeout(function () {
+                        $element.find("input").focus();
+                    });
+                };
+                $scope.cancelEdit = function () {
+                    $scope.isEdit = false;
+                    requestData($scope.requestUrl, {score: $scope.text})
+                        .then(function (_data) {
+                        });
+                };
+            }
+        }
+    };
+    clickEdit.$inject = ["requestData", "$timeout"];
+
     angular.module('manageApp.project')
         .directive('tableCalendar', tableCalendar)
         .directive('datePopover', datePopover)
         .directive('scoreConfig', scoreConfig)
+        .directive('clickEdit', clickEdit)
 });
