@@ -155,9 +155,10 @@ define('main/directives', ['main/init'], function () {
                             if (angular.isFunction($scope.submitCallBack)) {
                                 $scope.submitCallBack.call($scope, dialogData, data);
                             } else if (data && data.url) {
-                                dialogAlert(data.message || '提交成功', function () {
-                                    window.location.assign(data.url);
-                                })
+                                window.location.assign(data.url);
+                                // dialogAlert(data.message || '提交成功', function () {
+                                //     window.location.assign(data.url);
+                                // })
                             }
                             //自动关闭弹窗
                             angular.isDefined($attrs.autoCloseDialog) && modal.close();
@@ -1578,6 +1579,9 @@ define('main/directives', ['main/init'], function () {
                 switch (_src.type) {
                     case "text":
                         _item = '<input type="' + _src.type + '" name="' + _src.key + '" ng-init="formData[\'' + _src.key + '\']=\'' + (_src.value || "") + '\'" ng-model="formData[\'' + _src.key + '\']" class="ipt" placeholder="' + _src.placeholder + '" />';
+                        break;
+                    case "hidden":
+                        _item = '<input type="' + _src.type + '" name="' + _src.key + '" ng-init="formData[\'' + _src.key + '\']=\'' + (_src.value || "") + '\'" ng-model="formData[\'' + _src.key + '\']"/>';
                         break;
                     case "date":
                         _item = '<input type="' + _src.type + '" name="' + _src.key + '" ng-init="formData[\'' + _src.key + '\']=\'' + (_src.value || "") + '\'" ng-model="formData[\'' + _src.key + '\']" class="ipt" placeholder="' + _src.placeholder + '" convert-to-date/>';
