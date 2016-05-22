@@ -112,7 +112,7 @@ define('project/directives', ['moment', 'project/init'], function (moment) {
                 clickEdit: "="
             },
             transclude: true,
-            template: '<span><span ng-show="!isEdit" ng-click="edit()">{{text}}</span><span ng-show="isEdit"><input type="text" class="ipt ipt-s ipt-xshort" ng-model="text" ng-blur="cancelEdit()" /></span></span>',
+            template: '<span><span ng-show="!isEdit" ng-click="edit()">{{text}}</span><span ng-show="isEdit"><input type="text" class="ipt ipt-s ipt-xshort" ng-model="text" ng-keyup="finishInput($event)" ng-blur="cancelEdit()" /></span></span>',
             link: function ($scope, $element, $attrs) {
                 $scope.text = $scope.clickEdit;
                 $scope.edit = function () {
@@ -123,10 +123,17 @@ define('project/directives', ['moment', 'project/init'], function (moment) {
                 };
                 $scope.cancelEdit = function () {
                     $scope.isEdit = false;
-                    requestData($scope.requestUrl, {score: $scope.text})
+                    var score = parseFloat($scope.text) || 0;
+                    $scope.text = score;
+                    requestData($scope.requestUrl, {score: score})
                         .then(function (_data) {
                         });
                 };
+                $scope.finishInput = function ($e) {
+                    if ($e.keyCode == 13) {
+                        $scope.cancelEdit();
+                    }
+                }
             }
         }
     };
