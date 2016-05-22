@@ -1,0 +1,108 @@
+<div ng-controller="pageCtrl" ng-init="mainStatus.navigation='example'">
+    <div class="top-nav-wrap">
+        <div class="back backBtn"><i class="iconfont icon-back"></i></div>
+        <div class="title2">我的课件</div>
+        <div class="right">
+            <div class="nav">
+                <a class="li"><i class="iconfont icon-plus"></i></a>
+                <a class="li"><i class="iconfont icon-search"></i></a>
+                <a class="li"><i class="iconfont icon-bell"></i><i class="tip" ng-if="mainStatus.msgBubble">{{mainStatus.msgBubble}}</i></a>
+            </div>
+        </div>
+    </div>
+    <div class="page-main">
+        <div class="mg-m">
+            <div class="column-layout-wrap" ng-controller="oneCtrl">
+                <div class="side-wrap">
+                    <div class="tree-list" tree-list2="../data/tree.data" ng-model="itemData.item">
+                        <div class="loader" ng-if="status.isLoading">
+                            <div class="loader-inner pacman">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+                        <div ng-if="!status.isLoading">
+                            <div class="empty-wrap" ng-if="treeList.length==0">
+                                <div class="icon"><i class="iconfont icon-empty"></i></div>
+                                <div>什么也没有</div>
+                            </div>
+                            <ul ng-if="treeList.length">
+                                <div class="pd-s text-m text-right line">
+                                    <button type="button" class="btn btn-s btn-blue" modal-right="400" modal-scope="this" modal-url="views/yuexuequan/courseware-add.html">+ 添加课件</button>
+                                </div>
+                                <li ng-repeat="tree in treeList">
+                                    <em ng-click="selectTree(tree,$event)"><i class="iconfont fold-p" ng-if="tree.nodes.length"></i> {{tree.name}}</em>
+                                    <ul ng-if="tree.nodes.length">
+                                        <li ng-repeat="tree2 in tree.nodes">
+                                            <em ng-click="selectTree(tree2,$event)"><i class="iconfont fold-p" ng-if="tree2.nodes.length"></i> {{tree2.name}}</em>
+                                            <ul ng-if="tree2.nodes.length">
+                                                <li ng-repeat="tree3 in tree2.nodes">
+                                                    <em ng-click="selectTree(tree3,$event)"><i class="iconfont icon-house"></i> {{tree3.name}}</em>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="main-wrap">
+                    <table-list list-data="../data/table-list.data" list-params='itemData.item'>
+                        <div class="loader" ng-if="status.isLoading">
+                            <div class="loader-inner pacman">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+                        <div ng-if="!status.isLoading">
+                            <div class="empty-wrap" ng-if="tbodyList.length==0">
+                                <div class="icon"><i class="iconfont icon-empty"></i></div>
+                                <div>什么也没有</div>
+                            </div>
+                            <div ng-if="tbodyList.length">
+                                <table class="table-list">
+                                    <thead>
+                                    <tr>
+                                        <th><input type="checkbox" class="selectAll"></th>
+                                        <th>户型名称</th>
+                                        <th>房屋用途</th>
+                                        <th>房 型</th>
+                                        <th>预售面积</th>
+                                        <th>附属/赠送类型和面积</th>
+                                        <th>户型图</th>
+                                        <th>其他信息</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="tr in tbodyList" modal-right="920" modal-scope="this" modal-url="views/project-house-add.html?id={{::tr.id}}">
+                                        <td class="select-td"><input type="checkbox" class="selectOne" value="{{tr.id}}"></td>
+                                        <td>{{tr.name}}</td>
+                                        <td>{{tr.col1}}</td>
+                                        <td>{{tr.col2}}</td>
+                                        <td>{{tr.col3}}</td>
+                                        <td>{{tr.col4}}</td>
+                                        <td>{{tr.col5}}</td>
+                                        <td>{{tr.col6}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <div class="mg-s">
+                                    <div class="fr">
+                                        <pagination status="status"></pagination>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </table-list>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

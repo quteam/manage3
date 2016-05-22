@@ -1,0 +1,72 @@
+<div class="page-dialog-wrap">
+    <div class="page-dialog-title">添加课件</div>
+    <div class="page-dialog-content">
+        <div class="form-box">
+            <form name="myForm" action="../data/form-edit.data" form-validator>
+                <div class="form-tr">
+                    <div class="form-th">机构名称</div>
+                    <div class="form-td"><input type="text" class="ipt ipt-short" ng-model="formData.name"/></div>
+                </div>
+                <div class="form-tr">
+                    <div class="form-th">所属学科</div>
+                    <div class="form-td">
+                        <select class="select select-block" relative-select relative-initload relative-to="#relativeSelect2">
+                            <option value="张三">张三</option>
+                            <option value="李四">李四</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-tr">
+                    <div class="form-th">所属年级</div>
+                    <div class="form-td">
+                        <select class="select select-block" relative-select="../data/selectlist.data" relative-to="#relativeSelect3" id="relativeSelect2">
+                            <option value="张三">张三</option>
+                            <option value="李四">李四</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-tr">
+                    <div class="form-th">所属章节</div>
+                    <div class="form-td">
+                        <select class="select select-block" relative-select="../data/selectlist.data" relative-to="#relativeSelect4" id="relativeSelect3">
+                            <option value="张三">张三</option>
+                            <option value="李四">李四</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-tr">
+                    <div class="form-th">课题</div>
+                    <div class="form-td">
+                        <select class="select select-block" relative-select="../data/selectlist.data" id="relativeSelect4">
+                            <option value="张三">张三</option>
+                            <option value="李四">李四</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-tr">
+                    <div class="form-th">上传电子教案</div>
+                    <div class="form-td">
+                        <input type="file" class="ipt ipt-block"/>
+                    </div>
+                </div>
+                <div class="form-tr">
+                    <div class="form-th">是否共享</div>
+                    <div class="form-td">
+                        <label>
+                            <input type="radio" name="isShare"/> 是
+                            <span class="color-red">课件将共享至课件中心</span>
+                        </label>
+                        <br>
+                        <label>
+                            <input type="radio" name="isShare"/> 否
+                        </label>
+                    </div>
+                </div>
+                <div class="mg-m">
+                    <button type="button" class="btn btn-gray" ng-click="closeThisDialog()"><i class="iconfont icon-cancel"></i> 取消</button>
+                    <button type="submit" class="btn btn-primary"><i class="iconfont icon-ok"></i> 保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

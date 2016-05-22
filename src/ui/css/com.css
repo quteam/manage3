@@ -1268,7 +1268,7 @@ body {
   box-sizing: border-box;
   background: #0AD27A;
   color: #FFF;
-  margin-bottom: 0;
+  /*margin-bottom: 0;*/
   font-size: 14px;
   font-weight: normal;
   text-align: center;
@@ -1279,9 +1279,9 @@ body {
   border-radius: 4px;
   outline: none;
   -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 .btn .iconfont {
   font-size: 1.2em;

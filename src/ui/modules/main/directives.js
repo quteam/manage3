@@ -891,7 +891,9 @@ define('main/directives', ['main/init'], function () {
                 //弹窗修改后的回调
                 $scope.submitCallBack = function (_curRow, _data) {
                     modal.closeAll();
-                    getTreeData();
+                    $timeout(function () {
+                        getTreeData();
+                    });
                 };
             }
         }

@@ -299,7 +299,7 @@ body{color:#1E1E1E}
 .textarea-block{width:100%}
 .label{position:relative;display:inline-block;min-width:70px;padding-left:20px;margin-bottom:0;margin-right:10px;font-weight:400;vertical-align:middle;cursor:pointer}
 .label input{position:absolute;margin:4px 0 0 -20px}
-.btn{display:inline-block;padding:0 20px;height:36px;line-height:36px;min-width:128px;box-sizing:border-box;background:#0AD27A;color:#FFF;margin-bottom:0;font-size:14px;font-weight:400;text-align:center;white-space:nowrap;vertical-align:middle;cursor:pointer;border:1px solid transparent;border-radius:4px;outline:0;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+.btn{display:inline-block;padding:0 20px;height:36px;line-height:36px;min-width:128px;box-sizing:border-box;background:#0AD27A;color:#FFF;font-size:14px;font-weight:400;text-align:center;white-space:nowrap;vertical-align:middle;cursor:pointer;border:1px solid transparent;border-radius:4px;outline:0;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
 .btn .iconfont{font-size:1.2em}
 .btn:hover{text-decoration:none}
 .btn:active{background-image:none;outline:0;box-shadow:inset 0 3px 5px rgba(0,0,0,.125)}
