@@ -30,6 +30,7 @@ define('upload/directives', ['upload/init'], function () {
 
                 //获取初始值
                 angular.forEach(initFiles, function (_file) {
+                    _file.data = angular.copy(_file);
                     _file.status = "finished";
                     if (/\.(jpe?g|png|gif)$/.test(_file.url)) {
                         _file.imgSrc = _file.url;
