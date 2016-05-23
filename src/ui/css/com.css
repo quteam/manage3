@@ -1182,11 +1182,15 @@ body {
   height: 36px;
   box-sizing: border-box;
   background: #FFF;
-  border: 1px solid #CCC;
+  border: 1px solid #AAA;
   outline: none;
 }
 .select:focus {
   border: 1px solid #5897FB;
+}
+.select[disabled] {
+  opacity: .5;
+  box-shadow: none;
 }
 .select-noborder {
   background: transparent;
@@ -1206,7 +1210,7 @@ body {
   margin-bottom: 2px;
   border-radius: 3px;
   background-color: #FFF;
-  border: 1px solid #CCC;
+  border: 1px solid #AAA;
   outline: none;
 }
 .ipt:focus {
@@ -1229,6 +1233,10 @@ body {
 .ipt-noborder {
   border: none;
   background: transparent;
+}
+.ipt[disabled] {
+  opacity: .5;
+  box-shadow: none;
 }
 .textarea {
   width: 280px;

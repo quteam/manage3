@@ -29,12 +29,16 @@
                     <input type="date" class="ipt ipt-short" ng-model="formData.date"/>
                 </div>
             </div>
-            <div ng-show="formData.km && formData.date">
+            <div>
                 <div class="form-tr">
                     <div class="form-th">第二步</div>
                     <div class="form-td">
                         <div class="mg-s">录入成绩:
-                            <select class="select" ng-model="formData.importType" ng-init="formData.importType='按姓名录入'">
+                            <select class="select"
+                                    ng-model="formData.importType"
+                                    ng-init="formData.importType='按姓名录入'"
+                                    ng-disabled="!(formData.bj && formData.km && formData.date)"
+                            >
                                 <option value="按姓名录入">按姓名录入</option>
                                 <option value="按学号录入">按学号录入</option>
                             </select>
@@ -48,6 +52,7 @@
                                   ng-model="formData.studentName"
                                   ng-change="typeStudent()"
                                   ng-if="formData.importType=='按姓名录入'"
+                                  ng-disabled="!(formData.bj && formData.km && formData.date)"
                             ></span>
                             <span angucomplete
                                   placeholder="输入考生学号"
@@ -57,6 +62,7 @@
                                   ng-model="formData.studentID"
                                   ng-change="typeStudent()"
                                   ng-if="formData.importType=='按学号录入'"
+                                  ng-disabled="!(formData.bj && formData.km && formData.date)"
                             ></span>
 
                             <input type="number" min="0" max="150"
@@ -64,6 +70,7 @@
                                    ng-model="formData.studentScore"
                                    ng-keyup="typeScore($event,'../data/form.data',formData)"
                                    placeholder="输入成绩"
+                                   ng-disabled="!(formData.bj && formData.km && formData.date)"
                                    style="vertical-align: top;"
                             />
                         </div>
@@ -109,8 +116,15 @@
                 <div class="form-tr">
                     <div class="form-th"></div>
                     <div class="form-td">
-                        <button type="button" class="btn btn-gray">取 消</button>
-                        <button type="button" class="btn" ng-click="saveScore('确定要保存?','../data/form.data',formData)">保 存</button>
+                        <button type="button" class="btn btn-gray"
+                                ng-disabled="!(formData.bj && formData.km && formData.date)"
+                        >取 消
+                        </button>
+                        <button type="button" class="btn"
+                                ng-click="saveScore('确定要保存?','../data/form.data',formData)"
+                                ng-disabled="!(formData.bj && formData.km && formData.date)"
+                        >保 存
+                        </button>
                     </div>
                 </div>
             </div>

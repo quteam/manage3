@@ -51,7 +51,7 @@
                     </div>
                 </div>
                 <div class="main-wrap">
-                    <table-list list-data="../data/table-list.data" list-params='itemData.item'>
+                    <table-list list-data="../data/table-list.data?id={{itemData.item.id}}">
                         <div class="loader" ng-if="status.isLoading">
                             <div class="loader-inner pacman">
                                 <div></div>

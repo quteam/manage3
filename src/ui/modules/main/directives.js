@@ -293,8 +293,11 @@ define('main/directives', ['main/init'], function () {
                         }
                         return;
                     }
+                    if (statusInfo.isLoading) {
+                        return;
+                    }
                     statusInfo.isLoading = true;
-                    requestData($scope.listData, angular.merge({}, formData, {page: statusInfo.currentPage}))
+                    requestData($attrs.listData, angular.merge({}, formData, {page: statusInfo.currentPage}))
                         .then(function (results) {
                             var data = results[1];
                             if (data.code == 200) {
@@ -390,6 +393,16 @@ define('main/directives', ['main/init'], function () {
                     //清除选择框
                     $(".selectAll", $element).length > 0 && ($(".selectAll", $element).prop("checked", false).get(0).indeterminate = false);
                 }, true);
+
+                $attrs.$observe("listData", function (value) {
+                    statusInfo.currentPage = 1;
+                    statusInfo.isFinished = false;
+                    $scope.tbodyList = [];
+                    formData = angular.copy($scope.listParams);
+                    getListData(setSelectedValue);
+                    //清除选择框
+                    $(".selectAll", $element).length > 0 && ($(".selectAll", $element).prop("checked", false).get(0).indeterminate = false);
+                });
 
                 //接受广播
                 $scope.$on("reloadList", function () {
@@ -1134,7 +1147,8 @@ define('main/directives', ['main/init'], function () {
                 "descriptionField": "@",
                 //"localData": "=?",
                 "searchFields": "@",
-                "matchClass": "@"
+                "matchClass": "@",
+                "ngDisabled": "=?"
             },
             require: "?^ngModel",
             templateUrl: 'tpl/autocomplete.html',

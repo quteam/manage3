@@ -1,6 +1,6 @@
 <div class="angucomplete-holder">
     <input ng-model="searchStr" type="text" placeholder="{{placeholder}}" class="ipt" onmouseup="this.select();" ng-focus="resetHideResults()"
-           ng-blur="hideResults()"/>
+           ng-blur="hideResults()" ng-disabled="ngDisabled"/>
     <div class="angucomplete-dropdown" ng-if="showDropdown">
         <div class="angucomplete-searching" ng-show="searching">正在查询...</div>
         <div class="angucomplete-searching" ng-show="!searching && (!results || results.length == 0)">没有结果</div>
