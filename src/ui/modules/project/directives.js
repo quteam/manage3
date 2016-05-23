@@ -112,15 +112,15 @@ define('project/directives', ['moment', 'project/init'], function (moment) {
                 clickEdit: "="
             },
             transclude: true,
-            template: '<span><span ng-show="!isEdit" ng-click="edit()">{{text}}</span><span ng-show="isEdit"><input type="text" class="ipt ipt-s ipt-xshort" ng-model="text" ng-keyup="finishInput($event)" ng-blur="cancelEdit()" /></span></span>',
+            template: '<div><span ng-show="!isEdit">{{text}}</span><span ng-show="isEdit"><input type="text" class="ipt ipt-s ipt-xshort" ng-model="text" ng-keyup="finishInput($event)" ng-blur="cancelEdit()" /></span></div>',
             link: function ($scope, $element, $attrs) {
                 $scope.text = $scope.clickEdit;
-                $scope.edit = function () {
+
+                $element.on("click", function () {
                     $scope.isEdit = true;
-                    $timeout(function () {
-                        $element.find("input").focus();
-                    });
-                };
+                    $scope.$digest();
+                    $element.find("input").focus().select();
+                });
                 $scope.cancelEdit = function () {
                     $scope.isEdit = false;
                     var score = parseFloat($scope.text) || 0;

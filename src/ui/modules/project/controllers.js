@@ -11,6 +11,17 @@ define('project/controllers', ['project/init'], function () {
             $element.find(".studentScoreIpt").focus();
         };
 
+        var $selectClass = $element.find(".selectClass");
+        var _banjiValue = $selectClass.val();
+        $selectClass.on("change", function (e) {
+            if (confirm("你还没有保存当前录入记录,确定要切换班级?")) {
+                _banjiValue = $selectClass.val();
+            } else {
+                $selectClass.val(_banjiValue);
+                return false;
+            }
+        });
+
         $scope.typeScore = function ($e, _url, _data) {
             if ($e.keyCode == 13) {
                 requestData(_url, _data)
