@@ -811,6 +811,7 @@ define('main/directives', ['main/init'], function () {
             restrict: 'AE',
             require: "?^ngModel",
             link: function ($scope, $element, $attrs, ngModel) {
+                var canSelectGroup = angular.isDefined($attrs.selectGroup);
                 $scope.status = {};
                 $scope.treeList = [];
                 $scope.curTree = {};
@@ -821,9 +822,10 @@ define('main/directives', ['main/init'], function () {
                     var $em = $(e.currentTarget);
                     var $parentLi = $em.parent("li");
                     var _tree = angular.copy(tree);
-                    if (_tree.nodes.length == 0) {
+                    if (_tree.nodes.length == 0 || canSelectGroup) {
                         $li.removeClass("on");
                         $parentLi.addClass("on");
+                        delete _tree.nodes;
                         ngModel && ngModel.$setViewValue(_tree);
                     } else {
                         if ($parentLi.hasClass("fold")) {
@@ -838,11 +840,12 @@ define('main/directives', ['main/init'], function () {
                     e.preventDefault();
                     e.stopPropagation();
                     var $this = $(e.currentTarget);
-                    if ($this.hasClass("on")) {
-                        $this.removeClass("on");
+                    var $parentLi = $this.parent().parent("li");
+                    if ($parentLi.hasClass("fold")) {
+                        $parentLi.removeClass("fold");
                         $this.parent().next().hide();
                     } else {
-                        $this.addClass("on");
+                        $parentLi.addClass("fold");
                         $this.parent().next().show();
                     }
                 };

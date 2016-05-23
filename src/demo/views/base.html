@@ -154,6 +154,44 @@
                 </div>
             </div>
             <div class="form-tr">
+                <div class="form-th">树状选择</div>
+                <div class="form-td">
+                    {{itemData.tree}}
+                    <div class="tree-list tree-list-border" tree-list2="../data/tree.data" ng-model="itemData.tree" select-group style="max-height: 400px; overflow: auto;">
+                        <div class="loader" ng-if="status.isLoading">
+                            <div class="loader-inner pacman">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+                        <div ng-if="!status.isLoading">
+                            <div class="empty-wrap" ng-if="treeList.length==0">
+                                <div class="icon"><i class="iconfont icon-empty"></i></div>
+                                <div>什么也没有</div>
+                            </div>
+                            <ul ng-if="treeList.length">
+                                <li ng-repeat="tree in treeList">
+                                    <em ng-click="selectTree(tree,$event)"><i class="iconfont fold-p" ng-if="tree.nodes.length" ng-click="extendTree($event)"></i> {{tree.name}}</em>
+                                    <ul ng-if="tree.nodes.length">
+                                        <li ng-repeat="tree2 in tree.nodes">
+                                            <em ng-click="selectTree(tree2,$event)"><i class="iconfont fold-p" ng-if="tree2.nodes.length" ng-click="extendTree($event)"></i> <span>{{tree2.name}}</span></em>
+                                            <ul ng-if="tree2.nodes.length">
+                                                <li ng-repeat="tree3 in tree2.nodes">
+                                                    <em ng-click="selectTree(tree3,$event)"><i class="iconfont icon-house"></i> {{tree3.name}}</em>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-tr">
                 <div class="form-th">动画</div>
                 <div class="form-td">
                     <div class="loader">

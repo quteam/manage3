@@ -2498,7 +2498,7 @@ body {
 .tree-list li.fold > em > .fold-p:before {
   content: "\e61a";
 }
-.tree-list li.on em {
+.tree-list li.on > em {
   background: #E8ECF1;
 }
 .tree-list li.on:before {
@@ -2506,7 +2506,7 @@ body {
   position: absolute;
   left: 0;
   top: 0;
-  bottom: 0;
+  height: 44px;
   border-left: 3px solid #15BBF8;
   box-shadow: 2px 0 10px #15BBF8;
 }

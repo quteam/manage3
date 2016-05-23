@@ -511,8 +511,8 @@ body{color:#1E1E1E}
 .tree-list li.fold>ul{display:block}
 .tree-list li.fold em{color:#1E1E1E}
 .tree-list li.fold>em>.fold-p:before{content:"\e61a"}
-.tree-list li.on em{background:#E8ECF1}
-.tree-list li.on:before{content:"";position:absolute;left:0;top:0;bottom:0;border-left:3px solid #15BBF8;box-shadow:2px 0 10px #15BBF8}
+.tree-list li.on>em{background:#E8ECF1}
+.tree-list li.on:before{content:"";position:absolute;left:0;top:0;height:44px;border-left:3px solid #15BBF8;box-shadow:2px 0 10px #15BBF8}
 .tree-list li li>em{padding-left:40px}
 .tree-list li li li>em{padding-left:60px}
 .tree-list .empty-wrap{min-height:400px}
