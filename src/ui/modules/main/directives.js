@@ -98,12 +98,15 @@ define('main/directives', ['main/init'], function () {
                     requestData($attrs.detailsInfo, params)
                         .then(function (results) {
                             var data = results[0];
+                            $scope.detailsResponse = results[1];
                             $scope.isLoading = false;
                             if ($scope.detailsHandler) {
                                 $scope.details = $scope.detailsHandler(data);
                             } else {
                                 $scope.details = data;
                             }
+                            //回调父级的处理事件;
+                            $scope.listCallback && $scope.listCallback(results[1]);
                         })
                         .catch(function () {
                             $scope.details = {};

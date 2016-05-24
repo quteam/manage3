@@ -1,6 +1,7 @@
 {
   "code": 200,
   "message": "没有权限",
+  "hasScore": true,
   "data": {
     "num1": 5,
     "num2": 10,

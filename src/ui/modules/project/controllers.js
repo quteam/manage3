@@ -6,19 +6,22 @@ define('project/controllers', ['project/init'], function () {
     //录入成绩
     function importScoreCtrl($scope, requestData, $element, dialogConfirm, modal) {
         $scope.formData = {};
+        $scope.hasScore = false;
 
         $scope.typeStudent = function () {
             $element.find(".studentScoreIpt").focus();
         };
 
+        var _needSaveConfirm = true;
         var $selectClass = $element.find(".selectClass");
         var _banjiValue = $selectClass.val();
         $selectClass.on("change", function (e) {
-            if (confirm("你还没有保存当前录入记录,确定要切换班级?")) {
-                _banjiValue = $selectClass.val();
-            } else {
-                $selectClass.val(_banjiValue);
-                return false;
+            if ($scope.hasScore) {
+                if (confirm("你还没有保存当前录入记录,确定要保存?")) {
+                    _needSaveConfirm = false;
+                    $element.find(".saveBtn").trigger("click");
+                } else {
+                }
             }
         });
 
@@ -40,17 +43,32 @@ define('project/controllers', ['project/init'], function () {
         };
 
         $scope.saveScore = function (_text, _url, _data) {
-            dialogConfirm(_text, function () {
+            if (_needSaveConfirm) {
+                dialogConfirm(_text, function () {
+                    requestData(_url, _data)
+                        .then(function () {
+                            modal.closeAll();
+                        })
+                        .catch(function (error) {
+                            alert(error || '保存错误');
+                        })
+                });
+            } else {
                 requestData(_url, _data)
                     .then(function () {
-                        modal.closeAll();
+                        _needSaveConfirm = true;
                     })
                     .catch(function (error) {
+                        _needSaveConfirm = true;
                         alert(error || '保存错误');
                     })
-            });
-        }
+            }
+        };
 
+        //列表处理事件
+        $scope.listCallback = function (_data) {
+            $scope.hasScore = _data.hasScore;
+        }
     };
     importScoreCtrl.$inject = ['$scope', 'requestData', '$element', 'dialogConfirm', 'modal'];
 
