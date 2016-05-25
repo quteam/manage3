@@ -113,6 +113,10 @@ define('main/directives', ['main/init'], function () {
                             $scope.isLoading = false;
                         });
                 }
+
+                $scope.$on("reloadDetails", function () {
+                    getData({});
+                })
             }
         };
     };

@@ -13,9 +13,31 @@ define('project/controllers', ['project/init'], function () {
         };
 
         var _needSaveConfirm = true;
-        var $selectClass = $element.find(".selectClass");
-        var _banjiValue = $selectClass.val();
-        $selectClass.on("change", function (e) {
+        var $selectBanji = $element.find(".selectBanji");
+        var $selectKemu = $element.find(".selectKemu");
+        var $selectDate = $element.find(".selectDate");
+        var _banjiValue = $selectBanji.val();
+        var _kemuValue = $selectKemu.val();
+        var _dateValue = $selectDate.val();
+        $selectBanji.on("change", function (e) {
+            if ($scope.hasScore) {
+                if (confirm("你还没有保存当前录入记录,确定要保存?")) {
+                    _needSaveConfirm = false;
+                    $element.find(".saveBtn").trigger("click");
+                } else {
+                }
+            }
+        });
+        $selectKemu.on("change", function (e) {
+            if ($scope.hasScore) {
+                if (confirm("你还没有保存当前录入记录,确定要保存?")) {
+                    _needSaveConfirm = false;
+                    $element.find(".saveBtn").trigger("click");
+                } else {
+                }
+            }
+        });
+        $selectDate.on("change", function (e) {
             if ($scope.hasScore) {
                 if (confirm("你还没有保存当前录入记录,确定要保存?")) {
                     _needSaveConfirm = false;

@@ -127,11 +127,12 @@ define('project/directives', ['moment', 'project/init'], function (moment) {
                     $scope.text = score;
                     requestData($scope.requestUrl, {score: score})
                         .then(function (_data) {
+                            $scope.$emit("reloadDetails");
                         });
                 };
                 $scope.finishInput = function ($e) {
                     if ($e.keyCode == 13) {
-                        $scope.cancelEdit();
+                        $scope.isEdit = false;
                     }
                 }
             }
