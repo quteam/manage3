@@ -86,7 +86,6 @@
                             <table class="table-list">
                                 <thead>
                                 <tr>
-                                    <th>成绩录入情况</th>
                                     <th>班级</th>
                                     <th>学号</th>
                                     <th>姓名</th>
@@ -96,10 +95,6 @@
                                 </thead>
                                 <tbody>
                                 <tr ng-repeat="tr in details.list">
-                                    <td>
-                                        <span ng-if="!tr.score" class="color-red">未录入</span>
-                                        <span ng-if="tr.score" class="color-green">已录入</span>
-                                    </td>
                                     <td>{{tr.col1}}</td>
                                     <td>{{tr.col2}}</td>
                                     <td>{{tr.col3}}</td>

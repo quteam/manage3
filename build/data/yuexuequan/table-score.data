@@ -3,8 +3,8 @@
   "message": "没有权限",
   "hasScore": true,
   "data": {
-    "num1": 5,
-    "num2": 10,
+    "num1": 2,
+    "num2": 4,
     "list": [
       {
         "id": 11,

@@ -112,7 +112,11 @@ define('project/directives', ['moment', 'project/init'], function (moment) {
                 clickEdit: "="
             },
             transclude: true,
-            template: '<div><span ng-show="!isEdit">{{text}}</span><span ng-show="isEdit"><input type="text" class="ipt ipt-s ipt-xshort" ng-model="text" ng-keyup="finishInput($event)" ng-blur="cancelEdit()" /></span></div>',
+            template: '<div><span ng-show="!isEdit">' +
+            '<span ng-if="!text" class="color-red">未录入</span>' +
+            '<span ng-if="text">{{text}}</span>' +
+            '</span>' +
+            '<span ng-show="isEdit"><input type="text" class="ipt ipt-s ipt-xshort" ng-model="text" ng-keyup="finishInput($event)" ng-blur="cancelEdit()" /></span></div>',
             link: function ($scope, $element, $attrs) {
                 $scope.text = $scope.clickEdit;
 
@@ -124,16 +128,34 @@ define('project/directives', ['moment', 'project/init'], function (moment) {
                 $scope.cancelEdit = function () {
                     $scope.isEdit = false;
                     var score = parseFloat($scope.text) || 0;
-                    $scope.text = score;
-                    requestData($scope.requestUrl, {score: score})
-                        .then(function (_data) {
-                            $scope.$emit("reloadDetails");
-                        });
+                    $scope.clickEdit = $scope.text = score;
+                    if (score) {
+                        requestData($scope.requestUrl, {score: score})
+                            .then(function (_data) {
+                                $scope.$parent.$parent.$parent.hasScore = _data.hasScore;
+                                checkStudentScore();
+                            });
+                    }
                 };
                 $scope.finishInput = function ($e) {
                     if ($e.keyCode == 13) {
                         $scope.isEdit = false;
                     }
+                };
+
+                function checkStudentScore() {
+                    var studentListDetails = $scope.$parent.$parent.details;
+                    var _num1 = 0;
+                    var _num2 = 0;
+                    angular.forEach(studentListDetails.list, function (one) {
+                        if (one.score) {
+                            _num2++;
+                        } else {
+                            _num1++;
+                        }
+                    });
+                    studentListDetails.num1 = _num1;
+                    studentListDetails.num2 = _num2;
                 }
             }
         }
