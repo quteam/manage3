@@ -113,7 +113,7 @@ define('project/directives', ['moment', 'project/init'], function (moment) {
             },
             transclude: true,
             template: '<div><span ng-show="!isEdit">' +
-            '<span ng-if="!(text>=0)" class="color-red">未录入</span>' +
+            '<span ng-if="text===\'\'||text==undefined" class="color-red">未录入</span>' +
             '<span ng-if="text>=0">{{text}}</span>' +
             '</span>' +
             '<span ng-show="isEdit"><input type="text" class="ipt ipt-s ipt-xshort" ng-model="text" ng-keyup="finishInput($event)" ng-blur="cancelEdit()" /></span></div>',
@@ -125,21 +125,23 @@ define('project/directives', ['moment', 'project/init'], function (moment) {
                     $scope.$digest();
                     $element.find("input").focus().select();
                 });
+
+                var oldScore = "";
+
                 $scope.cancelEdit = function () {
                     $scope.isEdit = false;
-                    // var score = parseFloat($scope.text) || 0;
-                    // $scope.clickEdit = $scope.text = score;
 
-                    var score = $.trim($scope.text);
+                    var score = $scope.text = $.trim($scope.text);
                     if (score) {
-                        score = $scope.clickEdit = $scope.text = parseFloat(score) || 0;
-                        requestData($scope.requestUrl, {score: score})
+                        if (oldScore == score) {
+                            return;
+                        }
+                        oldScore = $scope.clickEdit = $scope.text = parseFloat(score) || 0;
+                        requestData($scope.requestUrl, {score: oldScore})
                             .then(function (_data) {
                                 $scope.$parent.$parent.$parent.hasScore = _data.hasScore;
                                 checkStudentScore();
                             });
-                    } else {
-                        $scope.text = score;
                     }
                 };
                 $scope.finishInput = function ($e) {
@@ -153,7 +155,7 @@ define('project/directives', ['moment', 'project/init'], function (moment) {
                     var _num1 = 0;
                     var _num2 = 0;
                     angular.forEach(studentListDetails.list, function (one) {
-                        if (one.score) {
+                        if (one.score >= 0) {
                             _num2++;
                         } else {
                             _num1++;

@@ -4,7 +4,7 @@
 
 define('project/controllers', ['project/init'], function () {
     //录入成绩
-    function importScoreCtrl($scope, requestData, $element, dialogConfirm, modal) {
+    function importScoreCtrl($scope, requestData, $element, dialogConfirm, modal, $rootScope, $timeout) {
         $scope.formData = {};
         $scope.hasScore = false;
 
@@ -20,30 +20,75 @@ define('project/controllers', ['project/init'], function () {
         var _kemuValue = $selectKemu.val();
         var _dateValue = $selectDate.val();
         $selectBanji.on("change", function (e) {
+            var $this = $(this);
             if ($scope.hasScore) {
-                if (confirm("你还没有保存当前录入记录,确定要保存?")) {
-                    _needSaveConfirm = false;
-                    $element.find(".saveBtn").trigger("click");
-                } else {
-                }
+                var _newValue = $this.val();
+                $this.val(_banjiValue);
+
+                var _$scope = $rootScope.$new(false);
+                _$scope.confirmText = '你还没有保存当前录入记录,确定要保存?';
+                _$scope.confirmBtnTxt = '保存';
+                _$scope.cancelBtnTxt = '不保存';
+                modal.openConfirm({
+                    template: 'tpl/dialog-confirm.html',
+                    scope: _$scope
+                }).then(function () {
+                    $timeout(function () {
+                        _needSaveConfirm = false;
+                        $element.find(".saveBtn").trigger("click");
+                        $scope.formData[$this.attr("ng-model").split(".")[1]] = _newValue;
+                    });
+                }).catch(function () {
+                    $scope.formData[$this.attr("ng-model").split(".")[1]] = _newValue;
+                });
             }
         });
         $selectKemu.on("change", function (e) {
+            var $this = $(this);
             if ($scope.hasScore) {
-                if (confirm("你还没有保存当前录入记录,确定要保存?")) {
-                    _needSaveConfirm = false;
-                    $element.find(".saveBtn").trigger("click");
-                } else {
-                }
+                var _newValue = $this.val();
+                $this.val(_kemuValue);
+
+                var _$scope = $rootScope.$new(false);
+                _$scope.confirmText = '你还没有保存当前录入记录,确定要保存?';
+                _$scope.confirmBtnTxt = '保存';
+                _$scope.cancelBtnTxt = '不保存';
+                modal.openConfirm({
+                    template: 'tpl/dialog-confirm.html',
+                    scope: _$scope
+                }).then(function () {
+                    $timeout(function () {
+                        _needSaveConfirm = false;
+                        $element.find(".saveBtn").trigger("click");
+                        $scope.formData[$this.attr("ng-model").split(".")[1]] = _newValue;
+                    });
+                }).catch(function () {
+                    $scope.formData[$this.attr("ng-model").split(".")[1]] = _newValue;
+                });
             }
         });
         $selectDate.on("change", function (e) {
+            var $this = $(this);
             if ($scope.hasScore) {
-                if (confirm("你还没有保存当前录入记录,确定要保存?")) {
-                    _needSaveConfirm = false;
-                    $element.find(".saveBtn").trigger("click");
-                } else {
-                }
+                var _newValue = $this.val();
+                $this.val(_dateValue);
+
+                var _$scope = $rootScope.$new(false);
+                _$scope.confirmText = '你还没有保存当前录入记录,确定要保存?';
+                _$scope.confirmBtnTxt = '保存';
+                _$scope.cancelBtnTxt = '不保存';
+                modal.openConfirm({
+                    template: 'tpl/dialog-confirm.html',
+                    scope: _$scope
+                }).then(function () {
+                    $timeout(function () {
+                        _needSaveConfirm = false;
+                        $element.find(".saveBtn").trigger("click");
+                        $scope.formData[$this.attr("ng-model").split(".")[1]] = _newValue;
+                    });
+                }).catch(function () {
+                    $scope.formData[$this.attr("ng-model").split(".")[1]] = _newValue;
+                });
             }
         });
 
@@ -92,7 +137,7 @@ define('project/controllers', ['project/init'], function () {
             $scope.hasScore = _data.hasScore;
         }
     };
-    importScoreCtrl.$inject = ['$scope', 'requestData', '$element', 'dialogConfirm', 'modal'];
+    importScoreCtrl.$inject = ['$scope', 'requestData', '$element', 'dialogConfirm', 'modal', '$rootScope', '$timeout'];
 
     //发送通知
     function noticePageCtrl($scope, $element, $timeout) {
