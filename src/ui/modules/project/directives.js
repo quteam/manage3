@@ -113,8 +113,8 @@ define('project/directives', ['moment', 'project/init'], function (moment) {
             },
             transclude: true,
             template: '<div><span ng-show="!isEdit">' +
-            '<span ng-if="!text" class="color-red">未录入</span>' +
-            '<span ng-if="text">{{text}}</span>' +
+            '<span ng-if="!(text>=0)" class="color-red">未录入</span>' +
+            '<span ng-if="text>=0">{{text}}</span>' +
             '</span>' +
             '<span ng-show="isEdit"><input type="text" class="ipt ipt-s ipt-xshort" ng-model="text" ng-keyup="finishInput($event)" ng-blur="cancelEdit()" /></span></div>',
             link: function ($scope, $element, $attrs) {
@@ -127,14 +127,19 @@ define('project/directives', ['moment', 'project/init'], function (moment) {
                 });
                 $scope.cancelEdit = function () {
                     $scope.isEdit = false;
-                    var score = parseFloat($scope.text) || 0;
-                    $scope.clickEdit = $scope.text = score;
+                    // var score = parseFloat($scope.text) || 0;
+                    // $scope.clickEdit = $scope.text = score;
+
+                    var score = $.trim($scope.text);
                     if (score) {
+                        score = $scope.clickEdit = $scope.text = parseFloat(score) || 0;
                         requestData($scope.requestUrl, {score: score})
                             .then(function (_data) {
                                 $scope.$parent.$parent.$parent.hasScore = _data.hasScore;
                                 checkStudentScore();
                             });
+                    } else {
+                        $scope.text = score;
                     }
                 };
                 $scope.finishInput = function ($e) {
