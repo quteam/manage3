@@ -154,8 +154,8 @@ define('project/directives', ['moment', 'project/init'], function (moment) {
                             _num1++;
                         }
                     });
-                    studentListDetails.num1 = _num1;
-                    studentListDetails.num2 = _num2;
+                    studentListDetails.noScoreNum = _num1;
+                    studentListDetails.hasScoreNum = _num2;
                 }
             }
         }
