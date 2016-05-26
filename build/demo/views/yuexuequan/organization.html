@@ -23,6 +23,10 @@
                                     <span class="name" modal-right="400" modal-scope="this" modal-url="views/yuexuequan/org-edit.html?id={{tree3.id}}">
                                         {{tree3.name}}
                                         <span class="extend iconfont" ng-if="tree3.nodes.length" ng-click="extendTree($event)"></span>
+                                        <span class="operate">
+                                            <i class="iconfont icon-plus" ng-click="addTree($event,'views/yuexuequan/org-edit.html?id='+tree3.id)"></i>
+                                            <i class="iconfont icon-delete" ng-click="deleteTree($event, '../data/form.data')"></i>
+                                        </span>
                                     </span>
                                     <ul ng-if="tree3.nodes.length" class="undis">
                                         <li ng-repeat="tree4 in tree3.nodes">

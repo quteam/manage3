@@ -813,7 +813,7 @@ define('main/directives', ['main/init'], function () {
     /**
      * 树状列表2
      */
-    function treeList2(requestData, modal, $timeout) {
+    function treeList2(requestData, modal, $timeout, dialogConfirm) {
         return {
             restrict: 'AE',
             require: "?^ngModel",
@@ -855,6 +855,35 @@ define('main/directives', ['main/init'], function () {
                         $parentLi.addClass("fold");
                         $this.parent().next().show();
                     }
+                };
+
+                $scope.deleteTree = function (e, _url) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    dialogConfirm("是否删除?", function () {
+                        requestData(_url).then(function () {
+                            getTreeData();
+                        });
+                    });
+                };
+
+                $scope.addTree = function (e, _url) {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    modal.closeAll();
+
+                    modal.open({
+                        template: _url,
+                        className: 'ngdialog-theme-right',
+                        cache: false,
+                        trapFocus: true,
+                        overlay: false,
+                        scope: $scope,
+                        controller: ["$scope", "$element", function ($scope, $element) {
+                            $(".ngdialog-content", $element).width(400);
+                        }]
+                    });
                 };
 
                 function buildTree(data) {
@@ -921,7 +950,7 @@ define('main/directives', ['main/init'], function () {
             }
         }
     };
-    treeList2.$inject = ["requestData", "modal", "$timeout"];
+    treeList2.$inject = ["requestData", "modal", "$timeout", "dialogConfirm"];
 
     /**
      * 导航列表
