@@ -12,7 +12,7 @@
     </div>
     <div class="page-main">
         <div class="mgb-l"><span class="text-l">录入成绩</span></div>
-        <div class="form-box import-score-wrap" ng-controller="importScoreCtrl" ng-init="formData.bj=banji='高一1班'">
+        <div class="form-box import-score-wrap" ng-controller="importScoreCtrl" ng-init="formData.bj='高一1班'">
             <div class="form-tr">
                 <div class="form-th">第一步</div>
                 <div class="form-td">
@@ -22,11 +22,12 @@
                         <option value="高一3班">高一3班</option>
                     </select>
                     <select class="select selectKemu" ng-model="formData.km">
+                        <option value="">选择科目</option>
                         <option value="语文">语文</option>
                         <option value="数学">数学</option>
                         <option value="英语">英语</option>
                     </select>
-                    <input type="date" class="ipt ipt-short selectDate" ng-model="formData.date"/>
+                    <input type="date" class="ipt ipt-short selectDate" ng-model="formData.date" convert-to-date/>
                 </div>
             </div>
             <div>
@@ -37,7 +38,7 @@
                             <select class="select"
                                     ng-model="formData.importType"
                                     ng-init="formData.importType='按姓名录入'"
-                                    ng-disabled="!(formData.bj && formData.km && formData.date)"
+                                    ng-disabled="!canContinue"
                             >
                                 <option value="按姓名录入">按姓名录入</option>
                                 <option value="按学号录入">按学号录入</option>
@@ -52,7 +53,7 @@
                                   ng-model="formData.studentName"
                                   ng-change="typeStudent()"
                                   ng-if="formData.importType=='按姓名录入'"
-                                  ng-disabled="!(formData.bj && formData.km && formData.date)"
+                                  ng-disabled="!canContinue"
                             ></span>
                             <span angucomplete
                                   placeholder="输入考生学号"
@@ -62,7 +63,7 @@
                                   ng-model="formData.studentID"
                                   ng-change="typeStudent()"
                                   ng-if="formData.importType=='按学号录入'"
-                                  ng-disabled="!(formData.bj && formData.km && formData.date)"
+                                  ng-disabled="!canContinue"
                             ></span>
 
                             <input type="number" min="0" max="150"
@@ -70,7 +71,7 @@
                                    ng-model="formData.studentScore"
                                    ng-keyup="typeScore($event,'../data/form.data',formData)"
                                    placeholder="输入成绩"
-                                   ng-disabled="!(formData.bj && formData.km && formData.date)"
+                                   ng-disabled="!canContinue"
                                    style="vertical-align: top;"
                             />
                         </div>
@@ -99,7 +100,7 @@
                                     <td>{{tr.col2}}</td>
                                     <td>{{tr.col3}}</td>
                                     <td>{{tr.col4}}</td>
-                                    <td click-edit="tr.score" request-url="../data/form.data">
+                                    <td click-edit="tr.score" status="canContinue" request-url="../data/form.data">
                                     </td>
                                 </tr>
                                 </tbody>
@@ -110,13 +111,14 @@
                 <div class="form-tr">
                     <div class="form-th"></div>
                     <div class="form-td">
-                        <button type="button" class="btn btn-gray"
-                                ng-disabled="!(formData.bj && formData.km && formData.date)"
-                        >取 消
+                        <button type="button" class="btn btn-gray notSaveBtn"
+                                ng-click="notSaveScore('确定不保存?','../data/form.data',formData)"
+                                ng-disabled="!canContinue"
+                        >不保存
                         </button>
                         <button type="button" class="btn saveBtn"
                                 ng-click="saveScore('确定要保存?','../data/form.data',formData)"
-                                ng-disabled="!(formData.bj && formData.km && formData.date)"
+                                ng-disabled="!canContinue"
                         >保 存
                         </button>
                     </div>

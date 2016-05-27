@@ -109,7 +109,8 @@ define('project/directives', ['moment', 'project/init'], function (moment) {
             restrict: 'AE',
             scope: {
                 requestUrl: "@",
-                clickEdit: "="
+                clickEdit: "=",
+                status: "="
             },
             transclude: true,
             template: '<div><span ng-show="!isEdit">' +
@@ -120,7 +121,10 @@ define('project/directives', ['moment', 'project/init'], function (moment) {
             link: function ($scope, $element, $attrs) {
                 $scope.text = $scope.clickEdit;
 
-                $element.on("click", function () {
+                $element.on("click", function (e) {
+                    if (!$scope.status) {
+                        return;
+                    }
                     $scope.isEdit = true;
                     $scope.$digest();
                     $element.find("input").focus().select();

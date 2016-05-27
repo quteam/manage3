@@ -7,21 +7,37 @@ define('project/controllers', ['project/init'], function () {
     function importScoreCtrl($scope, requestData, $element, dialogConfirm, modal, $rootScope, $timeout) {
         $scope.formData = {};
         $scope.hasScore = false;
+        $scope.canContinue = false;
 
         $scope.typeStudent = function () {
             $element.find(".studentScoreIpt").focus();
         };
 
         var _needSaveConfirm = true;
+        var _needNotSaveConfirm = true;
         var $selectBanji = $element.find(".selectBanji");
         var $selectKemu = $element.find(".selectKemu");
         var $selectDate = $element.find(".selectDate");
+        var _banjiModel = $selectBanji.attr("ng-model").split(".")[1];
+        var _kemuModel = $selectKemu.attr("ng-model").split(".")[1];
+        var _dateModel = $selectDate.attr("ng-model").split(".")[1];
         var _banjiValue = $selectBanji.val();
         var _kemuValue = $selectKemu.val();
         var _dateValue = $selectDate.val();
+
+        function checkOneStep() {
+            $scope.$digest();
+            _banjiValue = $selectBanji.val();
+            _kemuValue = $selectKemu.val();
+            _dateValue = $selectDate.val();
+
+            $scope.canContinue = _banjiValue && _kemuValue && _dateValue;
+        };
+
+        //第一步的选择
         $selectBanji.on("change", function (e) {
             var $this = $(this);
-            if ($scope.hasScore) {
+            if ($scope.hasScore && $scope.canContinue) {
                 var _newValue = $this.val();
                 $this.val(_banjiValue);
 
@@ -36,16 +52,26 @@ define('project/controllers', ['project/init'], function () {
                     $timeout(function () {
                         _needSaveConfirm = false;
                         $element.find(".saveBtn").trigger("click");
-                        $scope.formData[$this.attr("ng-model").split(".")[1]] = _newValue;
+                        $scope.formData[_banjiModel] = _newValue;
+                        checkOneStep();
                     });
-                }).catch(function () {
-                    $scope.formData[$this.attr("ng-model").split(".")[1]] = _newValue;
+                }).catch(function (_type) {
+                    if (_type == 'cancelBtn') {
+                        $timeout(function () {
+                            _needNotSaveConfirm = false;
+                            $element.find(".notSaveBtn").trigger("click");
+                            $scope.formData[_banjiModel] = _newValue;
+                            checkOneStep();
+                        });
+                    }
                 });
+            } else {
+                $timeout(checkOneStep);
             }
         });
         $selectKemu.on("change", function (e) {
             var $this = $(this);
-            if ($scope.hasScore) {
+            if ($scope.hasScore && $scope.canContinue) {
                 var _newValue = $this.val();
                 $this.val(_kemuValue);
 
@@ -60,16 +86,26 @@ define('project/controllers', ['project/init'], function () {
                     $timeout(function () {
                         _needSaveConfirm = false;
                         $element.find(".saveBtn").trigger("click");
-                        $scope.formData[$this.attr("ng-model").split(".")[1]] = _newValue;
+                        $scope.formData[_kemuModel] = _newValue;
+                        checkOneStep();
                     });
-                }).catch(function () {
-                    $scope.formData[$this.attr("ng-model").split(".")[1]] = _newValue;
+                }).catch(function (_type) {
+                    if (_type == 'cancelBtn') {
+                        $timeout(function () {
+                            _needNotSaveConfirm = false;
+                            $element.find(".notSaveBtn").trigger("click");
+                            $scope.formData[_kemuModel] = _newValue;
+                            checkOneStep();
+                        });
+                    }
                 });
+            } else {
+                $timeout(checkOneStep);
             }
         });
         $selectDate.on("change", function (e) {
             var $this = $(this);
-            if ($scope.hasScore) {
+            if ($scope.hasScore && $scope.canContinue) {
                 var _newValue = $this.val();
                 $this.val(_dateValue);
 
@@ -84,11 +120,21 @@ define('project/controllers', ['project/init'], function () {
                     $timeout(function () {
                         _needSaveConfirm = false;
                         $element.find(".saveBtn").trigger("click");
-                        $scope.formData[$this.attr("ng-model").split(".")[1]] = _newValue;
+                        $scope.formData[_dateModel] = _newValue;
+                        checkOneStep();
                     });
-                }).catch(function () {
-                    $scope.formData[$this.attr("ng-model").split(".")[1]] = _newValue;
+                }).catch(function (_type) {
+                    if (_type == 'cancelBtn') {
+                        $timeout(function () {
+                            _needNotSaveConfirm = false;
+                            $element.find(".notSaveBtn").trigger("click");
+                            $scope.formData[_dateModel] = _newValue;
+                            checkOneStep();
+                        });
+                    }
                 });
+            } else {
+                $timeout(checkOneStep);
             }
         });
 
@@ -109,6 +155,7 @@ define('project/controllers', ['project/init'], function () {
             }
         };
 
+        //保存录入的成绩
         $scope.saveScore = function (_text, _url, _data) {
             if (_needSaveConfirm) {
                 dialogConfirm(_text, function () {
@@ -132,7 +179,29 @@ define('project/controllers', ['project/init'], function () {
             }
         };
 
-        //列表处理事件
+        //不保存录入的成绩
+        $scope.notSaveScore = function (_text, _url, _data) {
+            if (_needNotSaveConfirm) {
+                dialogConfirm(_text, function () {
+                    requestData(_url, _data)
+                        .then(function () {
+                            modal.closeAll();
+                        })
+                        .catch(function (error) {
+                        })
+                });
+            } else {
+                requestData(_url, _data)
+                    .then(function () {
+                        _needNotSaveConfirm = true;
+                    })
+                    .catch(function (error) {
+                        _needNotSaveConfirm = true;
+                    })
+            }
+        };
+
+        //列表处理事件: 是否录入成绩
         $scope.listCallback = function (_data) {
             $scope.hasScore = _data.hasScore;
         }

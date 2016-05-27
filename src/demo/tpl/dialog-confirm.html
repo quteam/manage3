@@ -2,7 +2,7 @@
     <div class="page-dialog-content">
         <div class="mgb-l">{{confirmText}}</div>
         <div class="text-center pd-v-s">
-            <button type="button" class="btn btn-gray" ng-click="closeThisDialog()">{{cancelBtnTxt||'取消'}}</button>
+            <button type="button" class="btn btn-gray" ng-click="closeThisDialog('cancelBtn')">{{cancelBtnTxt||'取消'}}</button>
             <button type="button" class="btn btn-blue" ng-click="confirm()">{{confirmBtnTxt||'确定'}}</button>
         </div>
     </div>
