@@ -164,9 +164,8 @@ define('project/controllers', ['project/init'], function () {
                             $scope.hasScore = false;
                             if (angular.isFunction($scope.submitCallBack)) {
                                 $scope.submitCallBack.call($scope);
-                            }else{
-                                modal.closeAll();
                             }
+                            modal.closeAll();
                         })
                         .catch(function (error) {
                             alert(error || '保存错误');
@@ -197,9 +196,8 @@ define('project/controllers', ['project/init'], function () {
                             $scope.hasScore = false;
                             if (angular.isFunction($scope.submitCallBack)) {
                                 $scope.submitCallBack.call($scope);
-                            }else{
-                                modal.closeAll();
                             }
+                            modal.closeAll();
                         })
                         .catch(function (error) {
                         })
