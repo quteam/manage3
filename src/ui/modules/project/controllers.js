@@ -138,7 +138,7 @@ define('project/controllers', ['project/init'], function () {
             }
         });
 
-        $scope.typeScore = function ($e, _data) {
+        $scope.typeScore = function ($e, _url, _data) {
             if ($e.keyCode == 13) {
                 requestData(_url, _data)
                     .then(function () {
@@ -148,7 +148,7 @@ define('project/controllers', ['project/init'], function () {
                         var $ipt = $element.find(".studentNameIpt input");
                         $ipt.val("").focus();
                         $element.find(".studentScoreIpt").val("");
-                        $scope.hasScore = true;
+                        // $scope.hasScore = true;
                     })
                     .catch(function (error) {
                         alert(error || '录入成绩错误');
@@ -205,30 +205,32 @@ define('project/controllers', ['project/init'], function () {
         //列表处理事件: 是否录入成绩
         $scope.listCallback = function (_data) {
             $scope.hasScore = _data.hasScore;
-        }
+        };
 
         //退出事件
         $scope.$on("$destroy", function () {
-            var _$scope = $rootScope.$new(false);
-            _$scope.confirmText = '你还没有保存当前录入记录,确定要保存?';
-            _$scope.confirmBtnTxt = '保存';
-            _$scope.cancelBtnTxt = '不保存';
-            modal.openConfirm({
-                template: 'tpl/dialog-confirm.html',
-                scope: _$scope
-            }).then(function () {
-                $timeout(function () {
-                    _needSaveConfirm = false;
-                    $scope.saveScore()
-                });
-            }).catch(function (_type) {
-                if (_type == 'cancelBtn') {
+            if ($scope.hasScore && $scope.canContinue) {
+                var _$scope = $rootScope.$new(false);
+                _$scope.confirmText = '你还没有保存当前录入记录,确定要保存?';
+                _$scope.confirmBtnTxt = '保存';
+                _$scope.cancelBtnTxt = '不保存';
+                modal.openConfirm({
+                    template: 'tpl/dialog-confirm.html',
+                    scope: _$scope
+                }).then(function () {
                     $timeout(function () {
-                        _needNotSaveConfirm = false;
-                        $scope.notSaveScore()
+                        _needSaveConfirm = false;
+                        $scope.saveScore()
                     });
-                }
-            });
+                }).catch(function (_type) {
+                    if (_type == 'cancelBtn') {
+                        $timeout(function () {
+                            _needNotSaveConfirm = false;
+                            $scope.notSaveScore()
+                        });
+                    }
+                });
+            }
         })
     };
     importScoreCtrl.$inject = ['$scope', 'requestData', '$element', 'dialogConfirm', 'modal', '$rootScope', '$timeout'];
