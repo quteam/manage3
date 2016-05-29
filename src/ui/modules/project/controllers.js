@@ -148,7 +148,6 @@ define('project/controllers', ['project/init'], function () {
                         var $ipt = $element.find(".studentNameIpt input");
                         $ipt.val("").focus();
                         $element.find(".studentScoreIpt").val("");
-                        // $scope.hasScore = true;
                     })
                     .catch(function (error) {
                         alert(error || '录入成绩错误');
@@ -162,10 +161,12 @@ define('project/controllers', ['project/init'], function () {
                 dialogConfirm(_text, function () {
                     requestData($scope.saveScoreUrl, $scope.formData)
                         .then(function () {
+                            $scope.hasScore = false;
                             if (angular.isFunction($scope.submitCallBack)) {
                                 $scope.submitCallBack.call($scope);
+                            }else{
+                                modal.closeAll();
                             }
-                            modal.closeAll();
                         })
                         .catch(function (error) {
                             alert(error || '保存错误');
@@ -175,6 +176,7 @@ define('project/controllers', ['project/init'], function () {
                 requestData($scope.saveScoreUrl, $scope.formData)
                     .then(function () {
                         _needSaveConfirm = true;
+                        $scope.hasScore = false;
                         if (angular.isFunction($scope.submitCallBack)) {
                             $scope.submitCallBack.call($scope);
                         }
@@ -192,10 +194,12 @@ define('project/controllers', ['project/init'], function () {
                 dialogConfirm(_text, function () {
                     requestData($scope.notSaveScoreUrl, $scope.formData)
                         .then(function () {
+                            $scope.hasScore = false;
                             if (angular.isFunction($scope.submitCallBack)) {
                                 $scope.submitCallBack.call($scope);
+                            }else{
+                                modal.closeAll();
                             }
-                            modal.closeAll();
                         })
                         .catch(function (error) {
                         })
@@ -204,6 +208,7 @@ define('project/controllers', ['project/init'], function () {
                 requestData($scope.notSaveScoreUrl, $scope.formData)
                     .then(function () {
                         _needNotSaveConfirm = true;
+                        $scope.hasScore = false;
                         if (angular.isFunction($scope.submitCallBack)) {
                             $scope.submitCallBack.call($scope);
                         }
