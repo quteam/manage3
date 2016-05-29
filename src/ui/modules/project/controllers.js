@@ -184,7 +184,7 @@ define('project/controllers', ['project/init'], function () {
         $scope.notSaveScore = function (_text) {
             if (_needNotSaveConfirm) {
                 dialogConfirm(_text, function () {
-                    requestData($scope.saveScoreUrl, $scope.formData)
+                    requestData($scope.notSaveScoreUrl, $scope.formData)
                         .then(function () {
                             modal.closeAll();
                         })
@@ -192,7 +192,7 @@ define('project/controllers', ['project/init'], function () {
                         })
                 });
             } else {
-                requestData($scope.saveScoreUrl, $scope.formData)
+                requestData($scope.notSaveScoreUrl, $scope.formData)
                     .then(function () {
                         _needNotSaveConfirm = true;
                     })

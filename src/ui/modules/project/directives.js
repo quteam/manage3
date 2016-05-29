@@ -143,7 +143,7 @@ define('project/directives', ['moment', 'project/init'], function (moment) {
                         oldScore = $scope.clickEdit = $scope.text = parseFloat(score) || 0;
                         requestData($scope.requestUrl, {score: oldScore})
                             .then(function (_data) {
-                                $scope.$parent.$parent.$parent.hasScore = _data.hasScore;
+                                $scope.$parent.$parent.$parent.hasScore = _data[1].hasScore;
                                 checkStudentScore();
                             });
                     }
