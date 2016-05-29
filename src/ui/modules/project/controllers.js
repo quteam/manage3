@@ -162,6 +162,9 @@ define('project/controllers', ['project/init'], function () {
                 dialogConfirm(_text, function () {
                     requestData($scope.saveScoreUrl, $scope.formData)
                         .then(function () {
+                            if (angular.isFunction($scope.submitCallBack)) {
+                                $scope.submitCallBack.call($scope);
+                            }
                             modal.closeAll();
                         })
                         .catch(function (error) {
@@ -172,6 +175,9 @@ define('project/controllers', ['project/init'], function () {
                 requestData($scope.saveScoreUrl, $scope.formData)
                     .then(function () {
                         _needSaveConfirm = true;
+                        if (angular.isFunction($scope.submitCallBack)) {
+                            $scope.submitCallBack.call($scope);
+                        }
                     })
                     .catch(function (error) {
                         _needSaveConfirm = true;
@@ -186,6 +192,9 @@ define('project/controllers', ['project/init'], function () {
                 dialogConfirm(_text, function () {
                     requestData($scope.notSaveScoreUrl, $scope.formData)
                         .then(function () {
+                            if (angular.isFunction($scope.submitCallBack)) {
+                                $scope.submitCallBack.call($scope);
+                            }
                             modal.closeAll();
                         })
                         .catch(function (error) {
@@ -195,6 +204,9 @@ define('project/controllers', ['project/init'], function () {
                 requestData($scope.notSaveScoreUrl, $scope.formData)
                     .then(function () {
                         _needNotSaveConfirm = true;
+                        if (angular.isFunction($scope.submitCallBack)) {
+                            $scope.submitCallBack.call($scope);
+                        }
                     })
                     .catch(function (error) {
                         _needNotSaveConfirm = true;
