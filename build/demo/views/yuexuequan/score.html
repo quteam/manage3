@@ -12,7 +12,13 @@
     </div>
     <div class="page-main">
         <div class="mgb-l"><span class="text-l">录入成绩</span></div>
-        <div class="form-box import-score-wrap" ng-controller="importScoreCtrl" ng-init="formData.bj='高一1班'">
+        <div class="form-box import-score-wrap" ng-controller="importScoreCtrl"
+             ng-init="
+             formData.bj='高一1班';
+             notSaveScoreUrl='../data/form.data';
+             saveScoreUrl='../data/form.data';
+             "
+        >
             <div class="form-tr">
                 <div class="form-th">第一步</div>
                 <div class="form-td">
@@ -112,12 +118,12 @@
                     <div class="form-th"></div>
                     <div class="form-td">
                         <button type="button" class="btn btn-gray notSaveBtn"
-                                ng-click="notSaveScore('确定不保存?','../data/form.data',formData)"
+                                ng-click="notSaveScore('确定不保存?')"
                                 ng-disabled="!canContinue"
                         >不保存
                         </button>
                         <button type="button" class="btn saveBtn"
-                                ng-click="saveScore('确定要保存?','../data/form.data',formData)"
+                                ng-click="saveScore('你还没有保存当前录入记录,确定要保存?')"
                                 ng-disabled="!canContinue"
                         >保 存
                         </button>
