@@ -156,13 +156,16 @@ define('project/controllers', ['project/init'], function () {
         };
 
         //保存录入的成绩
-        $scope.saveScore = function (_text) {
+        $scope.saveScore = function (_text, _callback) {
             if (_needSaveConfirm) {
                 dialogConfirm(_text, function () {
                     requestData($scope.saveScoreUrl, $scope.formData)
                         .then(function () {
                             $scope.hasScore = false;
-                            if (angular.isFunction($scope.submitCallBack)) {
+                            $scope.formData.time = Date.now();
+                            if (_callback) {
+                                _callback();
+                            } else if (angular.isFunction($scope.submitCallBack)) {
                                 $scope.submitCallBack.call($scope);
                             }
                             modal.closeAll();
@@ -176,7 +179,10 @@ define('project/controllers', ['project/init'], function () {
                     .then(function () {
                         _needSaveConfirm = true;
                         $scope.hasScore = false;
-                        if (angular.isFunction($scope.submitCallBack)) {
+                        $scope.formData.time = Date.now();
+                        if (_callback) {
+                            _callback();
+                        } else if (angular.isFunction($scope.submitCallBack)) {
                             $scope.submitCallBack.call($scope);
                         }
                     })
@@ -188,13 +194,16 @@ define('project/controllers', ['project/init'], function () {
         };
 
         //不保存录入的成绩
-        $scope.notSaveScore = function (_text) {
+        $scope.notSaveScore = function (_text, _callback) {
             if (_needNotSaveConfirm) {
                 dialogConfirm(_text, function () {
                     requestData($scope.notSaveScoreUrl, $scope.formData)
                         .then(function () {
                             $scope.hasScore = false;
-                            if (angular.isFunction($scope.submitCallBack)) {
+                            $scope.formData.time = Date.now();
+                            if (_callback) {
+                                _callback();
+                            } else if (angular.isFunction($scope.submitCallBack)) {
                                 $scope.submitCallBack.call($scope);
                             }
                             modal.closeAll();
@@ -207,7 +216,10 @@ define('project/controllers', ['project/init'], function () {
                     .then(function () {
                         _needNotSaveConfirm = true;
                         $scope.hasScore = false;
-                        if (angular.isFunction($scope.submitCallBack)) {
+                        $scope.formData.time = Date.now();
+                        if (_callback) {
+                            _callback();
+                        } else if (angular.isFunction($scope.submitCallBack)) {
                             $scope.submitCallBack.call($scope);
                         }
                     })
@@ -223,8 +235,10 @@ define('project/controllers', ['project/init'], function () {
         };
 
         //退出事件
-        $scope.$on("$destroy", function () {
+        var $exitImportScore = $(".exitImportScore").on("click", function (e) {
             if ($scope.hasScore && $scope.canContinue) {
+                e.preventDefault();
+                e.stopPropagation();
                 var _$scope = $rootScope.$new(false);
                 _$scope.confirmText = '你还没有保存当前录入记录,确定要保存?';
                 _$scope.confirmBtnTxt = '保存';
@@ -235,18 +249,22 @@ define('project/controllers', ['project/init'], function () {
                 }).then(function () {
                     $timeout(function () {
                         _needSaveConfirm = false;
-                        $scope.saveScore()
+                        $scope.saveScore("", function () {
+                            $exitImportScore.trigger("click");
+                        })
                     });
                 }).catch(function (_type) {
                     if (_type == 'cancelBtn') {
                         $timeout(function () {
                             _needNotSaveConfirm = false;
-                            $scope.notSaveScore()
+                            $scope.notSaveScore("", function () {
+                                $exitImportScore.trigger("click");
+                            })
                         });
                     }
                 });
             }
-        })
+        });
     };
     importScoreCtrl.$inject = ['$scope', 'requestData', '$element', 'dialogConfirm', 'modal', '$rootScope', '$timeout'];
 
