@@ -160,7 +160,11 @@ define('project/controllers', ['project/init'], function () {
             if (_needSaveConfirm) {
                 dialogConfirm(_text, function () {
                     requestData($scope.saveScoreUrl, $scope.formData)
-                        .then(function () {
+                        .then(function (data) {
+                            var _data = data[0];
+                            if (_data.url) {
+                                window.location.assign(_data.url);
+                            }
                             $scope.hasScore = false;
                             $scope.formData.time = Date.now();
                             if (_callback) {
