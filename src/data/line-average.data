@@ -1,0 +1,108 @@
+{
+  "code": 200,
+  "message": "Success",
+  "data": {
+    "tooltip": {
+      "trigger": "axis"
+    },
+    "legend": {
+      "data": [
+        "语文",
+        "数学",
+        "总成绩"
+      ],
+      "selectedMode": "single",
+      "selected": {
+        "数学": false
+      }
+    },
+    "xAxis": [
+      {
+        "type": "category",
+        "boundaryGap": true,
+        "data": [
+          "入学考",
+          "考试一",
+          "考试二",
+          "考试三",
+          "考试四",
+          "考试五",
+          "期末考"
+        ]
+      }
+    ],
+    "yAxis": [
+      {
+        "type": "value"
+      }
+    ],
+    "series": [
+      {
+        "name": "语文",
+        "type": "line",
+        "data": [
+          120,
+          110,
+          123,
+          120,
+          130,
+          121,
+          133
+        ],
+        "markLine": {
+          "data": [
+            {
+              "type": "average",
+              "name": "平均值",
+              "yAxis": 100
+            }
+          ]
+        }
+      },
+      {
+        "name": "数学",
+        "type": "line",
+        "data": [
+          133,
+          {
+            "value": 120,
+            "symbolSize": 10
+          },
+          110,
+          123,
+          {
+            "value": 120,
+            "symbolSize": 10
+          },
+          130,
+          {
+            "value": 121,
+            "symbolSize": 10
+          }
+        ]
+      },
+      {
+        "name": "总成绩",
+        "type": "line",
+        "data": [
+          633,
+          {
+            "value": 620,
+            "symbolSize": 10
+          },
+          610,
+          623,
+          {
+            "value": 620,
+            "symbolSize": 10
+          },
+          630,
+          {
+            "value": 621,
+            "symbolSize": 10
+          }
+        ]
+      }
+    ]
+  }
+}

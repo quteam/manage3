@@ -1,0 +1,16 @@
+<div ng-controller="pageCtrl" ng-init="mainStatus.navigation='chart'">
+    <div class="top-nav-wrap">
+        <div class="back backBtn"><i class="iconfont icon-back"></i></div>
+        <div class="title2">图表</div>
+    </div>
+    <div class="page-main">
+        <div class="form-tr">
+            <!--初中部折线图-->
+            <div class="form-td">
+                <div chart="../data/line-average.data"
+                     ng-model="formData.chart9"
+                     style="height: 400px;"></div>
+            </div>
+        </div>
+    </div>
+</div>
