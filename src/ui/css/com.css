@@ -2061,7 +2061,7 @@ body {
   line-height: 1.2;
 }
 .table-list th {
-  background: #CCC;
+  background: #F5F5F5;
   text-align: left;
   font-weight: normal;
   color: #787878;
@@ -2074,10 +2074,10 @@ body {
   background-color: #D1D6DA;
 }
 .table-list tr td {
-  background: #E5EAEE;
+  background: #F2F6FA;
 }
 .table-list tr:nth-child(even) td {
-  background: #F2F6FA;
+  background: #EBF1F5;
 }
 .table-list input[type=checkbox] {
   width: 16px;

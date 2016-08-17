@@ -9,7 +9,7 @@ define('upload/directives', ['upload/init'], function () {
             restrict: 'EA',
             scope: {
                 ngModel: "=",
-                uploadMax: "@",
+                uploadMax: "=?",
                 uploadSize: "@",
                 width: "@",
                 height: "@"
@@ -17,12 +17,12 @@ define('upload/directives', ['upload/init'], function () {
             replace: true,
             templateUrl: 'tpl/uploader.html',
             link: function ($scope, $element, $attrs) {
-                var $fileIpt = $('<input type="file" multiple/>');
+                var $fileIpt;
                 var fileType = $attrs.uploadType || "image";
                 var initFiles = angular.fromJson($attrs.files || []);
                 $scope.fileList = [];
                 $scope.delFile = delFile;
-                $scope.ngModel = $scope.ngModel || [];
+                $scope.ngModel = angular.isArray($scope.ngModel) ? $scope.ngModel : [];
                 $scope.uploadMax = $scope.uploadMax || 99;
                 $scope.uploadSize = $scope.uploadSize || 1000;
                 $scope.width = $scope.width ? $scope.width : 120 + "px";
@@ -45,11 +45,16 @@ define('upload/directives', ['upload/init'], function () {
                     $scope.fileList = [];
                 };
 
-                var $uploadBtn = $(".uploadBtn", $element)
+                var $uploadBtn = $(".uploadBtn", $element);
                 $uploadBtn.on("click", function () {
                     $fileIpt.trigger("click");
                 });
-                $fileIpt.on("change", fileSelected);
+                //设置上传控件
+                function setInput(){
+                    $fileIpt = $('<input type="file" multiple/>');
+                    $fileIpt.on("change", fileSelected);
+                };
+                setInput();
 
                 //监听选择文件信息
                 function fileSelected() {
@@ -71,7 +76,6 @@ define('upload/directives', ['upload/init'], function () {
                                     file: files[i],
                                     progress: 0,
                                     text: '上传中...',
-                                    name: files[i].name,
                                     data: {}
                                 };
                                 $scope.fileList.push(_fileObj);
@@ -85,7 +89,6 @@ define('upload/directives', ['upload/init'], function () {
                                         file: files[i],
                                         progress: 0,
                                         text: '上传中...',
-                                        name: files[i].name,
                                         data: {},
                                         imgSrc: window.URL.createObjectURL(new Blob([files[i]], {type: files[i].type}))
                                     };
@@ -155,6 +158,7 @@ define('upload/directives', ['upload/init'], function () {
                             _fileObj.text = '上传失败！';
                             $scope.$apply();
                         }
+                        setInput();
                     });
                     //发送文件和表单自定义参数
                     xhr.open("POST", $attrs.uploader);
@@ -164,7 +168,6 @@ define('upload/directives', ['upload/init'], function () {
             }
         }
     };
-
     uploader.$inject = [];
 
 //
