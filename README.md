@@ -1,6 +1,6 @@
 # 后台管理系统 v3
 
-预览 <http://html.quteam.com/manage3/demo/>
+预览 <https://web.quteam.com/manage3/demo/>
 
 ## 说明
 
